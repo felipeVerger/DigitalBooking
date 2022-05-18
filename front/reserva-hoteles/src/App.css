@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
+*{
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+}
+
+
+html, body, #root, #root>div {
+    min-height: 100vh;
+  }
+
+#root{
+    overflow: hidden;
+}
