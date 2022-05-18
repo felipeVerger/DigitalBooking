@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 export const FooterBody = styled.div`
   background: ${(props) => props.theme.primary};
@@ -37,3 +36,4 @@ line-height: 0;
 export const IconLink = styled.a`
 text-decoration: none;
 `
+
