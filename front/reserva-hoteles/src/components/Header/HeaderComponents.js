@@ -50,3 +50,19 @@ export const Slogan = styled(Link)`
   text-decoration: none;
 
 `;
+<<<<<<< Updated upstream
+=======
+
+export const ToggleMenu = styled.div`
+display: none;
+
+@media screen and (max-width: 768px){
+  display: block;
+  width: 48px;
+  color: ${props => props.theme.primary}
+  bac
+
+}
+
+`
+>>>>>>> Stashed changes
