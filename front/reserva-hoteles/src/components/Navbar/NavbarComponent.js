@@ -32,7 +32,7 @@ export const SelectBox = styled.div`
 
 export const OptionsContainer = styled.div`
     background: white;
-    max-height: 0;
+    display: none;
     width: 100%;
     opacity: 0;
     transition: all 0.4s;
@@ -40,6 +40,7 @@ export const OptionsContainer = styled.div`
     overflow: hidden;
     order: 1;
     &.active {
+        display: block;
         max-height: 270px;
         opacity: 1;
     }

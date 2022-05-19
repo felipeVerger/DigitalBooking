@@ -28,19 +28,32 @@ export const HeaderButton = styled.button`
   height: 46px;
   width: 180px;
   font-weight: 700;
+  &:hover{
+    background-color: ${props => props.theme.primary};
+    color: ${props => props.theme.color_text_secondary};
+    cursor: pointer;
+
+  }
+
+  @media only screen and (max-width: 768px){
+    display: none;
+  }
+
+  
 `;
 
 export const HeaderButtonContainer = styled.div`
-  padding: 30px;
+  padding-left: 20px;
 `;
 
 export const Logo = styled.img`
   padding: 10px;
 `;
 
-export const LogoContainer = styled.div`
+export const LogoContainer = styled(Link)`
   background-color: ${(props) => props.theme.primary};
   border-radius: 10px;
+  text-decoration: none;
 `;
 
 export const Slogan = styled(Link)`
@@ -48,6 +61,10 @@ export const Slogan = styled(Link)`
   padding: 20px;
   font-size: 24px;
   text-decoration: none;
+  @media only screen and (max-width: 1100px){
+    display: none;
+    
+  }
 
 `;
 
@@ -55,8 +72,11 @@ export const ToggleMenu = styled.div`
 display: none;
 
 @media screen and (max-width: 768px){
-  display: block;
-  width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  padding: 25px;
   color: ${props => props.theme.primary}
 
 }

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import { NavbarBody, NavbarBlock, Title, Form, SelectBox, OptionsContainer, PreSelected, Option, Label, Box, Button, Input } from './NavbarComponent';
 import {ImLocation} from 'react-icons/im'
 import {GoLocation} from 'react-icons/go'
@@ -28,8 +28,10 @@ const Navbar = () => {
   const [optionSelected, setOptionSelected] = useState('')
 
   const handleToggle = () => {
-      setActive(!false)
+      setActive(!active)
   }
+
+
 
   return (
     <NavbarBody>
