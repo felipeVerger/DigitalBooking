@@ -1,92 +1,219 @@
-# DigitalBooking
 
 
+<p align="center"> 
+  <img src="/Recursos/logo.png" alt="DB Logo" width="20%" height="20%">
+</p>
+<h3 align="center"> Proyecto final del primer track de Certified Tech Developer </h3>  
 
-## Getting started
+</br>
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+<p align="center"> 
+  <img src="/Recursos/example.png" alt="Sample cap" width="70%" height="70%">
+</p>
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+<!-- TABLE OF CONTENTS -->
+<h2 id="table-of-contents"> :book: Tabla de contenidos</h2>
 
-## Add your files
+<details open="open">
+  <summary>tabla de contenidos</summary>
+  <ol>
+    <li><a href="#about-the-project"> ➤ Acerca del proyecto </a></li>
+    <li><a href="#prerequisites"> ➤ Tech Stack </a></li>
+    <li><a href="#folder-structure"> ➤ Estructura de carpetas</a></li>
+    <li><a href="#roadmap"> ➤ Roadmap</a></li>
+    <li><a href="#references"> ➤ Referencias </a></li>
+    <li><a href="#contributors"> ➤ Integrantes</a></li>
+    <li><a href="#contributors"> ➤ Agradecimiento </a></li>
+  </ol>
+</details>
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-```
-cd existing_repo
-git remote add origin https://gitlab.com/d8590/digitalbooking.git
-git branch -M main
-git push -uf origin main
-```
+<!-- ABOUT THE PROJECT -->
+<h2 id="about-the-project"> :pencil: Acerca del Proyecto</h2>
 
-## Integrate with your tools
+<p align="justify"> 
+El proyecto consta del desarrollo de una aplicacion full stack con maven en Spring Boot cuyo front end se desarrolla con React. Se realizaran testeos a lo largo del desarrollo y el despliegue adoptando el metodo agil de TDD. Finalmente, la infraestructura sera de tipo IaaS en AWS. 
 
-- [ ] [Set up project integrations](https://gitlab.com/d8590/digitalbooking/-/settings/integrations)
+El objetivo fundamental del proyecto es el aprendizaje y la puesta en práctica de las habilidades adquiridas en los primeros bimestres de cursada.
+</p>
 
-## Collaborate with your team
+<p align="center">
+  <img src="/Recursos/uikit.png" alt="UI kit" width="50%" height="50%">        
+  <!--figcaption>Caption goes here</figcaption-->
+</p>
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-## Test and Deploy
+<!-- PREREQUISITES -->
+<h2 id="prerequisites"> :fork_and_knife: Tech Stack</h2>
 
-Use the built-in continuous integration in GitLab.
+#### Front end
+  HTML + CSS + JS
+  Opcional preprocesadores de CSS
+  React
+  Node + NPM
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+#### Back end
+  Java
+  Spring
+  Hibernate
+  API
+  Rest
+  JSON
 
-***
+#### Base de datos
+  MySQL
+  MySQL Workbench / DBeaver
 
-# Editing this README
+#### Testing
+  Postman / Insomnia
+  Mocha
+  JUnit + Mockito
+  Selenium
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!).  Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+#### Infraestructura
+  AWS
+  Terraform
+  Docker v. 
+  Terraform v.
+  AWS
+  Gitlab runner
+  Grafana + Prometheus
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+  <p align="center">
+  <img src="/Recursos/structure.png" alt="flujo" width="60%" height="60%">        
+  <!--figcaption>Caption goes here</figcaption-->
+</p>
+  
+#### Gestion
+  Git + Gitlab
+  Discord
+  Zoom
+  Calendly
 
-## Name
-Choose a self-explaining name for your project.
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+<!-- :paw_prints:-->
+<!-- FOLDER STRUCTURE -->
+<h2 id="folder-structure"> :cactus: Estructura de carpetas</h2>
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+    monorepo/
+     back/
+         src/
+         Dockerfile
+     front/
+         src/
+         Dockerfile
+     infra/
+     .git/
+     .gitignore
+     .gitlab-ci.yaml
+     docker-compose.yaml
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+<!-- ROADMAP -->
+<h2 id="roadmap"> :dart: Roadmap</h2>
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+#### Resumen de los milestones
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+| Status | Milestone | Goals | ETA |
+| :---: | :--- | :---: | :---: |
+| 🚀 | **[Sprint 1](https://gl.deitech.online/ctd/proyecto-integrador-0522/0821-c1/grupo-10/-/milestones/1#tab-issues)** | 0 / 14 | jue May 26 2022 |
+| 🚀 | **[Sprint 2](https://gl.deitech.online/ctd/proyecto-integrador-0522/0821-c1/grupo-10/-/milestones/2#tab-issues)** | 0 / 0 | jue Jun 09 2022 |
+| 🚀 | **[Sprint 3](https://gl.deitech.online/ctd/proyecto-integrador-0522/0821-c1/grupo-10/-/milestones/3#tab-issues)** | 0 / 0 | jue jun 23 2022 |
+| 🚀 | **[Sprint 4](https://gl.deitech.online/ctd/proyecto-integrador-0522/0821-c1/grupo-10/-/milestones/4#tab-issues)** | 0 / 0 | jue jul 07 2022 |
+<p align="justify"> 
+  Los objetivos de este proyecto son:
+<ol>
+  <li>
+    <p align="justify"> 
+      Desarrollar una aplicacion front end que consuma los servicios de una api para ofrecer reserva de alojamiento vacacional/temporal.
+    </p>
+  </li>
+  <li>
+    <p align="justify"> 
+      Crear una api consumible y desplegar una infraestructura end-to-end para alojar los servicios de la aplicacion.
+    </p>
+  </li>
+</ol>
+</p>
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+<!-- REFERENCES -->
+<h2 id="references"> :books: Referencias </h2>
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+<ul>
+  <li>
+    <p></p>
+  </li>
+  <li>
+    <p></p>
+  </li>
+  <li>
+    <p></p>
+  </li>
+  <li>
+    <p></p>
+  </li>
+  <li>
+    <p></p>
+  </li>
+  <li>
+    <p></p>
+  </li>
+  <li>
+    <p></p>
+  </li>
+</ul>
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+<!-- CONTRIBUTORS -->
+<h2 id="contributors"> :scroll: Integrantes</h2>
 
-## License
-For open source projects, say how it is licensed.
+<p>
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+### Equipo de Desarrollo
+
+  :boy: <b>Henry Salomón Suárez López</b> <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Email: <a>hessuarezlo@unal.edu.co</a> <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GitHub: <a href="https://github.com/ma-shamshiri">@</a> <br>
+
+  :boy: <b>Matias Fernandez</b> <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Email: <a>matias_fernandez92@hotmail.com</a> <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GitHub: <a href="https://github.com/ma-shamshiri">@</a> <br>
+
+  :woman: <b>Jazmin Maldonado</b> <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Email: <a>jazminmald@gmail.com</a> <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GitHub: <a href="https://github.com/divyabhagavathiappan">@</a> <br>
+  
+  :boy: <b>Facundo Ezequiel Wahren Westen</b> <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Email: <a>facundowahren@gmail.com</a> <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GitHub: <a href="https://github.com/ma-shamshiri">@</a> <br>
+
+  :woman: <b>Natalia Varesi</b> <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Email: <a>varesinatalia@gmail.com</a> <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GitHub: <a href="https://github.com/varesi-code">@varesi-code</a> <br>
+
+  :boy: <b> Felipe Verger</b> <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Email: <a>felipeverger123@gmail.com</a> <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GitHub: <a href="https://github.com/ma-shamshiri">@</a> <br>
+
+### Product Owner:
+:woman: <b>Laura Padin</b> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Email: <a>laura.padin@digitalhouse.com</a> <br>
+
+### Scrum Master:
+:woman: <b>Martina Raggio</b> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Email: <a>martina.raggio@digitalhouse.com</a> <br>
+
+### Tech Lead:
+:boy: <b> Daniel Villajuan</b> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Email: <a>daniel.villajuan@digitalhouse.com</a> <br>
+</p>
+
+<br>
+✤ <i>Este es el proyecto final del primer año de cursada de Certified Tech Developer (May - Jul 2022), de <a href="https://www.digitalhouse.com/">Digital House</a><i>
