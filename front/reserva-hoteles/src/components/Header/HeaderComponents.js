@@ -50,8 +50,6 @@ export const Slogan = styled(Link)`
   text-decoration: none;
 
 `;
-<<<<<<< Updated upstream
-=======
 
 export const ToggleMenu = styled.div`
 display: none;
@@ -60,9 +58,7 @@ display: none;
   display: block;
   width: 48px;
   color: ${props => props.theme.primary}
-  bac
 
 }
 
 `
->>>>>>> Stashed changes
