@@ -39,6 +39,7 @@ export const OptionsContainer = styled.div`
     border-radius: 0px 0px 8px 8px;
     overflow: hidden;
     order: 1;
+    z-index: 1;
     &.active {
         display: block;
         max-height: 270px;

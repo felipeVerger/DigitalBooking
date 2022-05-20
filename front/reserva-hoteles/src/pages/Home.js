@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from '../components/Layout';
 import Navbar from '../components/Navbar';
+import Categorias from '../components/Categorias';
 import { Section } from '../components/Section';
 
 const Home = () => {
@@ -8,6 +9,7 @@ const Home = () => {
     <Layout>
       <Section>
         <Navbar/>
+        <Categorias/>
       </Section>
 
     </Layout>
