@@ -47,6 +47,8 @@ const Navbar = () => {
       setActive(!active)
   }
 
+
+
   return (
     <NavbarBody>
         <NavbarBlock>
