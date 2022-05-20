@@ -5,16 +5,12 @@ import { themes } from './assets/themes';
 import { ThemeProvider } from 'styled-components';
 import './App.css';
 
-<<<<<<< Updated upstream
-=======
 
 
->>>>>>> Stashed changes
 function App() {
   return (
     <ThemeProvider theme={themes.light}>
       <BrowserRouter>
-
         <Routes>
           <Route path="/" element={<Home />}/>
         </Routes>

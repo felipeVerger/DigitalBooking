@@ -1,6 +1,3 @@
-<<<<<<< Updated upstream
-import React from 'react'
-=======
 import React from "react";
 
 import {
@@ -10,16 +7,10 @@ import {
   MenuLink,
 } from "./MobileMenuComponents";
 import { AiOutlineClose } from "react-icons/ai";
->>>>>>> Stashed changes
 
 const MobileMenu = ({isMenuOpen, toggle}) => {
   const loggedIn = false;
   return (
-<<<<<<< Updated upstream
-    <div>MobileMenu</div>
-  )
-}
-=======
     <MobileMenuContainer isMenuOpen={isMenuOpen} onClick={toggle}>
       <CloseIcon onClick={toggle}>
         <AiOutlineClose />
@@ -37,6 +28,5 @@ const MobileMenu = ({isMenuOpen, toggle}) => {
     </MobileMenuContainer>
   );
 };
->>>>>>> Stashed changes
 
 export default MobileMenu
