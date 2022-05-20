@@ -1,14 +1,30 @@
 import React from "react";
 
-import { MobileMenuContainer, CloseIcon } from "./MobileMenuComponents";
-import { ImCross } from "react-icons/im";
+import {
+  MobileMenuContainer,
+  CloseIcon,
+  MenuLinksContainer,
+  MenuLink,
+} from "./MobileMenuComponents";
+import { AiOutlineClose } from "react-icons/ai";
 
-const MobileMenu = () => {
+const MobileMenu = ({isMenuOpen, toggle}) => {
+  const loggedIn = false;
   return (
-    <MobileMenuContainer>
-      <CloseIcon>
-        <ImCross />
+    <MobileMenuContainer isMenuOpen={isMenuOpen} onClick={toggle}>
+      <CloseIcon onClick={toggle}>
+        <AiOutlineClose />
       </CloseIcon>
+
+      <MenuLinksContainer>
+        <MenuLink to={"/"}>Home</MenuLink>
+        {loggedIn ? null : (
+          <>
+            <MenuLink to={"/login"}>Login</MenuLink>{" "}
+            <MenuLink to={"/register"}>Register</MenuLink>
+          </>
+        )}
+      </MenuLinksContainer>
     </MobileMenuContainer>
   );
 };

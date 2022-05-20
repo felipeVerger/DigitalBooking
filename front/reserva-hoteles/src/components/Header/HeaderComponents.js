@@ -18,7 +18,8 @@ export const HeaderBlock = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 50px;
+  padding-right: 5vw;
+  padding-left: 5vw;
 `;
 
 export const HeaderButton = styled.button`
@@ -70,13 +71,14 @@ export const Slogan = styled(Link)`
 
 export const ToggleMenu = styled.div`
 display: none;
+cursor: pointer;
 
 @media screen and (max-width: 768px){
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 32px;
-  padding: 25px;
+  padding: 32px;
   color: ${props => props.theme.primary}
 
 }
