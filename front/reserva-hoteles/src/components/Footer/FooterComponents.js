@@ -18,26 +18,26 @@ export const FooterBlock = styled.div`
   align-items: center;
 `;
 
-
 export const FooterText = styled.span`
-font-weight: 700;
-color: ${(props) => props.theme.color_text_secondary};
-text-decoration: none;
-@media screen  and (max-width: 440px){
-  font-size: 0.6rem;
-  
-}
-`
+  font-weight: 700;
+  color: ${(props) => props.theme.color_text_secondary};
+  text-decoration: none;
+  @media screen and (max-width: 440px) {
+    font-size: 0.6rem;
+  }
+`;
 
 export const FooterIcon = styled.div`
-color: ${(props) => props.theme.color_text_secondary};
-padding: 10px;
-font-size: 24px;
-align-items: center;
-line-height: 0;
-
-`
+  color: ${(props) => props.theme.color_text_secondary};
+  padding: 10px;
+  font-size: 24px;
+  align-items: center;
+  line-height: 0;
+  @media screen and (max-width: 440px) {
+    font-size: 1rem;
+  }
+`;
 
 export const IconLink = styled.a`
-text-decoration: none;
-`
+  text-decoration: none;
+`;

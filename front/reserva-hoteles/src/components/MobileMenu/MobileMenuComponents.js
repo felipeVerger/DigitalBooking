@@ -2,10 +2,10 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const MobileMenuContainer = styled.div`
-  position: fixed;
+  position: sticky;
   z-index: 999;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background: ${(props) => props.theme.background};
   display: ${({ isMenuOpen }) => (isMenuOpen ? "block" : "none")};
   align-items: center;
@@ -47,9 +47,9 @@ export const MenuLinksContainer = styled.div`
 export const MenuLink = styled(Link)`
 display: flex;
 justify-content: end;
-height: 100px;
+height: 80px;
 text-decoration: none;
-font-size: 32px;
+font-size: 24px;
 color: ${props => props.theme.primary};
 width: 100%;
 
@@ -65,7 +65,7 @@ grid-area: 5 / 5 / 6 / 6;
 display: flex;
 justify-content: center;
 color: ${props => props.theme.color_text_primary};
-font-size: 48px;
+font-size: 36px;
 padding: 10px;
 
 
