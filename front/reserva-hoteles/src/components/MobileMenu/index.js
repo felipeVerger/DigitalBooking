@@ -1,9 +1,16 @@
-import React from 'react'
+import React from "react";
+
+import { MobileMenuContainer, CloseIcon } from "./MobileMenuComponents";
+import { ImCross } from "react-icons/im";
 
 const MobileMenu = () => {
   return (
-    <div>MobileMenu</div>
-  )
-}
+    <MobileMenuContainer>
+      <CloseIcon>
+        <ImCross />
+      </CloseIcon>
+    </MobileMenuContainer>
+  );
+};
 
-export default MobileMenu
+export default MobileMenu;
