@@ -15,32 +15,58 @@ export const MobileMenuContainer = styled.div`
   opacity: ${({ isMenuOpen }) => (isMenuOpen ? "100%" : "0")};
 `;
 
+export const MobileMenuHeader = styled.div`
+background: ${props => props.theme.background};
+height: 25%;
+border-bottom: 1px solid ${props => props.theme.primary};
+display: grid;
+grid-template-columns: repeat(5, 1fr);
+grid-template-rows: repeat(5, 1fr);
+grid-column-gap: 0px;
+grid-row-gap: 0px;
+`
+
 export const CloseIcon = styled.div`
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: start;
   font-size: 32px;
   padding: 25px;
   color: ${(props) => props.theme.primary};
+  grid-area: 1 / 1 / 2 / 2; 
 `;
 
 export const MenuLinksContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  padding: 20px;
 `;
 
 
 export const MenuLink = styled(Link)`
+display: flex;
+justify-content: end;
 height: 100px;
 text-decoration: none;
 font-size: 32px;
 color: ${props => props.theme.primary};
+width: 100%;
 
 
 &:hover{
     color: ${props => props.theme.color_text_primary};
 }
+
+`
+
+export const MenuTitle = styled.div`
+grid-area: 5 / 5 / 6 / 6; 
+display: flex;
+justify-content: center;
+color: ${props => props.theme.color_text_primary};
+font-size: 48px;
+padding: 10px;
+
 
 `
