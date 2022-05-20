@@ -2,11 +2,10 @@ import styled from 'styled-components'
 
 export const Body = styled.div`
     background: white;
-
 `
 
 export const CategoryBlock = styled.div`
-    padding: 2rem ; 
+    padding: 2rem 2rem 1rem 2rem; 
     display: flex;
     flex-direction: column;
 `
