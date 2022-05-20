@@ -98,11 +98,11 @@ export const Box = styled.div`
     }
 `
 
-export const Input = styled.input`
-    width: 422px;
-    height: 40px;
-    border-radius: 10px;
-    border: none;
+export const DatePickerBox = styled.div`
+    position: relative;
+    svg {
+        right: 20px;
+    }
 `
 
 export const Button = styled.button`

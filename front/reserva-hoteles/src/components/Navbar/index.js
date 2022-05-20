@@ -1,7 +1,12 @@
 import React, {useState, useEffect} from 'react'
-import { NavbarBody, NavbarBlock, Title, Form, SelectBox, OptionsContainer, PreSelected, Option, Label, Box, Button, Input } from './NavbarComponent';
+import { NavbarBody, NavbarBlock, Title, Form, SelectBox, OptionsContainer, PreSelected, Option, Label, Box, Button, DatePickerBox } from './NavbarComponent';
 import {ImLocation} from 'react-icons/im'
 import {GoLocation} from 'react-icons/go'
+import {AiOutlineCalendar} from 'react-icons/ai'
+
+import './DatePickerStyles.css'
+import 'react-modern-calendar-datepicker/lib/DatePicker.css';
+import DatePicker from 'react-modern-calendar-datepicker';
 
 const ciudades = [
     {
@@ -22,13 +27,24 @@ const ciudades = [
     },
 ]
 
+const renderCustomInput = ({ ref }) => (
+    <input
+      ref={ref}
+      placeholder="Check in - Check out"
+      className="my-custom-input-class"
+    />
+  )
+
 const Navbar = () => {
 
   const [active, setActive] = useState(false)
-  const [optionSelected, setOptionSelected] = useState('')
+  const [selectedDayRange, setSelectedDayRange] = useState({
+    from: null,
+    to: null
+  });
 
   const handleToggle = () => {
-      setActive(!false)
+      setActive(!active)
   }
 
   return (
@@ -59,7 +75,14 @@ const Navbar = () => {
                         <span>¿A donde vamos?</span>
                     </PreSelected>
                 </SelectBox>
-                <Input type="date"/>
+                <DatePickerBox>
+                    <DatePicker
+                        value={selectedDayRange}
+                        onChange={setSelectedDayRange}
+                        renderInput={renderCustomInput}
+                        shouldHighlightWeekends
+                    />
+                </DatePickerBox>
                 <Button type='submit'>Buscar</Button>
             </Form>
         </NavbarBlock>
