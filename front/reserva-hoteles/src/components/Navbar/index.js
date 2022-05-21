@@ -82,7 +82,7 @@ const Navbar = () => {
                     id={item.city}
                     name="city"
                   />
-                  <Label for={item.city}>
+                  <Label htmlFor={item.city}>
                     <GoLocation />
                     <Box>
                       <span>{item.city}</span>
