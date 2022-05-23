@@ -20,7 +20,6 @@ import { AiOutlineCalendar } from "react-icons/ai";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css";
 
-import "./DatePickerStyles.css";
 import { DateRange } from "react-date-range";
 
 const ciudades = [
@@ -97,7 +96,8 @@ const Navbar = () => {
               <ImLocation />
               <span>¿A donde vamos?</span>
             </PreSelected>
-            <DatePickerBox>
+          </SelectBox>
+          <DatePickerBox>
               <DateRange
                 editableDateInputs={true}
                 onChange={(item) => setRange([item.selection])}
@@ -105,7 +105,6 @@ const Navbar = () => {
                 ranges={range}
               />
             </DatePickerBox>
-          </SelectBox>
           <Button type="submit">Buscar</Button>
         </Form>
       </NavbarBlock>
