@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 export const HeaderBody = styled.div`
   background: ${(props) => props.theme.background};
+  max-width: 1920px;
   height: 100px;
   position: sticky;
   top: 0;
