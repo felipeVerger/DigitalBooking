@@ -1,6 +1,24 @@
 import React from 'react'
 import recomendaciones from '../../staticData/recomendaciones.json'
-import { Body, Block, RecomendationTitle, RecommendationContainer, Recomendation, Image, RecomendationInfoContainer, RecomendationInfo, HotelTopInfoBlock, Category, Title, PunctuationBlock, Punctuation, Opinion, LocationText, DescriptionBlock, Description, Button } from './RecomendacionesComponents'
+import { 
+    Body,
+    Block,
+    RecomendationTitle,
+    RecommendationContainer,
+    Recomendation, 
+    Image, 
+    RecomendationInfoContainer, 
+    RecomendationInfo, 
+    HotelTopInfoBlock, 
+    Category, 
+    Title, 
+    PunctuationBlock, 
+    Punctuation, 
+    Opinion, 
+    LocationText, 
+    DescriptionBlock, 
+    Description, 
+    Button } from './RecomendacionesComponents'
 
 import { AiFillStar } from 'react-icons/ai'
 import { HiLocationMarker } from 'react-icons/hi'

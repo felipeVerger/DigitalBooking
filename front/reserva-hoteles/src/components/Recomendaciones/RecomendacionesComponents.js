@@ -8,7 +8,6 @@ export const Block = styled.div`
     padding: 1.5rem 2rem 1rem 2rem;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
 `
 
 export const RecomendationTitle = styled.h2`
@@ -21,14 +20,16 @@ export const RecomendationTitle = styled.h2`
 
 export const RecommendationContainer = styled.div`
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     grid-gap: 20px;
 `
 
 export const Recomendation = styled.div`
     display: flex;
 
-    height: 283px;
+    width: 710px;
+    height: 279px;
     background: #FFFFFF;
     border: 1px solid #DFE4EA;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
