@@ -9,7 +9,6 @@ export const HeaderBody = styled.div`
   top: 0;
   z-index: 10;
   display: flex;
-  display: flex;
   justify-content: space-between;
   overflow: hidden;
 `;

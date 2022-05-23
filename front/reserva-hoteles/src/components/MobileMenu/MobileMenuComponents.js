@@ -17,7 +17,7 @@ export const MobileMenuContainer = styled.div`
 
 export const MobileMenuHeader = styled.div`
 background: ${props => props.theme.background};
-height: 25%;
+height: 200px;
 border-bottom: 1px solid ${props => props.theme.primary};
 display: grid;
 grid-template-columns: repeat(5, 1fr);

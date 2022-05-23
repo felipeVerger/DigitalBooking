@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 export const FooterBody = styled.div`
   background: ${(props) => props.theme.primary};
+  max-width: 1920px;
   height: 60px;
   display: flex;
   width: 100%;
