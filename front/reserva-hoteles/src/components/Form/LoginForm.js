@@ -1,15 +1,39 @@
-import React, {useState} from 'react'
-import TextField from './TextField'
+import React, { useState } from "react";
+import {
+  FormContainer,
+  TextField,
+  HorizontalBlock,
+  FormTitle,
+  Label,
+} from "./FormComponents";
 
 const LoginForm = () => {
-
-    const [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState({});
   return (
-    <form>
-        <TextField label={"Correo electrónico"} errors={errors} name={"mail"} placeholder={"correo@electronico.com"} type={"email"} />
+    <FormContainer>
+      <FormTitle>Iniciar sesión</FormTitle>
 
-    </form>
-  )
-}
+      <Label for={"mail"}>Correo electrónico</Label>
 
-export default LoginForm
+      <TextField
+        label={"Correo electrónico"}
+        errors={errors}
+        name={"mail"}
+        placeholder={"correo@electronico.com"}
+        type={"email"}
+      />
+
+<Label for={"pass"}>Contraseña</Label>
+
+<TextField
+        label={"Correo electrónico"}
+        errors={errors}
+        name={"pass"}
+        placeholder={"●●●●●●"}
+        type={"password"}
+      />
+    </FormContainer>
+  );
+};
+
+export default LoginForm;

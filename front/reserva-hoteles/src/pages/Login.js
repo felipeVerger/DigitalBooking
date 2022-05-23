@@ -1,17 +1,19 @@
-import React from 'react'
-import LoginForm from '../components/Form/LoginForm'
-import Layout from '../components/Layout'
-import { Section } from '../components/Section'
+import React from "react";
+import LoginForm from "../components/Form/LoginForm";
+import Layout from "../components/Layout";
+import { Section } from "../components/Section";
+import PageContainer from "../components/PageContainer";
 
 const Login = () => {
   return (
-    <Layout>
+    <PageContainer>
+      <Layout>
         <Section>
-            <LoginForm />
-
+          <LoginForm />
         </Section>
-    </Layout>
-  )
-}
+      </Layout>
+    </PageContainer>
+  );
+};
 
-export default Login
+export default Login;

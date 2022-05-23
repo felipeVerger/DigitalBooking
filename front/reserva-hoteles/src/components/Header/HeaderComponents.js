@@ -18,8 +18,8 @@ export const HeaderBlock = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-right: 5vw;
-  padding-left: 5vw;
+  padding-right: 5%;
+  padding-left: 5%;
 `;
 
 export const HeaderButton = styled.button`
@@ -59,9 +59,10 @@ export const LogoContainer = styled(Link)`
 
 export const Slogan = styled(Link)`
   color: ${(props) => props.theme.primary};
-  padding: 20px;
+  padding-left: 20px;
   font-size: 24px;
   text-decoration: none;
+  white-space: nowrap;
   @media only screen and (max-width: 1100px){
     display: none;
     
