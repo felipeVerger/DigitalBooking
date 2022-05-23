@@ -2,10 +2,11 @@ import styled from 'styled-components'
 
 export const Body = styled.div`
     background: ${(props) => props.theme.content_background};
+    width: 100%;
 `
 
 export const Block = styled.div`
-    padding: 1.5rem 2rem 1rem 2rem;
+    padding: 1rem 2rem 1rem 4rem; 
     display: flex;
     flex-direction: column;
 `
@@ -28,7 +29,6 @@ export const RecommendationContainer = styled.div`
 export const Recomendation = styled.div`
     display: flex;
 
-    width: 710px;
     height: 279px;
     background: #FFFFFF;
     border: 1px solid #DFE4EA;
