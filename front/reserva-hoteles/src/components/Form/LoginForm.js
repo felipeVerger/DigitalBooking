@@ -5,6 +5,7 @@ import {
   HorizontalBlock,
   FormTitle,
   Label,
+  Sumbit,
 } from "./FormComponents";
 
 const LoginForm = () => {
@@ -19,7 +20,7 @@ const LoginForm = () => {
         label={"Correo electrónico"}
         errors={errors}
         name={"mail"}
-        placeholder={"correo@electronico.com"}
+        placeholder={"correo@electrónico.com"}
         type={"email"}
       />
 
@@ -32,6 +33,8 @@ const LoginForm = () => {
         placeholder={"●●●●●●"}
         type={"password"}
       />
+
+      <Sumbit type={"submit"} value="Ingresar"/>
     </FormContainer>
   );
 };

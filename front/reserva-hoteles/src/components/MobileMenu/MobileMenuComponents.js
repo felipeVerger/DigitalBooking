@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 export const MobileMenuContainer = styled.div`
   position: sticky;
   z-index: 999;
-  width: 100vw;
-  height: 100vh;
+  min-width: 100vw;
+  min-height: 100vh;
   background: ${(props) => props.theme.background};
   display: ${({ isMenuOpen }) => (isMenuOpen ? "block" : "none")};
   align-items: center;

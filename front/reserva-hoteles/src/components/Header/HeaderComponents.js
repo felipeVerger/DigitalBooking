@@ -1,10 +1,21 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const HeaderBody = styled.div`
-  background: ${(props) => props.theme.background};
-  max-width: 1920px;
+
+export const HeaderContainer = styled.div`
+   background: ${(props) => props.theme.background};
+  width: 100vw;
+
   height: 100px;
+  display: flex;
+  justify-content: center;
+`;
+
+export const HeaderBody = styled.div`
+ 
+  max-width: 1920px;
+  width: 100%;
+
   position: sticky;
   top: 0;
   z-index: 10;

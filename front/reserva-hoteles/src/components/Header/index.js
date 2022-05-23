@@ -5,6 +5,7 @@ import {
   HeaderBody,
   HeaderButton,
   HeaderButtonContainer,
+  HeaderContainer,
   Logo,
   LogoContainer,
   Slogan,
@@ -23,7 +24,7 @@ const Header = () => {
   }
 
   return (
-    <>
+    <HeaderContainer>
       <MobileMenu isMenuOpen={isMenuOpen} toggle={toggleMenu} />
       <HeaderBody>
         <HeaderBlock>
@@ -54,7 +55,7 @@ const Header = () => {
           <FaBars />
         </ToggleMenu>
       </HeaderBody>
-    </>
+    </HeaderContainer>
   );
 };
 

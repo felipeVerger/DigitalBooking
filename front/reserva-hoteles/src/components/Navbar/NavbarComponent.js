@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
+
 export const NavbarBody = styled.div`
     background-color: ${(props) => props.theme.primary};
     width: 100%;
+    max-width: 100vw;
 
     height: 150px;
     @media screen and (max-width: 768px){

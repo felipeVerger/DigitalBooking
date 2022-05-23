@@ -1,8 +1,8 @@
-import styled from "styled-components";
-export const Section = styled.div`
-  max-width: 1920px;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  align-items: center;
-`;
+import React from "react";
+import { SectionContainer, SectionBody } from "./SectionComponents";
+
+const Section = ({ children }) => {
+  return <SectionContainer>{children}</SectionContainer>;
+};
+
+export default Section;

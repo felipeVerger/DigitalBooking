@@ -1,7 +1,7 @@
 import React from "react";
 import LoginForm from "../components/Form/LoginForm";
 import Layout from "../components/Layout";
-import { Section } from "../components/Section";
+import Section from "../components/Section";
 import PageContainer from "../components/PageContainer";
 
 const Login = () => {
