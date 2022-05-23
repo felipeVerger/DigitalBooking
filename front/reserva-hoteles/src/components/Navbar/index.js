@@ -97,14 +97,14 @@ const Navbar = () => {
               <span>¿A donde vamos?</span>
             </PreSelected>
           </SelectBox>
-          <DatePickerBox>
+          {/* <DatePickerBox>
               <DateRange
                 editableDateInputs={true}
                 onChange={(item) => setRange([item.selection])}
                 moveRangeOnFirstSelection={false}
                 ranges={range}
               />
-            </DatePickerBox>
+            </DatePickerBox> */}
           <Button type="submit">Buscar</Button>
         </Form>
       </NavbarBlock>

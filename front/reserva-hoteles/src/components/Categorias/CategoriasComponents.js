@@ -5,10 +5,13 @@ export const Body = styled.div`
 `
 
 export const CategoryBlock = styled.div`
-    padding: 1rem 2rem 1rem 2rem; 
+    padding: 1rem 2rem 1rem 4rem; 
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    @media screen and (max-width: 1348px) {
+        padding: 2rem;
+    }
 `
 
 export const SectionTitle = styled.h2`
@@ -23,16 +26,18 @@ export const FlexWrapper = styled.div`
     display: flex;
     gap: 20px;
     flex-flow: wrap;
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1348px) {
         justify-content: center;
     }
 `
 
 export const Box = styled.div`
+    min-width: 330px;
     background: #FFFFFF;
     border: 1px solid #F3F1ED;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
+    flex: 1;
     @media screen and (max-width: 768px) {
         display: flex;
         flex-direction: column;
@@ -61,7 +66,7 @@ export const CategoryInfo = styled.p`
 
 
 export const Image = styled.img`
-    width: 330px;
+    width: 100%;
     height: 200px;
     border-radius: 10px 10px 0px 0px;
     @media screen and (max-width: 768px) {
