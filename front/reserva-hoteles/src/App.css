@@ -11,5 +11,5 @@ html, body, #root, #root>div {
   }
 
 #root{
-    overflow: hidden;
+    contain: paint;
 }

@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 
 export const HeaderBody = styled.div`
   background: ${(props) => props.theme.background};
+  max-width: 1920px;
   height: 100px;
   position: sticky;
   top: 0;
   z-index: 10;
-  display: flex;
   display: flex;
   justify-content: space-between;
   overflow: hidden;
@@ -18,7 +18,8 @@ export const HeaderBlock = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 50px;
+  padding-right: 5%;
+  padding-left: 5%;
 `;
 
 export const HeaderButton = styled.button`
@@ -58,9 +59,10 @@ export const LogoContainer = styled(Link)`
 
 export const Slogan = styled(Link)`
   color: ${(props) => props.theme.primary};
-  padding: 20px;
+  padding-left: 20px;
   font-size: 24px;
   text-decoration: none;
+  white-space: nowrap;
   @media only screen and (max-width: 1100px){
     display: none;
     
@@ -70,13 +72,14 @@ export const Slogan = styled(Link)`
 
 export const ToggleMenu = styled.div`
 display: none;
+cursor: pointer;
 
 @media screen and (max-width: 768px){
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 32px;
-  padding: 25px;
+  padding: 32px;
   color: ${props => props.theme.primary}
 
 }

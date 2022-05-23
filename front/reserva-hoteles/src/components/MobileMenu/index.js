@@ -1,9 +1,38 @@
-import React from 'react'
+import React from "react";
 
-const MobileMenu = () => {
+import {
+  MobileMenuContainer,
+  CloseIcon,
+  MenuLinksContainer,
+  MenuLink,
+  MobileMenuHeader,
+  MenuTitle
+} from "./MobileMenuComponents";
+import { AiOutlineClose } from "react-icons/ai";
+
+const MobileMenu = ({isMenuOpen, toggle}) => {
+  const loggedIn = false;
   return (
-    <div>MobileMenu</div>
-  )
-}
+    <MobileMenuContainer isMenuOpen={isMenuOpen} onClick={toggle}>
+      <MobileMenuHeader>
+        <CloseIcon onClick={toggle}>
+          <AiOutlineClose />
+        </CloseIcon>
 
-export default MobileMenu
+        <MenuTitle>MENÚ</MenuTitle>
+      </MobileMenuHeader>
+
+      <MenuLinksContainer>
+        <MenuLink to={"/"}>Inicio</MenuLink>
+        {loggedIn ? null : (
+          <>
+            <MenuLink to={"/login"}>Login</MenuLink>{" "}
+            <MenuLink to={"/register"}>Crear cuenta</MenuLink>
+          </>
+        )}
+      </MenuLinksContainer>
+    </MobileMenuContainer>
+  );
+};
+
+export default MobileMenu;

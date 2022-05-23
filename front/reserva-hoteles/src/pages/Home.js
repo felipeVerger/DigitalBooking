@@ -1,18 +1,23 @@
-import React from 'react';
-import Layout from '../components/Layout';
-import Navbar from '../components/Navbar';
-import { Section } from '../components/Section';
+import React from "react";
+import Layout from "../components/Layout";
+import Navbar from "../components/Navbar";
+import Categorias from "../components/Categorias";
+import Recomendaciones from "../components/Recomendaciones";
+import { Section } from "../components/Section";
+import PageContainer from "../components/PageContainer";
 
 const Home = () => {
   return (
-    <Layout>
-      <Section>
-        <Navbar/>
-      </Section>
+    <PageContainer>
+      <Layout>
+        <Section>
+          <Navbar />
+          <Categorias />
+          <Recomendaciones />
+        </Section>
+      </Layout>
+    </PageContainer>
+  );
+};
 
-    </Layout>
-    
-  )
-}
-
-export default Home
+export default Home;

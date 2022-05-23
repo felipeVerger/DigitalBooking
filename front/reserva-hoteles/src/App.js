@@ -4,6 +4,8 @@ import Home from './pages/Home'
 import { themes } from './assets/themes';
 import { ThemeProvider } from 'styled-components';
 import './App.css';
+import Login from './pages/Login';
+
 
 function App() {
   return (
@@ -11,6 +13,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />}/>
+          <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
