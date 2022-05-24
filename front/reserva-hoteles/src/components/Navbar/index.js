@@ -11,16 +11,13 @@ import {
   Label,
   Box,
   Button,
-  DatePickerBox,
 } from "./NavbarComponent";
 import { ImLocation } from "react-icons/im";
 import { GoLocation } from "react-icons/go";
 import { AiOutlineCalendar } from "react-icons/ai";
 
-import "react-date-range/dist/styles.css"; // main style file
-import "react-date-range/dist/theme/default.css";
-
-import { DateRange } from "react-date-range";
+import './DatePicker.css'
+import { DateRangePickerComponent } from '@syncfusion/ej2-react-calendars'
 
 const ciudades = [
   {
@@ -44,27 +41,8 @@ const ciudades = [
 const Navbar = () => {
   const [active, setActive] = useState(false);
 
-  const handleSelect = (ranges) => {
-    console.log(ranges);
-    // {
-    //   selection: {
-    //     startDate: [native Date Object],
-    //     endDate: [native Date Object],
-    //   }
-    // }
-  };
-
-  const handleToggle = () => {
-    setActive(!active);
-  };
-
-  const [range, setRange] = useState([
-    {
-      startDate: new Date(),
-      endDate: null,
-      key: "selection",
-    },
-  ]);
+  const startDate = new Date();
+  const endDate = new Date();
 
   return (
     <NavbarBody>
@@ -92,19 +70,18 @@ const Navbar = () => {
                 </Option>
               ))}
             </OptionsContainer>
-            <PreSelected onClick={() => handleToggle()}>
+            <PreSelected onClick={() => setActive(!active)}>
               <ImLocation />
               <span>¿A donde vamos?</span>
             </PreSelected>
           </SelectBox>
-          {/* <DatePickerBox>
-              <DateRange
-                editableDateInputs={true}
-                onChange={(item) => setRange([item.selection])}
-                moveRangeOnFirstSelection={false}
-                ranges={range}
-              />
-            </DatePickerBox> */}
+          <div style={{width: '422px'}}>
+            <DateRangePickerComponent
+              placeholder="Check in - Check out"
+              startDate={startDate}
+              endDate={endDate}
+            ></DateRangePickerComponent>
+          </div>
           <Button type="submit">Buscar</Button>
         </Form>
       </NavbarBlock>
