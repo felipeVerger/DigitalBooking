@@ -5,9 +5,9 @@ import {
     Block,
     RecomendationTitle,
     RecommendationContainer,
-    Recomendation, 
+    Recomendation,
+    ImageBlock,
     Image, 
-    RecomendationInfoContainer, 
     RecomendationInfo, 
     HotelTopInfoBlock, 
     Category, 
@@ -20,7 +20,7 @@ import {
     Description, 
     Button } from './RecomendacionesComponents'
 
-import { AiFillStar } from 'react-icons/ai'
+import { AiFillStar, AiFillHeart } from 'react-icons/ai'
 import { HiLocationMarker } from 'react-icons/hi'
 import { BiWifi } from 'react-icons/bi'
 import { FaSwimmingPool } from 'react-icons/fa'
@@ -37,8 +37,10 @@ const Recomendaciones = () => {
                     recomendaciones.map((item) => {
                         return (
                             <Recomendation key={item.id}>
-                                <Image src={item.crimg} alt="" />
-                                <RecomendationInfoContainer>
+                                <ImageBlock>
+                                    <Image src={item.crimg} alt="" />
+                                    <AiFillHeart/>
+                                </ImageBlock>
                                     <RecomendationInfo>
                                         <HotelTopInfoBlock>
                                             <div>
@@ -56,7 +58,6 @@ const Recomendaciones = () => {
                                             <Button>Ver mas</Button>
                                         </DescriptionBlock>
                                     </RecomendationInfo>
-                                </RecomendationInfoContainer>
                             </Recomendation>
                         )
                     })

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const FooterBody = styled.div`
-  background: ${(props) => props.theme.primary};
+  background: ${(props) => props.theme.secondary};
   height: 60px;
   display: flex;
   width: 100%;
