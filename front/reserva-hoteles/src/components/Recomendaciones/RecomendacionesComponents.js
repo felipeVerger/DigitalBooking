@@ -16,7 +16,7 @@ export const Body = styled.div`
 `
 
 export const Block = styled.div`
-    padding: 1rem 3rem 1rem 4rem; 
+    padding: 1rem 2rem 1rem 2rem; 
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -51,9 +51,7 @@ export const Recomendation = styled.div`
     min-height: 279px;
 
     @media screen and (max-width: 768px){
-        flex: none;
         flex-direction: column;
-        width: 100%;
         height: 491px;
     }
     @media screen and (max-width: 1321px){

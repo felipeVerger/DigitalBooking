@@ -6,7 +6,7 @@ export const Body = styled.div`
 `;
 
 export const CategoryBlock = styled.div`
-  padding: 1rem 2rem 1rem 4rem;
+  padding: 1rem 2rem 1rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -27,7 +27,7 @@ export const FlexWrapper = styled.div`
   display: flex;
   gap: 20px;
   flex-flow: wrap;
-
+  flex: 1;
   @media screen and (max-width: 1348px) {
     justify-content: center;
   }
