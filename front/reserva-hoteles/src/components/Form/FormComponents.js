@@ -25,7 +25,6 @@ export const HorizontalBlock = styled.div`
   gap: 20px;
   width: 800px;
 
-
   @media screen and (max-width: 768px) {
     flex-direction: column;
     gap: 0;
@@ -38,7 +37,6 @@ export const InputContainer = styled.div`
   flex-direction: column;
   max-width: 80vw;
   width: 800px;
-
 `;
 
 export const TextField = styled.input`
@@ -75,10 +73,20 @@ export const Sumbit = styled.input`
   border-radius: 5px;
   width: 60%;
   max-width: 300px;
+  &:hover {
+    background-color: ${props => props.theme.background};
+    color: ${props => props.theme.primary};
+    border: 1px solid ${props => props.theme.primary};
+  }
 `;
 
 export const FormSwitchText = styled.div`
-padding: 20px;
-font-weight: 600;
+  padding: 20px;
+  font-weight: 600;
+`;
 
-`
+export const ErrorText = styled.p`
+  color: red;
+  width: 100%;
+  padding: 5px;
+`;

@@ -10,24 +10,31 @@ import {
   LogoContainer,
   Slogan,
   ToggleMenu,
+  AvatarIcon
 } from "./HeaderComponents";
 import { FaBars } from "react-icons/fa";
 import MobileMenu from "../MobileMenu";
 import { MenuContext } from "../../context/menu-context";
+import { UserContext} from "../../context/user-context";
 
 const Header = () => {
   const signedIn = false;
-
 
   const location = useLocation().pathname;
 
   console.log(location);
 
-  const {toggleOpen} = useContext(MenuContext);
+  const { toggleOpen } = useContext(MenuContext);
+
+  const {user, setUser} = useContext(UserContext);
+
+
+
+
+
 
   return (
     <HeaderContainer>
-
       <HeaderBody>
         <HeaderBlock>
           <LogoContainer to={"/"}>
@@ -35,8 +42,15 @@ const Header = () => {
           </LogoContainer>
           <Slogan to={"/"}>Sentite como en tu hogar</Slogan>
         </HeaderBlock>
-        {signedIn ? (
-          <HeaderBlock></HeaderBlock>
+        {user ? (
+          <HeaderBlock>
+            <AvatarIcon name={user.nombre} round size="60px" />
+            <HeaderButtonContainer>
+                  <HeaderButton onClick={() => {setUser(null)}}>Cerrar sesion</HeaderButton>
+              </HeaderButtonContainer>
+
+
+          </HeaderBlock>
         ) : (
           <HeaderBlock>
             {location != "/register" ? (
