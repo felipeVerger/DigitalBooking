@@ -10,6 +10,7 @@ import MobileMenu from "./components/MobileMenu";
 import { MenuProvider } from "./context/menu-context";
 import { UserProvider } from "./context/user-context";
 
+
 function App() {
   return (
     <ThemeProvider theme={themes.light}>
