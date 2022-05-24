@@ -8,6 +8,9 @@ export const FooterContainer = styled.div`
   height: 60px;
   display: flex;
   justify-content: center;
+  @media screen and (max-width: 768px){
+    background: ${(props) => props.theme.secondary};
+  }
 `;
 
 export const FooterBody = styled.div`

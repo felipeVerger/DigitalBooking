@@ -53,7 +53,10 @@ const Recomendaciones = () => {
                                                 <Opinion>Muy bueno</Opinion>
                                             </PunctuationBlock>
                                         </HotelTopInfoBlock>
-                                        <LocationText> <HiLocationMarker/> {item.location} <span>mostrar en el mapa</span></LocationText>
+                                        <div>
+                                            <LocationText> <HiLocationMarker/> {item.location} <span>mostrar en el mapa</span></LocationText>
+                                            <BiWifi/> <FaSwimmingPool/>
+                                        </div>
                                         <DescriptionBlock>
                                             <Description>{item.description} <span>mas...</span></Description>
                                             <Button>Ver mas</Button>
