@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const RecomendacionesContainer = styled.div`
   background: ${(props) => props.theme.content_background};
   width: 100vw;
+  max-width: 1920px;
   display: flex;
   justify-content: center;
 `;
