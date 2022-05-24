@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Link, useLocation } from "react-router-dom";
 import {
   HeaderBlock,
   HeaderBody,
@@ -12,20 +12,22 @@ import {
   ToggleMenu,
 } from "./HeaderComponents";
 import { FaBars } from "react-icons/fa";
-import MobileMenu from '../MobileMenu';
+import MobileMenu from "../MobileMenu";
+import { MenuContext } from "../../context/menu-context";
 
 const Header = () => {
   const signedIn = false;
 
-  const [isMenuOpen, setisMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setisMenuOpen(!isMenuOpen);
-  }
+  const location = useLocation().pathname;
+
+  console.log(location);
+
+  const {toggleOpen} = useContext(MenuContext);
 
   return (
     <HeaderContainer>
-      <MobileMenu isMenuOpen={isMenuOpen} toggle={toggleMenu} />
+
       <HeaderBody>
         <HeaderBlock>
           <LogoContainer to={"/"}>
@@ -37,21 +39,25 @@ const Header = () => {
           <HeaderBlock></HeaderBlock>
         ) : (
           <HeaderBlock>
-            <HeaderButtonContainer>
-              <Link to={"/register"}>
-                {" "}
-                <HeaderButton>Crear cuenta</HeaderButton>
-              </Link>
-            </HeaderButtonContainer>
-            <HeaderButtonContainer>
-              <Link to={"/login"}>
-                {" "}
-                <HeaderButton>Iniciar sesión</HeaderButton>
-              </Link>
-            </HeaderButtonContainer>
+            {location != "/register" ? (
+              <HeaderButtonContainer>
+                <Link to={"/register"}>
+                  {" "}
+                  <HeaderButton>Crear cuenta</HeaderButton>
+                </Link>
+              </HeaderButtonContainer>
+            ) : null}
+            {location != "/login" ? (
+              <HeaderButtonContainer>
+                <Link to={"/login"}>
+                  {" "}
+                  <HeaderButton>Iniciar sesión</HeaderButton>
+                </Link>
+              </HeaderButtonContainer>
+            ) : null}
           </HeaderBlock>
         )}
-        <ToggleMenu onClick={toggleMenu}>
+        <ToggleMenu onClick={toggleOpen}>
           <FaBars />
         </ToggleMenu>
       </HeaderBody>

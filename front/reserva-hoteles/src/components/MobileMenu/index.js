@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 
 import {
   MobileMenuContainer,
@@ -9,13 +9,15 @@ import {
   MenuTitle
 } from "./MobileMenuComponents";
 import { AiOutlineClose } from "react-icons/ai";
+import { MenuContext } from "../../context/menu-context";
 
 const MobileMenu = ({isMenuOpen, toggle}) => {
   const loggedIn = false;
+  const {open, toggleOpen} = useContext(MenuContext);
   return (
-    <MobileMenuContainer isMenuOpen={isMenuOpen} onClick={toggle}>
+    <MobileMenuContainer isMenuOpen={open} onClick={toggleOpen}>
       <MobileMenuHeader>
-        <CloseIcon onClick={toggle}>
+        <CloseIcon onClick={toggleOpen}>
           <AiOutlineClose />
         </CloseIcon>
 

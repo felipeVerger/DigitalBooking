@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 export const HeaderContainer = styled.div`
    background: ${(props) => props.theme.background};
   width: 100vw;
+  display: unset;
 
   height: 100px;
   display: flex;
@@ -21,7 +22,7 @@ export const HeaderBody = styled.div`
   z-index: 10;
   display: flex;
   justify-content: space-between;
-  overflow: hidden;
+  overflow: clip;
 `;
 
 export const HeaderBlock = styled.div`

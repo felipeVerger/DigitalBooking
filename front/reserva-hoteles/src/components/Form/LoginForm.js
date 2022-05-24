@@ -12,30 +12,43 @@ import {
 import { Link } from "react-router-dom";
 
 const LoginForm = () => {
+  const [formValues, setformValues] = useState({email: "", password: ""});
   const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    const {name, value} = e.target;
+    setformValues({...formValues, name: value});
+
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+    }
+  }
   return (
     <FormContainer>
       <FormTitle>Iniciar sesión</FormTitle>
       <InputContainer>
-        <Label for={"mail"}>Correo electrónico</Label>
+        <Label for={"email"}>Correo electrónico</Label>
 
         <TextField
           label={"Correo electrónico"}
           errors={errors}
-          name={"mail"}
+          name={"email"}
           placeholder={"correo@electrónico.com"}
           type={"email"}
+          onChange={handleChange}
         />
       </InputContainer>
       <InputContainer>
-        <Label for={"pass"}>Contraseña</Label>
+        <Label for={"password"}>Contraseña</Label>
 
         <TextField
           label={"Correo electrónico"}
           errors={errors}
-          name={"pass"}
+          name={"password"}
           placeholder={"●●●●●●"}
           type={"password"}
+          onChange={handleChange}
         />
       </InputContainer>
 
