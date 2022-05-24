@@ -1,9 +1,18 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const FooterBody = styled.div`
-  background: ${(props) => props.theme.secondary};
+export const FooterContainer = styled.div`
+  background: ${(props) => props.theme.primary};
+  width: 100vw;
+
   height: 60px;
+  display: flex;
+  justify-content: center;
+`;
+
+export const FooterBody = styled.div`
+  max-width: 1920px;
+
   display: flex;
   width: 100%;
   flex-direction: row;

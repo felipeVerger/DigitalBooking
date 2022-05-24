@@ -1,6 +1,7 @@
 import React from 'react'
 import recomendaciones from '../../staticData/recomendaciones.json'
 import { 
+    RecomendacionesContainer,
     Body,
     Block,
     RecomendationTitle,

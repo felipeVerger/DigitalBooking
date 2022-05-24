@@ -1,4 +1,11 @@
-import styled from 'styled-components'
+import styled from "styled-components";
+
+export const RecomendacionesContainer = styled.div`
+  background: ${(props) => props.theme.content_background};
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+`;
 
 export const Body = styled.div`
     background: ${(props) => props.theme.content_background};

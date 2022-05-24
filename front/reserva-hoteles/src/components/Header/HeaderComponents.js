@@ -1,13 +1,24 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const HeaderBody = styled.div`
-  background: ${(props) => props.theme.background};
+
+export const HeaderContainer = styled.div`
+   background: ${(props) => props.theme.background};
+  width: 100vw;
+
   height: 100px;
+  display: flex;
+  justify-content: center;
+`;
+
+export const HeaderBody = styled.div`
+ 
+  max-width: 1920px;
+  width: 100%;
+
   position: sticky;
   top: 0;
   z-index: 10;
-  display: flex;
   display: flex;
   justify-content: space-between;
   overflow: hidden;
@@ -18,8 +29,8 @@ export const HeaderBlock = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-right: 5vw;
-  padding-left: 5vw;
+  padding-right: 5%;
+  padding-left: 5%;
 `;
 
 export const HeaderButton = styled.button`
@@ -59,9 +70,10 @@ export const LogoContainer = styled(Link)`
 
 export const Slogan = styled(Link)`
   color: ${(props) => props.theme.primary};
-  padding: 20px;
+  padding-left: 20px;
   font-size: 24px;
   text-decoration: none;
+  white-space: nowrap;
   @media only screen and (max-width: 1100px){
     display: none;
     
