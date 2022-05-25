@@ -27,7 +27,6 @@ import { BiWifi } from 'react-icons/bi'
 import { FaSwimmingPool } from 'react-icons/fa'
 
 
-
 const Recomendaciones = () => {
   return (
     <Body>
@@ -45,7 +44,7 @@ const Recomendaciones = () => {
                                     <RecomendationInfo>
                                         <HotelTopInfoBlock>
                                             <div>
-                                                <Category>{item.category}</Category>
+                                                <Category>{item.category} <AiFillStar/><AiFillStar/><AiFillStar/><AiFillStar/><AiFillStar/></Category>
                                                 <Title>{item.title}</Title>
                                             </div>
                                             <PunctuationBlock>
