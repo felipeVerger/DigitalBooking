@@ -44,7 +44,7 @@ const Navbar = () => {
     <NavbarBody>
       <NavbarBlock>
         <Title>Busca ofertas en hoteles, casas y mucho mas</Title>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <SelectBox>
             <OptionsContainer className={active ? "active" : ""}>
               {ciudades.map((item, index) => (
@@ -54,6 +54,9 @@ const Navbar = () => {
                     type="radio"
                     id={item.city}
                     name="city"
+                    onChange={handleInputChange}
+                    value={item.city}
+                    onClick={() => setActive(!active)}
                   />
                   <Label htmlFor={item.city}>
                     <GoLocation />
@@ -68,7 +71,7 @@ const Navbar = () => {
             </OptionsContainer>
             <PreSelected onClick={() => setActive(!active)}>
               <ImLocation />
-              <span>¿A donde vamos?</span>
+              <span>{data.city === '' ? '¿A donde vamos?' : data.city}</span>
             </PreSelected>
           </SelectBox>
           <div style={{width: '422px'}}> 
