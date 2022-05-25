@@ -93,7 +93,7 @@ Para incrementar la seguridad y reducir el riesgo y los costos necesitamos tambi
   <!--figcaption>Caption goes here</figcaption-->
 </p>
 <p align="center">
-  <img src="../Recursos/infraestructura-net.png" alt="nuestra arquitectura de redes en AWS" width="70%" height="70%">        
+  <img src="../Recursos/infraestructura-netw.png" alt="nuestra arquitectura de redes en AWS" width="70%" height="70%">        
   <!--figcaption>Caption goes here</figcaption-->
 </p>
 
