@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-
+import Avatar from "react-avatar";
 
 export const HeaderContainer = styled.div`
-   background: ${(props) => props.theme.background};
+  background: ${(props) => props.theme.background};
   width: 100vw;
   display: unset;
 
@@ -13,7 +13,6 @@ export const HeaderContainer = styled.div`
 `;
 
 export const HeaderBody = styled.div`
- 
   max-width: 1920px;
   width: 100%;
 
@@ -41,18 +40,15 @@ export const HeaderButton = styled.button`
   height: 46px;
   width: 180px;
   font-weight: 700;
-  &:hover{
-    background-color: ${props => props.theme.primary};
-    color: ${props => props.theme.color_text_secondary};
+  &:hover {
+    background-color: ${(props) => props.theme.primary};
+    color: ${(props) => props.theme.color_text_secondary};
     cursor: pointer;
-
   }
 
-  @media only screen and (max-width: 768px){
+  @media only screen and (max-width: 768px) {
     display: none;
   }
-
-  
 `;
 
 export const HeaderButtonContainer = styled.div`
@@ -75,25 +71,27 @@ export const Slogan = styled(Link)`
   font-size: 24px;
   text-decoration: none;
   white-space: nowrap;
-  @media only screen and (max-width: 1100px){
+  @media only screen and (max-width: 1100px) {
     display: none;
-    
   }
-
 `;
 
 export const ToggleMenu = styled.div`
-display: none;
-cursor: pointer;
+  display: none;
+  cursor: pointer;
 
-@media screen and (max-width: 768px){
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 32px;
-  padding: 32px;
-  color: ${props => props.theme.primary}
+  @media screen and (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    padding: 32px;
+    color: ${(props) => props.theme.primary};
+  }
+`;
 
-}
-
-`
+export const AvatarIcon = styled(Avatar)`
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`;

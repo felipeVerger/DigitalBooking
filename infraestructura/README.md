@@ -67,7 +67,7 @@ Establecimos una lista de necesidades:
 
 Veamos los componentes que necesitamos en nuestra arquitectura:
 
-Necesitamos seleccionar una región para establecer dónde va a alojarse inicialmente la aplicación. Como nuestros clientes estarán en Argentina, utilizaremos los servidores de la región de San Pablo. Esta región tiene varias zonas de disponibilidad de las que vamos a utilizar dos para cumplir con el requisito de alta disponibilidad.
+Necesitamos seleccionar una región para establecer dónde va a alojarse inicialmente la aplicación. Como es requerido por DH utilizaremos los servidores de la región de us-west-2. Esta región tiene varias zonas de disponibilidad de las que vamos a utilizar dos para cumplir con el requisito de alta disponibilidad.
 
 Ejecutaremos la app en nuestra VPC (nube privada virtual).  Tendremos control completo sobre nuestro entorno de red virtual para poder seleccionar cosas como el rango de las direcciones IP y la creación de subredes para poder aislar las 3 capas de nuestra arquitectura.
 
@@ -81,20 +81,21 @@ Para ajustar la escalabilidad en computación, se recomienda colocar las instanc
 Para reducir las interrupciones del servicio, mejorar la disponibilidad y eliminar el trabajo pesado, usamos dos AZ (zonas de disponibilidad). En la segunda zona nuestra arquitectura se verá exactamente igual. Nuestro grupo de autoescalado trabajará en las dos AZ de nuestra región.
 Amazon VPC es un servicio regional que nos permite aprovechar las zonas de disponibilidad mientras mantiene todos nuestros recursos en esa misma red lógica. Las AZ están conectadas entre sí mediante redes privadas de fibra óptica (rápida). 
 
-En AWS, ELB es una solución de balanceo de carga que ayuda a construir arquitectura tolerante a fallos. Podremos utilizarlos para verificar el estado de los hosts y distribuir el tráfico a las instancias EC2 entre las distintas AZ. También podemos aumentar o reducir la capacidad de balanceo ajustándolo a las demandas del tráfico. También permite administrar certificados, SSL/TLC y la integración con Amazon EC2.
-Hay varias opciones de balanceo de carga en AWS, Application Load Balancer (capa 7), Network Load Balancer (capa 4), Gateway Load Balancer (dispositivos de red de terceros) de las cuales elegimos la primera.
+En AWS, ALB es una solución de balanceo de carga que ayuda a construir arquitectura tolerante a fallos. Podremos utilizarlos para verificar el estado de los hosts y distribuir el tráfico a las instancias EC2 entre las distintas AZ. También podemos aumentar o reducir la capacidad de balanceo ajustándolo a las demandas del tráfico. También permite administrar certificados, SSL/TLC y la integración con Amazon EC2.
+Hay varias opciones de balanceo de carga en AWS, Application Load Balancer (capa 7), Network Load Balancer (capa 4 y 7), Gateway Load Balancer (dispositivos de red de terceros).
 
 En cuanto a la base de datos, podríamos alojarla en una instancia EC2 aunque nos resultó mas conveniente elegir uno de los servicios de base de datos administrados por AWS, RDS, que nos ayuda a reducir la carga de trabajo. RDS provee Fail-over automático, respaldo y recuperación, aislamiento y seguridad, fácil escalado y rutinas de mantenimiento entre otras funciones. En una optimización del rendimiento y las operaciones se podría considerar en un futuro Amazon Aurora.
-
-Como mencionamos anteriormente, también necesitamos un servicio DNS para conectarnos al mundo, sin embargo, configurar la DNS para una alta disponibilidad y desarrollar la capacidad de atender usuarios a nivel mundial no es un trabajo simple. Para nosotros lo mas optimo sería configurar Amazon Route53, un servicio DNS escalable y de alta disponibilidad que conecta las peticiones de los usuarios a nuestros balanceadores de carga, ahorrando el trabajo de configurar la infraestructura de DNS.
 
 Para incrementar la seguridad y reducir el riesgo y los costos necesitamos también considerar la administración de identidad y acceso, podríamos también configurar firewalls y protección contra los ataques DDoS (estos riesgos se ven mitigados por las zonas de disponibilidad múltiples y los balanceadores de carga) y monitorear las instancias y los servidores a través de Amazon CloudWatch o AWS Security, Identity & Compliance. También está disponibles mediante APIs, el monitoreo mediante Prometheus.
 
 <p align="center">
-  <img src="../Recursos/infraestructura.png" alt="nuestra arquitectura en AWS" width="50%" height="50%">        
+  <img src="../Recursos/infraestructura.png" alt="nuestra arquitectura en AWS" width="70%" height="70%">        
   <!--figcaption>Caption goes here</figcaption-->
 </p>
-
+<p align="center">
+  <img src="../Recursos/infraestructura-netw.png" alt="nuestra arquitectura de redes en AWS" width="70%" height="70%">        
+  <!--figcaption>Caption goes here</figcaption-->
+</p>
 
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
@@ -135,6 +136,12 @@ Para incrementar la seguridad y reducir el riesgo y los costos necesitamos tambi
   </li>
   <li>
     <p> Multi-Region Deployment to Address Region Failure. https://www.terraform.io/enterprise/before-installing/reference-architecture/aws</p>
+  </li>
+  <li>
+    <p> Adi Simon, 3 Tier Architecture on AWS using EC2 or Serverless. https://aws.plainenglish.io/3-tier-architecture-on-aws-using-ec2-or-serverless-43b39080fb0e</p>
+  </li>
+  <li>
+    <p> high availability setup to Amazon Web Services. https://docs.contentcontroller.com/self-hosting/aws/aws/</p>
   </li>
 </ul>
 

@@ -16,9 +16,6 @@ import { ImLocation } from "react-icons/im";
 import { GoLocation } from "react-icons/go";
 import { AiOutlineCalendar } from "react-icons/ai";
 
-import './DatePicker.css'
-import { DateRangePickerComponent } from '@syncfusion/ej2-react-calendars'
-
 const ciudades = [
   {
     city: "San Carlos de Bariloche",
@@ -41,21 +38,7 @@ const ciudades = [
 const Navbar = () => {
   const [active, setActive] = useState(false);
 
-  const [data, setData] = useState({
-    city: '',
-    date: ''
-  })
-
-  const handleInputChange = (event) => {
-    setData({
-      ...data,
-      [event.target.name] : event.target.value
-    })
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  }
+  const [dates, setDates] = useState({startDate: null, endDate: null});
 
   return (
     <NavbarBody>
@@ -91,6 +74,17 @@ const Navbar = () => {
               <span>{data.city === '' ? '¿A donde vamos?' : data.city}</span>
             </PreSelected>
           </SelectBox>
+          <div style={{width: '422px'}}> 
+          {/* <DateRangePicker
+          startDateId="startDate"
+          endDateId="endDate"
+          startDate={dates.startDate}
+          endDate={dates.endDate}
+          onDatesChange={({ startDate, endDate }) => { setDates(startDate, endDate)}}
+          // focusedInput={this.state.focusedInput}
+          // onFocusChange={(focusedInput) => { this.setState({ focusedInput })}}
+        /> */}
+          </div>
           <Button type="submit">Buscar</Button>
         </Form>
       </NavbarBlock>

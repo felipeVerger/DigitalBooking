@@ -8,21 +8,24 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import MobileMenu from "./components/MobileMenu";
 import { MenuProvider } from "./context/menu-context";
+import { UserProvider } from "./context/user-context";
+
 
 function App() {
   return (
     <ThemeProvider theme={themes.light}>
-      <MenuProvider>
-      
-      <BrowserRouter>
-      <MobileMenu />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
-      </BrowserRouter>
-      </MenuProvider>
+      <UserProvider>
+        <MenuProvider>
+          <BrowserRouter>
+            <MobileMenu />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </Routes>
+          </BrowserRouter>
+        </MenuProvider>
+      </UserProvider>
     </ThemeProvider>
   );
 }

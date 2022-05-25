@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext} from "react";
 import {
   FormContainer,
   TextField,
@@ -8,23 +8,66 @@ import {
   Label,
   Sumbit,
   FormSwitchText,
+  ErrorText,
 } from "./FormComponents";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, Navigate} from "react-router-dom";
+import { UserContext } from "../../context/user-context";
 
 const LoginForm = () => {
-  const [formValues, setformValues] = useState({email: "", password: ""});
+  const [formValues, setformValues] = useState({});
   const [errors, setErrors] = useState({});
+  const [toSumbit, setToSumbit] = useState(false);
+
+  const navigate = useNavigate();
+
+  const {user, setUser} = useContext(UserContext);
 
   const handleChange = (e) => {
-    const {name, value} = e.target;
-    setformValues({...formValues, name: value});
+    const { name, value } = e.target;
+    setformValues({ ...formValues, [name]: value });
+  };
 
+  const login = () => {
+    setUser({email: formValues.email, nombre: formValues.email.split("@")[0]});
+    navigate("/");
+  };
 
-    const handleSubmit = (e) => {
-      e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(formValues);
+    setErrors(validate(formValues));
+    setToSumbit(true);
+  };
+
+  const validate = (values) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    const errors = {};
+    if (!values.email) {
+      errors.email = "Este campo es obligatorio.";
+    } else if (!regex.test(values.email)) {
+      errors.email = "El correo electrónico ingresado no es valido.";
     }
+
+    if (!values.password) {
+      errors.password = "Este campo es obligatorio.";
+    } else if (values.password.length < 6) {
+      errors.password = "La contraseña tiene que ser minimo de 6 caracteres.";
+    }
+
+    return errors;
+  };
+
+  useEffect(() => {
+    if (Object.keys(errors).length === 0 && toSumbit) {
+      login();
+    }
+  }, [errors]);
+
+    if (user) {
+
+      return <Navigate to={'/'} />
   }
-  return (
+  else return(
     <FormContainer>
       <FormTitle>Iniciar sesión</FormTitle>
       <InputContainer>
@@ -38,6 +81,7 @@ const LoginForm = () => {
           type={"email"}
           onChange={handleChange}
         />
+        <ErrorText>{errors.email}</ErrorText>
       </InputContainer>
       <InputContainer>
         <Label for={"password"}>Contraseña</Label>
@@ -50,14 +94,14 @@ const LoginForm = () => {
           type={"password"}
           onChange={handleChange}
         />
+        <ErrorText>{errors.password}</ErrorText>
       </InputContainer>
 
-      <Sumbit type={"submit"} value="Ingresar" />
+      <Sumbit type={"submit"} value="Ingresar" onClick={handleSubmit} />
       <FormSwitchText>
         ¿Aún no tenes cuenta? <Link to={"/register"}> Registrate</Link>
       </FormSwitchText>
-    </FormContainer>
-  );
+    </FormContainer>);
 };
 
 export default LoginForm;
