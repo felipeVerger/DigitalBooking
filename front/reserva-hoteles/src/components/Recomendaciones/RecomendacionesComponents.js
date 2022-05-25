@@ -41,7 +41,7 @@ export const RecommendationContainer = styled.div`
 
 export const Recomendation = styled.div`
     display: flex;
-    flex: 1;
+
     background: white;
     border: 1px solid #DFE4EA;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -50,13 +50,15 @@ export const Recomendation = styled.div`
     width: 710px;
     min-height: 279px;
 
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 640px){
         flex-direction: column;
         height: 491px;
     }
-    @media screen and (max-width: 1321px){
-        flex: none;
+    @media screen and (max-width: 1007px){
         width: 100%;
+    }
+    @media screen and (min-width: 1007px){
+        width: 50%;
     }
 `
 
@@ -74,7 +76,7 @@ export const Image = styled.img`
     width: 311.1px;
     height: 100%;
     border-radius: 8px;
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 640px){
         width: 100%;
         height: 231px;
     }
@@ -86,7 +88,7 @@ export const RecomendationInfo = styled.div`
     flex-direction: column;
     justify-content: space-between;
     font-family: 'Roboto', sans-serif;
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 640px){
         height: 100%;
     }
     @media screen and (max-width: 1321px) {
