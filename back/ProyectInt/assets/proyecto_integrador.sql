@@ -26,6 +26,5 @@ CREATE TABLE `categorias` (
   `id` numeric(5) NOT NULL COMMENT 'Category Id',
   `titulo` varchar(36) NOT NULL COMMENT 'Category name',
   `descripcion` varchar(100) NOT NULL COMMENT 'Correspond to category description',
-  `url_imagen` varchar(100) DEFAULT NULL COMMENT 'Correspond to category image ‘representation,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `imagen` varchar(100) DEFAULT NULL COMMENT 'Correspond to category image representation',
+  PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
