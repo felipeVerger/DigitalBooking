@@ -11,10 +11,18 @@ import {
   Label,
   Box,
   Button,
+  CalendarContainer,
+  Dropdown,
+  CalendarIcon
 } from "./NavbarComponent";
 import { ImLocation } from "react-icons/im";
 import { GoLocation } from "react-icons/go";
-import { AiOutlineCalendar } from "react-icons/ai";
+
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
+import { DateRange } from "react-date-range";
+import { es } from "date-fns/locale";
+import "react-dropdown/style.css";
 
 const ciudades = [
   {
@@ -36,24 +44,36 @@ const ciudades = [
 ];
 
 const Navbar = () => {
-  const [active, setActive] = useState(false);
   const [data, setData] = useState({
-    city: '',
-    date: ''
-  })
+    city: "",
+    date: "",
+  });
 
-  const [dates, setDates] = useState({startDate: null, endDate: null});
+  const handleDateSelect = (ranges) => {
+    setData({ ...data, date: ranges.selection });
+  };
 
-  const handleInputChange = (event) => {
-    console.log('funciona');
+  const selectionRange = {
+    startDate: new Date(),
+    endDate: new Date(),
+    key: "selection",
+  };
+
+  const handleCityChange = (city) => {
     setData({
       ...data,
-      [event.target.name] : event.target.value
-    })
-  }
+      city: city.value
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+  };
+
+  const [calendarOpen, setCalendarOpen] = useState(false);
+
+  const toggleCalendarOpen = () => {
+    setCalendarOpen(!calendarOpen);
   }
 
   return (
@@ -61,46 +81,28 @@ const Navbar = () => {
       <NavbarBlock>
         <Title>Busca ofertas en hoteles, casas y mucho mas</Title>
         <Form onSubmit={handleSubmit}>
-          <SelectBox>
-            <OptionsContainer className={active ? "active" : ""}>
-              {ciudades.map((item, index) => (
-                <Option key={index}>
-                  <input
-                    className="radio"
-                    type="radio"
-                    id={item.city}
-                    name="city"
-                    onChange={handleInputChange}
-                    value={item.city}
-                    onClick={() => setActive(!active)}
-                  />
-                  <Label htmlFor={item.city}>
-                    <GoLocation />
-                    <Box>
-                      <span>{item.city}</span>
-                      <small>{item.country}</small>
-                    </Box>
-                  </Label>
-                  <hr />
-                </Option>
-              ))}
-            </OptionsContainer>
-            <PreSelected onClick={() => setActive(!active)}>
-              <ImLocation />
-              <span>{data.city === '' ? '¿A donde vamos?' : data.city}</span>
-            </PreSelected>
-          </SelectBox>
-          <div style={{width: '422px'}}> 
-          {/* <DateRangePicker
-          startDateId="startDate"
-          endDateId="endDate"
-          startDate={dates.startDate}
-          endDate={dates.endDate}
-          onDatesChange={({ startDate, endDate }) => { setDates(startDate, endDate)}}
-          // focusedInput={this.state.focusedInput}
-          // onFocusChange={(focusedInput) => { this.setState({ focusedInput })}}
-        /> */}
-          </div>
+          <Dropdown
+            options={ciudades.map((item) => ({
+              value: item.city.toLowerCase(),
+              label: item.city,
+            }))}
+            placeholder={"¿A donde vamos?"}
+            onChange={handleCityChange}
+          />
+          <CalendarContainer onClick={() => setCalendarOpen(true)} isCalendarOpen={calendarOpen}>
+            {calendarOpen ? (
+              <DateRange
+                locale={es}
+                ranges={[selectionRange]}
+                onChange={handleDateSelect}
+              />
+            ) : (
+              <>
+                <CalendarIcon />
+                <div>Check In - Check Out</div>
+              </>
+            )}
+          </CalendarContainer>
           <Button type="submit">Buscar</Button>
         </Form>
       </NavbarBlock>
