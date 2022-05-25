@@ -4,13 +4,19 @@ import com.proyecto.proyectInt.exception.ResourceNotFoundException;
 import com.proyecto.proyectInt.model.Categoria;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.proyecto.proyectInt.repository.CategoriaRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class CategoriaService {
+    private final CategoriaRepository repository;
+
     @Autowired
-    CategoriaRepository repository;
+    public CategoriaService(CategoriaRepository repository) {
+        this.repository = repository;
+    }
 
     public Optional<Categoria> buscar(Long id){
         return repository.findById(id);
@@ -41,4 +47,5 @@ public class CategoriaService {
         else
             return null;
     }
+
 }

@@ -16,46 +16,52 @@ import java.util.Optional;
 @RequestMapping("/categorias")
 public class CategoriaController {
 
-    @Autowired
-    CategoriaService service;
+    /* = Attribute = */
+    private final CategoriaService service;
 
+    /* = Get = */
     @GetMapping
     public List<Categoria> buscarCategorias(){
         return service.buscarTodos();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Categoria> buscarCategoria(@PathVariable Long id){
+        Optional<Categoria> categoriaActualizada=service.buscar(id);
+        return categoriaActualizada.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
+    /* = Post = */
     @PostMapping
     public Categoria registrarCategoria(@RequestBody Categoria categoria){
         return service.registrarCategoria(categoria);
     }
-    @PutMapping
+
+
+    /* = Update = */
+    @PutMapping("/update")
     public ResponseEntity<Categoria> actualizarCategoria(@RequestBody Categoria categoria){
         Categoria categoriaActualizada=service.actualizar(categoria);
         if (categoriaActualizada!=null){
             return ResponseEntity.ok(categoriaActualizada);
         }
         else{
-
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Categoria> buscarCategoria(@PathVariable Long id){
-        Optional<Categoria> categoriaActualizada=service.buscar(id);
-        if(categoriaActualizada.isPresent()){
-            return ResponseEntity.ok(categoriaActualizada.get());
-        }
-        else {
-
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-    }
-
+    /* = Delete = */
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminarOdontologo(@PathVariable Long id) throws ResourceNotFoundException {
+    public ResponseEntity<String> eliminarCategoria(@PathVariable Long id) throws ResourceNotFoundException {
         service.eliminarCategoria(id);
-        return ResponseEntity.ok("Odontologo deleteado");
+        return ResponseEntity.ok("Categoria eliminada");
 
+    }
+
+    /* = Constructor = */
+
+    @Autowired
+    public CategoriaController(CategoriaService service) {
+        this.service = service;
     }
 }

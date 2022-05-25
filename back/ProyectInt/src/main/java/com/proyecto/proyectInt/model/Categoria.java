@@ -1,15 +1,10 @@
 package com.proyecto.proyectInt.model;
 
-
-
-import org.springframework.data.annotation.Id;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "categorias")
 public class Categoria {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
