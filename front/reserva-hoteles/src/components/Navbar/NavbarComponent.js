@@ -56,7 +56,7 @@ export const Button = styled.button`
 `;
 
 export const CalendarContainer = styled.div`
-  z-index: 998;
+  z-index: ${props => props.isCalendarOpen ? 998 : 0};
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 2px;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   NavbarBody,
   NavbarBlock,
@@ -7,7 +7,7 @@ import {
   Button,
   CalendarContainer,
   Dropdown,
-  CalendarIcon
+  CalendarIcon,
 } from "./NavbarComponent";
 import { ImLocation } from "react-icons/im";
 import { GoLocation } from "react-icons/go";
@@ -37,26 +37,72 @@ const ciudades = [
   },
 ];
 
+const getDateString = (date) => {
+  const days = ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"];
+  const months = [
+    "Ene",
+    "Feb",
+    "Mar",
+    "Abr",
+    "May",
+    "Jun",
+    "Jul",
+    "Ago",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dic",
+  ];
+
+  return (
+    days[date.getDay()] +
+    ", " +
+    date.getDate() +
+    " " +
+    months[date.getMonth()] +
+    " " +
+    date.getFullYear()
+  );
+};
+
 const Navbar = () => {
+  const ref = useRef();
+  useEffect(() => {
+    const checkIfClickedOutside = (e) => {
+      if (calendarOpen && ref.current && !ref.current.contains(e.target)) {
+        setCalendarOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", checkIfClickedOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", checkIfClickedOutside);
+    };
+  }, [calendarOpen]);
+
   const [data, setData] = useState({
     city: "",
-    date: "",
+    date: { startDate: null, endDate: null },
   });
 
   const handleDateSelect = (ranges) => {
+    console.log(ranges.selection);
     setData({ ...data, date: ranges.selection });
+    if (ranges.selection.endDate !== ranges.selection.startDate) {
+      toggleCalendarOpen();
+    }
   };
 
   const selectionRange = {
-    startDate: new Date(),
-    endDate: new Date(),
+    startDate: data.date.startDate ? data.date.startDate : new Date(),
+    endDate: data.date.endDate ? data.date.endDate : new Date(),
     key: "selection",
   };
 
   const handleCityChange = (city) => {
     setData({
       ...data,
-      city: city.value
+      city: city.value,
     });
   };
 
@@ -68,7 +114,7 @@ const Navbar = () => {
 
   const toggleCalendarOpen = () => {
     setCalendarOpen(!calendarOpen);
-  }
+  };
 
   return (
     <NavbarBody>
@@ -83,9 +129,14 @@ const Navbar = () => {
             placeholder={"¿A donde vamos?"}
             onChange={handleCityChange}
           />
-          <CalendarContainer onClick={() => setCalendarOpen(true)} isCalendarOpen={calendarOpen}>
+          <CalendarContainer
+            ref={ref}
+            onClick={() => setCalendarOpen(true)}
+            isCalendarOpen={calendarOpen}
+          >
             {calendarOpen ? (
               <DateRange
+                minDate={new Date()}
                 locale={es}
                 ranges={[selectionRange]}
                 onChange={handleDateSelect}
@@ -93,7 +144,15 @@ const Navbar = () => {
             ) : (
               <>
                 <CalendarIcon />
-                <div>Check In - Check Out</div>
+                <div>
+                  {data.date.startDate
+                    ? getDateString(data.date.startDate)
+                    : "Check In"}
+                  {" - "}
+                  {data.date.endDate
+                    ? getDateString(data.date.endDate)
+                    : "Check Out"}
+                </div>
               </>
             )}
           </CalendarContainer>
