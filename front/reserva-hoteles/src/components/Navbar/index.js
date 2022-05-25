@@ -37,8 +37,24 @@ const ciudades = [
 
 const Navbar = () => {
   const [active, setActive] = useState(false);
+  const [data, setData] = useState({
+    city: '',
+    date: ''
+  })
 
   const [dates, setDates] = useState({startDate: null, endDate: null});
+
+  const handleInputChange = (event) => {
+    console.log('funciona');
+    setData({
+      ...data,
+      [event.target.name] : event.target.value
+    })
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  }
 
   return (
     <NavbarBody>
