@@ -85,7 +85,7 @@ const RegisterForm = () => {
         <FormTitle>Crear cuenta</FormTitle>
         <HorizontalBlock>
           <InputContainer>
-            <Label for={"nombre"}>Nombre</Label>
+            <Label htmlFor={"nombre"}>Nombre</Label>
             <TextField
               name={"nombre"}
               type={"text"}
@@ -95,7 +95,7 @@ const RegisterForm = () => {
             <ErrorText>{errors.nombre}</ErrorText>
           </InputContainer>
           <InputContainer>
-            <Label for={"apellido"}>Apellido</Label>
+            <Label htmlFor={"apellido"}>Apellido</Label>
             <TextField
               name={"apellido"}
               type={"text"}
@@ -107,7 +107,7 @@ const RegisterForm = () => {
         </HorizontalBlock>
 
         <InputContainer>
-          <Label for={"email"}>Correo electrónico</Label>
+          <Label htmlFor={"email"}>Correo electrónico</Label>
 
           <TextField
             name={"email"}
@@ -119,7 +119,7 @@ const RegisterForm = () => {
         </InputContainer>
 
         <InputContainer>
-          <Label for={"password"}>Contraseña</Label>
+          <Label htmlFor={"password"}>Contraseña</Label>
           <TextField
             name={"password"}
             placeholder={"●●●●●●"}
@@ -130,7 +130,7 @@ const RegisterForm = () => {
         </InputContainer>
 
         <InputContainer>
-          <Label for={"confirmarPass"}>Confirmar contraseña</Label>
+          <Label htmlFor={"confirmarPass"}>Confirmar contraseña</Label>
           <TextField
             name={"confirmarPass"}
             placeholder={"●●●●●●"}

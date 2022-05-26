@@ -70,7 +70,7 @@ const LoginForm = () => {
     <FormContainer>
       <FormTitle>Iniciar sesión</FormTitle>
       <InputContainer>
-        <Label for={"email"}>Correo electrónico</Label>
+        <Label htmlFor={"email"}>Correo electrónico</Label>
 
         <TextField
           label={"Correo electrónico"}
@@ -83,7 +83,7 @@ const LoginForm = () => {
         <ErrorText>{errors.email}</ErrorText>
       </InputContainer>
       <InputContainer>
-        <Label for={"password"}>Contraseña</Label>
+        <Label htmlFor={"password"}>Contraseña</Label>
 
         <TextField
           label={"Correo electrónico"}
