@@ -103,6 +103,7 @@ export const UserInfo = styled.div`
   padding-left: 20px;
 
   align-items: space-between;
+  justify-content: center;
   flex-direction: column;
   display: flex;
   
@@ -120,4 +121,5 @@ justify-content: space-between;
 
 export const UserName = styled.div`
 color: ${(props) => props.theme.primary};
+font-weight: 700;
 `

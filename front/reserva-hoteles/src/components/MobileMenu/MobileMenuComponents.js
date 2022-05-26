@@ -63,10 +63,31 @@ width: 100%;
 export const MenuTitle = styled.div`
 grid-area: 5 / 5 / 6 / 6; 
 display: flex;
-justify-content: center;
+align-items: flex-end;
+flex-direction: column;
 color: ${props => props.theme.color_text_primary};
 font-size: 36px;
 padding: 10px;
 
 
+`
+
+export const Greeting = styled.div`
+
+width: 100%;
+display: flex;
+justify-content: flex-end;
+font-size: 20px;
+`
+
+export const UserName = styled.div`
+color: ${(props) => props.theme.primary};
+font-size: 20px;
+font-weight: 700;
+width: 100%;
+`
+
+
+export const UserIcon = styled.div`
+padding-right: 1px;
 `

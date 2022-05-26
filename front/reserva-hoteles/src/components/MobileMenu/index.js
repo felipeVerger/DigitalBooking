@@ -7,11 +7,15 @@ import {
   MenuLink,
   MobileMenuHeader,
   MenuTitle,
+  Greeting,
+  UserName,
+  UserIcon
 } from "./MobileMenuComponents";
 import { AiOutlineClose } from "react-icons/ai";
 import { MenuContext } from "../../context/menu-context";
 import { UserContext } from "../../context/user-context";
 import Avatar from "react-avatar";
+import {themes} from "../../assets/themes";
 
 const MobileMenu = ({ isMenuOpen, toggle }) => {
   const { user, setUser } = useContext(UserContext);
@@ -24,7 +28,11 @@ const MobileMenu = ({ isMenuOpen, toggle }) => {
         </CloseIcon>
         {user ? (
           <MenuTitle>
-            <Avatar name={user.nombre} round size="60px" />
+            <UserIcon>
+            <Avatar name={user.nombre} round size="40px" color={themes.light.primary}/>
+            </UserIcon>
+            <Greeting>Hola,</Greeting>
+                   <UserName>{user.nombre}</UserName>
           </MenuTitle>
         ) : (
           <MenuTitle>MENÚ</MenuTitle>

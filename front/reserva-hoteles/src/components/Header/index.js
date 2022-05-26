@@ -20,6 +20,7 @@ import MobileMenu from "../MobileMenu";
 import { MenuContext } from "../../context/menu-context";
 import { UserContext} from "../../context/user-context";
 import { AiOutlineClose } from "react-icons/ai";
+import {themes} from "../../assets/themes";
 
 const Header = () => {
   const signedIn = false;
@@ -47,7 +48,7 @@ const Header = () => {
         </HeaderBlock>
         {user ? (
           <HeaderBlock>
-            <AvatarIcon name={user.nombre} round size="40px" />
+            <AvatarIcon name={user.nombre} round size="40px" color={themes.light.primary} />
                   {/* <HeaderButton onClick={() => {setUser(null)}}>Cerrar sesion</HeaderButton> */}
                   <UserInfo>
                    <Greeting>Hola, <AiOutlineClose style={{cursor: "pointer"}} onClick={()=> setUser(null)}/></Greeting>
