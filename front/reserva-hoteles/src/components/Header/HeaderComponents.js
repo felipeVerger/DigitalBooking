@@ -1,16 +1,27 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import Avatar from "react-avatar";
+
+export const HeaderContainer = styled.div`
+  background: ${(props) => props.theme.background};
+  width: 100vw;
+  display: unset;
+
+  height: 100px;
+  display: flex;
+  justify-content: center;
+`;
 
 export const HeaderBody = styled.div`
-  background: ${(props) => props.theme.background};
-  height: 100px;
+  max-width: 1920px;
+  width: 100%;
+
   position: sticky;
   top: 0;
   z-index: 10;
   display: flex;
-  display: flex;
   justify-content: space-between;
-  overflow: hidden;
+  overflow: clip;
 `;
 
 export const HeaderBlock = styled.div`
@@ -18,7 +29,8 @@ export const HeaderBlock = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 50px;
+  padding-right: 5%;
+  padding-left: 5%;
 `;
 
 export const HeaderButton = styled.button`
@@ -28,17 +40,15 @@ export const HeaderButton = styled.button`
   height: 46px;
   width: 180px;
   font-weight: 700;
-  &:hover{
-    background-color: ${props => props.theme.primary};
-    color: ${props => props.theme.color_text_secondary};
-
+  &:hover {
+    background-color: ${(props) => props.theme.primary};
+    color: ${(props) => props.theme.color_text_secondary};
+    cursor: pointer;
   }
 
-  @media only screen and (max-width: 768px){
+  @media only screen and (max-width: 768px) {
     display: none;
   }
-
-  
 `;
 
 export const HeaderButtonContainer = styled.div`
@@ -57,25 +67,59 @@ export const LogoContainer = styled(Link)`
 
 export const Slogan = styled(Link)`
   color: ${(props) => props.theme.primary};
-  padding: 20px;
+  padding-left: 20px;
   font-size: 24px;
   text-decoration: none;
-  @media only screen and (max-width: 1100px){
+  white-space: nowrap;
+  @media only screen and (max-width: 1100px) {
     display: none;
-    
   }
-
 `;
 
 export const ToggleMenu = styled.div`
-display: none;
+  display: none;
+  cursor: pointer;
 
-@media screen and (max-wioth: 768px){
-  display: block;
-  width: 48px;
-  color: ${props => props.theme.primary}
-  bac
+  @media screen and (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    padding: 32px;
+    color: ${(props) => props.theme.primary};
+  }
+`;
 
-}
+export const AvatarIcon = styled(Avatar)`
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`;
 
+export const UserInfo = styled.div`
+  
+  height: 46px;
+  width: 180px;
+  padding-left: 20px;
+
+  align-items: space-between;
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
+  
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`
+
+export const Greeting = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+`
+
+export const UserName = styled.div`
+color: ${(props) => props.theme.primary};
+font-weight: 700;
 `
