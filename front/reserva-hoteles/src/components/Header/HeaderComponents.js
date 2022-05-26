@@ -10,15 +10,17 @@ export const HeaderContainer = styled.div`
   height: 100px;
   display: flex;
   justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index:998;
 `;
 
 export const HeaderBody = styled.div`
   max-width: 1920px;
   width: 100%;
 
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  
+  
   display: flex;
   justify-content: space-between;
   overflow: clip;
