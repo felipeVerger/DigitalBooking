@@ -54,11 +54,8 @@ export const Recomendation = styled.div`
         flex-direction: column;
         height: 491px;
     }
-    @media screen and (max-width: 1007px){
+    @media screen and (max-width: 1366px){
         width: 100%;
-    }
-    @media screen and (min-width: 1007px){
-        width: 50%;
     }
 `
 
@@ -91,9 +88,7 @@ export const RecomendationInfo = styled.div`
     @media screen and (max-width: 640px){
         height: 100%;
     }
-    @media screen and (max-width: 1321px) {
-        gap: 20px;
-    }
+    
 `
 
 export const HotelTopInfoBlock = styled.div`
