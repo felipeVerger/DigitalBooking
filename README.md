@@ -1,4 +1,3 @@
-
 <p align="center"> 
   <img src="/Recursos/logo.png" alt="DB Logo" width="20%" height="20%">
 </p>
@@ -179,19 +178,19 @@ El objetivo fundamental del proyecto es el aprendizaje y la puesta en práctica 
 
   :boy: <b>Henry Salomón Suárez López</b> <br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Email: <a>hessuarezlo@unal.edu.co</a> <br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GitHub: <a href="https://github.com/ma-shamshiri">@henrysalomo</a> <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GitHub: <a href="https://github.com/henrysalo">@henrysalomo</a> <br>
 
   :boy: <b>Matias Fernandez</b> <br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Email: <a>matias_fernandez92@hotmail.com</a> <br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GitHub: <a href="https://github.com/ma-shamshiri">@</a> <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GitHub: <a href="https://github.com/MatiasFz">@MatiasFz</a> <br>
 
   :woman: <b>Jazmin Maldonado</b> <br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Email: <a>jazminmald@gmail.com</a> <br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GitHub: <a href="https://github.com/divyabhagavathiappan">@</a> <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GitHub: <a href="https://github.com/jazminmald">@jazminmald</a> <br>
   
   :boy: <b>Facundo Ezequiel Wahren Westen</b> <br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Email: <a>facundowahren@gmail.com</a> <br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GitHub: <a href="https://github.com/ma-shamshiri">@</a> <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GitHub: <a href="https://github.com/facundowesten">@facundowesten</a> <br>
 
   :woman: <b>Natalia Varesi</b> <br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Email: <a>varesinatalia@gmail.com</a> <br>
@@ -199,7 +198,7 @@ El objetivo fundamental del proyecto es el aprendizaje y la puesta en práctica 
 
   :boy: <b> Felipe Verger</b> <br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Email: <a>felipeverger123@gmail.com</a> <br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GitHub: <a href="https://github.com/ma-shamshiri">@</a> <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GitHub: <a href="https://github.com/felipeVerger">@felipeVerger</a> <br>
 
 ### Product Owner:
 :woman: <b>Laura Padin</b> <br>
