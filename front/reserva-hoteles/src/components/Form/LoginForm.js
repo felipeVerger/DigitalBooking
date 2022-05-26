@@ -34,7 +34,6 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formValues);
     setErrors(validate(formValues));
     setToSumbit(true);
   };

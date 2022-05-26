@@ -95,3 +95,29 @@ export const AvatarIcon = styled(Avatar)`
     display: none;
   }
 `;
+
+export const UserInfo = styled.div`
+  
+  height: 46px;
+  width: 180px;
+  padding-left: 20px;
+
+  align-items: space-between;
+  flex-direction: column;
+  display: flex;
+  
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`
+
+export const Greeting = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+`
+
+export const UserName = styled.div`
+color: ${(props) => props.theme.primary};
+`

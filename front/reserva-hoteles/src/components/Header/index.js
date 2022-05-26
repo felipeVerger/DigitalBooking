@@ -10,19 +10,22 @@ import {
   LogoContainer,
   Slogan,
   ToggleMenu,
-  AvatarIcon
+  AvatarIcon,
+  UserInfo,
+  Greeting,
+  UserName
 } from "./HeaderComponents";
 import { FaBars } from "react-icons/fa";
 import MobileMenu from "../MobileMenu";
 import { MenuContext } from "../../context/menu-context";
 import { UserContext} from "../../context/user-context";
+import { AiOutlineClose } from "react-icons/ai";
 
 const Header = () => {
   const signedIn = false;
 
   const location = useLocation().pathname;
 
-  console.log(location);
 
   const { toggleOpen } = useContext(MenuContext);
 
@@ -44,10 +47,12 @@ const Header = () => {
         </HeaderBlock>
         {user ? (
           <HeaderBlock>
-            <AvatarIcon name={user.nombre} round size="60px" />
-            <HeaderButtonContainer>
-                  <HeaderButton onClick={() => {setUser(null)}}>Cerrar sesion</HeaderButton>
-              </HeaderButtonContainer>
+            <AvatarIcon name={user.nombre} round size="40px" />
+                  {/* <HeaderButton onClick={() => {setUser(null)}}>Cerrar sesion</HeaderButton> */}
+                  <UserInfo>
+                   <Greeting>Hola, <AiOutlineClose style={{cursor: "pointer"}} onClick={()=> setUser(null)}/></Greeting>
+                   <UserName>{user.nombre}</UserName>
+                  </UserInfo>
 
 
           </HeaderBlock>
