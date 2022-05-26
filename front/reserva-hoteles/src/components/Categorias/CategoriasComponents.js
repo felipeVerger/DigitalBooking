@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Body = styled.div`
   background: white;
   max-width: 1920px;
+
 `;
 
 export const CategoryBlock = styled.div`

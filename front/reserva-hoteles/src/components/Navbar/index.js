@@ -86,7 +86,6 @@ const Navbar = () => {
   });
 
   const handleDateSelect = (ranges) => {
-    console.log(ranges.selection);
     setData({ ...data, date: ranges.selection });
     if (ranges.selection.endDate !== ranges.selection.startDate) {
       toggleCalendarOpen();

@@ -1,12 +1,11 @@
 import React from 'react'
 import recomendaciones from '../../staticData/recomendaciones.json'
 import { 
-    RecomendacionesContainer,
     Body,
     Block,
     RecomendationTitle,
     RecommendationContainer,
-    Recomendation,
+    Recommendation,
     ImageBlock,
     Image, 
     RecomendationInfo, 
@@ -36,7 +35,7 @@ const Recomendaciones = () => {
                 {
                     recomendaciones.map((item) => {
                         return (
-                            <Recomendation key={item.id}>
+                            <Recommendation key={item.id}>
                                 <ImageBlock>
                                     <Image src={item.crimg} alt="" />
                                     <AiFillHeart/>
@@ -61,7 +60,7 @@ const Recomendaciones = () => {
                                             <Button>Ver mas</Button>
                                         </DescriptionBlock>
                                     </RecomendationInfo>
-                            </Recomendation>
+                            </Recommendation>
                         )
                     })
                 }
