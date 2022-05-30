@@ -1,0 +1,26 @@
+stages:
+  - triggers
+  - deploybd
+
+trigger_front:
+  stage: triggers
+  trigger:
+    include: front/.gitlab-ci.yml
+  rules:
+    - changes:
+        - front/*
+
+trigger_back:
+  stage: triggers
+  trigger:
+    include: back/.gitlab-ci.yml
+  rules:
+    - changes:
+        - back/*
+
+deploy_database:
+  stage: deploybd
+  script:
+    - echo "This job deploys something else. It will only run when all jobs in the"
+    - echo "test stage complete. It will start at about the same time as deploy_a."
+
