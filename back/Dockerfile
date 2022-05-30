@@ -1,6 +1,6 @@
 FROM maven:3-amazoncorretto-17 as BUILD
-COPY /src /home/app/src
-COPY /pom.xml /home/app/pom.xml
+COPY ./ProyectInt/src /home/app/src
+COPY ./ProyectInt/pom.xml /home/app/pom.xml
 RUN mvn -f /home/app/pom.xml clean package
 
 FROM openjdk:17

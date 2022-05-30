@@ -2,7 +2,7 @@ services:
   - docker:19.03.7-dind
 stages:
   - build
-  - maven-test
+  - test
   - docker-build
   - deploy
 
@@ -13,23 +13,26 @@ build:
     - source .${CI_COMMIT_REF_NAME}.env
   script:
     - echo "Start building App"
+    - cd /ProyectInt 
     - mvn clean install -Dspring.profiles.active=$SPRING_ACTIVE_PROFILE && mvn package -B -e -Dspring.profiles.active=$SPRING_ACTIVE_PROFILE
   artifacts:
     paths:
       - target/*.jar
 
-maven-test:
+test:
   stage: test
   needs: [build]
   image: maven:3-jdk-17-slim
-  script: "mvn test"
+  script: 
+  - cd /ProyectInt
+  - "mvn test"
   artifacts:
     paths:
       - target/*.jar
 
 docker-build:
   stage: docker-build
-  needs: [maven-test]
+  needs: [test]
   image: docker:stable
   before_script:
     - source .${CI_COMMIT_REF_NAME}.env
