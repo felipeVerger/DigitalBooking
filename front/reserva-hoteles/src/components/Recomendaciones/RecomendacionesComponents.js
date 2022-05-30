@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { AiFillHeart } from "react-icons/ai";
 
 export const Body = styled.div`
   background: ${(props) => props.theme.content_background};
@@ -51,7 +52,6 @@ export const Recommendation = styled.div`
   @media screen and (max-width: 1280px) {
     width: 100%;
   }
-
   @media screen and (max-width: 640px) {
     flex-direction: column;
   }
@@ -67,6 +67,9 @@ export const ImageBlock = styled.div`
     right: 20px;
     top: 20px;
     color: white;
+  }
+  .active {
+    color: red;
   }
 `;
 
