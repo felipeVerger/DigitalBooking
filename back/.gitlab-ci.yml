@@ -13,7 +13,7 @@ build:
     - source .${CI_COMMIT_REF_NAME}.env
   script:
     - echo "Start building App"
-    - cd /ProyectInt 
+    - cd ProyectInt/
     - mvn clean install -Dspring.profiles.active=$SPRING_ACTIVE_PROFILE && mvn package -B -e -Dspring.profiles.active=$SPRING_ACTIVE_PROFILE
   artifacts:
     paths:
@@ -24,7 +24,7 @@ test:
   needs: [build]
   image: maven:3-jdk-17-slim
   script: 
-  - cd /ProyectInt
+  - cd ProyectInt/
   - "mvn test"
   artifacts:
     paths:
