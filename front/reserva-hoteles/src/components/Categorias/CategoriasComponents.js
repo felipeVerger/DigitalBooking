@@ -28,10 +28,7 @@ export const FlexWrapper = styled.div`
   display: flex;
   gap: 20px;
   flex-flow: wrap;
-  flex: 1;
-  @media screen and (max-width: 1348px) {
-    justify-content: center;
-  }
+  
   @media screen and (max-width: 768px) {
     display: flex;
     flex-direction: column;
