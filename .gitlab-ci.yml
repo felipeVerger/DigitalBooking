@@ -2,7 +2,7 @@ stages:
   - triggers
   - deploybd
 
-trigger_a:
+trigger_front:
   stage: triggers
   trigger:
     include: front/.gitlab-ci.yml
@@ -10,7 +10,7 @@ trigger_a:
     - changes:
         - front/*
 
-trigger_b:
+trigger_back:
   stage: triggers
   trigger:
     include: back/.gitlab-ci.yml
@@ -18,7 +18,7 @@ trigger_b:
     - changes:
         - back/*
 
-deploy_bd:
+deploy_database:
   stage: deploybd
   script:
     - echo "This job deploys something else. It will only run when all jobs in the"
