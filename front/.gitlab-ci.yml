@@ -9,7 +9,7 @@ build:
   image: node
   script: 
     - echo "Start building App"
-    - cd /reserva-hoteles
+    - cd reserva-hoteles/
     - npm install
     - npm build
     - echo "Build successfully!"
@@ -25,7 +25,7 @@ test:
   image: node
   script:
     - echo "Testing App"
-    - cd /reserva-hoteles
+    - cd reserva-hoteles/
     - CI=true npm test
     - echo "Test successfully!"
 
