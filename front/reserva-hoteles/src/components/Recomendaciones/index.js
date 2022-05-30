@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import recomendaciones from '../../staticData/recomendaciones.json'
 import { 
     Body,
@@ -25,8 +25,14 @@ import { HiLocationMarker } from 'react-icons/hi'
 import { BiWifi } from 'react-icons/bi'
 import { FaSwimmingPool } from 'react-icons/fa'
 
-
 const Recomendaciones = () => {
+
+  const [activeLike, setActiveLike] = useState(false)
+
+  const handleActiveHeart = () => {
+      setActiveLike(!activeLike)
+  }
+  
   return (
     <Body>
         <Block>
@@ -38,7 +44,7 @@ const Recomendaciones = () => {
                             <Recommendation key={item.id}>
                                 <ImageBlock>
                                     <Image src={item.crimg} alt="" />
-                                    <AiFillHeart/>
+                                    <AiFillHeart onClick={handleActiveHeart} className={activeLike ? 'active' : ''}/>
                                 </ImageBlock>
                                     <RecomendationInfo>
                                         <HotelTopInfoBlock>
