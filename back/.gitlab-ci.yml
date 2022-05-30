@@ -1,0 +1,56 @@
+services:
+  - docker:19.03.7-dind
+stages:
+  - build
+  - maven-test
+  - docker-build
+  - deploy
+
+build:
+  stage: build
+  image: maven:3.6.3-jdk-17-slim
+  before_script:
+    - source .${CI_COMMIT_REF_NAME}.env
+  script:
+    - echo "Start building App"
+    - mvn clean install -Dspring.profiles.active=$SPRING_ACTIVE_PROFILE && mvn package -B -e -Dspring.profiles.active=$SPRING_ACTIVE_PROFILE
+  artifacts:
+    paths:
+      - target/*.jar
+
+maven-test:
+  stage: test
+  needs: [build]
+  image: maven:3-jdk-17-slim
+  script: "mvn test"
+  artifacts:
+    paths:
+      - target/*.jar
+
+docker-build:
+  stage: docker-build
+  needs: [maven-test]
+  image: docker:stable
+  before_script:
+    - source .${CI_COMMIT_REF_NAME}.env
+  script:
+    - docker build --build-arg SPRING_ACTIVE_PROFILE=$SPRING_ACTIVE_PROFILE -t $DOCKER_REPO .
+    - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD docker.io
+    - docker push $DOCKER_REPO
+
+deploy:
+  stage: deploy
+  needs: [docker-build]
+  #image: ubuntu:latest
+  image: alpine:latest
+  #before_script:
+  #  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+  #  - eval $(ssh-agent -s)
+  #  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+  #  - mkdir -p ~/.ssh
+  #  - chmod 700 ~/.ssh
+  #  - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+  #  - source .${CI_COMMIT_REF_NAME}.env
+  script:
+    - echo "deploying app"
+  #  - ssh root@$SERVER "docker login -u $DOCKER_USER -p $DOCKER_PASSWORD docker.io; docker stop $APP_NAME; docker system prune -a -f; docker pull $DOCKER_REPO; docker container run -d --name $APP_NAME -p $PORT:8080 -e SPRING_PROFILES_ACTIVE=$SPRING_ACTIVE_PROFILE $DOCKER_REPO; docker logout"
