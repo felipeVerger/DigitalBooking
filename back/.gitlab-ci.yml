@@ -9,7 +9,6 @@ build:
   image: maven:3.6.3-jdk-11-slim
   script:
     - echo "Start building App"
-    - cd ProyectInt/
     - mvn clean install -Dspring.profiles.active=$SPRING_ACTIVE_PROFILE && mvn package -B -e -Dspring.profiles.active=$SPRING_ACTIVE_PROFILE
   artifacts:
     expire_in: 1 hour
@@ -21,7 +20,6 @@ test:
   needs: [build]
   image: maven:3-jdk-11-slim
   script: 
-  - cd ProyectInt/
   - "mvn test"
   artifacts:
     paths:
