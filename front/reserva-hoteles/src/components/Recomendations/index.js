@@ -18,7 +18,7 @@ import {
     LocationText, 
     DescriptionBlock, 
     Description, 
-    Button } from './RecomendacionesComponents'
+    Button } from './RecomendationsComponents'
 
 import { AiFillStar, AiFillHeart } from 'react-icons/ai'
 import { HiLocationMarker } from 'react-icons/hi'

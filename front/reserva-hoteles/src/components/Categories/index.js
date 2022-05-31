@@ -1,15 +1,16 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import categorias from '../../staticData/categorias.json'
-import { Body, CategoryBlock, SectionTitle, FlexWrapper, Box, Image, InfoSection, CategoryText, CategoryInfo } from './CategoriasComponents'
+import { Body, CategoryBlock, SectionTitle, FlexWrapper, Box, Image, InfoSection, CategoryText, CategoryInfo } from './CategoriesComponents'
 
 const Categorias = () => {
+
   return (
     <Body>
         <CategoryBlock>
             <SectionTitle>Buscar por tipo de alojamiento</SectionTitle>
             <FlexWrapper>
                 {
-                    categorias.map((item, index) => {
+                    categorias.map((item) => {
                         return (
                             <Box key={item.id}>
                                 <Image src={item.image} alt="imagen-categorias" />
