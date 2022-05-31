@@ -1,5 +1,3 @@
-services:
-  - docker:19.03.7-dind
 stages:
   - build
   - test
@@ -16,6 +14,7 @@ build:
     - cd ProyectInt/
     - mvn clean install -Dspring.profiles.active=$SPRING_ACTIVE_PROFILE && mvn package -B -e -Dspring.profiles.active=$SPRING_ACTIVE_PROFILE
   artifacts:
+    expire_in: 1 hour
     paths:
       - target/*.jar
 
@@ -33,13 +32,15 @@ test:
 docker-build:
   stage: docker-build
   needs: [test]
-  image: docker:stable
+  image: docker:latest
+  services: 
+    - name: docker:19.03.8-dind
   before_script:
-    - source .${CI_COMMIT_REF_NAME}.env
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - docker build --build-arg SPRING_ACTIVE_PROFILE=$SPRING_ACTIVE_PROFILE -t $DOCKER_REPO .
-    - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD docker.io
-    - docker push $DOCKER_REPO
+    - docker build --pull -t "$CI_REGISTRY_IMAGE" .
+    - docker push "$CI_REGISTRY_IMAGE"
+    - echo "Registry image:" $CI_REGISTRY_IMAGE
 
 deploy:
   stage: deploy
