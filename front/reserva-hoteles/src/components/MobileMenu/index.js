@@ -9,17 +9,19 @@ import {
   MenuTitle,
   Greeting,
   UserName,
-  UserIcon
+  UserIcon,
 } from "./MobileMenuComponents";
 import { AiOutlineClose } from "react-icons/ai";
 import { MenuContext } from "../../context/menu-context";
 import { UserContext } from "../../context/user-context";
 import Avatar from "react-avatar";
-import {themes} from "../../assets/themes";
+import { themes } from "../../assets/themes";
+import { useLocation } from "react-router-dom";
 
 const MobileMenu = ({ isMenuOpen, toggle }) => {
   const { user, setUser } = useContext(UserContext);
   const { open, toggleOpen } = useContext(MenuContext);
+  const location = useLocation().pathname;
   return (
     <MobileMenuContainer isMenuOpen={open} onClick={toggleOpen}>
       <MobileMenuHeader>
@@ -29,10 +31,15 @@ const MobileMenu = ({ isMenuOpen, toggle }) => {
         {user ? (
           <MenuTitle>
             <UserIcon>
-            <Avatar name={user.nombre} round size="40px" color={themes.light.primary}/>
+              <Avatar
+                name={user.nombre}
+                round
+                size="40px"
+                color={themes.light.primary}
+              />
             </UserIcon>
             <Greeting>Hola,</Greeting>
-                   <UserName>{user.nombre}</UserName>
+            <UserName>{user.nombre.split(" ")[0]}</UserName>
           </MenuTitle>
         ) : (
           <MenuTitle>MENÚ</MenuTitle>
@@ -47,8 +54,16 @@ const MobileMenu = ({ isMenuOpen, toggle }) => {
           </MenuLink>
         ) : (
           <>
-            <MenuLink to={"/login"}>Login</MenuLink>{" "}
-            <MenuLink to={"/register"}>Crear cuenta</MenuLink>
+            {location != "/login" ? (
+              <MenuLink to={"/login"}>Login</MenuLink>
+            ) : (
+              null
+            )}
+            {location != "/register" ? (
+              <MenuLink to={"/register"}>Crear cuenta</MenuLink>
+            ) : (
+              null
+            )}
           </>
         )}
       </MenuLinksContainer>

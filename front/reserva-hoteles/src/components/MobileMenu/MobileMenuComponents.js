@@ -17,7 +17,7 @@ export const MobileMenuContainer = styled.div`
 
 export const MobileMenuHeader = styled.div`
 background: ${props => props.theme.background};
-height: 200px;
+max-height: 30vh;
 border-bottom: 1px solid ${props => props.theme.primary};
 display: grid;
 grid-template-columns: repeat(5, 1fr);
@@ -74,7 +74,6 @@ padding: 10px;
 
 export const Greeting = styled.div`
 
-width: 100%;
 display: flex;
 justify-content: flex-end;
 font-size: 20px;
@@ -84,7 +83,7 @@ export const UserName = styled.div`
 color: ${(props) => props.theme.primary};
 font-size: 20px;
 font-weight: 700;
-width: 100%;
+
 `
 
 
