@@ -6,7 +6,7 @@ stages:
 
 build:
   stage: build
-  image: maven:3.6.3-jdk-17-slim
+  image: maven:3.6.3-jdk-11-slim
   before_script:
     - source .${CI_COMMIT_REF_NAME}.env
   script:
@@ -21,7 +21,7 @@ build:
 test:
   stage: test
   needs: [build]
-  image: maven:3-jdk-17-slim
+  image: maven:3-jdk-11-slim
   script: 
   - cd ProyectInt/
   - "mvn test"
