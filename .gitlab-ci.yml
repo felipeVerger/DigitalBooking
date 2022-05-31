@@ -17,4 +17,4 @@ trigger_back:
     - if: $CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 
- 
+  
