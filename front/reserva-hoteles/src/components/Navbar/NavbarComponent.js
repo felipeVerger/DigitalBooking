@@ -6,7 +6,7 @@ export const NavbarBody = styled.div`
   background-color: ${(props) => props.theme.primary};
   width: 100%;
   max-width: 100vw;
-  z-index: 998;
+  z-index: 997;
   height: 150px;
   @media screen and (max-width: 768px) {
     height: 237px;

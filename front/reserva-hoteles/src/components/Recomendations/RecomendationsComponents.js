@@ -100,6 +100,7 @@ export const RecomendationInfo = styled.div`
 export const HotelTopInfoBlock = styled.div`
   display: flex;
   justify-content: space-between;
+
   gap: 10px;
 `;
 
