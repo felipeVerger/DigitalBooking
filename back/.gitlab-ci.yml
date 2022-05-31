@@ -8,22 +8,25 @@ build:
   stage: build
   image: maven:3.6.3-jdk-11-slim
   script:
+    - ls 
+    - cd back/ProyectInt/
     - echo "Start building App"
     - mvn clean install -Dspring.profiles.active=$SPRING_ACTIVE_PROFILE && mvn package -B -e -Dspring.profiles.active=$SPRING_ACTIVE_PROFILE
   artifacts:
     expire_in: 1 hour
     paths:
-      - target/*.jar
+      - back/ProyectInt/target/*.jar
 
 test:
   stage: test
   needs: [build]
   image: maven:3-jdk-11-slim
   script: 
+  - cd back/ProyectInt/
   - "mvn test"
   artifacts:
     paths:
-      - target/*.jar
+      - back/ProyectInt/target/*.jar
 
 docker-build:
   stage: docker-build
@@ -32,11 +35,12 @@ docker-build:
   services: 
     - name: docker:19.03.8-dind
   before_script:
+    - cd back/
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE" .
-    - docker push "$CI_REGISTRY_IMAGE"
-    - echo "Registry image:" $CI_REGISTRY_IMAGE
+    - docker build --pull -t "$CI_REGISTRY_IMAGE"/back .
+    - docker push "$CI_REGISTRY_IMAGE"/back
+    - echo "Registry image:" $CI_REGISTRY_IMAGE/back
 
 deploy:
   stage: deploy
