@@ -38,7 +38,9 @@ docker-build:
     - name: docker:19.03.8-dind
   before_script:
     - cd front/
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+
   script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE"/front .
     - docker push "$CI_REGISTRY_IMAGE"/front
