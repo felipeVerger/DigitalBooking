@@ -122,7 +122,7 @@ const Navbar = () => {
         <Form onSubmit={handleSubmit}>
           <Dropdown
             options={ciudades.map((item) => ({
-              value: item.city.toLowerCase(),
+              value: item.city,
               label: item.city,
             }))}
             placeholder={"¿A donde vamos?"}

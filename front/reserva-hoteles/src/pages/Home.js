@@ -1,8 +1,8 @@
 import React from "react";
 import Layout from "../components/Layout";
 import Navbar from "../components/Navbar";
-import Categorias from "../components/Categorias";
-import Recomendaciones from "../components/Recomendaciones";
+import Categories from "../components/Categories";
+import Recomendations from "../components/Recomendations";
 import Section from "../components/Section";
 import PageContainer from "../components/PageContainer";
 
@@ -12,8 +12,8 @@ const Home = () => {
       <Layout>
         <Section>
           <Navbar />
-          <Categorias />
-          <Recomendaciones />
+          <Categories />
+          <Recomendations />
         </Section>
       </Layout>
     </PageContainer>
