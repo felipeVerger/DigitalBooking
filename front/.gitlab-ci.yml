@@ -43,11 +43,13 @@ docker-build:
       alias: docker
   before_script:
     - cd front/
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD gl.deitech.online
+    - nmap gl.deitech.online -p 5050 | grep -i tcp 
+    - nc -zv 119.8.73 5050
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
 
   script:
-    - docker build --pull -t gl.deitech.online/ctd/proyecto-integrador-0522/0821-c1/grupo-10/front .
-    - docker push gl.deitech.online/ctd/proyecto-integrador-0522/0821-c1/grupo-10/front
+    - docker build --pull -t "$CI_REGISTRY_IMAGE"/front .
+    - docker push "$CI_REGISTRY_IMAGE"/front
     - echo "Registry image:" $CI_REGISTRY_IMAGE/front
 
 deploy:
