@@ -44,9 +44,6 @@ docker-build:
   services: 
     - name: docker:18.09.7-dind
       alias: docker
-  before_script:
-    - cd front/
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
 
   script:    
     - aws ecr get-login-password --region $AWS_REGION |
