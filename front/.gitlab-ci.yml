@@ -43,7 +43,6 @@ docker-build:
       alias: docker
   before_script:
     - cd front/
-    - nc -zv 119.8.73 5050
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
 
   script:
