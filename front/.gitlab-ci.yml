@@ -5,10 +5,11 @@ stages:
   - deploy
 
 variables:
-  IMAGE_NAME: front
-  TAG_LATEST: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$IMAGE_NAME:latest
-  TAG_COMMIT: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA
-  DOCKER_TLS_CERTDIR: ""
+  DOCKER_REGISTRY: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+  APP_NAME: front
+  DOCKER_HOST: tcp://docker:2375
+  TAG_LATEST: $DOCKER_REGISTRY/$APP_NAME:latest
+  USERNAME:
 
 
 build:
@@ -42,16 +43,15 @@ docker-build:
   needs: [test]
   image: docker:latest
   services: 
-    - name: docker:18.09.7-dind
-      alias: docker
+    - name: docker:dind
 
   script:    
-    - aws ecr get-login-password --region $AWS_REGION |
-      docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+    - aws ecr get-login-password --region $AWS_REGION | docker login --username $USERNAME --password-stdin $DOCKER_REGISTRY
     - docker pull $TAG_LATEST || true
-    - docker build --cache-from $TAG_LATEST -t $TAG_COMMIT -t $TAG_LATEST .
-    - docker push $TAG_COMMIT
+    - docker build -t $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IID .
+    - docker push $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IID
     - docker push $TAG_LATEST
+    - docker logout
 
 deploy:
   stage: deploy
