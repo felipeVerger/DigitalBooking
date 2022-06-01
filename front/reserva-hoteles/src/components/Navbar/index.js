@@ -16,7 +16,6 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { DateRange } from "react-date-range";
 import { es } from "date-fns/locale";
-import "react-dropdown/style.css";
 
 const ciudades = [
   {
@@ -66,6 +65,7 @@ const getDateString = (date) => {
 };
 
 const Navbar = () => {
+  const [calendarOpen, setCalendarOpen] = useState(false);
   const ref = useRef();
   useEffect(() => {
     const checkIfClickedOutside = (e) => {
@@ -109,7 +109,7 @@ const Navbar = () => {
     e.preventDefault();
   };
 
-  const [calendarOpen, setCalendarOpen] = useState(false);
+
 
   const toggleCalendarOpen = () => {
     setCalendarOpen(!calendarOpen);
@@ -122,7 +122,7 @@ const Navbar = () => {
         <Form onSubmit={handleSubmit}>
           <Dropdown
             options={ciudades.map((item) => ({
-              value: item.city.toLowerCase(),
+              value: item.city,
               label: item.city,
             }))}
             placeholder={"¿A donde vamos?"}

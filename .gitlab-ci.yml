@@ -1,25 +1,20 @@
 stages:
   - triggers
-  - deploybd
-
-trigger_a:
+      
+trigger_front:
   stage: triggers
   trigger:
     include: front/.gitlab-ci.yml
   rules:
-    - changes:
-        - front/*
+    - if: $CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
-trigger_b:
+
+trigger_back:
   stage: triggers
   trigger:
     include: back/.gitlab-ci.yml
   rules:
-    - changes:
-        - back/*
+    - if: $CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
-deploy_bd:
-  stage: deploybd
-  script:
-    - echo "This job deploys something else. It will only run when all jobs in the"
-    - echo "test stage complete. It will start at about the same time as deploy_a."
+
+  

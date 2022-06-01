@@ -68,7 +68,8 @@ El objetivo fundamental del proyecto es el aprendizaje y la puesta en práctica 
   Postman / Insomnia
   Mocha
   JUnit + Mockito
-  Selenium
+
+  https://docs.google.com/spreadsheets/d/1tb5XguhvcDcyyoWVv_L2QkMwJM2uPio-LPyVEgaJmnw/edit?usp=sharing
 
 #### Infraestructura
   AWS

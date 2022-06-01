@@ -1,23 +1,74 @@
 stages:
   - build
   - test
+  - docker-build
   - deploy
 
-image: alpine
+variables:
+  DOCKER_REGISTRY: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+  APP_NAME: front
+  DOCKER_HOST: tcp://docker:2375
+  TAG_LATEST: $DOCKER_REGISTRY/$APP_NAME:latest
+  USERNAME: AWS
 
-build_front:
+
+build:
   stage: build
-  script:
-    - echo "This job builds something."
+  image: node
+  script: 
+    - echo "Start building App"
+    - cd front/reserva-hoteles/
+    - npm install
+    - CI=false npm run build
+    - echo "Build successfully!"
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - front/reserva-hoteles/build
+      - front/reserva-hoteles/node_modules/
 
-test_front:
+test:
   stage: test
-  needs: [build_front]
+  needs: [build]
+  image: node
   script:
-    - echo "This job tests something."
+    - echo "Testing App"
+    #- cd front/reserva-hoteles/
+    #- npm install
+    #- CI=true npm test --passWithNoTests
+    - echo "Test successfully!"
 
-deploy_front:
+docker-build:
+  stage: docker-build
+  needs: [test]
+  image: 
+    name: amazon/aws-cli
+    entrypoint: [""]
+  services:
+    - docker:dind
+  before_script:
+    - amazon-linux-extras install docker
+    - aws --version
+    - docker --version
+
+  script:    
+    - aws ecr get-login-password --region $AWS_REGION | docker login --username $USERNAME --password-stdin $DOCKER_REGISTRY
+    - docker pull $TAG_LATEST || true
+    - docker build -t $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IID .
+    - docker push $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IID
+    - docker push $TAG_LATEST
+    - docker logout
+
+deploy:
   stage: deploy
-  needs: [test_front]
-  script:
-    - echo "This job deploys something."
+  needs: [docker-build]
+  image: kroniak/ssh-client
+  #before_script:
+    #- echo "deploying app"
+  script:  
+    - echo "deploying app"
+    #- echo "$SSH_PRIVATE_KEY" | tr -d '\r' > key.pem
+    #- chmod 400 key.pem
+    #- ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY root@$PROD_SERVER_IP "docker pull registry.gitlab.com/alfredomartinezzz/budgefy"
+    #- ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY root@$PROD_SERVER_IP "docker stop budgefycontainer || true && docker rm budgefycontainer || true"
+    #- ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY root@$PROD_SERVER_IP "docker run -p 3001:80 -d --name budgefycontainer registry.gitlab.com/alfredomartinezzz/budgefy" 
