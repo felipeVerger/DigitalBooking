@@ -37,10 +37,10 @@ test:
 docker-build:
   stage: docker-build
   needs: [test]
-  image: docker:latest
-  services: 
-    - name: docker:18.09.7-dind
-      alias: docker 
+  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/docker:19.03.12
+  services:
+    - name: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/docker:18.09.7-dind
+      alias: docker
   before_script:
     - cd front/
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
