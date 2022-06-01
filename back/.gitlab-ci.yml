@@ -4,11 +4,6 @@ stages:
   - docker-build
   - deploy
 
-variables:
-  # Use TLS https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#tls-enabled
-  DOCKER_HOST: tcp://docker:2376
-  DOCKER_TLS_CERTDIR: "/certs"
-
 build:
   stage: build
   image: maven:3.6.3-jdk-11-slim
