@@ -3,6 +3,11 @@ stages:
   - test
   - docker-build
   - deploy
+variables:
+  # Use TLS https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#tls-enabled
+  DOCKER_HOST: tcp://docker:2376
+  DOCKER_TLS_CERTDIR: "/certs"
+
 
 build:
   stage: build
@@ -38,7 +43,7 @@ docker-build:
     - name: docker:dind
   before_script:
     - cd front/
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
 
   script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE"/front .

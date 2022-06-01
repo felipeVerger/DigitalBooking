@@ -4,6 +4,11 @@ stages:
   - docker-build
   - deploy
 
+variables:
+  # Use TLS https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#tls-enabled
+  DOCKER_HOST: tcp://docker:2376
+  DOCKER_TLS_CERTDIR: "/certs"
+
 build:
   stage: build
   image: maven:3.6.3-jdk-11-slim
@@ -33,10 +38,11 @@ docker-build:
   needs: [test]
   image: docker:latest
   services: 
-    - name: docker:dind
+    - name: docker:19.03.8-dind
+    - alias: docker
   before_script:
     - cd back/
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY --password-stdin
   script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE"/back .
     - docker push "$CI_REGISTRY_IMAGE"/back
