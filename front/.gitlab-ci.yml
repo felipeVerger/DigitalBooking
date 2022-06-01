@@ -9,7 +9,7 @@ variables:
   APP_NAME: front
   DOCKER_HOST: tcp://docker:2375
   TAG_LATEST: $DOCKER_REGISTRY/$APP_NAME:latest
-  USERNAME:
+  USERNAME: AWS
 
 
 build:
