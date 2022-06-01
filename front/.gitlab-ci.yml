@@ -5,7 +5,11 @@ stages:
   - deploy
 
 variables:
-  DOCKER_TLS_CERTDIR: "/certs"
+  variables:
+  IMAGE_NAME: front
+  TAG_LATEST: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$IMAGE_NAME:latest
+  TAG_COMMIT: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA
+  DOCKER_TLS_CERTDIR: ""
 
 
 build:
@@ -45,10 +49,13 @@ docker-build:
     - cd front/
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
 
-  script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE"/front .
-    - docker push "$CI_REGISTRY_IMAGE"/front
-    - echo "Registry image:" $CI_REGISTRY_IMAGE/front
+  script:    
+    - aws ecr get-login-password --region $AWS_REGION |
+      docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+    - docker pull $TAG_LATEST || true
+    - docker build --cache-from $TAG_LATEST -t $TAG_COMMIT -t $TAG_LATEST .
+    - docker push $TAG_COMMIT
+    - docker push $TAG_LATEST
 
 deploy:
   stage: deploy
