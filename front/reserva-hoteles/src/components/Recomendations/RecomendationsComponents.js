@@ -68,9 +68,6 @@ export const ImageBlock = styled.div`
     top: 20px;
     color: white;
   }
-  .active {
-    color: red;
-  }
 `;
 
 export const Image = styled.img`
@@ -130,7 +127,7 @@ export const PunctuationBlock = styled.div`
 
 export const Punctuation = styled.span`
   background-color: ${(props) => props.theme.primary};
-  width: 37px;
+  width: 30px;
   height: 23px;
   text-align: center;
   border-radius: 7px;
@@ -187,4 +184,10 @@ export const Button = styled.button`
   border-radius: 5px;
   color: white;
   height: 40px;
+  cursor: pointer;
+  transition: all 500ms ease;
+  &:hover {
+    background-color: white;
+    color: black;
+  }
 `;
