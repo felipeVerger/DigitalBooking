@@ -45,6 +45,9 @@ export const FooterIcon = styled.div`
   font-size: 24px;
   align-items: center;
   line-height: 0;
+  &:hover {
+    transform: scale(1.1);
+  }
   @media screen and (max-width: 440px) {
     font-size: 1rem;
   }

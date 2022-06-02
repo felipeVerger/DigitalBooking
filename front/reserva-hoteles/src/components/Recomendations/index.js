@@ -26,13 +26,6 @@ import { BiWifi } from 'react-icons/bi'
 import { FaSwimmingPool } from 'react-icons/fa'
 
 const Recomendaciones = () => {
-
-  const [activeLike, setActiveLike] = useState(false)
-
-  const handleActiveHeart = () => {
-      setActiveLike(!activeLike)
-  }
-  
   return (
     <Body>
         <Block>
@@ -44,7 +37,7 @@ const Recomendaciones = () => {
                             <Recommendation key={item.id}>
                                 <ImageBlock>
                                     <Image src={item.crimg} alt="" />
-                                    <AiFillHeart onClick={handleActiveHeart} className={activeLike ? 'active' : ''}/>
+                                    <AiFillHeart/>
                                 </ImageBlock>
                                     <RecomendationInfo>
                                         <HotelTopInfoBlock>
