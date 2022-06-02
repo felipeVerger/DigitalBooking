@@ -19,9 +19,28 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(name = "title")
     private String title;
 
-    @Column
+    @Column(name = "url")
     private String url;
+
+    @ManyToOne
+    @JoinColumn(name = "id_product", nullable = false)
+    private Product product;
+
+    public Image(String title, String url) {
+        this.title = title;
+        this.url = url;
+    }
+
+    @Override
+    public String toString() {
+        return "Image{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", url='" + url + '\'' +
+                ", product=" + product +
+                '}';
+    }
 }

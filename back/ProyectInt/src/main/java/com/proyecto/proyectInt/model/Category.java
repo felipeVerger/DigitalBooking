@@ -1,10 +1,13 @@
 package com.proyecto.proyectInt.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -17,20 +20,34 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column
+    @Column(name = "title")
     private String title;
 
-    @Column
+    @Column(name = "description")
     private String description;
 
-    @Column
-    private String image;
+    @Column(name = "url_image")
+    private String urlImage;
+
+    @OneToMany
+    @JsonIgnore
+    private List<Product> products;
 
 
-    public Category(Long id, String title, String description, String image) {
-        this.id = id;
+    public Category(String title, String description, String urlImage) {
         this.title = title;
         this.description = description;
-        this.image = image;
+        this.urlImage = urlImage;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", urlImage='" + urlImage + '\'' +
+                ", products=" + products +
+                '}';
     }
 }

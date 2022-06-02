@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -45,15 +46,17 @@ public class Product {
     private String cancellationPolicy;
 
     @ManyToOne
+    @JoinColumn(name = "id_category", nullable = false)
     private Category category;
 
     @ManyToMany
     private List<Feature> features;
 
-    @OneToMany
+    @OneToMany(mappedBy = "product")
     private List<Image> images;
 
     @ManyToOne
+    @JoinColumn(name = "id_city", nullable = false)
     private City city;
 
 
