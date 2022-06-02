@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Getter
@@ -42,6 +43,18 @@ public class Product {
 
     @Column
     private String cancellationPolicy;
+
+    @ManyToOne
+    private Category category;
+
+    @ManyToMany
+    private List<Feature> features;
+
+    @OneToMany
+    private List<Image> images;
+
+    @ManyToOne
+    private City city;
 
 
 
