@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { AiFillHeart } from "react-icons/ai";
 
 export const Body = styled.div`
   background: ${(props) => props.theme.content_background};
@@ -52,6 +51,7 @@ export const Recommendation = styled.div`
   @media screen and (max-width: 1280px) {
     width: 100%;
   }
+
   @media screen and (max-width: 640px) {
     flex-direction: column;
   }
@@ -127,7 +127,7 @@ export const PunctuationBlock = styled.div`
 
 export const Punctuation = styled.span`
   background-color: ${(props) => props.theme.primary};
-  width: 30px;
+  width: 37px;
   height: 23px;
   text-align: center;
   border-radius: 7px;
@@ -184,10 +184,4 @@ export const Button = styled.button`
   border-radius: 5px;
   color: white;
   height: 40px;
-  cursor: pointer;
-  transition: all 500ms ease;
-  &:hover {
-    background-color: white;
-    color: black;
-  }
 `;

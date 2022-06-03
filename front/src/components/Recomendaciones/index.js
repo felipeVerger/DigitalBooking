@@ -1,5 +1,5 @@
-import React,{useState, useEffect} from 'react'
-import products from '../../staticData/products.json'
+import React from 'react'
+import recomendaciones from '../../staticData/recomendaciones.json'
 import { 
     Body,
     Block,
@@ -18,12 +18,13 @@ import {
     LocationText, 
     DescriptionBlock, 
     Description, 
-    Button } from './RecomendationsComponents'
+    Button } from './RecomendacionesComponents'
 
 import { AiFillStar, AiFillHeart } from 'react-icons/ai'
 import { HiLocationMarker } from 'react-icons/hi'
 import { BiWifi } from 'react-icons/bi'
 import { FaSwimmingPool } from 'react-icons/fa'
+
 
 const Recomendaciones = () => {
   return (
@@ -32,7 +33,7 @@ const Recomendaciones = () => {
             <RecomendationTitle>Recomendaciones</RecomendationTitle>
             <RecommendationContainer>
                 {
-                    products.map((item) => {
+                    recomendaciones.map((item) => {
                         return (
                             <Recommendation key={item.id}>
                                 <ImageBlock>

@@ -6,7 +6,8 @@ trigger_front:
   trigger:
     include: front/.gitlab-ci.yml
   rules:
-    - if: $CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_BRANCH == "main" 
+    #|| $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 
 trigger_back:
@@ -14,7 +15,8 @@ trigger_back:
   trigger:
     include: back/.gitlab-ci.yml
   rules:
-    - if: $CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_BRANCH == "main" 
+    #|| $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 
   

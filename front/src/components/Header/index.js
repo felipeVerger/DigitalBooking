@@ -51,8 +51,8 @@ const Header = () => {
             <AvatarIcon name={user.nombre} round size="40px" color={themes.light.primary} />
                   {/* <HeaderButton onClick={() => {setUser(null)}}>Cerrar sesion</HeaderButton> */}
                   <UserInfo>
-                  <Greeting>Hola, <AiOutlineClose style={{cursor: "pointer"}} onClick={()=> setUser(null)}/></Greeting>
-                  <UserName>{user.nombre}</UserName>
+                   <Greeting>Hola, <AiOutlineClose style={{cursor: "pointer"}} onClick={()=> setUser(null)}/></Greeting>
+                   <UserName>{user.nombre}</UserName>
                   </UserInfo>
 
 
