@@ -45,17 +45,22 @@ public class Product {
     @Column
     private String cancellationPolicy;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "id_category", nullable = false)
     private Category category;
 
+    @JoinTable(
+            name = "products_has_features",
+            joinColumns = @JoinColumn(name = "id_product"),
+            inverseJoinColumns = @JoinColumn(name = "id_feature")
+    )
     @ManyToMany
     private List<Feature> features;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Image> images;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "id_city", nullable = false)
     private City city;
 

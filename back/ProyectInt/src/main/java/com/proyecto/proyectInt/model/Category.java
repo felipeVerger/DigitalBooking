@@ -29,7 +29,7 @@ public class Category {
     @Column(name = "url_image")
     private String urlImage;
 
-    @OneToMany
+    @OneToMany(mappedBy = "category")
     @JsonIgnore
     private List<Product> products;
 
