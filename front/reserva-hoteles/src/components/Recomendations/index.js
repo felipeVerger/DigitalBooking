@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react'
-import recomendaciones from '../../staticData/recomendaciones.json'
+import products from '../../staticData/products.json'
 import { 
     Body,
     Block,
@@ -32,7 +32,7 @@ const Recomendaciones = () => {
             <RecomendationTitle>Recomendaciones</RecomendationTitle>
             <RecommendationContainer>
                 {
-                    recomendaciones.map((item) => {
+                    products.map((item) => {
                         return (
                             <Recommendation key={item.id}>
                                 <ImageBlock>
