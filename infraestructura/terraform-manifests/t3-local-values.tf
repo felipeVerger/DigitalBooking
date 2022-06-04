@@ -1,21 +1,21 @@
-#⁡⁢⁢⁢########################     ##########################
-#⁡⁢⁢⁢#################      LOCAL VARS      ################⁡
 #⁡⁢⁢⁢#######################################################
+#⁡⁢⁢⁢#################      LOCAL VARS      ################⁡
+#⁡⁢⁢⁢⁡⁢⁢⁢#######################################################⁡
 
 locals {
   owners  = var.team_number
   camada  = var.camada
   project = "${var.team_number}-${var.camada}"
   common_tags = {
-    owners = var.owners
-    camada = var.camada
+    owners = local.owners
+    camada = local.camada
   }
 }
 
 
 
 /*
-locals values do NOT need to go in a separate file. This is only done for educational purposes.
+local values do NOT need to go in a separate file. This is only done for educational purposes.
 
 LOCAL VALUES assign a name to an e͟x͟p͟r͟e͟s͟s͟i͟o͟n so it can be used multiple times in the terraform code.
 These are comparable to traditional programming languages as they allow you to assign a name to a value.
