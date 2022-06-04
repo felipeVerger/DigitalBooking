@@ -19,3 +19,6 @@ module "ec2_private" {
   user_data = file("${path.module}/app1-install.sh")
   tags      = local.common_tags
 }
+
+
+# Meta-argument depends_on to handle hidden resource module or resource dependencies.
