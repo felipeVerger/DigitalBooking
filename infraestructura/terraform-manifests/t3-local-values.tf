@@ -3,12 +3,11 @@
 #⁡⁢⁢⁢⁡⁢⁢⁢#######################################################⁡
 
 locals {
-  owners  = var.team_number
-  camada  = var.camada
-  project = "${var.team_number}-${var.camada}"
+
+  project = "${var.team_number}-${var.camada}-digitalbooking"
   common_tags = {
-    owners = local.owners
-    camada = local.camada
+    Owners = var.team_number
+    Camada = var.camada
   }
 }
 

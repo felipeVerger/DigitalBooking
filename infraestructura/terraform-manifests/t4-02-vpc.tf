@@ -2,12 +2,12 @@
 #⁡⁢⁢⁢#################      VPC MODULE      ################⁡
 #⁡⁢⁢⁢#######################################################⁡
 
-module "vpc_0821_g10" {
+module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "3.14.0" #! as it is a public module, do not use version constraints; that could break the module
 
   # VPC basic details
-  name            = "${local.camada}-${local.team_number}-${vpc.name}"
+  name            = "${var.camada}-${var.team_number}-${var.vpc_name}"
   cidr            = var.vpc_cidr_block
   azs             = var.vpc_availability_zones
   private_subnets = var.vpc_private_subnets
@@ -15,7 +15,7 @@ module "vpc_0821_g10" {
 
   # Database subnets
   create_database_subnet_group       = var.vpc_create_database_subnet_group
-  create_database_subnet_route_table = var.create_database_internet_gateway_route
+  create_database_subnet_route_table = var.vpc_create_database_subnet_route_table
   database_subnets                   = var.vpc_database_subnets
 
   #! in case you want to want your database p͟r͟i͟v͟a͟t͟e s͟u͟b͟n͟e͟t͟s to be open to the internet, use the following:
@@ -23,8 +23,8 @@ module "vpc_0821_g10" {
   #create_database_internet_gateway_route = true
 
   # NAT Gateway per az. outbound communication 
-  enable_nat_gateway     = var.vpc_enable_nat_gateway
-  vpc_single_nat_gateway = var.vpc_single_nat_gateway
+  enable_nat_gateway = var.vpc_enable_nat_gateway
+  single_nat_gateway = var.single_nat_gateway #? debug!! an argument named vpc_single_nat_gateway is not expected here.
 
   # VPC DNS parameters
   enable_dns_hostnames = true
