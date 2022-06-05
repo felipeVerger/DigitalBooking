@@ -81,7 +81,7 @@ const Navbar = () => {
   }, [calendarOpen]);
 
   const [data, setData] = useState({
-    city: "",
+    city: [],
     date: { startDate: null, endDate: null },
   });
 
@@ -108,8 +108,6 @@ const Navbar = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
-
-
 
   const toggleCalendarOpen = () => {
     setCalendarOpen(!calendarOpen);
