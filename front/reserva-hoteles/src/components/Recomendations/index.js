@@ -26,6 +26,7 @@ import { BiWifi } from 'react-icons/bi'
 import { FaSwimmingPool } from 'react-icons/fa'
 
 const Recomendaciones = () => {
+
   return (
     <Body>
         <Block>

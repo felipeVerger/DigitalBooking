@@ -5,7 +5,8 @@
         "category": "hotel",
         "title": "Hard Rock Hotel",
         "location": "Estados Unidos, Miami",
-        "description": "Disfruta este magnifico lugar en Paris Francia, essss donde conatmos con muchas actividades. Contamos con pileta, sauna, y muchas cosas mas para relajarse."
+        "description": "Disfruta este magnifico lugar en Paris Francia, essss donde conatmos con muchas actividades. Contamos con pileta, sauna, y muchas cosas mas para relajarse.",
+        "price": 137
     },
     {
         "id": 2,
@@ -13,7 +14,8 @@
         "category": "hostel",
         "title": "Hermitage Hostel",
         "location": "Lima, Peru",
-        "description": "Disfruta este magnifico lugar en Paris Francia, essss donde conatmos con muchas actividades. Contamos con pileta, sauna, y muchas cosas mas para relajarse."
+        "description": "Disfruta este magnifico lugar en Paris Francia, essss donde conatmos con muchas actividades. Contamos con pileta, sauna, y muchas cosas mas para relajarse.",
+        "price": 85.70
     },
     {
         "id": 3,
@@ -21,7 +23,8 @@
         "category": "departamento",
         "title": "Valizas",
         "location": "Argentina, Cordoba",
-        "description": "Disfruta este magnifico lugar en Paris Francia, essss donde conatmos con muchas actividades. Contamos con pileta, sauna, y muchas cosas mas para relajarse."
+        "description": "Disfruta este magnifico lugar en Paris Francia, essss donde conatmos con muchas actividades. Contamos con pileta, sauna, y muchas cosas mas para relajarse.",
+        "price": 153
     },
     {
         "id": 4,
@@ -29,6 +32,7 @@
         "category": "Bed and Breakfast",
         "title": "Rosa",
         "location": "Francia, Paris",
-        "description": "Disfruta este magnifico lugar en Paris Francia, essss donde conatmos con muchas actividades. Contamos con pileta, sauna, y muchas cosas mas para relajarse."
+        "description": "Disfruta este magnifico lugar en Paris Francia, essss donde conatmos con muchas actividades. Contamos con pileta, sauna, y muchas cosas mas para relajarse.",
+        "price": 120
     }
 ]
