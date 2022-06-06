@@ -1,8 +1,14 @@
-import React, {useContext, useEffect, useState} from 'react'
-import categories from '../../staticData/data.json'
+import React, { useEffect, useState } from 'react'
+import categoriesList from '../../staticData/data.json'
 import { Body, CategoryBlock, SectionTitle, FlexWrapper, Box, Image, InfoSection, CategoryText, CategoryInfo } from './CategoriesComponents'
 
+
 const Categorias = () => {
+    const [categories, setCatgeories] = useState([]);
+
+    useEffect(() => {
+        setCatgeories(categoriesList)
+      }, [])
 
   return (
     <Body>

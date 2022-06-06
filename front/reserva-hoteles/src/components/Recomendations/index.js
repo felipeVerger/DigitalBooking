@@ -43,7 +43,7 @@ const Recomendaciones = () => {
                                     <RecomendationInfo>
                                         <HotelTopInfoBlock>
                                             <div>
-                                                <Category>{item.category}<div> <AiFillStar/><AiFillStar/><AiFillStar/><AiFillStar/><AiFillStar/></div></Category>
+                                                <Category>{item.category} <AiFillStar/><AiFillStar/><AiFillStar/><AiFillStar/><AiFillStar/></Category>
                                                 <Title>{item.title}</Title>
                                             </div>
                                             <PunctuationBlock>

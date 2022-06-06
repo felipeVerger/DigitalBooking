@@ -37,7 +37,7 @@ export const Product = styled.div`
 `
 
 export const Image = styled.img`
-    width: 450px;
+    width: 420px;
     height: 100%;
     border-radius: 8px;
 `
