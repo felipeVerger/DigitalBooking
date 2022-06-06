@@ -6,6 +6,7 @@
         "title": "Hard Rock Hotel",
         "location": "Estados Unidos, Miami",
         "description": "Disfruta este magnifico lugar en Paris Francia, essss donde conatmos con muchas actividades. Contamos con pileta, sauna, y muchas cosas mas para relajarse.",
+        "puntuation": 4.07,
         "price": 137
     },
     {
@@ -15,6 +16,7 @@
         "title": "Hermitage Hostel",
         "location": "Lima, Peru",
         "description": "Disfruta este magnifico lugar en Paris Francia, essss donde conatmos con muchas actividades. Contamos con pileta, sauna, y muchas cosas mas para relajarse.",
+        "puntuation": 7,
         "price": 85.70
     },
     {
@@ -24,6 +26,7 @@
         "title": "Valizas",
         "location": "Argentina, Cordoba",
         "description": "Disfruta este magnifico lugar en Paris Francia, essss donde conatmos con muchas actividades. Contamos con pileta, sauna, y muchas cosas mas para relajarse.",
+        "puntuation": 9,
         "price": 153
     },
     {
@@ -33,6 +36,27 @@
         "title": "Rosa",
         "location": "Francia, Paris",
         "description": "Disfruta este magnifico lugar en Paris Francia, essss donde conatmos con muchas actividades. Contamos con pileta, sauna, y muchas cosas mas para relajarse.",
+        "puntuation": 8,
         "price": 120
+    },
+    {
+        "id": 5,
+        "crimg": "https://images.unsplash.com/photo-1568495248636-6432b97bd949?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=60&raw_url=true&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGhhYml0YWNpb24lMjBob3RlbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500",
+        "category": "Hotel",
+        "title": "Montel",
+        "location": "Argentina, jujuy",
+        "description": "Disfruta este magnifico lugar en Paris Francia, essss donde conatmos con muchas actividades. Contamos con pileta, sauna, y muchas cosas mas para relajarse.",
+        "puntuation": 8,
+        "price": 45
+    },
+    {
+        "id": 6,
+        "crimg": "https://images.unsplash.com/photo-1568495248636-6432b97bd949?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=60&raw_url=true&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGhhYml0YWNpb24lMjBob3RlbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500",
+        "category": "Departamento",
+        "title": "Ruiseñor",
+        "location": "Alemania, Berlin",
+        "description": "Disfruta este magnifico lugar en Paris Francia, essss donde conatmos con muchas actividades. Contamos con pileta, sauna, y muchas cosas mas para relajarse.",
+        "puntuation": 9,
+        "price": 125
     }
 ]
