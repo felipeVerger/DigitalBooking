@@ -19,15 +19,17 @@ import {
     TextPrice,
     Price
 } from './ProductsComponents'
-import { AiFillStar, AiFillHeart } from 'react-icons/ai'
 import { HiLocationMarker } from 'react-icons/hi'
-import { BiWifi } from 'react-icons/bi'
-import { FaSwimmingPool } from 'react-icons/fa'
-import products from '../../staticData/products.json'
+import productsList from '../../staticData/products.json'
 
 
 const Products = () => {
-  
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        setProducts(productsList);
+    }, [])
+
   return (
     <ProductsContainer>
         <ProductsBody>
@@ -50,7 +52,6 @@ const Products = () => {
                                     </PunctuationBlock>
                                 </TopInfo>
                                 <PriceBlock>
-                                    <button>Ver mas</button>
                                     <TextPrice>Precio por noche</TextPrice>
                                     <Price>$ {product.price}</Price>
                                 </PriceBlock>
