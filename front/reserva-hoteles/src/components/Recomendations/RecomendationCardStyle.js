@@ -158,7 +158,7 @@ export const Button = styled(Link)`
     background: ${(props) => props.theme.secondary};
     text-align: center;
     padding: 0.5rem;
-    outline: none;
+    text-decoration: none;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
     border-radius: 5px;
     color: white;
@@ -168,6 +168,7 @@ export const Button = styled(Link)`
     &:hover {
         background-color: white;
         color: black;
+        border: 1px solid black;
     }
 `
 

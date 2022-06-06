@@ -9,6 +9,7 @@ import Register from "./pages/Register";
 import MobileMenu from "./components/MobileMenu";
 import { MenuProvider } from "./context/menu-context";
 import { UserProvider } from "./context/user-context";
+import { FilterProvider } from "./context/filter-context";
 import ProductsList from "./pages/ProductsList";
 import Product from "./pages/Product";
 
@@ -17,16 +18,18 @@ function App() {
     <ThemeProvider theme={themes.light}>
       <UserProvider>
         <MenuProvider>
-          <BrowserRouter>
-            <MobileMenu />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/productsList" element={<ProductsList/>}/>
-              <Route path="/product/:id" element={<Product />} />
-            </Routes>
-          </BrowserRouter>
+          <FilterProvider>
+            <BrowserRouter>
+              <MobileMenu />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/productsList" element={<ProductsList/>}/>
+                <Route path="/product/:id" element={<Product />} />
+              </Routes>
+            </BrowserRouter>
+          </FilterProvider>
         </MenuProvider>
       </UserProvider>
     </ThemeProvider>

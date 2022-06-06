@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import {
     ProductsContainer,
     ProductsBody,
     Title,
     ProductsBlock,
     Product,
+    TitleLink,
     Image,
     InfoBlock,
     TopInfo,
@@ -21,14 +22,20 @@ import {
 } from './ProductsComponents'
 import { HiLocationMarker } from 'react-icons/hi'
 import productsList from '../../staticData/products.json'
+import {Link} from 'react-router-dom'
+import { FilterContext } from '../../context/filter-context'
 
 
 const Products = () => {
-    const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);
+  const {filter} = useContext(FilterContext);
 
-    useEffect(() => {
-        setProducts(productsList);
-    }, [])
+  useEffect(() => {
+      setProducts(productsList);
+  }, [])
+
+    /* Filtering the products array based on the filter context. */
+  const filteredArray = products && filter[1] === 'category' ? products.filter((product) => product.category === filter[0]) : products;
 
   return (
     <ProductsContainer>
@@ -36,18 +43,22 @@ const Products = () => {
             <Title>Lo mejor que podes encontrar en esta categoria</Title>
             <ProductsBlock>
                 {
-                    products.map((product) => (
+                    filteredArray.map((product) => (
                         <Product key={product.id}>
-                            <Image src={product.crimg} alt="image"/>
+                            <Link to={`/product/${product.id}`}>
+                                <Image src={product.crimg} alt="image"/>
+                            </Link>
                             <InfoBlock>
                                 <TopInfo>
                                     <CategoryBlock>
                                         <Category>{product.category}</Category>
-                                        <Name>{product.title}</Name>
+                                        <TitleLink to={`/product/${product.id}`}>
+                                            <Name>{product.title}</Name>
+                                        </TitleLink>
                                         <Location> <HiLocationMarker/> {product.location}</Location>
                                     </CategoryBlock>
                                     <PunctuationBlock>
-                                        <Punctuation>8</Punctuation>
+                                        <Punctuation>{product.puntuation}</Punctuation>
                                         <Opinion>Muy bueno</Opinion>
                                     </PunctuationBlock>
                                 </TopInfo>
