@@ -15,8 +15,8 @@ trigger_back:
   trigger:
     include: back/.gitlab-ci.yml
   rules:
-    - if: $CI_COMMIT_BRANCH == "main" 
-    #|| $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_BRANCH == "44-crear-infraestructura-en-aws"
+    #$CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 
   
