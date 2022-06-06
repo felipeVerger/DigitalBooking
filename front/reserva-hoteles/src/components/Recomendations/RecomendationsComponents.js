@@ -41,12 +41,11 @@ export const RecommendationContainer = styled.div`
 export const Recommendation = styled.div`
   display: flex;
   background: white;
-  border: 1px solid #dfe4ea;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 
   min-height: 279px;
-  width: 48%;
+  width: 49.5%;
   margin-bottom: 40px;
 
   @media screen and (max-width: 1280px) {
@@ -180,7 +179,6 @@ export const Description = styled.p`
 
 export const Button = styled.button`
   background: ${(props) => props.theme.secondary};
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
   border-radius: 5px;
   color: white;
   height: 40px;

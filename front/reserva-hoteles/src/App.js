@@ -10,6 +10,7 @@ import MobileMenu from "./components/MobileMenu";
 import { MenuProvider } from "./context/menu-context";
 import { UserProvider } from "./context/user-context";
 import ProductsList from "./pages/ProductsList";
+import Product from "./pages/Product";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/productsList" element={<ProductsList/>}/>
+              <Route path="/product/:id" element={<Product />} />
             </Routes>
           </BrowserRouter>
         </MenuProvider>
