@@ -39,6 +39,7 @@ publish:
   services:
     - docker:dind
   before_script:
+    - cd back/
     - amazon-linux-extras install docker
     - aws --version
     - docker --version
