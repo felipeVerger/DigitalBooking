@@ -29,7 +29,7 @@ test:
       - back/ProyectInt/target/*.jar
 
 variables:
-  DOCKER_REGISTRY: $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com
+  DOCKER_REGISTRY: 145504712931.dkr.ecr.us-west-2.amazonaws.com
   AWS_DEFAULT_REGION: us-east-1
   REPOSITORY_NAME: digitalbooking10
   DOCKER_HOST: tcp://docker:2375
