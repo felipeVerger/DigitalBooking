@@ -32,7 +32,6 @@ variables:
   DOCKER_REGISTRY: 145504712931.dkr.ecr.us-west-2.amazonaws.com
   AWS_DEFAULT_REGION: us-west-2
   REPOSITORY_NAME: digitalbooking10
-  DOCKER_HOST: tcp://docker:2375
 publish:
   image: 
     name: amazon/aws-cli
