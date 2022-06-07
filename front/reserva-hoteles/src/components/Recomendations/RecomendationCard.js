@@ -16,7 +16,7 @@ import {
     DescriptionBlock, 
     Description,
     Button
-} from './RecomendationCardStyle'
+} from './RecomendationStyle'
 
 import { AiFillStar, AiFillHeart, AiOutlineStar } from 'react-icons/ai'
 import { HiLocationMarker } from 'react-icons/hi'
@@ -47,10 +47,24 @@ const RecomendationCard = ({id, img, category, title, location, description, pun
 
   let arrayStars = [0, 0, 0, 0, 0];
 
+  /**
+   * It takes the array of stars and maps it to a new array of stars, where the star is incremented by
+   * 1 if the scoreStars is greater than or equal to the index + 1.
+   * @returns The map() method creates a new array with the results of calling a provided function on
+   * every element in the calling array.
+   */
   const createArrayStars = () => {
     return arrayStars.map((star, index) =>
       scoreStars >= index + 1 ? star + 1 : 0
     );
+  };
+
+  /**
+   * When the user clicks the button, the page scrolls to the top.
+   */
+  const scrollTop = () => {
+    let element = document.querySelector("main");
+    element.scrollTop = 0;
   };
 
   return (
@@ -90,11 +104,11 @@ const RecomendationCard = ({id, img, category, title, location, description, pun
           <Description>
             {description}
           </Description>
-          <Button to={`/product/${id}`}>Ver mas</Button>
+          <Button onClick={scrollTop} to={`/product/${id}`}>Ver mas</Button>
         </DescriptionBlock>
       </RecomendationInfo>
     </Recommendation>
-  );
+  ) ;
 };
 
 export default RecomendationCard;
