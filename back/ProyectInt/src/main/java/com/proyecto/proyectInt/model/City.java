@@ -18,6 +18,7 @@ public class City {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name= "id_city")
     private Long id;
 
     @Column(name = "name")

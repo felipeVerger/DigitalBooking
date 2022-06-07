@@ -18,6 +18,7 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name= "id_category")
     private Long id;
 
     @Column(name = "title")
