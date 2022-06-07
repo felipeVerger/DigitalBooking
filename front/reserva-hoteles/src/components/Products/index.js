@@ -34,8 +34,10 @@ const Products = () => {
       setProducts(productsList);
   }, [])
 
-    /* Filtering the products array based on the filter context. */
-  const filteredArray = products && filter[1] === 'category' ? products.filter((product) => product.category === filter[0]) : products;
+    
+  /* Filtering the products based on the filter. */
+  const filteredArray = products && filter[1] === 'category' ? products.filter((product) => product.category === filter[0]) 
+    : products && filter[1] === 'city' ? products.filter((product) => product.location === filter[0]) : products;
 
   return (
     <ProductsContainer>
