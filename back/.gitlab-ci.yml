@@ -1,7 +1,7 @@
 stages:
   - build
   - test
-  - docker-build
+  - publish
   - deploy
 
 build:
@@ -28,34 +28,22 @@ test:
     paths:
       - back/ProyectInt/target/*.jar
 
-docker-build:
-  stage: docker-build
-  needs: [test]
-  image: docker:latest
-  services: 
-    - name: docker:18.09.7-dind
-      alias: docker
+variables:
+  DOCKER_REGISTRY: $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com
+  AWS_DEFAULT_REGION: us-east-1
+  REPOSITORY_NAME: digitalbooking10
+  DOCKER_HOST: tcp://docker:2375
+publish:
+  image: 
+    name: amazon/aws-cli
+    entrypoint: [""]
+  services:
+    - docker:dind
   before_script:
-    - cd back/
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" gl.deitech.online
+    - amazon-linux-extras install docker
+    - aws --version
+    - docker --version
   script:
-    - docker build --pull -t gl.deitech.online/ctd/proyecto-integrador-0522/0821-c1/grupo-10/back .
-    - docker push gl.deitech.online/ctd/proyecto-integrador-0522/0821-c1/grupo-10/back
-    - echo "Registry image:" $CI_REGISTRY_IMAGE/back
-
-deploy:
-  stage: deploy
-  needs: [docker-build]
-  #image: ubuntu:latest
-  image: alpine:latest
-  #before_script:
-  #  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
-  #  - eval $(ssh-agent -s)
-  #  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-  #  - mkdir -p ~/.ssh
-  #  - chmod 700 ~/.ssh
-  #  - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-  #  - source .${CI_COMMIT_REF_NAME}.env
-  script:
-    - echo "deploying app"
-  #  - ssh root@$SERVER "docker login -u $DOCKER_USER -p $DOCKER_PASSWORD docker.io; docker stop $APP_NAME; docker system prune -a -f; docker pull $DOCKER_REPO; docker container run -d --name $APP_NAME -p $PORT:8080 -e SPRING_PROFILES_ACTIVE=$SPRING_ACTIVE_PROFILE $DOCKER_REPO; docker logout"
+    - docker build -t $DOCKER_REGISTRY/$REPOSITORY_NAME:latest . 
+    - aws ecr get-login-password | docker login --username AWS --password-stdin $DOCKER_REGISTRY
+    - docker push $DOCKER_REGISTRY/$REPOSITORY_NAME:latest
