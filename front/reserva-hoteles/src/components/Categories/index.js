@@ -1,8 +1,15 @@
-import React, {useContext} from 'react'
-import categorias from '../../staticData/categorias.json'
-import { Body, CategoryBlock, SectionTitle, FlexWrapper, Box, Image, InfoSection, CategoryText, CategoryInfo } from './CategoriesComponents'
+import React, { useEffect, useState } from 'react'
+import categoriesList from '../../staticData/data.json'
+import { Body, CategoryBlock, SectionTitle, FlexWrapper} from './IndexStyle'
+import CategoryCard from './CategoryCard'
+
 
 const Categorias = () => {
+    const [categories, setCatgeories] = useState([]);
+
+    useEffect(() => {
+        setCatgeories(categoriesList)
+      }, [])
 
   return (
     <Body>
@@ -10,15 +17,15 @@ const Categorias = () => {
             <SectionTitle>Buscar por tipo de alojamiento</SectionTitle>
             <FlexWrapper>
                 {
-                    categorias.map((item) => {
+                    categories.map((item) => {
                         return (
-                            <Box key={item.id}>
-                                <Image src={item.image} alt="imagen-categorias" />
-                                <InfoSection>
-                                    <CategoryText>{item.category}</CategoryText>
-                                    <CategoryInfo>{item.amount} {item.type}</CategoryInfo>
-                                </InfoSection>
-                            </Box>
+                            <CategoryCard
+                                key={item.id}
+                                img={item.image}
+                                category={item.category}
+                                amount={item.amount}
+                                type={item.type}
+                            />
                         )
                     })
                 }

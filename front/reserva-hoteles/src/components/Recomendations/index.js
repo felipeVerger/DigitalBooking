@@ -1,72 +1,42 @@
 import React,{useState, useEffect} from 'react'
 import products from '../../staticData/products.json'
-import { 
-    Body,
-    Block,
-    RecomendationTitle,
-    RecommendationContainer,
-    Recommendation,
-    ImageBlock,
-    Image, 
-    RecomendationInfo, 
-    HotelTopInfoBlock, 
-    Category, 
-    Title, 
-    PunctuationBlock, 
-    Punctuation, 
-    Opinion, 
-    LocationText, 
-    DescriptionBlock, 
-    Description, 
-    Button } from './RecomendationsComponents'
-
-import { AiFillStar, AiFillHeart } from 'react-icons/ai'
-import { HiLocationMarker } from 'react-icons/hi'
-import { BiWifi } from 'react-icons/bi'
-import { FaSwimmingPool } from 'react-icons/fa'
+import { Body, Block, RecomendationTitle, RecommendationContainer, ErrorMessage, Button } from './indexStyle'
+import RecomendationCard from './RecomendationCard'
 
 const Recomendaciones = () => {
-  return (
+
+  return products ? (
     <Body>
         <Block>
             <RecomendationTitle>Recomendaciones</RecomendationTitle>
             <RecommendationContainer>
+                {/* Si el llamado a la api falla mostramos este mensaje */}
+                {products.length === 0 && (
+                        <div>
+                            <ErrorMessage>Lo sentimos no hemos encontrado resultados para tu busqueda</ErrorMessage>
+                            <Button to={'/'}>Home</Button>
+                        </div>
+                )}
                 {
-                    products.map((item) => {
+                    products.map((product) => {
                         return (
-                            <Recommendation key={item.id}>
-                                <ImageBlock>
-                                    <Image src={item.crimg} alt="" />
-                                    <AiFillHeart/>
-                                </ImageBlock>
-                                    <RecomendationInfo>
-                                        <HotelTopInfoBlock>
-                                            <div>
-                                                <Category>{item.category}<div> <AiFillStar/><AiFillStar/><AiFillStar/><AiFillStar/><AiFillStar/></div></Category>
-                                                <Title>{item.title}</Title>
-                                            </div>
-                                            <PunctuationBlock>
-                                                <Punctuation>8</Punctuation>
-                                                <Opinion>Muy bueno</Opinion>
-                                            </PunctuationBlock>
-                                        </HotelTopInfoBlock>
-                                        <div>
-                                            <LocationText> <HiLocationMarker/> {item.location} <span>mostrar en el mapa</span></LocationText>
-                                            <BiWifi/> <FaSwimmingPool/>
-                                        </div>
-                                        <DescriptionBlock>
-                                            <Description>{item.description} <span>mas...</span></Description>
-                                            <Button>Ver mas</Button>
-                                        </DescriptionBlock>
-                                    </RecomendationInfo>
-                            </Recommendation>
+                            <RecomendationCard
+                                key={product.id}
+                                img={product.crimg}
+                                category={product.category}
+                                title={product.title}
+                                location={product.location}
+                                description={product.description}
+                                puntuation={product.puntuation}
+                                id={product.id}
+                            />
                         )
                     })
                 }
             </RecommendationContainer>
         </Block>
     </Body>
-  )
+  ) : null;
 }
 
 export default Recomendaciones
