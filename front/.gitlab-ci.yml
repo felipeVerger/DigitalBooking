@@ -52,7 +52,6 @@ publish:
 
 deploy:
   stage: deploy
-  needs: [docker-build]
   image: kroniak/ssh-client
   #before_script:
     #- echo "deploying app"
