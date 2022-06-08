@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import categoriesList from '../../staticData/data.json'
-import { Body, CategoryBlock, SectionTitle, FlexWrapper, Box, Image, InfoSection, CategoryText, CategoryInfo } from './CategoriesComponents'
+import { Body, CategoryBlock, SectionTitle, FlexWrapper} from './IndexStyle'
+import CategoryCard from './CategoryCard'
 
 
 const Categorias = () => {
@@ -18,13 +19,13 @@ const Categorias = () => {
                 {
                     categories.map((item) => {
                         return (
-                            <Box key={item.id}>
-                                <Image src={item.image} alt="imagen-categorias" />
-                                <InfoSection>
-                                    <CategoryText>{item.category}</CategoryText>
-                                    <CategoryInfo>{item.amount} {item.type}</CategoryInfo>
-                                </InfoSection>
-                            </Box>
+                            <CategoryCard
+                                key={item.id}
+                                img={item.image}
+                                category={item.category}
+                                amount={item.amount}
+                                type={item.type}
+                            />
                         )
                     })
                 }

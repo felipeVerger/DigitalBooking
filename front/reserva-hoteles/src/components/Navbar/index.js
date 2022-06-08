@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import {
   NavbarBody,
   NavbarBlock,
@@ -9,8 +9,6 @@ import {
   Dropdown,
   CalendarIcon,
 } from "./NavbarComponent";
-import { ImLocation } from "react-icons/im";
-import { GoLocation } from "react-icons/go";
 
 import { DateRange } from "react-date-range";
 import { es } from "date-fns/locale";
@@ -18,24 +16,10 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 
 
-const ciudades = [
-  {
-    city: "San Carlos de Bariloche",
-    country: "Argentina",
-  },
-  {
-    city: "Mendoza",
-    country: "Argentina",
-  },
-  {
-    city: "Cordoba",
-    country: "Argentina",
-  },
-  {
-    city: "Buenos Aires",
-    country: "Argentina",
-  },
-];
+import { FilterContext } from "../../context/filter-context";
+import citiesJson from '../../staticData/cities.json'
+import {useNavigate} from 'react-router-dom'
+
 
 const getDateString = (date) => {
   const days = ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"];
@@ -67,6 +51,10 @@ const getDateString = (date) => {
 
 const Navbar = () => {
   const [calendarOpen, setCalendarOpen] = useState(false);
+  const [cities, setCities] = useState([]);
+  const {setFilter} = useContext(FilterContext);
+  const navigate = useNavigate();
+
   const ref = useRef();
   useEffect(() => {
     const checkIfClickedOutside = (e) => {
@@ -80,6 +68,10 @@ const Navbar = () => {
       document.removeEventListener("mousedown", checkIfClickedOutside);
     };
   }, [calendarOpen]);
+
+  useEffect(() => {
+    setCities(citiesJson)
+  }, [])
 
   const [data, setData] = useState({
     city: [],
@@ -108,6 +100,10 @@ const Navbar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (e.target[0].value !== "¿A dónde vamos?" && !e.target[1].value) {
+      setFilter([data.city, 'city'])
+    }
+    navigate('/productsList')
   };
 
   const toggleCalendarOpen = () => {
@@ -120,11 +116,11 @@ const Navbar = () => {
         <Title>Busca ofertas en hoteles, casas y mucho mas</Title>
         <Form onSubmit={handleSubmit}>
           <Dropdown
-            options={ciudades.map((item) => ({
-              value: item.city,
-              label: item.city,
+            options={cities.map((item) => ({
+              value: item.city + ', ' + item.country,
+              label: item.city + ', ' + item.country,
             }))}
-            placeholder={"¿A donde vamos?"}
+            placeholder={'¿A donde vamos?'}
             onChange={handleCityChange}
           />
           <CalendarContainer

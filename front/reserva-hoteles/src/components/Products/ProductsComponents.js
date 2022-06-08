@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const ProductsContainer = styled.div`
     background: white;
@@ -36,10 +37,21 @@ export const Product = styled.div`
     
 `
 
+export const TitleLink = styled(Link)`
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+        color: ${(props) => props.theme.primary};
+    }
+`
+
 export const Image = styled.img`
     width: 420px;
     height: 100%;
     border-radius: 8px;
+    &:hover {
+        opacity: 0.8;
+    }
 `
 
 export const InfoBlock = styled.div`
@@ -118,9 +130,6 @@ export const PriceBlock = styled.div`
     flex-direction: column;
     align-items: flex-end;
     gap: 5px;
-`
-export const Button = styled.button`
-    
 `
 export const TextPrice = styled.span`
     color: ${(props) => props.theme.secondary};

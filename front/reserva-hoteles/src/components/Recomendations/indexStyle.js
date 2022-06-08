@@ -20,7 +20,7 @@ export const Block = styled.div`
   align-items: flex-start;
 `;
 
-export const RecomendationTitle = styled.h2`
+export const Title = styled.h2`
   color: ${(props) => props.theme.primary};
   font-family: "Roboto", sans-serif;
   font-weight: 600;
