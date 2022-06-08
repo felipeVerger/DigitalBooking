@@ -126,3 +126,4 @@ color: ${(props) => props.theme.primary};
 font-weight: 700;
 width: 100vw;
 `
+

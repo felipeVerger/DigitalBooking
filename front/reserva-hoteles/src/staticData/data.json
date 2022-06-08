@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "image": "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=60&raw_url=true&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aGFiaXRhY2klQzMlQjNuJTIwZGUlMjBob3RlbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500",
+    "category": "Hotel",
+    "amount": 807.105,
+    "type": "hoteles"
+  },
+  {
+    "id": 2,
+    "image": "https://images.unsplash.com/photo-1611892440504-42a792e24d32?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870",
+    "category": "Hostel",
+    "amount": 200.145,
+    "type": "hoteles"
+  },
+  {
+    "id": 3,
+    "image": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870",
+    "category": "Departamento",
+    "amount": 130.465,
+    "type": "hoteles"
+  },
+  {
+    "id": 4,
+    "image": "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870",
+    "category": "Bed and Breakfast",
+    "amount": 134.532,
+    "type": "hoteles"
+  }
+]
+
+
