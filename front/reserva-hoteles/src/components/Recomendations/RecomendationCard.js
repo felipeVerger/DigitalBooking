@@ -23,6 +23,8 @@ import { HiLocationMarker } from 'react-icons/hi'
 import { BiWifi } from 'react-icons/bi'
 import { FaSwimmingPool } from 'react-icons/fa'
 
+import Loading from "../Loading";
+
 const RecomendationCard = ({id, img, category, title, location, description, puntuation}) => {
 
   const score = Math.round(puntuation * 10) / 10;
