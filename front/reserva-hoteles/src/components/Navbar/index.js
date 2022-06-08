@@ -20,7 +20,6 @@ import { FilterContext } from "../../context/filter-context";
 import citiesJson from '../../staticData/cities.json'
 import {useNavigate} from 'react-router-dom'
 
-
 const getDateString = (date) => {
   const days = ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"];
   const months = [
@@ -103,7 +102,7 @@ const Navbar = () => {
     if (e.target[0].value !== "¿A dónde vamos?" && !e.target[1].value) {
       setFilter([data.city, 'city'])
     }
-    navigate('/productsList')
+    navigate('/productsList');
   };
 
   const toggleCalendarOpen = () => {

@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useEffect, useContext, Suspense} from 'react'
 import {
     ProductsContainer,
     ProductsBody,
@@ -31,7 +31,7 @@ const Products = () => {
   const {filter} = useContext(FilterContext);
 
   useEffect(() => {
-      setProducts(productsList);
+    setProducts(productsList);
   }, [])
 
     
