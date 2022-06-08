@@ -21,28 +21,25 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(name = "name")
     private String name;
 
-    @Column
+    @Column(name = "description")
     private String description;
 
-    @Column
+    @Column(name = "address")
     private String address;
 
-    @Column
+    @Column(name = "longitude")
     private String longitude;
 
-    @Column
+    @Column(name = "latitude")
     private String latitude;
 
-    @Column
+    @Column(name = "health_hygiene")
     private String healthAndHygiene;
 
-    @Column
-    private String securityPolicy;
-
-    @Column
+    @Column(name = "cancellation_policies")
     private String cancellationPolicy;
 
     @ManyToOne(optional = false)
@@ -65,7 +62,17 @@ public class Product {
     private City city;
 
 
-
-
-
+    public Product(String name, String description, String address, String longitude, String latitude, String healthAndHygiene, String cancellationPolicy, Category category, List<Feature> features, List<Image> images, City city) {
+        this.name = name;
+        this.description = description;
+        this.address = address;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.healthAndHygiene = healthAndHygiene;
+        this.cancellationPolicy = cancellationPolicy;
+        this.category = category;
+        this.features = features;
+        this.images = images;
+        this.city = city;
+    }
 }
