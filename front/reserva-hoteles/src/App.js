@@ -12,6 +12,7 @@ import { UserProvider } from "./context/user-context";
 import ProductsList from "./pages/ProductsList";
 import Product from "./pages/Product";
 
+
 function App() {
   return (
     <ThemeProvider theme={themes.light}>

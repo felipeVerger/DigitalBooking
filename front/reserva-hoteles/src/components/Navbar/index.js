@@ -12,10 +12,11 @@ import {
 import { ImLocation } from "react-icons/im";
 import { GoLocation } from "react-icons/go";
 
-import "react-date-range/dist/styles.css";
-import "react-date-range/dist/theme/default.css";
 import { DateRange } from "react-date-range";
 import { es } from "date-fns/locale";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
+
 
 const ciudades = [
   {
