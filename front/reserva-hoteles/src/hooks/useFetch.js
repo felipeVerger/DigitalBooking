@@ -20,7 +20,7 @@ export const useFetch = (URL, options) => {
         .finally(() => {
             setLoading(false);
         })
-  }, [URL])
+  }, [])
 
   return {data, loading, error};
 }
