@@ -12,6 +12,8 @@ import { UserProvider } from "./context/user-context";
 import { FilterProvider } from "./context/filter-context";
 import ProductsList from "./pages/ProductsList";
 import Product from "./pages/Product";
+import Error from "./pages/Error";
+
 
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/productsList" element={<ProductsList/>}/>
                 <Route path="/product/:id" element={<Product />} />
+                <Route path="*" element={<Error />} />
               </Routes>
             </BrowserRouter>
           </FilterProvider>

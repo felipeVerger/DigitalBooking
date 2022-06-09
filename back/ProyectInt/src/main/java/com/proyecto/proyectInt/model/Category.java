@@ -18,6 +18,7 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name= "id_category")
     private Long id;
 
     @Column(name = "title")
@@ -29,7 +30,7 @@ public class Category {
     @Column(name = "url_image")
     private String urlImage;
 
-    @OneToMany
+    @OneToMany(mappedBy = "category")
     @JsonIgnore
     private List<Product> products;
 

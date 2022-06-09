@@ -20,6 +20,12 @@ public class CategoryController {
     /* = Attribute = */
     private final CategoryService service;
 
+    /* = Constructor = */
+    @Autowired
+    public CategoryController(CategoryService service) {
+        this.service = service;
+    }
+
     /* = Get = */
     @GetMapping
     public List<Category> searchCategories() throws BadRequestException {
@@ -28,8 +34,8 @@ public class CategoryController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Category> searchCategory(@PathVariable Long id) throws ResourceNotFoundException {
-        Optional<Category> categoriaActualizada=service.search(id);
-        return categoriaActualizada.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+        Optional<Category> categoryUpdated=service.search(id);
+        return categoryUpdated.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     /* = Post = */
@@ -53,16 +59,9 @@ public class CategoryController {
 
     /* = Delete = */
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminarCategoria(@PathVariable Long id) throws ResourceNotFoundException {
+    public ResponseEntity<String> deleteCategory(@PathVariable Long id) throws ResourceNotFoundException {
         service.categoryDelete(id);
         return ResponseEntity.ok("Category deleted");
 
-    }
-
-    /* = Constructor = */
-
-    @Autowired
-    public CategoryController(CategoryService service) {
-        this.service = service;
     }
 }

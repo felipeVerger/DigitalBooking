@@ -1,6 +1,6 @@
-import React,{useState, useEffect} from 'react'
+import React from 'react'
 import products from '../../staticData/products.json'
-import { Body, Block, RecomendationTitle, RecommendationContainer, ErrorMessage, Button } from './indexStyle'
+import { Body, Block, Title, RecommendationContainer, ErrorMessage, Button } from './indexStyle'
 import RecomendationCard from './RecomendationCard'
 
 const Recomendaciones = () => {
@@ -8,7 +8,7 @@ const Recomendaciones = () => {
   return products ? (
     <Body>
         <Block>
-            <RecomendationTitle>Recomendaciones</RecomendationTitle>
+            <Title>Recomendaciones</Title>
             <RecommendationContainer>
                 {/* Si el llamado a la api falla mostramos este mensaje */}
                 {products.length === 0 && (

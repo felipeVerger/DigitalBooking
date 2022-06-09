@@ -19,6 +19,7 @@ public class Feature {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name= "id_feature")
     private Long id;
 
     @Column(name = "name")

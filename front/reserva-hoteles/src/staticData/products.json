@@ -4,7 +4,7 @@
         "crimg": "https://images.unsplash.com/flagged/photo-1556438758-8d49568ce18e?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=60&raw_url=true&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8aGFiaXRhY2lvbiUyMGhvdGVsfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500",
         "category": "Hotel",
         "title": "Hard Rock Hotel",
-        "location": "Estados Unidos, Miami",
+        "location": "Mendoza, Argentina",
         "description": "Disfruta este magnifico lugar en Paris Francia, essss donde conatmos con muchas actividades. Contamos con pileta, sauna, y muchas cosas mas para relajarse.",
         "puntuation": 4,
         "price": 137
@@ -14,7 +14,7 @@
         "crimg": "https://images.unsplash.com/photo-1631049552057-403cdb8f0658?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=60&raw_url=true&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGhhYml0YWNpb24lMjBob3RlbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500",
         "category": "Hostel",
         "title": "Hermitage Hostel",
-        "location": "Lima, Peru",
+        "location": "Buenos Aires, Argentina",
         "description": "Disfruta este magnifico lugar en Paris Francia, essss donde conatmos con muchas actividades. Contamos con pileta, sauna, y muchas cosas mas para relajarse.",
         "puntuation": 7,
         "price": 85.70
@@ -24,7 +24,7 @@
         "crimg": "https://images.unsplash.com/photo-1566195992011-5f6b21e539aa?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=60&raw_url=true&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fGhhYml0YWNpb24lMjBob3RlbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500",
         "category": "Departamento",
         "title": "Valizas",
-        "location": "Argentina, Cordoba",
+        "location": "Cordoba, Argentina",
         "description": "Disfruta este magnifico lugar en Paris Francia, essss donde conatmos con muchas actividades. Contamos con pileta, sauna, y muchas cosas mas para relajarse.",
         "puntuation": 9,
         "price": 153
@@ -34,7 +34,7 @@
         "crimg": "https://images.unsplash.com/photo-1568495248636-6432b97bd949?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=60&raw_url=true&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGhhYml0YWNpb24lMjBob3RlbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500",
         "category": "Bed and Breakfast",
         "title": "Rosa",
-        "location": "Francia, Paris",
+        "location": "Paris, Francia",
         "description": "Disfruta este magnifico lugar en Paris Francia, essss donde conatmos con muchas actividades. Contamos con pileta, sauna, y muchas cosas mas para relajarse.",
         "puntuation": 8,
         "price": 120
@@ -44,7 +44,7 @@
         "crimg": "https://images.unsplash.com/photo-1560448205-4d9b3e6bb6db?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fGhhYml0YWNpb258ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
         "category": "Hotel",
         "title": "Montel",
-        "location": "Argentina, jujuy",
+        "location": "Jujuy, Argentina",
         "description": "Disfruta este magnifico lugar en Paris Francia, essss donde conatmos con muchas actividades. Contamos con pileta, sauna, y muchas cosas mas para relajarse.",
         "puntuation": 8,
         "price": 45
@@ -54,7 +54,7 @@
         "crimg": "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8aGFiaXRhY2lvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
         "category": "Departamento",
         "title": "Ruiseñor",
-        "location": "Alemania, Berlin",
+        "location": "Berlin, Alemania",
         "description": "Disfruta este magnifico lugar en Paris Francia, essss donde conatmos con muchas actividades. Contamos con pileta, sauna, y muchas cosas mas para relajarse.",
         "puntuation": 10,
         "price": 125

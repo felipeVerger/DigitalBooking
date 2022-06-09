@@ -1,116 +1,31 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useContext } from "react";
 import {
   NavbarBody,
   NavbarBlock,
   Title,
   Form,
   Button,
-  CalendarContainer,
-  Dropdown,
-  CalendarIcon,
-} from "./NavbarComponent";
-import { ImLocation } from "react-icons/im";
-import { GoLocation } from "react-icons/go";
+} from "./IndexStyle";
 
-import "react-date-range/dist/styles.css";
-import "react-date-range/dist/theme/default.css";
-import { DateRange } from "react-date-range";
-import { es } from "date-fns/locale";
-
-const ciudades = [
-  {
-    city: "San Carlos de Bariloche",
-    country: "Argentina",
-  },
-  {
-    city: "Mendoza",
-    country: "Argentina",
-  },
-  {
-    city: "Cordoba",
-    country: "Argentina",
-  },
-  {
-    city: "Buenos Aires",
-    country: "Argentina",
-  },
-];
-
-const getDateString = (date) => {
-  const days = ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"];
-  const months = [
-    "Ene",
-    "Feb",
-    "Mar",
-    "Abr",
-    "May",
-    "Jun",
-    "Jul",
-    "Ago",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dic",
-  ];
-
-  return (
-    days[date.getDay()] +
-    ", " +
-    date.getDate() +
-    " " +
-    months[date.getMonth()] +
-    " " +
-    date.getFullYear()
-  );
-};
+import { FilterContext } from "../../context/filter-context";
+import {useNavigate} from 'react-router-dom'
+import SearchCity from "./SearchCity";
+import SearchCalendar from "./SearchCalendar";
 
 const Navbar = () => {
-  const [calendarOpen, setCalendarOpen] = useState(false);
-  const ref = useRef();
-  useEffect(() => {
-    const checkIfClickedOutside = (e) => {
-      if (calendarOpen && ref.current && !ref.current.contains(e.target)) {
-        setCalendarOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", checkIfClickedOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", checkIfClickedOutside);
-    };
-  }, [calendarOpen]);
-
+  const {setFilter} = useContext(FilterContext);
+  const [destination, setDestination] = useState('¿A donde vamos?');
   const [data, setData] = useState({
-    city: [],
     date: { startDate: null, endDate: null },
   });
-
-  const handleDateSelect = (ranges) => {
-    setData({ ...data, date: ranges.selection });
-    if (ranges.selection.endDate !== ranges.selection.startDate) {
-      toggleCalendarOpen();
-    }
-  };
-
-  const selectionRange = {
-    startDate: data.date.startDate ? data.date.startDate : new Date(),
-    endDate: data.date.endDate ? data.date.endDate : new Date(),
-    key: "selection",
-  };
-
-  const handleCityChange = (city) => {
-    setData({
-      ...data,
-      city: city.value,
-    });
-  };
-
+  const navigate = useNavigate();
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-  };
-
-  const toggleCalendarOpen = () => {
-    setCalendarOpen(!calendarOpen);
+    if (destination !== '¿A donde vamos?') {
+      setFilter([destination, 'city'])
+      navigate('/productsList');
+    }
   };
 
   return (
@@ -118,41 +33,14 @@ const Navbar = () => {
       <NavbarBlock>
         <Title>Busca ofertas en hoteles, casas y mucho mas</Title>
         <Form onSubmit={handleSubmit}>
-          <Dropdown
-            options={ciudades.map((item) => ({
-              value: item.city,
-              label: item.city,
-            }))}
-            placeholder={"¿A donde vamos?"}
-            onChange={handleCityChange}
+          <SearchCity 
+            destination={destination} 
+            setDestination={setDestination}
           />
-          <CalendarContainer
-            ref={ref}
-            onClick={() => setCalendarOpen(true)}
-            isCalendarOpen={calendarOpen}
-          >
-            {calendarOpen ? (
-              <DateRange
-                minDate={new Date()}
-                locale={es}
-                ranges={[selectionRange]}
-                onChange={handleDateSelect}
-              />
-            ) : (
-              <>
-                <CalendarIcon />
-                <div>
-                  {data.date.startDate
-                    ? getDateString(data.date.startDate)
-                    : "Check In"}
-                  {" - "}
-                  {data.date.endDate
-                    ? getDateString(data.date.endDate)
-                    : "Check Out"}
-                </div>
-              </>
-            )}
-          </CalendarContainer>
+          <SearchCalendar 
+            data={data} 
+            setData={setData}
+          />
           <Button type="submit">Buscar</Button>
         </Form>
       </NavbarBlock>

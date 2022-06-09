@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useEffect, useContext, Suspense} from 'react'
 import {
     ProductsContainer,
     ProductsBody,
@@ -31,11 +31,13 @@ const Products = () => {
   const {filter} = useContext(FilterContext);
 
   useEffect(() => {
-      setProducts(productsList);
+    setProducts(productsList);
   }, [])
 
-    /* Filtering the products array based on the filter context. */
-  const filteredArray = products && filter[1] === 'category' ? products.filter((product) => product.category === filter[0]) : products;
+    
+  /* Filtering the products based on the filter. */
+  const filteredArray = products && filter[1] === 'category' ? products.filter((product) => product.category === filter[0]) 
+    : products && filter[1] === 'city' ? products.filter((product) => product.location === filter[0]) : products;
 
   return (
     <ProductsContainer>

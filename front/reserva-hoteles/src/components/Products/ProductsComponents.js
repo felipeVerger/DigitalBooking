@@ -131,9 +131,6 @@ export const PriceBlock = styled.div`
     align-items: flex-end;
     gap: 5px;
 `
-export const Button = styled.button`
-    
-`
 export const TextPrice = styled.span`
     color: ${(props) => props.theme.secondary};
     font-size: 14px;
