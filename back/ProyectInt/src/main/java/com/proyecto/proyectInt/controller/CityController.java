@@ -22,8 +22,8 @@ public class CityController {
     private final CityService service;
 
     /* = Get = */
-    @GetMapping
-    public List<City> searchCategories() throws BadRequestException {
+    @GetMapping("/findAll")
+    public List<City> searchCities() throws BadRequestException {
         return service.searchAll();
     }
 
