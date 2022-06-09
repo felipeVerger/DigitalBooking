@@ -1,16 +1,8 @@
 stages:
   - build
   - test
-  - docker-build
+  - publish
   - deploy
-
-variables:
-  DOCKER_REGISTRY: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
-  APP_NAME: front
-  DOCKER_HOST: tcp://docker:2375
-  TAG_LATEST: $DOCKER_REGISTRY/$APP_NAME:latest
-  USERNAME: AWS
-
 
 build:
   stage: build
@@ -38,30 +30,28 @@ test:
     #- CI=true npm test --passWithNoTests
     - echo "Test successfully!"
 
-docker-build:
-  stage: docker-build
-  needs: [test]
+variables:
+  DOCKER_REGISTRY: 145504712931.dkr.ecr.us-west-2.amazonaws.com
+  AWS_DEFAULT_REGION: us-west-2
+  REPOSITORY_NAME: digitalbookingweb
+publish:
   image: 
     name: amazon/aws-cli
     entrypoint: [""]
   services:
     - docker:dind
   before_script:
+    - cd front/
     - amazon-linux-extras install docker
     - aws --version
     - docker --version
-
-  script:    
-    - aws ecr get-login-password --region $AWS_REGION | docker login --username $USERNAME --password-stdin $DOCKER_REGISTRY
-    - docker pull $TAG_LATEST || true
-    - docker build -t $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IID .
-    - docker push $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IID
-    - docker push $TAG_LATEST
-    - docker logout
+  script:
+    - docker build -t $DOCKER_REGISTRY/$REPOSITORY_NAME:latest . 
+    - aws ecr get-login-password | docker login --username AWS --password-stdin $DOCKER_REGISTRY
+    - docker push $DOCKER_REGISTRY/$REPOSITORY_NAME:latest
 
 deploy:
   stage: deploy
-  needs: [docker-build]
   image: kroniak/ssh-client
   #before_script:
     #- echo "deploying app"

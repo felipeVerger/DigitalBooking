@@ -22,3 +22,5 @@ COPY ./reserva-hoteles/nginx/nginx.conf /etc/nginx/conf.d
 # Fire up nginx
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
+
+#docker run -p 4250:80 -d digital-booking-front
