@@ -27,7 +27,7 @@ public class CategoryController {
     }
 
     /* = Get = */
-    @GetMapping
+    @GetMapping("/findAll")
     public List<Category> searchCategories() throws BadRequestException {
         return service.searchAll();
     }
