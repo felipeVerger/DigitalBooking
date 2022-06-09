@@ -6,7 +6,6 @@ export const HeaderContainer = styled.div`
   background: ${(props) => props.theme.background};
   width: 100vw;
   display: unset;
-
   height: 100px;
   display: flex;
   justify-content: center;

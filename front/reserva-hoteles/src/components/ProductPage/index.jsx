@@ -111,7 +111,7 @@ const ProductPage = ({ product }) => {
       <HeaderBody>
         <HeaderBlock>
           <HeaderInfo>
-            <HeaderCategory>{product.category}</HeaderCategory>
+            <HeaderCategory>{product.category.title}</HeaderCategory>
             <HeaderName>{product.name}</HeaderName>
           </HeaderInfo>
           <CleanLink to={"/"}>
@@ -123,11 +123,9 @@ const ProductPage = ({ product }) => {
         <LocationBlock>
           <ContentDiv>
             <Span bold={true}>
-              <LocationIcon /> {product.location}
+              <LocationIcon /> {product.city.name + ", " + product.city.country}
             </Span>
-            <LocationSubtitle bold={false}>
-              {product.distancia}
-            </LocationSubtitle>
+            <LocationSubtitle bold={false}>A 900m del centro.</LocationSubtitle>
           </ContentDiv>
           <ReviewContent>
             <ContentDiv>
@@ -183,8 +181,8 @@ const ProductPage = ({ product }) => {
             </Carousel>
           </ImageGalleryMobile>
           <ContentBlock>
-            <ContentTitle>{product.desc_title}</ContentTitle>
-            <DescriptionContent>{product.desc}</DescriptionContent>
+            <ContentTitle>{product.title}</ContentTitle>
+            <DescriptionContent>{product.description}</DescriptionContent>
           </ContentBlock>
 
           <TitleBlock>
@@ -196,18 +194,6 @@ const ProductPage = ({ product }) => {
               <Feature>
                 <FeatureIcon />
                 Cocina
-              </Feature>
-              <Feature>
-                <TvIcon />
-                Televisor
-              </Feature>
-              <Feature>
-                <TvIcon />
-                Televisor
-              </Feature>
-              <Feature>
-                <TvIcon />
-                Televisor
               </Feature>
               <Feature>
                 <TvIcon />
@@ -227,7 +213,9 @@ const ProductPage = ({ product }) => {
                   minDate={new Date()}
                   months={2}
                   direction="horizontal"
-                  disabledDates={[]}
+                  disabledDates={[
+
+                  ]}
                 />
                 <ReservationBlock>
                   <Span bold={true}>
@@ -245,13 +233,12 @@ const ProductPage = ({ product }) => {
                 disabledDates={[]}
               />
               <ReservationBlock>
-                  <Span bold={true}>
-                    Agrega tus fechas de viaje para obtener precios exactos
-                  </Span>
-                  <ReservationButton>Iniciar Reserva</ReservationButton>
-                </ReservationBlock>
+                <Span bold={true}>
+                  Agrega tus fechas de viaje para obtener precios exactos
+                </Span>
+                <ReservationButton>Iniciar Reserva</ReservationButton>
+              </ReservationBlock>
             </MobileCalendar>
-            
           </ContentBlock>
         </MainContent>
       </CalendarBody>
@@ -263,16 +250,33 @@ const ProductPage = ({ product }) => {
           <Separator />
           <ContentBlock>
             <PoliciesContainer>
-              {product.politicas.map((policy) => {
-                return <Policy>
-                  <PolicyTitle>{policy.title}</PolicyTitle>
-                  <PolicyContent>
-                    {policy.list.map((content) => {
-                      return <PolicyItem>{content}</PolicyItem>;
-                    })}
-                  </PolicyContent>
-                </Policy>;
-              })}
+              <Policy>
+                <PolicyTitle>Normas de la casa</PolicyTitle>
+                <PolicyContent>
+                  {product.houseRules.map((content) => {
+                    return <PolicyItem>{content}</PolicyItem>;
+                  })}
+                </PolicyContent>
+              </Policy>
+              ;
+              <Policy>
+                <PolicyTitle>Salud y seguridad</PolicyTitle>
+                <PolicyContent>
+                  {product.healthAndHygiene.map((content) => {
+                    return <PolicyItem>{content}</PolicyItem>;
+                  })}
+                </PolicyContent>
+              </Policy>
+              ;
+              <Policy>
+                <PolicyTitle>Politica de cancelacion</PolicyTitle>
+                <PolicyContent>
+                  {product.cancellationPolicy.map((content) => {
+                    return <PolicyItem>{content}</PolicyItem>;
+                  })}
+                </PolicyContent>
+              </Policy>
+              ;
             </PoliciesContainer>
           </ContentBlock>
         </MainContent>
