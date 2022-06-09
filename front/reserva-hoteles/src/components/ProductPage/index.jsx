@@ -57,6 +57,7 @@ import {
   PolicyContent,
   PoliciesContainer,
   PolicyItem,
+  MoreImagesButton,
 } from "./ProductPageComponents";
 import Modal from "react-modal";
 import { DateRange } from "react-date-range";
@@ -159,7 +160,7 @@ const ProductPage = ({ product }) => {
             <MainImageContainer>
               <MainImage src={product.images[0]} />
             </MainImageContainer>
-            <OtherImagesContaienr onClick={openModal}>
+            <OtherImagesContaienr>
               {Array.from(
                 Array(
                   Math.min(Math.max(product.images.length - 1, 0), 4)
@@ -167,6 +168,7 @@ const ProductPage = ({ product }) => {
               ).map((_, i) => {
                 return <SubImage index={i} src={product.images[i + 1]} />;
               })}
+              <MoreImagesButton onClick={openModal}>Ver más</MoreImagesButton>
             </OtherImagesContaienr>
           </ImageGallery>
           <ImageGalleryMobile>
