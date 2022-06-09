@@ -1,0 +1,22 @@
+stages:
+  - publish
+
+variables:
+  DOCKER_REGISTRY: 145504712931.dkr.ecr.us-west-2.amazonaws.com
+  AWS_DEFAULT_REGION: us-west-2
+  REPOSITORY_NAME: digitalbookingdb
+publish:
+  image: 
+    name: amazon/aws-cli
+    entrypoint: [""]
+  services:
+    - docker:dind
+  before_script:
+    - cd back/ProyectInt/assets/
+    - amazon-linux-extras install docker
+    - aws --version
+    - docker --version
+  script:
+    - docker build -t $DOCKER_REGISTRY/$REPOSITORY_NAME:latest . 
+    - aws ecr get-login-password | docker login --username AWS --password-stdin $DOCKER_REGISTRY
+    - docker push $DOCKER_REGISTRY/$REPOSITORY_NAME:latest
