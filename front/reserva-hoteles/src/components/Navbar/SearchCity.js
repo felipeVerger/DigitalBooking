@@ -6,12 +6,10 @@ const URL_API = 'http://localhost:8080/cities/findAll'
 
 const SearchCity = ({destination, setDestination}) => {
   const myHeaders = new Headers();
-myHeaders.append("Authorization", "Basic dXNlcjo2NDE3OTJiNC00ZjY1LTQ4NmEtYjg3Zi04Y2ZmODMwOWM3OTg=");
-myHeaders.append("Cookie", "JSESSIONID=DCEC261BC6EEE5EBE29C774E130417E4");
+    myHeaders.append("Authorization", "Basic dXNlcjoyMDQwMWY4Zi1iNzZhLTQzNTQtODRjNy0xMDhjNzcyMzE2MTE=");
 
 const requestOptions = {
   method: 'GET',
-  mode: 'no-cors',
   headers: myHeaders,
   redirect: 'follow'
 };
@@ -22,6 +20,7 @@ const requestOptions = {
     fetch(URL_API, requestOptions)
       .then((response) => response.json())
       .then((data) => setCitiesList(data))
+      .catch(error => console.log('error', error));
   }, [])
 
 
@@ -33,8 +32,8 @@ const requestOptions = {
   return (
     <Dropdown
       options={citiesList.map((item) => ({
-        value: item.city + ", " + item.country,
-        label: item.city + ", " + item.country,
+        value: item.name + ", " + item.country,
+        label: item.name + ", " + item.country,
       }))}
       placeholder={destination}
       onChange={handleCityChange}
