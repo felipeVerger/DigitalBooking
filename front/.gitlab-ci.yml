@@ -1,8 +1,13 @@
 stages:
   - build
+  - terraform:fmt
+  - terraform:validate
+  - terraform:build
   - test
   - publish
   - deploy
+  - terraform:deploy
+  - terraform:destroy
 
 variables:
  DOCKER_REGISTRY: 145504712931.dkr.ecr.us-west-2.amazonaws.com
@@ -98,7 +103,7 @@ terraform:deploy: &terraform_deploy
     - if: $CI_COMMIT_BRANCH == "main"
       when: manual
 
-.terraform:destroy: &terraform_destroy
+terraform:destroy: &terraform_destroy
   stage: cleanup
   script:
     - cd "${TF_ROOT}"
