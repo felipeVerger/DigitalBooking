@@ -5,6 +5,7 @@ import com.proyecto.proyectInt.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -27,7 +28,9 @@ public class ProductService implements EntityService<Product>{
 
     @Override
     public List<Product> findAll() {
-        return productRepository.findAll();
+        List<Product> productsAll = productRepository.findAll();
+        Collections.shuffle(productsAll);
+        return productsAll;
     }
 
     @Override

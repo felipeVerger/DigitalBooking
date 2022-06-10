@@ -31,7 +31,6 @@ width: 100vw;
   justify-content: space-between;
   align-items: center;
   color: ${(props) => props.theme.color_text_secondary};
-  height: 90px;
 `;
 
 export const HeaderCategory = styled.h2`
@@ -44,6 +43,7 @@ export const HeaderName = styled.h1`
 `
 
 export const HeaderInfo = styled.div`
+
 
 `
 
@@ -200,6 +200,18 @@ height: 500px;
 padding: 1rem 62px 1rem 0;
 border-radius: 20px;
 border-radius: 20px;
+position: relative;
+`
+export const MoreImagesButton = styled.div`
+text-decoration: underline;
+position: absolute;
+bottom: 0;
+right: 100px;
+color: ${props => props.theme.color_text_secondary};
+z-index: 800;
+cursor: pointer;
+
+
 `
 
 export const MainImage = styled.img`
@@ -217,8 +229,8 @@ cursor: pointer;
 
 `
 export const SubImage = styled.img`
-margin-bottom: ${props => props.index <= 1 ? "1%" : "0"};
-margin-right: ${props => (props.index + 1) % 2 !== 0 ? "1%" : "0"};
+padding-bottom: ${props => props.index <= 1 ? "1%" : "0"};
+padding-right: ${props => (props.index + 1) % 2 !== 0 ? "1%" : "0"};
 
 
 width: 49%;
@@ -229,8 +241,6 @@ transition: all .2s ease-in-out;
 &:hover{
   transform: scale(1.01);
 }
-
-cursor: pointer;
 
 
 `
@@ -438,6 +448,10 @@ export const PoliciesContainer = styled.div`
 display: flex;
 flex-direction: row;
 
+@media only screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+
 
 
 
@@ -449,9 +463,13 @@ flex-direction: column;
 width: 25%;
 padding: 1rem;
 flex-wrap: wrap;
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1200px) {
     width: 50%;
   }
+@media only screen and (max-width: 768px) {
+    width: 100%;
+  }
+
 `
 
 export const PolicyTitle = styled.div`

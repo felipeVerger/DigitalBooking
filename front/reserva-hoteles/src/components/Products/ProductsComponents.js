@@ -27,6 +27,7 @@ export const ProductsBlock = styled.div`
     flex-direction: column;
     gap: 20px;
     width: 100%;
+    padding: 1rem;
 `
 export const Product = styled.div`
     display: flex;
@@ -34,7 +35,9 @@ export const Product = styled.div`
     border: 1px solid #dfe4ea;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
-    
+    @media screen and (max-width: 640px) {
+    flex-direction: column;
+  }
 `
 
 export const TitleLink = styled(Link)`
@@ -52,6 +55,9 @@ export const Image = styled.img`
     &:hover {
         opacity: 0.8;
     }
+    @media screen and (max-width: 640px) {
+    width: 100%;
+  }
 `
 
 export const InfoBlock = styled.div`
@@ -142,3 +148,7 @@ export const Price = styled.span`
     font-weight: 700;
 `
 
+export const ErrorMessage = styled.h1`
+    text-align: center;
+    margin-top: 25vh;
+`

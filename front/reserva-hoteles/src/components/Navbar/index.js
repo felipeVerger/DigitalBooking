@@ -22,7 +22,7 @@ const Navbar = () => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (destination !== '¿A donde vamos?') {
+    if (destination !== '¿A dónde vamos?') {
       setFilter([destination, 'city'])
       navigate('/productsList');
     }
@@ -31,7 +31,7 @@ const Navbar = () => {
   return (
     <NavbarBody>
       <NavbarBlock>
-        <Title>Busca ofertas en hoteles, casas y mucho mas</Title>
+        <Title>Busca ofertas en hoteles, casas y mucho más</Title>
         <Form onSubmit={handleSubmit}>
           <SearchCity 
             destination={destination} 

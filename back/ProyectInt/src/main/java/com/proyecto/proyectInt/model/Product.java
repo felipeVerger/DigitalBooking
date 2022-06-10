@@ -1,11 +1,13 @@
 package com.proyecto.proyectInt.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -56,7 +58,8 @@ public class Product {
     private List<Feature> features;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Image> images;
+    @JsonIgnore
+    private List<Image> images = new ArrayList<>();
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "cities_id_city", nullable = false)
