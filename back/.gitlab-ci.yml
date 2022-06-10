@@ -49,3 +49,4 @@ publish:
     - aws ecr get-login-password | docker login --username AWS --password-stdin $DOCKER_REGISTRY
     - docker tag $REPOSITORY_NAME:latest $DOCKER_REGISTRY/$REPOSITORY_NAME:latest
     - docker push $DOCKER_REGISTRY/$REPOSITORY_NAME:latest
+    
