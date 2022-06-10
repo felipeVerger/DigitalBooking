@@ -1,11 +1,13 @@
 package com.proyecto.proyectInt.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -28,7 +30,8 @@ public class City {
     private String country;
 
     @OneToMany(mappedBy = "city")
-    List<Product> products;
+    @JsonIgnore
+    List<Product> products = new ArrayList<>();
 
     public City(String name, String country) {
         this.name = name;
@@ -40,8 +43,7 @@ public class City {
         return "City{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", country='" + country + '\'' +
-                ", products=" + products +
+                ", country='" + country +
                 '}';
     }
 }

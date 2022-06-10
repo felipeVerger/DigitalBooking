@@ -27,7 +27,7 @@ public class ImageController {
     }
 
     /* = Get = */
-    @GetMapping
+    @GetMapping("/findAll")
     public List<Image> searchImages() throws BadRequestException {
         return service.searchAll();
     }

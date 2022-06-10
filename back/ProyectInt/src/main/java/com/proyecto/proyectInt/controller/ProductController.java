@@ -37,7 +37,7 @@ public class ProductController {
         }
     }
 
-    @GetMapping("")
+    @GetMapping("/findAll")
     public List<Product> findAllProducts() {
         return productService.findAll().stream().collect(Collectors.toList());
     }
