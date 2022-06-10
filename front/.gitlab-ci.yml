@@ -60,7 +60,7 @@ image:
 cache:
   key: "${TF_ROOT}"
   paths:
-    - ${TF_ROOT}/.terraform/
+    - ${TF_ROOT}/infraestructura/terraform-manifests/
 
 .terraform:fmt: &terraform_fmt
   stage: validate
