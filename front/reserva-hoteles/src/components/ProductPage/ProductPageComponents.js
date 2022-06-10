@@ -200,6 +200,18 @@ height: 500px;
 padding: 1rem 62px 1rem 0;
 border-radius: 20px;
 border-radius: 20px;
+position: relative;
+`
+export const MoreImagesButton = styled.div`
+text-decoration: underline;
+position: absolute;
+bottom: 0;
+right: 100px;
+color: ${props => props.theme.color_text_secondary};
+z-index: 800;
+cursor: pointer;
+
+
 `
 
 export const MainImage = styled.img`
@@ -229,8 +241,6 @@ transition: all .2s ease-in-out;
 &:hover{
   transform: scale(1.01);
 }
-
-cursor: pointer;
 
 
 `
