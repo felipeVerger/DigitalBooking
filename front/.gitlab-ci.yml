@@ -62,20 +62,20 @@ cache:
   paths:
     - ${TF_ROOT}/infraestructura/terraform-manifests/
 
-.terraform:fmt: &terraform_fmt
+terraform:fmt: &terraform_fmt
   stage: validate
   script:
     - cd "${TF_ROOT}"
     - gitlab-terraform fmt
   allow_failure: true
 
-.terraform:validate: &terraform_validate
+terraform:validate: &terraform_validate
   stage: validate
   script:
     - cd "${TF_ROOT}"
     - gitlab-terraform validate
 
-.terraform:build: &terraform_build
+terraform:build: &terraform_build
   stage: build
   script:
     - cd "${TF_ROOT}"
