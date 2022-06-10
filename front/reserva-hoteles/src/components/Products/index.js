@@ -18,7 +18,8 @@ import {
     Location,
     PriceBlock,
     TextPrice,
-    Price
+    Price,
+    ErrorMessage
 } from './ProductsComponents'
 import { HiLocationMarker } from 'react-icons/hi'
 import productsList from '../../staticData/products.json'
@@ -39,7 +40,8 @@ const Products = () => {
   const filteredArray = products && filter[1] === 'category' ? products.filter((product) => product.category === filter[0]) 
     : products && filter[1] === 'city' ? products.filter((product) => product.location === filter[0]) : products;
 
-  return (
+  return filteredArray.length === 0 ? <ErrorMessage>No se encontraron resultados</ErrorMessage> : 
+  (
     <ProductsContainer>
         <ProductsBody>
             <Title>Lo mejor que podes encontrar en esta categoria</Title>
