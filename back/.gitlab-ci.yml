@@ -45,8 +45,14 @@ publish:
     - aws --version
     - docker --version
   script:
-    - docker build -t $DOCKER_REGISTRY/$REPOSITORY_NAME . 
+    - docker build -t $DOCKER_REGISTRY/$REPOSITORY_NAME:latest . 
     - aws ecr get-login-password | docker login --username AWS --password-stdin $DOCKER_REGISTRY
-    - docker tag $REPOSITORY_NAME:latest $DOCKER_REGISTRY/$REPOSITORY_NAME:latest
     - docker push $DOCKER_REGISTRY/$REPOSITORY_NAME:latest
     
+deploy:
+  stage: deploy
+  needs: [publish]
+  image: python:latest
+  script:
+    - pip install awscli
+    - aws ecs update-service --cluster public-cluster --service dinamita-web-server-service --force-new-deployment --region us-west-2
