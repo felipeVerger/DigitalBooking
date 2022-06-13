@@ -23,15 +23,15 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reservation_sequence")
     private Long id;
 
-    @Column
+    @Column(name="checkIn")
     @JsonSerialize(using = ToStringSerializer.class)
     private LocalDate checkIn;
 
-    @Column
+    @Column(name="checkOut")
     @JsonSerialize(using = ToStringSerializer.class)
     private LocalDate checkOut;
 
-    @Column
+    @Column(name="info")
     private String additionalInfo;
 
     @ManyToOne(fetch = FetchType.EAGER)

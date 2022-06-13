@@ -41,9 +41,6 @@ public class Product {
     @Column(name = "latitude")
     private String latitude;
 
-    @Column(name = "health_hygiene")
-    private String healthAndHygiene;
-
     @Column(name = "cancellation_policies")
     private String cancellationPolicy;
 
@@ -54,7 +51,7 @@ public class Product {
     private int score;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "categories_id_category", nullable = false)
+    @JoinColumn(name = "categories_id_categories", nullable = false)
     private Category category;
 
     @ManyToMany
@@ -77,6 +74,10 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Reservation> reservations = new HashSet<>();
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Favorite> favorites = new HashSet<>();
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore

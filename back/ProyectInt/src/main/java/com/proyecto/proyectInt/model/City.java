@@ -30,9 +30,13 @@ public class City {
     @Column(name = "country")
     private String country;
 
-    @OneToMany(mappedBy = "")
+    @OneToMany(mappedBy = "city")
     @JsonIgnore
     private Set<Product> products = new HashSet<>();
+
+    @OneToMany(mappedBy = "city")
+    @JsonIgnore
+    private Set<User> users = new HashSet<>();
 
     public City(String name, String country) {
         this.name = name;
