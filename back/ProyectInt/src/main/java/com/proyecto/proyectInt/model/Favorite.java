@@ -18,11 +18,11 @@ public class Favorite {
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_products")
+    @JoinColumn(name = "products_id_product")
     private Product product;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_users")
+    @JoinColumn(name = "users_id_user")
     private User user;
 
 
