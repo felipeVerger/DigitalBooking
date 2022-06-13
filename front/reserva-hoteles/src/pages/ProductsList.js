@@ -2,7 +2,7 @@ import React from 'react'
 import PageContainer from '../components/PageContainer'
 import Layout from '../components/Layout'
 import Section from '../components/Section'
-import Products from '../components/Products'
+import Recomendaciones from '../components/Products'
 import Navbar from '../components/Navbar'
 
 const ProductsList = () => {
@@ -11,7 +11,7 @@ const ProductsList = () => {
         <Layout>
             <Section>
                 <Navbar/>
-                <Products/>
+                <Recomendaciones/>
             </Section>
         </Layout>
     </PageContainer>

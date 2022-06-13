@@ -39,10 +39,11 @@ export const RecommendationContainer = styled.div`
 `;
 
 export const ErrorMessage = styled.h3`
-  font-size: 18px;
-  font-weight: 500;
-  color: lightgray;
+  font-size: 24px;
+  font-weight: 700;
+  color: black;
   text-align: center;
+  margin: 25vh;
 `
 
 export const Button = styled(Link)`

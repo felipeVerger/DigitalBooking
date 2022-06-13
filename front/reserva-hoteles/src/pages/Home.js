@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../components/Layout";
 import Navbar from "../components/Navbar";
 import Categories from "../components/Categories";
-import Recomendations from "../components/Recomendations";
+import Recomendations from '../components/Products'
 import Section from "../components/Section";
 import PageContainer from "../components/PageContainer";
 

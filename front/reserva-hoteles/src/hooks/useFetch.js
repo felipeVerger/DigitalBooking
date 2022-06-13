@@ -1,26 +1,31 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from "react";
 
-export const useFetch = (URL, options) => {
+export const statuses = {
+  LOADING: "Loading...",
+  OK: "OK",
+  ERROR: "Error",
+};
+
+function useFetch(URL, options) {
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [status, setStatus] = useState(null);
 
   useEffect(() => {
-      setLoading(true);
-      fetch(URL, options)
-        .then((response) => {
-            return response.json();
-        })
-        .then((data) => {
-            setData(data);
-        })
-        .catch((err) => {
-            setError(err);
-        })
-        .finally(() => {
-            setLoading(false);
-        })
-  }, [])
+    setStatus(statuses.LOADING);
 
-  return {data, loading, error};
+    fetch(URL, options)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => setData(data))
+      .then(() => setStatus(statuses.OK))
+      .catch((error) => setStatus(statuses.Error));
+  }, []);
+
+  return { data, status };
 }
+
+export default useFetch;
