@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react'
 import productsList from '../../staticData/products.json'
 import { Body, Block, Title, RecommendationContainer, ErrorMessage, Button } from './indexStyle'
-import RecomendationCard from './RecomendationCard'
+import RecomendationCard from './ProductsCard'
 import { FilterContext } from '../../context/filter-context'
 import { useLocation } from 'react-router-dom'
 
@@ -22,7 +22,7 @@ const Recomendaciones = () => {
   (
     <Body>
         <Block>
-            <Title>Recomendaciones</Title>
+            <Title>{locationPath === '/' ? 'Recomendaciones' : 'Buscaste: ' + filter[0]}</Title>
             <RecommendationContainer>
                 {
                    filteredArray && locationPath === '/productsList' ? filteredArray.map((product) => {
