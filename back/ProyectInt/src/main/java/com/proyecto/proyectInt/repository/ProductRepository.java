@@ -1,6 +1,4 @@
 package com.proyecto.proyectInt.repository;
-
-
 import com.proyecto.proyectInt.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -38,3 +36,5 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
             "and r.city.name = :city")
     List<Product> filterByDateAndCity(String city, LocalDate init, LocalDate end);
 }
+
+

@@ -20,6 +20,9 @@ public class HealthHygiene {
     @Column(name= "id_health_hygiene")
     private Long id;
 
+    @Column(name = "health_hygiene")
+    private String description;
+
     @ManyToOne
     @JoinColumn(name = "products_id_product", nullable = false)
     private Product product;
