@@ -4,6 +4,8 @@ import com.proyecto.proyectInt.exception.BadRequestException;
 import com.proyecto.proyectInt.exception.ResourceNotFoundException;
 import com.proyecto.proyectInt.model.Category;
 import com.proyecto.proyectInt.service.CategoryService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,52 +18,35 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/categories")
 public class CategoryController {
-
-    /* = Attribute = */
-    private final CategoryService service;
-
-    /* = Constructor = */
     @Autowired
-    public CategoryController(CategoryService service) {
-        this.service = service;
-    }
+    private CategoryService categoryService;
 
-    /* = Get = */
-    @GetMapping("/findAll")
-    public List<Category> searchCategories() throws ResourceNotFoundException {
-        return service.findAll();
-    }
+    Logger logger = LogManager.getLogger(CategoryController.class);
 
+    @GetMapping("/all")
+    public ResponseEntity<List<Category>> getAllCategories() throws ResourceNotFoundException {
+        logger.info("Retrieving data from category table");
+        return ResponseEntity.ok(categoryService.findAll());
+    }
     @GetMapping("/{id}")
-    public ResponseEntity<Category> searchCategory(@PathVariable Long id) throws ResourceNotFoundException {
-        Optional<Category> categoryUpdated=service.findById(id);
-        return categoryUpdated.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    public ResponseEntity<Optional<Category>> getCategoryById(@PathVariable Long id) throws ResourceNotFoundException {
+        logger.info("Retrieving data from category table");
+        return ResponseEntity.ok(categoryService.findById(id));
     }
-
-    /* = Post = */
     @PostMapping
-    public Category saveCategory(@RequestBody Category category) throws BadRequestException {
-        return service.create(category);
+    public ResponseEntity<Category> addCategory(@RequestBody Category category) throws BadRequestException {
+        logger.info("Adding new category");
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.create(category));
     }
-
-
-    /* = Update = */
-    @PutMapping("/update")
+    @PutMapping
     public ResponseEntity<Category> updateCategory(@RequestBody Category category) throws BadRequestException {
-        Category updatedCategory =service.update(category);
-        if (updatedCategory !=null){
-            return ResponseEntity.ok(updatedCategory);
-        }
-        else{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+        logger.info("Updating category");
+        return ResponseEntity.ok(categoryService.update(category));
     }
-
-    /* = Delete = */
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCategory(@PathVariable Long id) throws ResourceNotFoundException {
-        service.delete(id);
+        logger.info("Deleting category");
+        categoryService.delete(id);
         return ResponseEntity.ok("Category deleted");
-
     }
 }

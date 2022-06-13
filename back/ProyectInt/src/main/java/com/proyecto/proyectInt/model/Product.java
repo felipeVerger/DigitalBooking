@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
@@ -28,6 +26,9 @@ public class Product {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "subtitle")
+    private String subtitle;
+
     @Column(name = "description")
     private String description;
 
@@ -45,6 +46,12 @@ public class Product {
 
     @Column(name = "cancellation_policies")
     private String cancellationPolicy;
+
+    @Column(name = "price")
+    private Double price;
+
+    @Column(name = "score" )
+    private int score;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "categories_id_category", nullable = false)
@@ -66,35 +73,43 @@ public class Product {
     @JoinColumn(name = "cities_id_city", nullable = false)
     private City city;
 
-    //revisar si la relacion esta bien planteada
-    //atributo
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
-    private Set<Score> scores = new HashSet<>();
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Reservation> reservations = new HashSet<>();
 
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private Set<HealthHygiene> healthHygiene = new HashSet<>();
 
-    public Product(String name, String description, String address, String longitude, String latitude, String healthAndHygiene, String cancellationPolicy, Category category, Set<Feature> features, Set<Image> images, City city, Set<Score> scores,Set<Reservation> reservations) {
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private Set<HouseRule> houseRules = new HashSet<>();
+
+
+    public Product(String name, String description,String subtitle, Double price, String address, String longitude, String latitude , String cancellationPolicy, Category category, Set<Feature> features, Set<Image> images, City city, int score, Set<HouseRule> houseRules, Set<HealthHygiene> healthHygiene) {
         this.name = name;
         this.description = description;
+        this.subtitle = subtitle;
+        this.price = price;
         this.address = address;
         this.longitude = longitude;
         this.latitude = latitude;
-        this.healthAndHygiene = healthAndHygiene;
         this.cancellationPolicy = cancellationPolicy;
         this.category = category;
         this.features = features;
         this.images = images;
         this.city = city;
-        this.scores = scores;
-        this.reservations = reservations;
+        this.score = score;
+        this.houseRules = houseRules;
+        this.healthHygiene = healthHygiene;
+
     }
 
-    public Product(String name, String description, String address, String longitude, String latitude, String cancellationPolicy, Category category, Set<Feature> features, City city) {
+    public Product(String name, String subtitle, Double price, String description, String address, String longitude, String latitude, String cancellationPolicy, Category category, Set<Feature> features, City city, int score, Set<HouseRule> houseRules, Set<HealthHygiene> healthHygiene) {
         this.name = name;
+        this.subtitle = subtitle;
+        this.price = price;
         this.description = description;
         this.address = address;
         this.longitude = longitude;
@@ -103,5 +118,8 @@ public class Product {
         this.category = category;
         this.features = features;
         this.city = city;
+        this.score = score;
+        this.houseRules = houseRules;
+        this.healthHygiene = healthHygiene;
     }
 }

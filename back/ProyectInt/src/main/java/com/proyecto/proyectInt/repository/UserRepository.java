@@ -15,8 +15,15 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     Optional<User> findByEmail (String email);
 
-    @Query("SELECT u FROM user u WHERE :roleId = u.role")
+    @Query("SELECT u FROM users u WHERE :role = u.role")
     Optional<User> filterByUseRole (UserRole userRole);
+
+
+    @Query("SELECT DISTINCT role FROM users")
+    Optional<User> showRoles ();
+
+    @Query("SELECT role FROM users u where :name = u.name")
+    Optional<User> showUserRole (String username);
 
 
 }

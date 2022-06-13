@@ -41,8 +41,7 @@ public class User implements UserDetails {
     @Column
     private String password;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="roles_id_rol", nullable = false)
+    @JoinColumn(name="roles", nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
