@@ -32,22 +32,30 @@ public class User implements UserDetails {
     @Column(name = "name")
     private String username;
 
-    @Column
+    @Column(name = "lastName")
     private String lastname;
 
-    @Column
+    @Column(name = "email")
     private String email;
 
-    @Column
+    @Column(name = "password")
     private String password;
 
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="roles", nullable = false)
-    @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="cities", nullable = false)
+    private City city;
+
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Reservation> reservations = new HashSet<>();
+
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Favorite> favorites = new HashSet<>();
 
     public User(String name, String lastname, String email, String password, UserRole role) {
         this.username = name;
