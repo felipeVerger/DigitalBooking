@@ -18,7 +18,8 @@ public class Feature {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "feature_sequence", sequenceName = "feature_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "feature_sequence")
     @Column(name= "id_feature")
     private Long id;
 

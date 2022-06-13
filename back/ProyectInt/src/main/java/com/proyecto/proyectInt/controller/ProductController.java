@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @CrossOrigin
@@ -26,11 +27,11 @@ public class ProductController {
 
     /* = Get = */
     @GetMapping("/{id}")
-    public ResponseEntity<?> findProductById(@PathVariable Integer id) {
+    public ResponseEntity<?> findProductById(@PathVariable Long id) {
 
-        Product product = productService.findById(id);
+        Optional<Product> product = productService.findById(id);
 
-        if (product.getName() != null) {
+        if (product.isPresent()) {
             return ResponseEntity.ok(product);
         } else {
             return new ResponseEntity("There's no product with that id, please verify and try again", HttpStatus.NOT_FOUND);
@@ -39,7 +40,7 @@ public class ProductController {
 
     @GetMapping("/findAll")
     public List<Product> findAllProducts() {
-        return productService.findAll().stream().collect(Collectors.toList());
+        return productService.findAll();
     }
 
     /* = Post = */
@@ -59,8 +60,6 @@ public class ProductController {
         }else{
             response = new ResponseEntity(productService.create(product), HttpStatus.CREATED);
         }
-
         return response;
     }
-
 }

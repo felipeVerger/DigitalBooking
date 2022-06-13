@@ -7,12 +7,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class ProductService implements EntityService<Product>{
+public class ProductService implements EntityService<Product> {
 
     /* = Attributes = */
-    private final ProductRepository productRepository;
+    @Autowired
+    ProductRepository productRepository;
 
     /* = Constructor = */
     @Autowired
@@ -34,8 +36,8 @@ public class ProductService implements EntityService<Product>{
     }
 
     @Override
-    public Product findById(Integer id) {
-        return productRepository.findById(Long.valueOf(id)).orElse(null);
+    public Optional<Product> findById(Long id) {
+        return productRepository.findById(id);
     }
 
     @Override
@@ -44,24 +46,19 @@ public class ProductService implements EntityService<Product>{
     }
 
     @Override
-    public String delete(Integer id) {
-        if(productRepository.findById(Long.valueOf(id)).isPresent()){
-            productRepository.deleteById(Long.valueOf(id));
-            return "Product with id: " + id + " was deleted";
-        }else{
-            return "Product with id:" + id + " don't exist";
-        }
+    public void delete(Long id) {
+        productRepository.deleteById(Long.valueOf(String.valueOf(productRepository.findById(id))));
     }
 
     public Product findProductByName(String name){
         return productRepository.findProductByProductName(name).orElse(null);
     }
 
-    public List<String> getLocations(){
+    public Optional<List<String>> getLocations(){
         return productRepository.getLocations();
     }
 
-    public List<Product> getProductsByCategory(String category){
+    public Optional<List<Product>> getProductsByCategory(String category){
         return productRepository.getProductsByCategory(category);
     }
 

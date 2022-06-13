@@ -28,26 +28,26 @@ public class ImageController {
 
     /* = Get = */
     @GetMapping("/findAll")
-    public List<Image> searchImages() throws BadRequestException {
-        return service.searchAll();
+    public List<Image> searchImages() throws ResourceNotFoundException {
+        return service.findAll();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Image> searchImage(@PathVariable Long id) throws ResourceNotFoundException {
-        Optional<Image> imageUpdated=service.search(id);
+        Optional<Image> imageUpdated=service.findById(id);
         return imageUpdated.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     /* = Post = */
     @PostMapping
     public Image saveImage(@RequestBody Image image) throws BadRequestException {
-        return service.imageSave(image);
+        return service.create(image);
     }
 
     /* = Update = */
     @PutMapping("/update")
-    public ResponseEntity<Image> toUpdateImage(@RequestBody Image image) throws ResourceNotFoundException {
-        Image updatedImage =service.toUpdate(image);
+    public ResponseEntity<Image> toUpdateImage(@RequestBody Image image) throws BadRequestException {
+        Image updatedImage =service.update(image);
         if (updatedImage !=null){
             return ResponseEntity.ok(updatedImage);
         }
@@ -59,7 +59,7 @@ public class ImageController {
     /* = Delete = */
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteImage(@PathVariable Long id) throws ResourceNotFoundException {
-        service.imageDelete(id);
+        service.delete(id);
         return ResponseEntity.ok("Image deleted");
     }
 }

@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Getter
@@ -55,18 +56,28 @@ public class Product {
             joinColumns = @JoinColumn(name = "products_id_product"),
             inverseJoinColumns = @JoinColumn(name = "features_id_feature")
     )
-    private List<Feature> features;
+    private Set<Feature> features = new HashSet<>();
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
-    private List<Image> images = new ArrayList<>();
+    private Set<Image> images = new HashSet<>();
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "cities_id_city", nullable = false)
     private City city;
 
+    //revisar si la relacion esta bien planteada
+    //atributo
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private Set<Score> scores = new HashSet<>();
 
-    public Product(String name, String description, String address, String longitude, String latitude, String healthAndHygiene, String cancellationPolicy, Category category, List<Feature> features, List<Image> images, City city) {
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Reservation> reservations = new HashSet<>();
+
+
+    public Product(String name, String description, String address, String longitude, String latitude, String healthAndHygiene, String cancellationPolicy, Category category, Set<Feature> features, Set<Image> images, City city, Set<Score> scores,Set<Reservation> reservations) {
         this.name = name;
         this.description = description;
         this.address = address;
@@ -77,6 +88,20 @@ public class Product {
         this.category = category;
         this.features = features;
         this.images = images;
+        this.city = city;
+        this.scores = scores;
+        this.reservations = reservations;
+    }
+
+    public Product(String name, String description, String address, String longitude, String latitude, String cancellationPolicy, Category category, Set<Feature> features, City city) {
+        this.name = name;
+        this.description = description;
+        this.address = address;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.cancellationPolicy = cancellationPolicy;
+        this.category = category;
+        this.features = features;
         this.city = city;
     }
 }

@@ -28,27 +28,27 @@ public class CategoryController {
 
     /* = Get = */
     @GetMapping("/findAll")
-    public List<Category> searchCategories() throws BadRequestException {
-        return service.searchAll();
+    public List<Category> searchCategories() throws ResourceNotFoundException {
+        return service.findAll();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Category> searchCategory(@PathVariable Long id) throws ResourceNotFoundException {
-        Optional<Category> categoryUpdated=service.search(id);
+        Optional<Category> categoryUpdated=service.findById(id);
         return categoryUpdated.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     /* = Post = */
     @PostMapping
     public Category saveCategory(@RequestBody Category category) throws BadRequestException {
-        return service.categorySave(category);
+        return service.create(category);
     }
 
 
     /* = Update = */
     @PutMapping("/update")
-    public ResponseEntity<Category> toUpdateCategory(@RequestBody Category category) throws ResourceNotFoundException {
-        Category updatedCategory =service.toUpdate(category);
+    public ResponseEntity<Category> updateCategory(@RequestBody Category category) throws BadRequestException {
+        Category updatedCategory =service.update(category);
         if (updatedCategory !=null){
             return ResponseEntity.ok(updatedCategory);
         }
@@ -60,7 +60,7 @@ public class CategoryController {
     /* = Delete = */
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCategory(@PathVariable Long id) throws ResourceNotFoundException {
-        service.categoryDelete(id);
+        service.delete(id);
         return ResponseEntity.ok("Category deleted");
 
     }

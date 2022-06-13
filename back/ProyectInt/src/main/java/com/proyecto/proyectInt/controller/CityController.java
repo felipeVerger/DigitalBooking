@@ -23,27 +23,27 @@ public class CityController {
 
     /* = Get = */
     @GetMapping("/findAll")
-    public List<City> searchCities() throws BadRequestException {
-        return service.searchAll();
+    public List<City> searchCities() throws ResourceNotFoundException {
+        return service.findAll();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<City> searchCity(@PathVariable Long id) throws ResourceNotFoundException {
-        Optional<City> cityActualizada = service.search(id);
+        Optional<City> cityActualizada = service.findById(id);
         return cityActualizada.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     /* = Post = */
     @PostMapping
     public City saveCity(@RequestBody City city) throws BadRequestException {
-        return service.citySave(city);
+        return service.create(city);
     }
 
 
     /* = Update = */
     @PutMapping("/update")
-    public ResponseEntity<City> toUpdateCity(@RequestBody City city) throws ResourceNotFoundException {
-        City updatedCity = service.toUpdate(city);
+    public ResponseEntity<City> toUpdateCity(@RequestBody City city) throws ResourceNotFoundException, BadRequestException {
+        City updatedCity = service.update(city);
         if (updatedCity != null) {
             return ResponseEntity.ok(updatedCity);
         } else {
@@ -54,7 +54,7 @@ public class CityController {
     /* = Delete = */
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCity(@PathVariable Long id) throws ResourceNotFoundException {
-        service.cityDelete(id);
+        service.delete(id);
         return ResponseEntity.ok("City deleted");
 
     }

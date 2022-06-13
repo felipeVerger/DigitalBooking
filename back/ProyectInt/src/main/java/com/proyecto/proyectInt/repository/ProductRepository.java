@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,8 +18,21 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     Optional<Product> findProductByProductName(String name);
 
     @Query("SELECT CONCAT(p.city.name,', ',p.city.country) FROM Product p GROUP BY p.city.name")
-    List<String> getLocations();
+    Optional<List<String>> getLocations();
 
     @Query("SELECT p FROM Product p WHERE p.category.title = ?1")
-    List<Product> getProductsByCategory(String category);
+    Optional<List<Product>> getProductsByCategory(String category);
+
+    //@Query("SELECT p FROM Product p WHERE p.Score.score = ?1")
+    //Optional<List<Product>> filterByScore(int score);
+
+    //revisar la query para filtrar. issue 58
+    @Query("FROM Product p left join p.reservation r on p.id = r.product.id WHERE " +
+            "(r.id is null " +
+            "or r.checkIn BETWEEN :init AND :end " +
+            "or r.checkOut BETWEEN :init AND :end " +
+            "or r.checkIn > :end " +
+            "or r.checkOut < :init)" +
+            "and r.city.name = :city")
+    Optional<List<Product>> filterByDateAndCity(String city, LocalDate init, LocalDate end);
 }

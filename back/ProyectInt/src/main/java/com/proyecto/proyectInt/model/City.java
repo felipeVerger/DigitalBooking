@@ -8,7 +8,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Getter
@@ -19,7 +21,8 @@ import java.util.List;
 public class City {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "city_sequence", sequenceName = "city_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "city_sequence")
     @Column(name= "id_city")
     private Long id;
 
@@ -31,7 +34,7 @@ public class City {
 
     @OneToMany(mappedBy = "city")
     @JsonIgnore
-    List<Product> products = new ArrayList<>();
+    private Set<Product> products = new HashSet<>();
 
     public City(String name, String country) {
         this.name = name;
