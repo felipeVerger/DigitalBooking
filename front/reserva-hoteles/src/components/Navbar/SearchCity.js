@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
-import {Dropdown} from './CityStyle'
+import {Dropdown} from './CityStyle';
+// import useFetch from '../../hooks/useFetch';
 
 const URL_API = 'http://localhost:8080/cities/findAll'
 
@@ -7,7 +8,7 @@ const SearchCity = ({destination, setDestination}) => {
   const  [citiesList, setCitiesList] = useState([]);
 
   const myHeaders = new Headers();
-    myHeaders.append("Authorization", "Basic dXNlcjo1ZGQ5N2E1Ny1hNmI2LTQ4ZTItOGJjOS03M2YzOTc1ZWVmZGQ=");
+    myHeaders.append("Authorization", "Basic dXNlcjoyZTQwYmU2Yi1kNTg5LTQzNWItYWU0Zi1iNmU3MzUwOWEwNDE=");
 
   const requestOptions = {
     method: 'GET',
@@ -21,6 +22,8 @@ const SearchCity = ({destination, setDestination}) => {
       .then((data) => setCitiesList(data))
       .catch(error => console.log('error', error));
   }, [])
+
+
 
   const handleCityChange = (city) => {
     setDestination(city.value);

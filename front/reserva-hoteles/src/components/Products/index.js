@@ -1,83 +1,65 @@
-import React, {useState, useEffect, useContext, Suspense} from 'react'
-import {
-    ProductsContainer,
-    ProductsBody,
-    Title,
-    ProductsBlock,
-    Product,
-    TitleLink,
-    Image,
-    InfoBlock,
-    TopInfo,
-    CategoryBlock,
-    Category,
-    Name,
-    PunctuationBlock,
-    Punctuation,
-    Opinion,
-    Location,
-    PriceBlock,
-    TextPrice,
-    Price,
-    ErrorMessage
-} from './ProductsComponents'
-import { HiLocationMarker } from 'react-icons/hi'
+import React, {useContext, useEffect, useState} from 'react'
 import productsList from '../../staticData/products.json'
-import {Link} from 'react-router-dom'
+import { Body, Block, Title, RecommendationContainer, ErrorMessage, Button } from './indexStyle'
+import RecomendationCard from './RecomendationCard'
 import { FilterContext } from '../../context/filter-context'
+import { useLocation } from 'react-router-dom'
 
+const Recomendaciones = () => {
+    const {filter} = useContext(FilterContext);
+    const [products, setProducts] = useState([]);
+    const locationPath = useLocation().pathname;
 
-const Products = () => {
-  const [products, setProducts] = useState([]);
-  const {filter} = useContext(FilterContext);
+    useEffect(() => {
+        setProducts(productsList);
+    }, [])
 
-  useEffect(() => {
-    setProducts(productsList);
-  }, [])
+    /* Filtering the products based on the filter context. */
+    const filteredArray = filter ? products && filter[1] === 'category' ? products.filter((product) => product.category === filter[0]) 
+    : products && filter[1] === 'city' ? products.filter((product) => product.location === filter[0]) : products : products;
 
-    
-  /* Filtering the products based on the filter. */
-  const filteredArray = products && filter[1] === 'category' ? products.filter((product) => product.category === filter[0]) 
-    : products && filter[1] === 'city' ? products.filter((product) => product.location === filter[0]) : products;
-
-  return filteredArray.length === 0 ? <ErrorMessage>No se encontraron resultados</ErrorMessage> : 
+  return filteredArray.length === 0 && locationPath === '/productsList' ? <ErrorMessage>No se encontraron resultados</ErrorMessage> : 
   (
-    <ProductsContainer>
-        <ProductsBody>
-            <Title>Lo mejor que podes encontrar en esta categoria</Title>
-            <ProductsBlock>
+    <Body>
+        <Block>
+            <Title>Recomendaciones</Title>
+            <RecommendationContainer>
                 {
-                    filteredArray.map((product) => (
-                        <Product key={product.id}>
-                            <Link to={`/product/${product.id}`}>
-                                <Image src={product.crimg} alt="image"/>
-                            </Link>
-                            <InfoBlock>
-                                <TopInfo>
-                                    <CategoryBlock>
-                                        <Category>{product.category}</Category>
-                                        <TitleLink to={`/product/${product.id}`}>
-                                            <Name>{product.title}</Name>
-                                        </TitleLink>
-                                        <Location> <HiLocationMarker/> {product.location}</Location>
-                                    </CategoryBlock>
-                                    <PunctuationBlock>
-                                        <Punctuation>{product.puntuation}</Punctuation>
-                                        <Opinion>Muy bueno</Opinion>
-                                    </PunctuationBlock>
-                                </TopInfo>
-                                <PriceBlock>
-                                    <TextPrice>Precio por noche</TextPrice>
-                                    <Price>$ {product.price}</Price>
-                                </PriceBlock>
-                            </InfoBlock>
-                        </Product>
-                    ))
+                   filteredArray && locationPath === '/productsList' ? filteredArray.map((product) => {
+                        return (
+                            <RecomendationCard
+                                key={product.id}
+                                img={product.crimg}
+                                category={product.category}
+                                title={product.title}
+                                location={product.location}
+                                description={product.description}
+                                puntuation={product.puntuation}
+                                price={product.price}
+                                id={product.id}
+                            />
+                        )
+                   }) : 
+                     products.map((product) => {
+                        return (
+                            <RecomendationCard
+                                key={product.id}
+                                img={product.crimg}
+                                category={product.category}
+                                title={product.title}
+                                location={product.location}
+                                description={product.description}
+                                puntuation={product.puntuation}
+                                price={product.price}
+                                id={product.id}
+                            />
+                        )
+                     })
                 }
-            </ProductsBlock>
-        </ProductsBody>
-    </ProductsContainer>
-  )
+            </RecommendationContainer>
+        </Block>
+    </Body>
+  );
 }
 
-export default Products
+export default Recomendaciones

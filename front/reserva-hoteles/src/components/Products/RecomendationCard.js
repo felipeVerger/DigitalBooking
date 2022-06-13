@@ -1,29 +1,40 @@
 import React from "react";
 import {
-    Recommendation,
-    ImageBlock,
-    Image, 
-    RecomendationInfo, 
-    HotelTopInfoBlock,
-    TitleBlock, 
-    CategoryBlock,
-    Category, 
-    Title, 
-    PunctuationBlock, 
-    Punctuation, 
-    Opinion, 
-    LocationText, 
-    DescriptionBlock, 
-    Description,
-    Button
-} from './RecomendationStyle'
+  Recommendation,
+  ImageBlock,
+  Image,
+  RecomendationInfo,
+  HotelTopInfoBlock,
+  TitleBlock,
+  CategoryBlock,
+  Category,
+  Title,
+  PunctuationBlock,
+  Punctuation,
+  Opinion,
+  LocationText,
+  DescriptionBlock,
+  Description,
+  Button,
+} from "./RecomendationStyle";
+import { useLocation } from "react-router-dom";
 
-import { AiFillStar, AiFillHeart, AiOutlineStar } from 'react-icons/ai'
-import { HiLocationMarker } from 'react-icons/hi'
-import { BiWifi } from 'react-icons/bi'
-import { FaSwimmingPool } from 'react-icons/fa'
+import { AiFillStar, AiFillHeart, AiOutlineStar } from "react-icons/ai";
+import { HiLocationMarker } from "react-icons/hi";
+import { BiWifi } from "react-icons/bi";
+import { FaSwimmingPool } from "react-icons/fa";
 
-const RecomendationCard = ({id, img, category, title, location, description, puntuation}) => {
+const RecomendationCard = ({
+  id,
+  img,
+  category,
+  title,
+  location,
+  description,
+  puntuation,
+  price,
+}) => {
+  const locationPath = useLocation().pathname;
 
   const score = Math.round(puntuation * 10) / 10;
 
@@ -78,15 +89,15 @@ const RecomendationCard = ({id, img, category, title, location, description, pun
         <HotelTopInfoBlock>
           <TitleBlock>
             <CategoryBlock>
-                <Category>{category}</Category>
-                {createArrayStars().map((star, index) =>
-                  star === 1 ? (
-                    <AiFillStar key={index}/>
-                  ) : (
-                    <AiOutlineStar key={index}/>
-                  )
-                )}
-            </CategoryBlock> 
+              <Category>{category}</Category>
+              {createArrayStars().map((star, index) =>
+                star === 1 ? (
+                  <AiFillStar key={index} />
+                ) : (
+                  <AiOutlineStar key={index} />
+                )
+              )}
+            </CategoryBlock>
             <Title>{title}</Title>
           </TitleBlock>
           <PunctuationBlock>
@@ -102,14 +113,14 @@ const RecomendationCard = ({id, img, category, title, location, description, pun
           <BiWifi /> <FaSwimmingPool />
         </div>
         <DescriptionBlock>
-          <Description>
-            {description}
-          </Description>
-          <Button onClick={scrollTop} to={`/product/${id}`}>Ver mas</Button>
+          <Description>{description}</Description>
+          <Button onClick={scrollTop} to={`/product/${id}`}>
+            Ver mas
+          </Button>
         </DescriptionBlock>
       </RecomendationInfo>
     </Recommendation>
-  ) ;
+  )
 };
 
 export default RecomendationCard;
