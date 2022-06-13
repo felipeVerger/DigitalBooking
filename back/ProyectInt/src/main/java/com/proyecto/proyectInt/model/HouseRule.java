@@ -20,6 +20,9 @@ public class HouseRule {
     @Column(name= "id_house_rules")
     private Long id;
 
+    @Column(name = "rules")
+    private String description;
+
     @ManyToOne
     @JoinColumn(name = "products_id_product", nullable = false)
     private Product product;
