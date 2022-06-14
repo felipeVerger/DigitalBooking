@@ -181,6 +181,11 @@ El objetivo fundamental del proyecto es el aprendizaje y la puesta en práctica 
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Email: <a>hessuarezlo@unal.edu.co</a> <br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GitHub: <a href="https://github.com/henrysalo">@henrysalomo</a> <br>
 
+  :boy: <b>Simón Gómez López</b> <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Email: <a>sisegolo@hotmail.com</a> <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GitHub: <a href="https://github.com/gologolo0903">@gologolo0903</a> <br>
+
+
   :boy: <b>Matias Fernandez</b> <br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Email: <a>matias_fernandez92@hotmail.com</a> <br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GitHub: <a href="https://github.com/MatiasFz">@MatiasFz</a> <br>
