@@ -13,9 +13,9 @@ const ErrorPage = () => {
     <ErrorContainer>
         <ErrorBody>
             <ErrorType>404</ErrorType>
-            <ErrorText>Page not found</ErrorText>
+            <ErrorText>Esta pagina no existe</ErrorText>
             <Link to={'/'}>
-                <Button>Back home</Button>
+                <Button>Volver al home</Button>
             </Link>
         </ErrorBody>
     </ErrorContainer>

@@ -12,6 +12,8 @@ import { UserProvider } from "./context/user-context";
 import { FilterProvider } from "./context/filter-context";
 import ProductsList from "./pages/ProductsList";
 import Product from "./pages/Product";
+import ProductBooking from "./pages/ProductBooking";
+import SuccessfulMessage from "./pages/SuccessfulMessage";
 import Error from "./pages/Error";
 
 
@@ -29,6 +31,8 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/productsList" element={<ProductsList/>}/>
                 <Route path="/product/:id" element={<Product />} />
+                <Route path="/product/:id/booking" element={<ProductBooking />} />
+                <Route path="/product/:id/booking/successful" element={<SuccessfulMessage />} />
                 <Route path="*" element={<Error />} />
               </Routes>
             </BrowserRouter>

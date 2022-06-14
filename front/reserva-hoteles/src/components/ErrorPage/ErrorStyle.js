@@ -9,7 +9,7 @@ export const ErrorBody = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    color: ${(props) => props.theme.secondary};
+    color: ${(props) => props.theme.primary};
 `
 
 export const ErrorType = styled.h1`
@@ -22,9 +22,10 @@ export const ErrorText = styled.span`
 `
 
 export const Button = styled.button`
+    margin-top: 20px;
     width: 150px;
     height: 40px;
-    background-color: ${(props) => props.theme.primary};
+    background-color: ${(props) => props.theme.secondary};
     color: white;
     border: none;
     border-radius: 5px;
@@ -32,6 +33,6 @@ export const Button = styled.button`
     font-weight: 600;
     transition: all 500ms ease;
     &:hover {
-        background-color: ${(props) => props.theme.secondary};
+        background-color: ${(props) => props.theme.primary};
     }
 `
