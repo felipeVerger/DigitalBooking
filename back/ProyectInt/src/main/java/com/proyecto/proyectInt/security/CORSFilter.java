@@ -23,6 +23,8 @@ public class CORSFilter implements Filter {
         response.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
         response.setHeader("Access-Control-Expose-Headers", "*");
 
+
+
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             response.setStatus(HttpServletResponse.SC_OK);
         } else {

@@ -16,14 +16,12 @@ import javax.persistence.*;
 public class Image {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name= "id_image")
+    @SequenceGenerator(name = "image_sequence", sequenceName = "image_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "image_sequence")
     private Long id;
 
-    @Column(name = "title")
     private String title;
 
-    @Column(name = "url")
     private String url;
 
     @ManyToOne

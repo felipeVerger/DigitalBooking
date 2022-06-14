@@ -6,7 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Getter
@@ -17,22 +18,19 @@ import java.util.List;
 public class Category {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name= "id_category")
+    @SequenceGenerator(name = "category_sequence", sequenceName = "category_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "category_sequence")
     private Long id;
 
-    @Column(name = "title")
     private String title;
 
-    @Column(name = "description")
     private String description;
 
-    @Column(name = "url_image")
     private String urlImage;
 
     @OneToMany(mappedBy = "category")
     @JsonIgnore
-    private List<Product> products;
+    private Set<Product> products = new HashSet<>();
 
 
     public Category(String title, String description, String urlImage) {
