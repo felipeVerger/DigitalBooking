@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react'
 import productsList from '../../staticData/products.json'
 import { Body, Block, Title, RecommendationContainer, ErrorMessage, Button } from './indexStyle'
-import RecomendationCard from './ProductsCard'
+import ProductCard from './ProductsCard'
 import { FilterContext } from '../../context/filter-context'
 import { useLocation } from 'react-router-dom'
 
@@ -18,6 +18,9 @@ const Recomendaciones = () => {
     const filteredArray = filter ? products && filter[1] === 'category' ? products.filter((product) => product.category === filter[0]) 
     : products && filter[1] === 'city' ? products.filter((product) => product.location === filter[0]) : products : products;
 
+    // productos random y mostrar un limite de 6 productos
+    const randomProducts = products && products.length > 6 ? products.sort(() => Math.random() - 0.5).slice(0, 6) : products; 
+
   return filteredArray.length === 0 && locationPath === '/productsList' ? <ErrorMessage>No se encontraron resultados</ErrorMessage> : 
   (
     <Body>
@@ -27,7 +30,7 @@ const Recomendaciones = () => {
                 {
                    filteredArray && locationPath === '/productsList' ? filteredArray.map((product) => {
                         return (
-                            <RecomendationCard
+                            <ProductCard
                                 key={product.id}
                                 img={product.crimg}
                                 category={product.category}
@@ -40,9 +43,9 @@ const Recomendaciones = () => {
                             />
                         )
                    }) : 
-                     products.map((product) => {
+                     randomProducts.map((product) => {
                         return (
-                            <RecomendationCard
+                            <ProductCard
                                 key={product.id}
                                 img={product.crimg}
                                 category={product.category}

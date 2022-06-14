@@ -1,5 +1,6 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState, useEffect, useRef, useContext} from 'react'
 import {CalendarContainer, CalendarIcon} from './CalendarStyle'
+import { FilterContext } from '../../context/filter-context';
 
 import { DateRange } from "react-date-range";
 import { es } from "date-fns/locale";
@@ -35,6 +36,7 @@ const getDateString = (date) => {
 };
 
 const SearchCalendar = ({data, setData}) => {
+  const {filter} = useContext(FilterContext);
   const [calendarOpen, setCalendarOpen] = useState(false);
   const ref = useRef();
 
@@ -52,7 +54,7 @@ const SearchCalendar = ({data, setData}) => {
   }, [calendarOpen]);
 
   const handleDateSelect = (ranges) => {
-    setData({ ...data, date: ranges.selection });
+    setData({ date: ranges.selection });
     if (ranges.selection.endDate !== ranges.selection.startDate) {
       toggleCalendarOpen();
     }

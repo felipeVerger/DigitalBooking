@@ -16,6 +16,7 @@ import {
   DescriptionBlock,
   Description,
   Button,
+  Product
 } from "./ProductsStyle";
 import { useLocation } from "react-router-dom";
 
@@ -44,7 +45,6 @@ const RecomendationCard = ({id, img, category, title, location, description, pun
     "Excepcional",
   ];
   const textScore = puntuationToText[Math.round(score) + 1];
-  console.log(textScore);
 
   const scoreStars = Math.floor(Math.round(score) / 2);
 
@@ -70,7 +70,7 @@ const RecomendationCard = ({id, img, category, title, location, description, pun
     element.scrollTop = 0;
   };
 
-  return (
+  return locationPath === '/' ? (
     <Recommendation>
       <ImageBlock>
         <Image src={img} alt="" />
@@ -111,6 +111,10 @@ const RecomendationCard = ({id, img, category, title, location, description, pun
         </DescriptionBlock>
       </RecomendationInfo>
     </Recommendation>
+  ) : (
+    <Product>
+      
+    </Product>
   )
 };
 

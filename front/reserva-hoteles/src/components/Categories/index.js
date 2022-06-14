@@ -8,7 +8,7 @@ const Categorias = () => {
     const [categories, setCatgeories] = useState([]);
 
     const myHeaders = new Headers();
-    myHeaders.append("Authorization", "Basic dXNlcjoyZTQwYmU2Yi1kNTg5LTQzNWItYWU0Zi1iNmU3MzUwOWEwNDE=");
+    myHeaders.append("Authorization", "Basic dXNlcjo2NTRiODk5YS0wZGQzLTRjOWMtYTc0ZC04NTkxNzAzNDkyOGQ=");
 
     const requestOptions = {
         method: 'GET',
