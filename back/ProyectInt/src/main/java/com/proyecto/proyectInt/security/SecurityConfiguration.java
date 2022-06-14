@@ -1,6 +1,7 @@
-package com.proyecto.proyectInt.service;
+package com.proyecto.proyectInt.security;
 
 
+import com.proyecto.proyectInt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,10 +32,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/","/index.html","/*turno*").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/js/**").permitAll()
-                .antMatchers("/**").hasRole("ADMIN")
-                //.antMatchers("/**").permitAll()
+                //.antMatchers("/","/index.html","/*turno*").hasAnyRole("USER", "ADMIN")
+                //.antMatchers("/js/**").permitAll()
+                //.antMatchers("/**").hasRole("ADMIN")
+                .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin()
                 .and().logout();
