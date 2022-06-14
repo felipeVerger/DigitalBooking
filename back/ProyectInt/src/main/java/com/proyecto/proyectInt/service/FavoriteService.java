@@ -110,6 +110,4 @@ public class FavoriteService implements EntityService<Favorite> {
             return favoritesSearched;
         }
     }
-
-
 }
