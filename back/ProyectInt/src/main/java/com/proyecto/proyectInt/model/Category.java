@@ -20,16 +20,12 @@ public class Category {
     @Id
     @SequenceGenerator(name = "category_sequence", sequenceName = "category_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "category_sequence")
-    @Column(name= "id_category")
     private Long id;
 
-    @Column(name = "title")
     private String title;
 
-    @Column(name = "description")
     private String description;
 
-    @Column(name = "url_image")
     private String urlImage;
 
     @OneToMany(mappedBy = "category")

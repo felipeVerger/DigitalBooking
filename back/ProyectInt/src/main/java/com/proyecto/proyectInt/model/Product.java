@@ -1,12 +1,21 @@
 package com.proyecto.proyectInt.model;
 
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -54,17 +63,17 @@ public class Product {
     @JoinColumn(name = "categories_id_categories", nullable = false)
     private Category category;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "products_has_features",
             joinColumns = @JoinColumn(name = "products_id_product"),
             inverseJoinColumns = @JoinColumn(name = "features_id_feature")
     )
-    private Set<Feature> features = new HashSet<>();
+    private Set<Feature> features;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
-    private Set<Image> images = new HashSet<>();
+    private Set<Image> images;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "cities_id_city", nullable = false)
@@ -73,19 +82,19 @@ public class Product {
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     @JsonIgnore
-    private Set<Reservation> reservations = new HashSet<>();
+    private Set<Reservation> reservations;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     @JsonIgnore
-    private Set<Favorite> favorites = new HashSet<>();
+    private Set<Favorite> favorites;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
-    private Set<HealthHygiene> healthHygiene = new HashSet<>();
+    private Set<HealthHygiene> healthHygiene;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
-    private Set<HouseRule> houseRules = new HashSet<>();
+    private Set<HouseRule> houseRules;
 
 
     public Product(String name, String description,String subtitle, Double price, String address, String longitude, String latitude , String cancellationPolicy, Category category, Set<Feature> features, Set<Image> images, City city, int score, Set<HouseRule> houseRules, Set<HealthHygiene> healthHygiene) {

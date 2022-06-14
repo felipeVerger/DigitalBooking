@@ -1,13 +1,11 @@
 package com.proyecto.proyectInt.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -20,13 +18,10 @@ public class Feature {
     @Id
     @SequenceGenerator(name = "feature_sequence", sequenceName = "feature_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "feature_sequence")
-    @Column(name= "id_feature")
     private Long id;
 
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "icon")
     private String icon;
 
 

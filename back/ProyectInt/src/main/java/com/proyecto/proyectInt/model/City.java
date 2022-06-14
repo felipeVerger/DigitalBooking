@@ -21,13 +21,10 @@ public class City {
     @Id
     @SequenceGenerator(name = "city_sequence", sequenceName = "city_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "city_sequence")
-    @Column(name= "id_city")
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    private String city;
 
-    @Column(name = "country")
     private String country;
 
     @OneToMany(mappedBy = "city")
@@ -38,8 +35,8 @@ public class City {
     @JsonIgnore
     private Set<User> users = new HashSet<>();
 
-    public City(String name, String country) {
-        this.name = name;
+    public City(String city, String country) {
+        this.city = city;
         this.country = country;
     }
 
@@ -47,7 +44,7 @@ public class City {
     public String toString() {
         return "City{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", city='" + city + '\'' +
                 ", country='" + country +
                 '}';
     }

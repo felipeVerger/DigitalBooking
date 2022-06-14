@@ -21,13 +21,8 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator= "rol_sequence")
     private Long id;
 
-    @Column(name="name")
     private String name;
 
-    @Column(name="icon")
     private String icon;
 
-    @OneToMany(mappedBy = "roles", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private Set<User> users = new HashSet<>();
 }

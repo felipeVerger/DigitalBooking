@@ -3,7 +3,6 @@ package com.proyecto.proyectInt.service;
 import com.proyecto.proyectInt.exception.BadRequestException;
 import com.proyecto.proyectInt.exception.ResourceNotFoundException;
 import com.proyecto.proyectInt.model.User;
-import com.proyecto.proyectInt.model.UserRole;
 import com.proyecto.proyectInt.repository.UserRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

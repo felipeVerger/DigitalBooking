@@ -3,7 +3,6 @@ package com.proyecto.proyectInt.service;
 import com.proyecto.proyectInt.exception.BadRequestException;
 import com.proyecto.proyectInt.exception.ResourceNotFoundException;
 
-import com.proyecto.proyectInt.model.Category;
 import com.proyecto.proyectInt.model.City;
 
 import com.proyecto.proyectInt.repository.CityRepository;
@@ -82,10 +81,10 @@ public class CityService implements EntityService<City>{
 
     //additional services
 
-    public Optional<City> findByName(String name) throws ResourceNotFoundException {
-        Optional<City> citySearched = repository.findByName(name);
+    public Optional<City> findByCity(String city) throws ResourceNotFoundException {
+        Optional<City> citySearched = repository.findByCity(city);
         if (citySearched.isPresent()) {
-            logger.info("Success. City found with title " + citySearched.get().getName() + ".");
+            logger.info("Success. City found with title " + city + ".");
             return citySearched;
         } else {
             logger.error("Attempt failed. The city you are requesting does not exist in our database. Please check input name");
