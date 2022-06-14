@@ -1,14 +1,18 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import {Dropdown} from './CityStyle';
 // import useFetch from '../../hooks/useFetch';
+import {useLocation} from 'react-router-dom';
+import { FilterContext } from "../../context/filter-context";
 
 const URL_API = 'http://localhost:8080/cities/findAll'
 
 const SearchCity = ({destination, setDestination}) => {
+  const locationPath = useLocation().pathname;
+  const {filter} = useContext(FilterContext);
   const  [citiesList, setCitiesList] = useState([]);
 
   const myHeaders = new Headers();
-    myHeaders.append("Authorization", "Basic dXNlcjoyZTQwYmU2Yi1kNTg5LTQzNWItYWU0Zi1iNmU3MzUwOWEwNDE=");
+    myHeaders.append("Authorization", "Basic dXNlcjo2NTRiODk5YS0wZGQzLTRjOWMtYTc0ZC04NTkxNzAzNDkyOGQ=");
 
   const requestOptions = {
     method: 'GET',
@@ -36,7 +40,7 @@ const SearchCity = ({destination, setDestination}) => {
         value: item.name + ", " + item.country,
         label: item.name + ", " + item.country,
       }))}
-      placeholder={destination}
+      placeholder={locationPath === '/' ? destination : filter && locationPath === '/productsList' ? filter[0] : destination}
       onChange={handleCityChange}
     />
   )
