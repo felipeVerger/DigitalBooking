@@ -64,7 +64,7 @@ public class CityService implements EntityService<City>{
             throw new BadRequestException("Attempt failed. This city already exists in our database.");
         } else {
             logger.info("Success. New city added to the database.");
-            return city;
+            return repository.save(city);
         }
     }
 

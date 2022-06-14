@@ -9,7 +9,6 @@ import com.proyecto.proyectInt.service.CityService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,11 +36,12 @@ public class CityController {
         logger.info("Retrieving data from city table");
         return ResponseEntity.ok(cityservice.findById(id));
     }
-    @PostMapping
-    public ResponseEntity<City> addCity(@RequestBody City city) throws BadRequestException {
-        logger.info("Adding new city");
-        return ResponseEntity.status(HttpStatus.CREATED).body(cityservice.create(city));
+    @PostMapping(value = "/add")
+    public ResponseEntity<String> addCity(@RequestBody City city) throws BadRequestException {
+        cityservice.create(city);
+        return ResponseEntity.ok("Ciudad agregada correctamente");
     }
+
     @PutMapping
     public ResponseEntity<City> updateCity(@RequestBody City city) throws BadRequestException {
         logger.info("Updating city");
