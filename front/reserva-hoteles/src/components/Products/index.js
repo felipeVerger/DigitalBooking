@@ -18,7 +18,10 @@ const Recomendaciones = () => {
     const filteredArray = filter ? products && filter[1] === 'category' ? products.filter((product) => product.category === filter[0]) 
     : products && filter[1] === 'city' ? products.filter((product) => product.location === filter[0]) : products : products;
 
-    // productos random y mostrar un limite de 6 productos
+    
+    /* A ternary operator that checks if the products array has more than 6 elements, if it does, it
+    sorts the array randomly and then slices the first 6 elements, if it doesn't, it returns the
+    products array. */
     const randomProducts = products && products.length > 6 ? products.sort(() => Math.random() - 0.5).slice(0, 6) : products; 
 
   return filteredArray.length === 0 && locationPath === '/productsList' ? <ErrorMessage>No se encontraron resultados</ErrorMessage> : 
