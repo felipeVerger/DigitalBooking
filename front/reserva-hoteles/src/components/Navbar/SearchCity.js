@@ -34,6 +34,7 @@ const SearchCity = ({destination, setDestination}) => {
     setDestination(city.value);
   }
 
+  // If citiesList is false nothing will be displayed, else the select will show
   return (
     <Dropdown
       options={citiesList.map((item) => ({
