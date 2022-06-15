@@ -12,7 +12,8 @@ const SearchCity = ({destination, setDestination}) => {
   const  [citiesList, setCitiesList] = useState([]);
 
   const myHeaders = new Headers();
-    myHeaders.append("Authorization", "Basic dXNlcjo2NTRiODk5YS0wZGQzLTRjOWMtYTc0ZC04NTkxNzAzNDkyOGQ=");
+  // TO DO g10Booking
+    myHeaders.append("Authorization", "Basic dXNlcjpnMTBCb29raW5n");
 
   const requestOptions = {
     method: 'GET',
