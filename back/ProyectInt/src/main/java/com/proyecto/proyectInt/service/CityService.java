@@ -3,6 +3,7 @@ package com.proyecto.proyectInt.service;
 import com.proyecto.proyectInt.exception.BadRequestException;
 import com.proyecto.proyectInt.exception.ResourceNotFoundException;
 
+import com.proyecto.proyectInt.model.Category;
 import com.proyecto.proyectInt.model.City;
 
 import com.proyecto.proyectInt.repository.CityRepository;
@@ -91,4 +92,6 @@ public class CityService implements EntityService<City>{
             throw new ResourceNotFoundException("Attempt failed. The city you are requesting does not exist in our database. Please check input name.");
         }
     }
+
+
 }

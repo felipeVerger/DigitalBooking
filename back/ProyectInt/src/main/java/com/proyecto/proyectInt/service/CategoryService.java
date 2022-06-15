@@ -67,7 +67,7 @@ public class CategoryService implements EntityService<Category> {
             throw new BadRequestException("Attempt failed. This category already exists in our database.");
         } else {
             logger.info("Success. New category added to the database.");
-            return category;
+            return repository.save(category);
         }
     }
 
@@ -95,5 +95,6 @@ public class CategoryService implements EntityService<Category> {
             throw new ResourceNotFoundException("Attempt failed. The category you are requesting does not exist in our database. Please check input title.");
         }
     }
+
 
 }

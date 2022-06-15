@@ -50,6 +50,10 @@ public class FeatureController {
         return ResponseEntity.ok("Feature deleted");
     }
 
+    @DeleteMapping("/null")
+    public ResponseEntity<String> deleteNullID (){
+        featureService.delete(nullID);
+            }
 
 
 }
