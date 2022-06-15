@@ -61,7 +61,7 @@ deploy:
   image: python:latest
   script:
     - pip install awscli
-    - aws ecs update-service --cluster public-cluster --service dinamita-web-server-service --force-new-deployment --region us-west-2
+    - aws ecs update-service --cluster g10-cluster --service 101-web-service --force-new-deployment --region us-west-2
 
 
 
