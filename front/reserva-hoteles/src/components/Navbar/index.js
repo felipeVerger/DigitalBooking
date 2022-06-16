@@ -23,7 +23,7 @@ const Navbar = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (destination !== '¿A dónde vamos?') {
-      setFilter([destination, 'city', data.date, 'date']);
+      setFilter([destination, 'city']);
       navigate('/productsList');
     }
   };

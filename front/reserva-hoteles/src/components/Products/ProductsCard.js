@@ -16,7 +16,8 @@ import {
   DescriptionBlock,
   Description,
   Button,
-  Product
+  ProductFiltered,
+  FilteredImage
 } from "./ProductsStyle";
 import { useLocation } from "react-router-dom";
 
@@ -112,9 +113,45 @@ const RecomendationCard = ({id, img, category, title, location, description, pun
       </RecomendationInfo>
     </Recommendation>
   ) : (
-    <Product>
-      
-    </Product>
+    <ProductFiltered>
+      <ImageBlock>
+        <FilteredImage src={img} alt="" />
+      </ImageBlock>
+      <RecomendationInfo>
+        <HotelTopInfoBlock>
+          <TitleBlock>
+            <CategoryBlock>
+              <Category>{category}</Category>
+              {createArrayStars().map((star, index) =>
+                star === 1 ? (
+                  <AiFillStar key={index} />
+                ) : (
+                  <AiOutlineStar key={index} />
+                )
+              )}
+            </CategoryBlock>
+            <Title>{title}</Title>
+          </TitleBlock>
+          <PunctuationBlock>
+            <Punctuation>{score >= 0 ? score : "—"}</Punctuation>
+            <Opinion>{textScore}</Opinion>
+          </PunctuationBlock>
+        </HotelTopInfoBlock>
+        <div>
+          <LocationText>
+            {" "}
+            <HiLocationMarker /> {location} <span>mostrar en el mapa</span>
+          </LocationText>
+          <BiWifi /> <FaSwimmingPool />
+        </div>
+        <DescriptionBlock>
+          <Description>{description}</Description>
+          <Button onClick={scrollTop} to={`/product/${id}`}>
+            Ver mas
+          </Button>
+        </DescriptionBlock>
+      </RecomendationInfo>
+    </ProductFiltered>
   )
 };
 
