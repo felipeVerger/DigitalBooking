@@ -1,15 +1,16 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    min-height: 50vh;
-    max-height: 900px;
     width: 100%;
     max-width: 1920px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding-top: 5rem;
+    padding: 5rem;
+    @media screen and (max-width: 768px) {
+        padding: 2rem;
+    }
 `
 
 export const Box = styled.div`
@@ -22,7 +23,15 @@ export const Box = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 15px;
+    gap: 10px;
+    padding: 1rem;
+    @media screen and (max-width: 768px) {
+        width: 100%;
+    }
+`
+
+export const Logo = styled.img`
+    width: 100px;
 `
 
 export const Gratitude = styled.h2`
@@ -35,11 +44,17 @@ export const MessageText = styled.p`
 
 export const Button = styled.button`
     margin-top: 20px;
-    width: 170px;
+    min-width: 170px;
+    max-width: 100%;
     height: 40px;
     border: none;
     border-radius: 5px;
     background-color: ${(props) => props.theme.primary};
     color: white;
     font-size: 16px;
+    cursor: pointer;
+    transition: all 500ms ease;
+    &:hover{
+        background-color: ${(props) => props.theme.secondary};
+    }
 `
