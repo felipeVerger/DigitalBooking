@@ -173,12 +173,32 @@ export const Button = styled(Link)`
 `
 
  
-export const Product = styled.div`
+export const ProductFiltered = styled.div`
   display: flex;
   background: white;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 
   width: 100%;
+  min-height: 300px;
   margin-bottom: 40px;
+  @media screen and (max-width: 1280px) {
+    width: 100%;
+  }
+  @media screen and (max-width: 640px) {
+    flex-direction: column;
+  }
+  @media screen and (max-width: 1007px) {
+    width: 100%;
+  }
+`
+
+export const FilteredImage = styled.img`
+  width: 400px;
+  height: 100%;
+  border-radius: 8px;
+  @media screen and (max-width: 640px) {
+    width: 100%;
+    height: 231px;
+  }
 `

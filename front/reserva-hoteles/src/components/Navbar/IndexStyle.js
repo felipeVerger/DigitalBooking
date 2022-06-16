@@ -8,6 +8,7 @@ export const NavbarBody = styled.div`
   height: 150px;
   @media screen and (max-width: 768px) {
     height: 237px;
+    background-color: ${(props) => props.theme.secondary};
   }
   @media screen and (max-width: 728px) {
     height: 275px;
@@ -50,6 +51,7 @@ export const Button = styled.button`
   @media screen and (max-width: 768px) {
     width: 100%;
     max-height: 45px;
+    background-color: ${(props) => props.theme.primary};
   }
 `;
 

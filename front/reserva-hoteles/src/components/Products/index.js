@@ -1,12 +1,13 @@
 import React, {useContext, useEffect, useState} from 'react'
 import productsList from '../../staticData/products.json'
-import { Body, Block, Title, RecommendationContainer, ErrorMessage, Button } from './indexStyle'
+import { Body, Block, Title, RecommendationContainer, ErrorMessage } from './indexStyle'
 import ProductCard from './ProductsCard'
 import { FilterContext } from '../../context/filter-context'
 import { useLocation } from 'react-router-dom'
 
 const Recomendaciones = () => {
     const {filter} = useContext(FilterContext);
+    console.log(filter);
     const [products, setProducts] = useState([]);
     const locationPath = useLocation().pathname;
 
