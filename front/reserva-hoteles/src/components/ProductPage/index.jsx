@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Carousel } from "react-responsive-carousel";
 import {
   HeaderBody,
@@ -66,6 +66,7 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { DateRangePicker } from "react-date-range";
 import Products from "../Products";
+
 
 const ProductPage = ({ product }) => {
   const getRatingComment = (rating) => {
@@ -223,7 +224,7 @@ const ProductPage = ({ product }) => {
                   <Span bold={true}>
                     Agrega tus fechas de viaje para obtener precios exactos
                   </Span>
-                  <ReservationButton>Iniciar Reserva</ReservationButton>
+                    <ReservationButton>Iniciar Reserva</ReservationButton>
                 </ReservationBlock>
               </Row>
             </CalendarContent>
