@@ -61,7 +61,7 @@ public class FavoriteService implements EntityService<Favorite> {
             throw new BadRequestException("Attempt failed. This favorite already exists in our database.");
         } else {
             logger.info("Success. New favorite added to the database.");
-            return favorite;
+            return repository.save(favorite);
         }
     }
 
@@ -78,8 +78,8 @@ public class FavoriteService implements EntityService<Favorite> {
 
     //additional services
 
-    public List<Favorite> findByUserId(Long id) throws ResourceNotFoundException {
-        List<Favorite> favoritesSearched = repository.findByUserId(id);
+    public List<Favorite> findByUsersId(Long id) throws ResourceNotFoundException {
+        List<Favorite> favoritesSearched = repository.findByUsersId(id);
         if (favoritesSearched.isEmpty()) {
             logger.error("Attempt Failed. No favorites found in our database.");
             throw new ResourceNotFoundException("Attempt Failed. No favorites found.");
@@ -100,8 +100,8 @@ public class FavoriteService implements EntityService<Favorite> {
         }
     }
 
-    public List<Favorite> findByUserIdAndProductId (Long userId, Long productId) throws ResourceNotFoundException {
-        List<Favorite> favoritesSearched = repository.findByUserIdAndProductId(userId, productId);
+    public List<Favorite> findByUsersIdAndProductId (Long userId, Long productId) throws ResourceNotFoundException {
+        List<Favorite> favoritesSearched = repository.findByUsersIdAndProductId(userId, productId);
         if (favoritesSearched.isEmpty()) {
             logger.error("Attempt Failed. No favorites found in our database.");
             throw new ResourceNotFoundException("Attempt Failed. No favorites found.");

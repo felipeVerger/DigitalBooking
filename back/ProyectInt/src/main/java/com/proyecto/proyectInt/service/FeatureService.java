@@ -61,7 +61,7 @@ public class FeatureService implements EntityService<Feature> {
             throw new BadRequestException("Attempt failed. This Feature already exists in our database.");
         } else {
             logger.info("Success. New Feature added to the database.");
-            return Feature;
+            return repository.save(Feature);
         }
     }
 
@@ -78,14 +78,14 @@ public class FeatureService implements EntityService<Feature> {
 
     //additional services
 
-    public Optional<Feature> findByName(String name) throws ResourceNotFoundException {
-        Optional<Feature> featureSearched = repository.findByName(name);
-        if (featureSearched.isPresent()) {
-            logger.info("Success. Feature found with title " + featureSearched.get().getName() + ".");
-            return featureSearched;
-        } else {
-            logger.error("Attempt failed. The feature you are requesting does not exist in our database. Please check input name");
-            throw new ResourceNotFoundException("Attempt failed. The feature you are requesting does not exist in our database. Please check input name.");
-        }
-    }
+//    public Optional<Feature> findByName(String name) throws ResourceNotFoundException {
+//        Optional<Feature> featureSearched = repository.findByName(name);
+//        if (featureSearched.isPresent()) {
+//            logger.info("Success. Feature found with title " + featureSearched.get().getName() + ".");
+//            return featureSearched;
+//        } else {
+//            logger.error("Attempt failed. The feature you are requesting does not exist in our database. Please check input name");
+//            throw new ResourceNotFoundException("Attempt failed. The feature you are requesting does not exist in our database. Please check input name.");
+//        }
+//    }
 }

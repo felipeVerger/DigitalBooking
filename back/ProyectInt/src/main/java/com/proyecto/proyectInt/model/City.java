@@ -22,9 +22,9 @@ public class City {
     @SequenceGenerator(name = "city_sequence", sequenceName = "city_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "city_sequence")
     private Long id;
-
+    @Column
     private String city;
-
+    @Column
     private String country;
 
     @OneToMany(mappedBy = "city")

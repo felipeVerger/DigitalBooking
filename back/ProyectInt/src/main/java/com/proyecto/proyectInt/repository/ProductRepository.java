@@ -11,17 +11,17 @@ import java.util.Optional;
 @Repository
 @Transactional
 public interface ProductRepository extends JpaRepository<Product,Long> {
-    @Query("SELECT p FROM Product p WHERE p.name = ?1")
-    Optional<Product> findProductByProductName(String name);
-
-    @Query("SELECT CONCAT(p.city.city,', ',p.city.country) FROM Product p GROUP BY p.city.city")
-    Optional<List<String>> getLocations();
-
-    @Query("SELECT p FROM Product p WHERE p.category.title = ?1")
-    Optional<List<Product>> getProductsByCategory(String category);
-
-    @Query("SELECT p FROM Product p WHERE p.score = ?1")
-    Optional<List<Product>> filterByScore(int score);
+//    @Query("SELECT p FROM Product p WHERE p.name = ?1")
+//    Optional<Product> findProductByProductName(String name);
+//
+//    @Query("SELECT CONCAT(p.city.city,', ',p.city.country) FROM Product p GROUP BY p.city.city")
+//    Optional<List<String>> getLocations();
+//
+//    @Query("SELECT p FROM Product p WHERE p.category.title = ?1")
+//    Optional<List<Product>> getProductsByCategory(String category);
+//
+//    @Query("SELECT p FROM Product p WHERE p.score = ?1")
+//    Optional<List<Product>> filterByScore(int score);
 
     //revisar la query para filtrar. issue 58
     // ejemplo

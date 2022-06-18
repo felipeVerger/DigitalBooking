@@ -65,7 +65,7 @@ public class UserService implements EntityService<User>, UserDetailsService {
             throw new BadRequestException("Attempt failed. This user already exists in our database.");
         } else {
             logger.info("Success. New user added to the database.");
-            return user;
+            return repository.save(user);
         }
     }
 

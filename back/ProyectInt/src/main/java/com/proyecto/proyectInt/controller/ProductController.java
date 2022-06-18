@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @CrossOrigin
@@ -27,7 +28,7 @@ public class ProductController {
     private static final Logger logger = LogManager.getLogger(ProductController.class);
 
     @GetMapping("/all")
-    public ResponseEntity<List<Product>> getProductList() {
+    public ResponseEntity<Set<Product>> getProductList() {
         logger.info("Retrieving data from product table");
         return ResponseEntity.ok(productService.findAll());
     }
@@ -40,17 +41,17 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Product> addProduct(@RequestBody Product product) {
+    public ResponseEntity<Product> addProduct(@RequestBody Product product) throws BadRequestException {
         logger.info("Adding new product");
-        return ResponseEntity.status(HttpStatus.CREATED).body(productService.create(product));
+        return ResponseEntity.ok(productService.create(product));
     }
     @PutMapping
-    public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
+    public ResponseEntity<Product> updateProduct(@RequestBody Product product) throws ResourceNotFoundException{
         logger.info("Updating product");
         return ResponseEntity.ok(productService.update(product));
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
+    public ResponseEntity<String> deleteProduct(@PathVariable Long id) throws Exception{
         logger.info("Deleting product");
         productService.delete(id);
         return ResponseEntity.ok("Product deleted");

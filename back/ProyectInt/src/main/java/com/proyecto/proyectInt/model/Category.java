@@ -21,11 +21,11 @@ public class Category {
     @SequenceGenerator(name = "category_sequence", sequenceName = "category_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "category_sequence")
     private Long id;
-
+    @Column
     private String title;
-
-    private String description;
-
+    @Column
+    private String amount;
+    @Column
     private String urlImage;
 
     @OneToMany(mappedBy = "category")
@@ -35,7 +35,7 @@ public class Category {
 
     public Category(String title, String description, String urlImage) {
         this.title = title;
-        this.description = description;
+        this.amount = amount;
         this.urlImage = urlImage;
     }
 
@@ -44,7 +44,7 @@ public class Category {
         return "Category{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
+                ", description='" + amount + '\'' +
                 ", urlImage='" + urlImage + '\'' +
                 ", products=" + products +
                 '}';

@@ -63,7 +63,7 @@ public class ReservationService implements EntityService<Reservation>{
             throw new BadRequestException("Attempt failed. This Reservation already exists in our database.");
         } else {
             logger.info("Success. New reservation added to the database.");
-            return reservation;
+            return repository.save(reservation);
         }
     }
 
@@ -79,47 +79,47 @@ public class ReservationService implements EntityService<Reservation>{
     }
 
     //additional services
-    public List<Reservation> filterByDate(LocalDate init, LocalDate end) throws ResourceNotFoundException {
-        List<Reservation> reservationsSearched = repository.filterByDate(init, end);
-        if (reservationsSearched.isEmpty()) {
-            logger.error("Attempt Failed. No reservations found in our database.");
-            throw new ResourceNotFoundException("Attempt Failed. No reservations found in our database.");
-        } else {
-            logger.info("Success. Retrieving list of reservations.");
-            return reservationsSearched;
-        }
-    }
-
-    public List<Reservation> findByProductId( Long id) throws ResourceNotFoundException {
-        List<Reservation> reservationsSearched = repository.findByProductId(id);
-        if (reservationsSearched.isEmpty()) {
-            logger.error("Attempt Failed. No reservations found in our database.");
-            throw new ResourceNotFoundException("Attempt Failed. No reservations found in our database.");
-        } else {
-            logger.info("Success. Retrieving list of reservations.");
-            return reservationsSearched;
-        }
-    }
-
-    public List<Reservation> findByUserId(Long id) throws ResourceNotFoundException {
-        List<Reservation> reservationsSearched = repository.findByUserId(id);
-        if (reservationsSearched.isEmpty()) {
-            logger.error("Attempt Failed. No reservations found in our database.");
-            throw new ResourceNotFoundException("Attempt Failed. No reservations found in our database.");
-        } else {
-            logger.info("Success. Retrieving list of reservations.");
-            return reservationsSearched;
-        }
-    }
-
-    public List<Reservation> findSpecificReservation(Integer id, LocalDate start, LocalDate end) throws ResourceNotFoundException {
-        List<Reservation> reservationsSearched = repository.findSpecificReservation(id, start, end);
-        if (reservationsSearched.isEmpty()) {
-            logger.error("Attempt Failed. No reservations found in our database.");
-            throw new ResourceNotFoundException("Attempt Failed. No reservations found in our database.");
-        } else {
-            logger.info("Success. Retrieving list of reservations.");
-            return reservationsSearched;
-        }
-    }
+//    public List<Reservation> filterByDate(LocalDate init, LocalDate end) throws ResourceNotFoundException {
+//        List<Reservation> reservationsSearched = repository.filterByDate(init, end);
+//        if (reservationsSearched.isEmpty()) {
+//            logger.error("Attempt Failed. No reservations found in our database.");
+//            throw new ResourceNotFoundException("Attempt Failed. No reservations found in our database.");
+//        } else {
+//            logger.info("Success. Retrieving list of reservations.");
+//            return reservationsSearched;
+//        }
+//    }
+//
+//    public List<Reservation> findByProductId( Long id) throws ResourceNotFoundException {
+//        List<Reservation> reservationsSearched = repository.findByProductId(id);
+//        if (reservationsSearched.isEmpty()) {
+//            logger.error("Attempt Failed. No reservations found in our database.");
+//            throw new ResourceNotFoundException("Attempt Failed. No reservations found in our database.");
+//        } else {
+//            logger.info("Success. Retrieving list of reservations.");
+//            return reservationsSearched;
+//        }
+//    }
+//
+//    public List<Reservation> findByUserId(Long id) throws ResourceNotFoundException {
+//        List<Reservation> reservationsSearched = repository.findByUserId(id);
+//        if (reservationsSearched.isEmpty()) {
+//            logger.error("Attempt Failed. No reservations found in our database.");
+//            throw new ResourceNotFoundException("Attempt Failed. No reservations found in our database.");
+//        } else {
+//            logger.info("Success. Retrieving list of reservations.");
+//            return reservationsSearched;
+//        }
+//    }
+//
+//    public List<Reservation> findSpecificReservation(Integer id, LocalDate start, LocalDate end) throws ResourceNotFoundException {
+//        List<Reservation> reservationsSearched = repository.findSpecificReservation(id, start, end);
+//        if (reservationsSearched.isEmpty()) {
+//            logger.error("Attempt Failed. No reservations found in our database.");
+//            throw new ResourceNotFoundException("Attempt Failed. No reservations found in our database.");
+//        } else {
+//            logger.info("Success. Retrieving list of reservations.");
+//            return reservationsSearched;
+//        }
+//    }
 }

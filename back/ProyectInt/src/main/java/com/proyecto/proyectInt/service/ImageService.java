@@ -65,7 +65,7 @@ public class ImageService implements EntityService<Image>{
             throw new BadRequestException("Attempt failed. This image already exists in our database.");
         } else {
             logger.info("Success. New Image added to the database.");
-            return image;
+            return repository.save(image);
         }
     }
 

@@ -53,11 +53,11 @@ public class ReservationController {
     }
 
     //additional methods
-    @GetMapping("/{date1}{date2}")
-    public ResponseEntity<List<Reservation>> getReservationByDate(@PathVariable LocalDate date1, @PathVariable LocalDate date2) throws ResourceNotFoundException {
-        logger.info("Retrieving data from reservation table");
-        return ResponseEntity.ok(reservationService.filterByDate(date1, date2));
-    }
+//    @GetMapping("/{date1}{date2}")
+//    public ResponseEntity<List<Reservation>> getReservationByDate(@PathVariable LocalDate date1, @PathVariable LocalDate date2) throws ResourceNotFoundException {
+//        logger.info("Retrieving data from reservation table");
+//        return ResponseEntity.ok(reservationService.filterByDate(date1, date2));
+//    }
 
 
 }

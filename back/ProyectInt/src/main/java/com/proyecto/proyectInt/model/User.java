@@ -28,30 +28,39 @@ public class User implements UserDetails {
     @SequenceGenerator(name = "user_sequence", sequenceName = "user_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator= "user_sequence")
     private Long id;
-
+    @Column
     private String username;
-
+    @Column
     private String lastname;
-
+    @Column
     private String email;
-
+    @Column
     private String password;
 
     @ManyToOne
-    @JoinColumn(name = "role_id")
+    @JoinColumn(name = "roles_id_role")
     private Role role;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="cities", nullable = false)
+    @JoinColumn(name="cities_id_city", nullable = false)
     private City city;
 
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private Set<Favorite> favorites;
 
-    public User(String name, String lastname, String email, String password, Role role) {
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private Set<Reservation> reservations;
+
+
+    public User(String name, String lastName, String email, String password, Role role, City city) {
         this.username = name;
-        this.lastname = lastname;
+        this.lastname = lastName;
         this.email = email;
         this.password = password;
         this.role = role;
+        this.city = city;
     }
 
     //metodos de la interfaz UserDetails

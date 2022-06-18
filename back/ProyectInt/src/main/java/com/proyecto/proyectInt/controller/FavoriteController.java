@@ -28,9 +28,9 @@ public class FavoriteController {
     }
 
     @GetMapping("/u{id}")
-    public ResponseEntity<List<Favorite>> getFavoritesByUserId(@PathVariable Long id) throws ResourceNotFoundException {
+    public ResponseEntity<List<Favorite>> getFavoritesByUsersId(@PathVariable Long id) throws ResourceNotFoundException {
         logger.info("Retrieving data from user's favorite table");
-        return ResponseEntity.ok(favoriteService.findByUserId(id));
+        return ResponseEntity.ok(favoriteService.findByUsersId(id));
     }
 
     @GetMapping("/p{id}")
@@ -40,9 +40,9 @@ public class FavoriteController {
     }
 
     @GetMapping("/u{id}/p{id}")
-    public ResponseEntity<List<Favorite>> getFavoriteByUserIdAndProductId(@PathVariable Long id1, @PathVariable Long id2) throws ResourceNotFoundException {
+    public ResponseEntity<List<Favorite>> getFavoriteByUsersIdAndProductId(@PathVariable Long id1, @PathVariable Long id2) throws ResourceNotFoundException {
         logger.info("Retrieving data from user's favorite table");
-        return ResponseEntity.ok(favoriteService.findByUserIdAndProductId(id1, id2));
+        return ResponseEntity.ok(favoriteService.findByUsersIdAndProductId(id1, id2));
     }
 
     @PostMapping

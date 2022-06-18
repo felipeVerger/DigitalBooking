@@ -19,14 +19,14 @@ public class Image {
     @SequenceGenerator(name = "image_sequence", sequenceName = "image_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "image_sequence")
     private Long id;
-
+    @Column
     private String title;
-
+    @Column
     private String url;
 
     @ManyToOne
     @JoinColumn(name = "products_id_product", nullable = false)
-    private Product product;
+    private Product products;
 
     public Image(String title, String url) {
         this.title = title;
@@ -39,7 +39,7 @@ public class Image {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", url='" + url + '\'' +
-                ", product=" + product +
+                ", product=" + products +
                 '}';
     }
 }

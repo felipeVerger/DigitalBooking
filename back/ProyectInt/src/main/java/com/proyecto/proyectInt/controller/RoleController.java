@@ -3,8 +3,8 @@ package com.proyecto.proyectInt.controller;
 import com.proyecto.proyectInt.exception.BadRequestException;
 import com.proyecto.proyectInt.exception.ResourceNotFoundException;
 import com.proyecto.proyectInt.model.Role;
-import com.proyecto.proyectInt.service.RoleService;
 import org.apache.logging.log4j.LogManager;
+import com.proyecto.proyectInt.service.RoleService;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +14,11 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/Roles")
+@RequestMapping("/roles")
 public class RoleController {
 
     @Autowired
-    private RoleService roleService;
+    RoleService roleService;
 
     Logger logger = LogManager.getLogger(UserController.class);
 
@@ -48,7 +48,4 @@ public class RoleController {
         roleService.delete(id);
         return ResponseEntity.ok("Role deleted");
     }
-
-
-
 }

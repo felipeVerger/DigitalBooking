@@ -18,17 +18,17 @@ public class Favorite {
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "products_id_product")
+    @JoinColumn(name = "products_id_product", nullable = false)
     private Product product;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "users_id_user")
-    private User user;
+    @JoinColumn(name = "users_id_user", nullable = false)
+    private User users;
 
 
-    public Favorite(Long id, Product product, User user) {
+    public Favorite(Long id, Product product, User users) {
         this.id = id;
         this.product = product;
-        this.user = user;
+        this.users = users;
     }
 }

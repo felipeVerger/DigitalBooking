@@ -1,13 +1,8 @@
 package com.proyecto.proyectInt.model;
 
-
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
@@ -19,10 +14,10 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name="products")
 public class Product {
@@ -32,35 +27,35 @@ public class Product {
     @Column(name= "id_product")
     private Long id;
 
-    @Column(name = "name")
+    @Column
     private String name;
 
-    @Column(name = "subtitle")
+    @Column
     private String subtitle;
 
-    @Column(name = "description")
+    @Column
     private String description;
 
-    @Column(name = "address")
+    @Column
     private String address;
 
-    @Column(name = "longitude")
+    @Column
     private String longitude;
 
-    @Column(name = "latitude")
+    @Column
     private String latitude;
 
-    @Column(name = "cancellation_policies")
+    @Column
     private String cancellationPolicy;
 
-    @Column(name = "price")
+    @Column
     private Double price;
 
-    @Column(name = "score" )
+    @Column
     private int score;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "categories_id_categories", nullable = false)
+    @JoinColumn(name = "categories_id_category", nullable = false)
     private Category category;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -71,28 +66,27 @@ public class Product {
     )
     private Set<Feature> features;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
-    private Set<Image> images;
-
     @ManyToOne(optional = false)
     @JoinColumn(name = "cities_id_city", nullable = false)
     private City city;
 
+    @OneToMany(mappedBy = "products", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private Set<Image> images;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "products", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private Set<Reservation> reservations;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private Set<Favorite> favorites;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "products", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private Set<HealthHygiene> healthHygiene;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "products", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private Set<HouseRule> houseRules;
 

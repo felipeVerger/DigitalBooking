@@ -2,16 +2,16 @@ package com.proyecto.proyectInt.service;
 
 import com.proyecto.proyectInt.exception.BadRequestException;
 import com.proyecto.proyectInt.exception.ResourceNotFoundException;
-import com.proyecto.proyectInt.model.Reservation;
 import com.proyecto.proyectInt.model.Role;
 import com.proyecto.proyectInt.repository.RoleRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class RoleService implements EntityService<Role>{
 
     @Autowired
@@ -26,7 +26,7 @@ public class RoleService implements EntityService<Role>{
             throw new BadRequestException("Attempt failed. This Role already exists in our database.");
         } else {
             logger.info("Success. New role added to the database.");
-            return role;
+            return repository.save(role);
         }
     }
 
@@ -37,7 +37,7 @@ public class RoleService implements EntityService<Role>{
             logger.error("Attempt Failed. No roles found in our database.");
             throw new ResourceNotFoundException("Attempt Failed. No roles found in our database.");
         } else {
-            logger.info("Success. Retrieving list of reservations.");
+            logger.info("Success. Retrieving list of roles.");
             return rolesSearched;
         }
     }
