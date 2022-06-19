@@ -23,7 +23,7 @@ public class CategoryController {
 
     Logger logger = LogManager.getLogger(CategoryController.class);
 
-    @GetMapping("/all")
+    @GetMapping("/findAll")
     public ResponseEntity<List<Category>> getAllCategories() throws ResourceNotFoundException {
         logger.info("Retrieving data from category table");
         return ResponseEntity.ok(categoryService.findAll());
