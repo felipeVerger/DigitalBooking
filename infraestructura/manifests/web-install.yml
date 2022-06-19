@@ -1,0 +1,14 @@
+
+#front
+
+packages:
+  - docker.io
+runcmd:
+  - sudo yum update -y
+  - sudo yum install -y docker
+  - sudo systemctl start docker
+  - sudo systemctl enable docker
+  - docker pull varesinatalia/digitalbooking10:latest
+  - docker run -p 80:80 --name digitalapptier varesinatalia/digitalbooking10:latest
+
+
