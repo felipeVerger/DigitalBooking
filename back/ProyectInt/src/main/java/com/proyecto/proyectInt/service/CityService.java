@@ -3,7 +3,6 @@ package com.proyecto.proyectInt.service;
 import com.proyecto.proyectInt.exception.BadRequestException;
 import com.proyecto.proyectInt.exception.ResourceNotFoundException;
 
-import com.proyecto.proyectInt.model.Category;
 import com.proyecto.proyectInt.model.City;
 
 import com.proyecto.proyectInt.repository.CityRepository;

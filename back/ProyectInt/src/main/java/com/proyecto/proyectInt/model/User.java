@@ -36,14 +36,12 @@ public class User implements UserDetails {
     private String email;
     @Column
     private String password;
+    @Column
+    private String city;
 
     @ManyToOne
     @JoinColumn(name = "roles_id_role")
     private Role role;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="cities_id_city", nullable = false)
-    private City city;
 
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
@@ -54,7 +52,7 @@ public class User implements UserDetails {
     private Set<Reservation> reservations;
 
 
-    public User(String name, String lastName, String email, String password, Role role, City city) {
+    public User(String name, String lastName, String email, String password, Role role, String city) {
         this.username = name;
         this.lastname = lastName;
         this.email = email;

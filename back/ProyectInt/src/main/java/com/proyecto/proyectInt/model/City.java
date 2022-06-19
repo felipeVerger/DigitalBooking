@@ -31,10 +31,6 @@ public class City {
     @JsonIgnore
     private Set<Product> products = new HashSet<>();
 
-    @OneToMany(mappedBy = "city")
-    @JsonIgnore
-    private Set<User> users = new HashSet<>();
-
     public City(String city, String country) {
         this.city = city;
         this.country = country;
