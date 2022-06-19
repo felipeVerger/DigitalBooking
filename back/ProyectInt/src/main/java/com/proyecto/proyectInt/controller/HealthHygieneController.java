@@ -22,7 +22,7 @@ public class HealthHygieneController {
 
     Logger logger = LogManager.getLogger(HouseRuleController.class);
 
-    @GetMapping("/all")
+    @GetMapping("/findAll")
     public ResponseEntity<List<HealthHygiene>> getHealthHygieneList() throws ResourceNotFoundException {
         logger.info("Retrieving data from HealthHygiene table");
         return ResponseEntity.ok(healthHygieneService.findAll());

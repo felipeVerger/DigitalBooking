@@ -22,7 +22,7 @@ public class HouseRuleController {
 
     Logger logger = LogManager.getLogger(HouseRuleController.class);
 
-    @GetMapping("/all")
+    @GetMapping("/findAll")
     public ResponseEntity<List<HouseRule>> getHouseRuleList() throws ResourceNotFoundException {
         logger.info("Retrieving data from HouseRules table");
         return ResponseEntity.ok(houseRuleService.findAll());
