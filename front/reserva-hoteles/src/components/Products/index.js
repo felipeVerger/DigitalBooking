@@ -4,37 +4,27 @@ import { Body, Block, Title, RecommendationContainer, ErrorMessage } from './ind
 import ProductCard from './ProductsCard'
 import { FilterContext } from '../../context/filter-context'
 import { useLocation } from 'react-router-dom'
+import useFetch from '../../hooks/useFetch';
 
-// const URL_API = 'http://localhost:8080/products/findAll'
+const URL_API = 'http://localhost:8080/products/findAll'
 
 const Recomendaciones = () => {
-    const [products, setProducts] = useState([]);
+    // const [products, setProducts] = useState([]);
     const {filter} = useContext(FilterContext);
     const locationPath = useLocation().pathname;
 
-    // const myHeaders = new Headers();
-    // myHeaders.append("Authorization", "Basic dXNlcjpnMTBCb29raW5n");
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", "Basic dXNlcjpnMTBCb29raW5n");
 
-    // const requestOptions = {
-    //     method: 'GET',
-    //     headers: myHeaders,
-    //     redirect: 'follow'
-    // };
-
-    // useEffect(() => {
-    //     fetch(URL_API, requestOptions)
-    //       .then((response) => response.json())
-    //       .then((data) => setProducts(data))
-    //       .catch(error => console.log('error', error));
-    // }, [])
-
-    useEffect(() => {
-        setProducts(productsList);
-    }, [])
+    const { data: products } = useFetch(URL_API, {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+    })
 
     /* Filtering the products based on the filter context. */
-    const filteredArray = filter ? products && filter[1] === 'category' ? products.filter((product) => product.category === filter[0]) 
-    : products && filter[1] === 'city' ? products.filter((product) => product.location === filter[0]) : products : products;
+    const filteredArray = filter ? products && filter[1] === 'category' ? products.filter((product) => product.category.title === filter[0]) 
+    : products && filter[1] === 'city' ? products.filter((product) => product.city.name + ', ' + product.city.country === filter[0]) : products : products;
 
     
     /* A ternary operator that checks if the products array has more than 6 elements, if it does, it
@@ -54,9 +44,9 @@ const Recomendaciones = () => {
                             <ProductCard
                                 key={product.id}
                                 img={product.crimg}
-                                category={product.category}
-                                title={product.title}
-                                location={product.location}
+                                category={product.category.title}
+                                title={product.name}
+                                location={product.address}
                                 description={product.description}
                                 puntuation={product.puntuation}
                                 id={product.id}
@@ -67,10 +57,10 @@ const Recomendaciones = () => {
                         return (
                             <ProductCard
                                 key={product.id}
-                                img={product.crimg}
-                                category={product.category}
-                                title={product.title}
-                                location={product.location}
+                                img={product.category.urlImage}
+                                category={product.category.title}
+                                title={product.name}
+                                location={product.address}
                                 description={product.description}
                                 puntuation={product.puntuation}
                                 id={product.id}

@@ -65,8 +65,6 @@ import { es } from "date-fns/locale";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { DateRangePicker } from "react-date-range";
-import Products from "../Products";
-
 
 const ProductPage = ({ product }) => {
   const getRatingComment = (rating) => {
@@ -94,6 +92,7 @@ const ProductPage = ({ product }) => {
     endDate: new Date(),
     key: "selection",
   };
+
 
   return (
     <>

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {
+    Container,
     HeaderBody,
     HeaderBlock,
     HeaderInfo,
@@ -7,11 +8,14 @@ import {
     HeaderName,
     CleanLink,
     BackIcon,
+    BookingBlock,
+    BookingBlockInfo,
 } from './BookingComponents'
+import Form from './Form'
 
 const Booking = ({product}) => {
   return (
-    <>
+    <Container>
         <HeaderBody>
         <HeaderBlock>
           <HeaderInfo>
@@ -23,7 +27,12 @@ const Booking = ({product}) => {
           </CleanLink>
         </HeaderBlock>
       </HeaderBody>
-    </>
+      <BookingBlock>
+        <BookingBlockInfo>
+          <Form />
+        </BookingBlockInfo>
+      </BookingBlock>
+    </Container>
   )
 }
 
