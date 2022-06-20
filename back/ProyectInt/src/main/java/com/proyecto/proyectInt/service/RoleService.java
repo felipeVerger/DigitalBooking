@@ -1,5 +1,4 @@
 package com.proyecto.proyectInt.service;
-
 import com.proyecto.proyectInt.exception.BadRequestException;
 import com.proyecto.proyectInt.exception.ResourceNotFoundException;
 import com.proyecto.proyectInt.model.Role;
@@ -8,17 +7,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 @Service
 public class RoleService implements EntityService<Role>{
-
     @Autowired
     RoleRepository repository;
-
     Logger logger = LogManager.getLogger(RoleService.class);
-
     @Override
     public Role create(Role role) throws BadRequestException {
         if (role.getId() != null) {
@@ -29,7 +24,6 @@ public class RoleService implements EntityService<Role>{
             return repository.save(role);
         }
     }
-
     @Override
     public List<Role> findAll() throws ResourceNotFoundException {
         List<Role> rolesSearched = repository.findAll();
@@ -41,7 +35,6 @@ public class RoleService implements EntityService<Role>{
             return rolesSearched;
         }
     }
-
     @Override
     public Optional<Role> findById(Long id) throws ResourceNotFoundException {
         Optional<Role> roleSearched = repository.findById(id);
@@ -53,7 +46,6 @@ public class RoleService implements EntityService<Role>{
             throw new ResourceNotFoundException("Attempt failed. The role you are requesting does not exist in our database. Please check input id.");
         }
     }
-
     @Override
     public Role update(Role role) throws BadRequestException {
         Optional<Role> roleSearched = repository.findById(role.getId());
@@ -65,7 +57,6 @@ public class RoleService implements EntityService<Role>{
             throw new BadRequestException("Attempt failed. The role you are requesting does not exist in our database. Please check spelling.");
         }
     }
-
     @Override
     public void delete(Long id) throws ResourceNotFoundException {
         if (findById(id).isPresent()) {

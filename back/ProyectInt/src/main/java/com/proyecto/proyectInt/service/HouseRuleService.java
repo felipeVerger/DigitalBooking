@@ -1,5 +1,4 @@
 package com.proyecto.proyectInt.service;
-
 import com.proyecto.proyectInt.exception.BadRequestException;
 import com.proyecto.proyectInt.exception.ResourceNotFoundException;
 import com.proyecto.proyectInt.model.HouseRule;
@@ -11,15 +10,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
 @Service
 public class HouseRuleService implements EntityService<HouseRule>{
-
     @Autowired
     HouseRuleRepository repository;
-
     private static final Logger logger = LogManager.getLogger(HouseRuleService.class);
-
     @Override
     public HouseRule create(HouseRule houseRule) throws BadRequestException {
         if (houseRule.getId() != null){
@@ -30,7 +25,6 @@ public class HouseRuleService implements EntityService<HouseRule>{
             return repository.save(houseRule);
         }
     }
-
     @Override
     public List<HouseRule> findAll() throws ResourceNotFoundException {
         List<HouseRule> hrSearched = repository.findAll();
@@ -42,8 +36,6 @@ public class HouseRuleService implements EntityService<HouseRule>{
             return hrSearched;
         }
     }
-
-
     @Override
     public Optional<HouseRule> findById(Long id) throws ResourceNotFoundException {
         Optional<HouseRule> hrSearched = repository.findById(id);
@@ -55,7 +47,6 @@ public class HouseRuleService implements EntityService<HouseRule>{
             throw new ResourceNotFoundException("Attempt failed. The HouseRule you are requesting does not exist in our database. Please check input id.");
         }
     }
-
     @Override
     public HouseRule update(HouseRule houseRule) throws BadRequestException {
         Optional<HouseRule> hrSearched = repository.findById(houseRule.getId());
@@ -67,8 +58,6 @@ public class HouseRuleService implements EntityService<HouseRule>{
             throw new BadRequestException("Attempt failed. The HouseRule you are requesting does not exist in our database. Please check spelling.");
         }
     }
-
-
     @Override
     public void delete(Long id) throws ResourceNotFoundException {
         if (findById(id).isPresent()) {

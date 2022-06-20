@@ -1,6 +1,4 @@
 package com.proyecto.proyectInt.model;
-
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,7 +13,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-
 @Entity
 @Getter
 @Setter
@@ -38,7 +35,6 @@ public class User implements UserDetails {
     private String password;
     @Column
     private String city;
-
     @ManyToOne
     @JoinColumn(name = "roles_id_role")
     private Role role;
@@ -51,7 +47,6 @@ public class User implements UserDetails {
     @JsonIgnore
     private Set<Reservation> reservations;
 
-
     public User(String name, String lastName, String email, String password, Role role, String city) {
         this.username = name;
         this.lastname = lastName;
@@ -60,9 +55,7 @@ public class User implements UserDetails {
         this.role = role;
         this.city = city;
     }
-
     //metodos de la interfaz UserDetails
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.getName());
@@ -73,17 +66,14 @@ public class User implements UserDetails {
     public boolean isAccountNonExpired() {
         return true;
     }
-
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
-
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
-
     @Override
     public boolean isEnabled() {
         return true;

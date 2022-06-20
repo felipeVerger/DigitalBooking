@@ -1,5 +1,4 @@
 package com.proyecto.proyectInt.service;
-
 import com.proyecto.proyectInt.exception.BadRequestException;
 import com.proyecto.proyectInt.exception.ResourceNotFoundException;
 import com.proyecto.proyectInt.model.HealthHygiene;
@@ -11,15 +10,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
 @Service
 public class HealthHygieneService implements EntityService<HealthHygiene>{
-
     @Autowired
     HealthHygieneRepository repository;
-
     private static final Logger logger = LogManager.getLogger(HealthHygieneService.class);
-
     @Override
     public HealthHygiene create(HealthHygiene hygiene) throws BadRequestException {
         if (hygiene.getId() != null){
@@ -30,7 +25,6 @@ public class HealthHygieneService implements EntityService<HealthHygiene>{
             return repository.save(hygiene);
         }
     }
-
     @Override
     public List<HealthHygiene> findAll() throws ResourceNotFoundException {
         List<HealthHygiene> hhSearched = repository.findAll();
@@ -42,8 +36,6 @@ public class HealthHygieneService implements EntityService<HealthHygiene>{
             return hhSearched;
         }
     }
-
-
     @Override
     public Optional<HealthHygiene> findById(Long id) throws ResourceNotFoundException {
         Optional<HealthHygiene> hhSearched = repository.findById(id);
@@ -55,7 +47,6 @@ public class HealthHygieneService implements EntityService<HealthHygiene>{
             throw new ResourceNotFoundException("Attempt failed. The healthHygiene you are requesting does not exist in our database. Please check input id.");
         }
     }
-
     @Override
     public HealthHygiene update(HealthHygiene hygiene) throws BadRequestException {
         Optional<HealthHygiene> hhSearched = repository.findById(hygiene.getId());
@@ -67,8 +58,6 @@ public class HealthHygieneService implements EntityService<HealthHygiene>{
             throw new BadRequestException("Attempt failed. The healthHygiene you are requesting does not exist in our database. Please check spelling.");
         }
     }
-
-
     @Override
     public void delete(Long id) throws ResourceNotFoundException {
         if (findById(id).isPresent()) {

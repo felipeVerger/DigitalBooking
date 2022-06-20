@@ -1,10 +1,8 @@
 package com.proyecto.proyectInt.model;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.apache.tomcat.jni.Local;
-
 import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -13,7 +11,6 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,38 +23,27 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name= "id_product")
     private Long id;
-
     @Column
     private String name;
-
     @Column
     private String subtitle;
-
     @Column
     private String description;
-
     @Column
     private String address;
-
     @Column
     private String longitude;
-
     @Column
     private String latitude;
-
     @Column
     private String cancellationPolicy;
-
     @Column
     private Double price;
-
     @Column
     private int score;
-
     @ManyToOne(optional = false)
     @JoinColumn(name = "categories_id_category", nullable = false)
     private Category category;
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "products_has_features",
@@ -65,31 +51,24 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "features_id_feature")
     )
     private Set<Feature> features;
-
     @ManyToOne(optional = false)
     @JoinColumn(name = "cities_id_city", nullable = false)
     private City city;
-
     @OneToMany(mappedBy = "products", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private Set<Image> images;
-
     @OneToMany(mappedBy = "products", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private Set<Reservation> reservations;
-
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private Set<Favorite> favorites;
-
     @OneToMany(mappedBy = "products", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private Set<HealthHygiene> healthHygiene;
-
     @OneToMany(mappedBy = "products", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private Set<HouseRule> houseRules;
-
 
     public Product(String name, String description,String subtitle, Double price, String address, String longitude, String latitude , String cancellationPolicy, Category category, Set<Feature> features, Set<Image> images, City city, int score, Set<HouseRule> houseRules, Set<HealthHygiene> healthHygiene) {
         this.name = name;
@@ -109,7 +88,6 @@ public class Product {
         this.healthHygiene = healthHygiene;
 
     }
-
     public Product(String name, String subtitle, Double price, String description, String address, String longitude, String latitude, String cancellationPolicy, Category category, Set<Feature> features, City city, int score, Set<HouseRule> houseRules, Set<HealthHygiene> healthHygiene) {
         this.name = name;
         this.subtitle = subtitle;

@@ -1,5 +1,4 @@
 package com.proyecto.proyectInt.controller;
-
 import com.proyecto.proyectInt.exception.BadRequestException;
 import com.proyecto.proyectInt.exception.ResourceNotFoundException;
 import com.proyecto.proyectInt.model.HealthHygiene;
@@ -12,16 +11,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
 @RestController
 @RequestMapping("/healthHygiene")
 public class HealthHygieneController {
-
     @Autowired
     HealthHygieneService healthHygieneService;
-
     Logger logger = LogManager.getLogger(HouseRuleController.class);
-
     @GetMapping("/findAll")
     public ResponseEntity<List<HealthHygiene>> getHealthHygieneList() throws ResourceNotFoundException {
         logger.info("Retrieving data from HealthHygiene table");
@@ -37,7 +32,7 @@ public class HealthHygieneController {
         logger.info("Adding new HealthHygiene");
         return ResponseEntity.ok(healthHygieneService.create(healthHygiene));
     }
-    @PutMapping
+    @PutMapping("update")
     public ResponseEntity<HealthHygiene> updateHealthHygiene(@RequestBody HealthHygiene healthHygiene) throws BadRequestException {
         logger.info("Updating HealthHygiene");
         return ResponseEntity.ok(healthHygieneService.update(healthHygiene));

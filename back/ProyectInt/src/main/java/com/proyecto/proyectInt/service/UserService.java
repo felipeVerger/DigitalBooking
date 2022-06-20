@@ -1,5 +1,4 @@
 package com.proyecto.proyectInt.service;
-
 import com.proyecto.proyectInt.exception.BadRequestException;
 import com.proyecto.proyectInt.exception.ResourceNotFoundException;
 import com.proyecto.proyectInt.model.User;
@@ -14,15 +13,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
 @Service
 public class UserService implements EntityService<User>, UserDetailsService {
-
     @Autowired
     UserRepository repository;
-
     Logger logger = LogManager.getLogger(UserService.class);
-
     @Override
     public Optional<User> findById(Long id) throws ResourceNotFoundException {
         Optional<User> userSearched = repository.findById(id);
@@ -45,7 +40,6 @@ public class UserService implements EntityService<User>, UserDetailsService {
             throw new BadRequestException("Attempt failed. The User you are requesting does not exist in our database. Please check spelling.");
         }
     }
-
     @Override
     public List<User> findAll() throws ResourceNotFoundException {
         List<User> usersSearched = repository.findAll();
@@ -57,7 +51,6 @@ public class UserService implements EntityService<User>, UserDetailsService {
             return usersSearched;
         }
     }
-
     @Override
     public User create(User user) throws BadRequestException {
         if (user.getId() != null) {
@@ -68,7 +61,6 @@ public class UserService implements EntityService<User>, UserDetailsService {
             return repository.save(user);
         }
     }
-
     @Override
     public void delete(Long id) throws ResourceNotFoundException {
         if (findById(id).isPresent()) {
@@ -79,9 +71,7 @@ public class UserService implements EntityService<User>, UserDetailsService {
             throw new ResourceNotFoundException("Attempt failed. User with id " + id + " could not be found. Database remains untouched.");
         }
     }
-
     //additional services
-
     public Optional<User> findByEmail(String email) throws ResourceNotFoundException {
         Optional<User> userSearched = repository.findByEmail(email);
         if (userSearched.isPresent()) {
@@ -92,7 +82,6 @@ public class UserService implements EntityService<User>, UserDetailsService {
             throw new ResourceNotFoundException("Attempt failed. The user you are requesting does not exist in our database. Please check input email.");
         }
     }
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> user = repository.findByEmail(username);

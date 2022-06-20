@@ -1,5 +1,4 @@
 package com.proyecto.proyectInt.service;
-
 import com.proyecto.proyectInt.exception.BadRequestException;
 import com.proyecto.proyectInt.exception.ResourceNotFoundException;
 import com.proyecto.proyectInt.model.Favorite;
@@ -11,14 +10,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
 @Service
 public class FavoriteService implements EntityService<Favorite> {
     @Autowired
     FavoriteRepository repository;
-
     Logger logger = LogManager.getLogger(FavoriteService.class);
-
     @Override
     public Optional<Favorite> findById(Long id) throws ResourceNotFoundException {
         Optional<Favorite> favoriteSearched = repository.findById(id);
@@ -41,7 +37,6 @@ public class FavoriteService implements EntityService<Favorite> {
             throw new BadRequestException("Attempt failed. The favorite you are requesting does not exist in our database. Please check spelling.");
         }
     }
-
     @Override
     public List<Favorite> findAll() throws ResourceNotFoundException {
         List<Favorite> favoritesSearched = repository.findAll();
@@ -53,7 +48,6 @@ public class FavoriteService implements EntityService<Favorite> {
             return favoritesSearched;
         }
     }
-
     @Override
     public Favorite create(Favorite favorite) throws BadRequestException {
         if (favorite.getId() != null) {
@@ -64,7 +58,6 @@ public class FavoriteService implements EntityService<Favorite> {
             return repository.save(favorite);
         }
     }
-
     @Override
     public void delete(Long id) throws ResourceNotFoundException {
         if (findById(id).isPresent()) {
@@ -75,9 +68,7 @@ public class FavoriteService implements EntityService<Favorite> {
             throw new ResourceNotFoundException("Attempt failed. Favorite with id " + id + " could not be found. Database remains untouched.");
         }
     }
-
     //additional services
-
     public List<Favorite> findByUsersId(Long id) throws ResourceNotFoundException {
         List<Favorite> favoritesSearched = repository.findByUsersId(id);
         if (favoritesSearched.isEmpty()) {
@@ -88,7 +79,6 @@ public class FavoriteService implements EntityService<Favorite> {
             return favoritesSearched;
         }
     }
-
     public List<Favorite> findByProductId(Long id) throws ResourceNotFoundException {
         List<Favorite> favoritesSearched = repository.findByProductId(id);
         if (favoritesSearched.isEmpty()) {
@@ -99,7 +89,6 @@ public class FavoriteService implements EntityService<Favorite> {
             return favoritesSearched;
         }
     }
-
     public List<Favorite> findByUsersIdAndProductId (Long userId, Long productId) throws ResourceNotFoundException {
         List<Favorite> favoritesSearched = repository.findByUsersIdAndProductId(userId, productId);
         if (favoritesSearched.isEmpty()) {

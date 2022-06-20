@@ -1,10 +1,7 @@
 package com.proyecto.proyectInt.service;
-
 import com.proyecto.proyectInt.exception.BadRequestException;
 import com.proyecto.proyectInt.exception.ResourceNotFoundException;
-
 import com.proyecto.proyectInt.model.City;
-
 import com.proyecto.proyectInt.repository.CityRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,15 +10,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
 @Service
 public class CityService implements EntityService<City>{
-
     @Autowired
     CityRepository repository;
-
     Logger logger = LogManager.getLogger(CityService.class);
-
     @Override
     public Optional<City> findById(Long id) throws ResourceNotFoundException {
         Optional<City> citySearched = repository.findById(id);
@@ -78,9 +71,7 @@ public class CityService implements EntityService<City>{
             throw new ResourceNotFoundException("Attempt failed. City with id " + id + " could not be found. Database remains untouched.");
         }
     }
-
     //additional services
-
     public Optional<City> findByCity(String city) throws ResourceNotFoundException {
         Optional<City> citySearched = repository.findByCity(city);
         if (citySearched.isPresent()) {
@@ -91,6 +82,4 @@ public class CityService implements EntityService<City>{
             throw new ResourceNotFoundException("Attempt failed. The city you are requesting does not exist in our database. Please check input name.");
         }
     }
-
-
 }

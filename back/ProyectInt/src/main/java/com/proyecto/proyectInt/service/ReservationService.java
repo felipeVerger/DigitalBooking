@@ -1,5 +1,4 @@
 package com.proyecto.proyectInt.service;
-
 import com.proyecto.proyectInt.exception.BadRequestException;
 import com.proyecto.proyectInt.exception.ResourceNotFoundException;
 import com.proyecto.proyectInt.model.Reservation;
@@ -12,15 +11,11 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-
 @Service
 public class ReservationService implements EntityService<Reservation>{
-
     @Autowired
     ReservationRepository repository;
-
     Logger logger = LogManager.getLogger(ReservationService.class);
-
     @Override
     public Optional<Reservation> findById(Long id) throws ResourceNotFoundException {
         Optional<Reservation> reservationSearched = repository.findById(id);
@@ -43,7 +38,6 @@ public class ReservationService implements EntityService<Reservation>{
             throw new BadRequestException("Attempt failed. The reservation you are requesting does not exist in our database. Please check spelling.");
         }
     }
-
     @Override
     public List<Reservation> findAll() throws ResourceNotFoundException {
         List<Reservation> reservationsSearched = repository.findAll();
@@ -55,7 +49,6 @@ public class ReservationService implements EntityService<Reservation>{
             return reservationsSearched;
         }
     }
-
     @Override
     public Reservation create(Reservation reservation) throws BadRequestException {
         if (reservation.getId() != null) {
@@ -66,7 +59,6 @@ public class ReservationService implements EntityService<Reservation>{
             return repository.save(reservation);
         }
     }
-
     @Override
     public void delete(Long id) throws ResourceNotFoundException {
         if (findById(id).isPresent()) {
@@ -77,7 +69,6 @@ public class ReservationService implements EntityService<Reservation>{
             throw new ResourceNotFoundException("Attempt failed. Reservation with id " + id + " could not be found. Database remains untouched.");
         }
     }
-
     //additional services
 //    public List<Reservation> filterByDate(LocalDate init, LocalDate end) throws ResourceNotFoundException {
 //        List<Reservation> reservationsSearched = repository.filterByDate(init, end);

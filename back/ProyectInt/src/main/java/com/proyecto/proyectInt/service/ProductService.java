@@ -1,5 +1,4 @@
 package com.proyecto.proyectInt.service;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proyecto.proyectInt.exception.BadRequestException;
 import com.proyecto.proyectInt.exception.ResourceNotFoundException;
@@ -11,25 +10,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-
-
 @Service
 public class ProductService {
-
     /* = Attributes = */
     @Autowired
     ProductRepository productRepository;
     @Autowired
     ObjectMapper mapper;
     private static final Logger logger = LogManager.getLogger(ProductService.class);
-
-
     /* = Constructor = */
     @Autowired
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
-
     /* = Methods = */
     public Product create(Product product) throws BadRequestException {
         if (product.getId() != null){
@@ -40,7 +33,6 @@ public class ProductService {
             return productRepository.save(product);
         }
     }
-
     public Set<Product> findAll(){
         List<Product> products = productRepository.findAll();
         Set<Product> product1 = new HashSet<>();
@@ -50,17 +42,14 @@ public class ProductService {
         }
         return product1;
     }
-
     public Optional<Product> findById(Long id) {
         return productRepository.findById(id);
     }
-
     public Product update(Product product) throws ResourceNotFoundException{
         if(findById(product.getId()) == null)
             throw  new ResourceNotFoundException("Product: " + product.getId() +" not found.");
         return productRepository.save(product);
     }
-
     public void delete(Long id) throws ResourceNotFoundException{
         Optional<Product> productFound = findById(id);
         if (productFound.isPresent()) {
@@ -69,9 +58,7 @@ public class ProductService {
             throw new ResourceNotFoundException("The product with id: " + id + " can't be deleted, search error");
         }
     }
-
     //additional services
-
 //    public Product findProductByName(String name){
 //        return productRepository.findProductByProductName(name).orElse(null);
 //    }
@@ -83,6 +70,4 @@ public class ProductService {
 //    public Optional<List<Product>> getProductsByCategory(String category){
 //        return productRepository.getProductsByCategory(category);
 //    }
-
 }
-

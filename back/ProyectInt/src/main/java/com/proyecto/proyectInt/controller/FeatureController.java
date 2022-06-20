@@ -1,5 +1,4 @@
 package com.proyecto.proyectInt.controller;
-
 import com.proyecto.proyectInt.exception.BadRequestException;
 import com.proyecto.proyectInt.exception.ResourceNotFoundException;
 import com.proyecto.proyectInt.model.Feature;
@@ -13,17 +12,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
 @RestController
 @RequestMapping("/feature")
 public class FeatureController {
-
     @Autowired
     private FeatureService featureService;
-
     Logger logger = LogManager.getLogger(FeatureController.class);
-
-    @GetMapping("/all")
+    @GetMapping("/findAll")
     public ResponseEntity<List<Feature>> getFeatureList() throws ResourceNotFoundException {
         logger.info("Retrieving data from feature table");
         return ResponseEntity.ok(featureService.findAll());
@@ -38,7 +33,7 @@ public class FeatureController {
         logger.info("Adding new feature");
         return ResponseEntity.status(HttpStatus.CREATED).body(featureService.create(feature));
     }
-    @PutMapping
+    @PutMapping("update")
     public ResponseEntity<Feature> updateFeature(@RequestBody Feature feature) throws BadRequestException {
         logger.info("Updating feature");
         return ResponseEntity.ok(featureService.update(feature));
@@ -49,10 +44,8 @@ public class FeatureController {
         featureService.delete(id);
         return ResponseEntity.ok("Feature deleted");
     }
-
 //    @DeleteMapping("/null")
 //    public ResponseEntity<String> deleteNullID (){
 //        featureService.delete(nullID);
 //    }
-
 }

@@ -1,5 +1,4 @@
 package com.proyecto.proyectInt.service;
-
 import com.proyecto.proyectInt.exception.BadRequestException;
 import com.proyecto.proyectInt.exception.ResourceNotFoundException;
 import com.proyecto.proyectInt.model.Category;
@@ -12,16 +11,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
-
 @Service
 public class CategoryService implements EntityService<Category> {
-
     @Autowired
     CategoryRepository repository;
-
     private static final Logger logger = LogManager.getLogger(CategoryService.class);
-
 
     @Override
     public Optional<Category> findById(Long id) throws ResourceNotFoundException {
@@ -35,7 +29,6 @@ public class CategoryService implements EntityService<Category> {
         }
 
     }
-
     @Override
     public Category update(Category category) throws BadRequestException {
         Optional<Category> categorySearched = repository.findById(category.getId());
@@ -47,7 +40,6 @@ public class CategoryService implements EntityService<Category> {
             throw new BadRequestException("Attempt failed. The category you are requesting does not exist in our database. Please check spelling.");
         }
     }
-
     @Override
     public List<Category> findAll() throws ResourceNotFoundException {
         List<Category> categoriesSearched = repository.findAll();
@@ -59,7 +51,6 @@ public class CategoryService implements EntityService<Category> {
             return categoriesSearched;
         }
     }
-
     @Override
     public Category create(Category category) throws BadRequestException {
         if (category.getId() != null) {
@@ -70,7 +61,6 @@ public class CategoryService implements EntityService<Category> {
             return repository.save(category);
         }
     }
-
     @Override
     public void delete(Long id) throws ResourceNotFoundException {
         if (findById(id).isPresent()) {
@@ -81,10 +71,7 @@ public class CategoryService implements EntityService<Category> {
             throw new ResourceNotFoundException("Attempt failed. Category with id " + id + " could not be found. Database remains untouched.");
         }
     }
-
-
     //additional services
-
     public Optional<Category> findByTitle(String title) throws ResourceNotFoundException{
         Optional<Category> categorySearched = repository.findByTitle(title);
         if (categorySearched.isPresent()) {
@@ -95,6 +82,4 @@ public class CategoryService implements EntityService<Category> {
             throw new ResourceNotFoundException("Attempt failed. The category you are requesting does not exist in our database. Please check input title.");
         }
     }
-
-
 }

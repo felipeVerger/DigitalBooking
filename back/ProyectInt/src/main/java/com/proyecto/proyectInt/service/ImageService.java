@@ -1,5 +1,4 @@
 package com.proyecto.proyectInt.service;
-
 import com.proyecto.proyectInt.exception.BadRequestException;
 import com.proyecto.proyectInt.exception.ResourceNotFoundException;
 import com.proyecto.proyectInt.model.Image;
@@ -11,16 +10,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
-
 @Service
 public class ImageService implements EntityService<Image>{
     @Autowired
     ImageRepository repository;
-
     private static final Logger logger = LogManager.getLogger(ImageService.class);
-
-
     @Override
     public Optional<Image> findById(Long id) throws ResourceNotFoundException {
         Optional<Image> imageSearched = repository.findById(id);
@@ -33,7 +27,6 @@ public class ImageService implements EntityService<Image>{
         }
 
     }
-
     @Override
     public Image update(Image image) throws BadRequestException {
         Optional<Image> imageSearched = repository.findById(image.getId());
@@ -45,7 +38,6 @@ public class ImageService implements EntityService<Image>{
             throw new BadRequestException("Attempt failed. The image you are requesting does not exist in our database. Please check spelling.");
         }
     }
-
     @Override
     public List<Image> findAll() throws ResourceNotFoundException {
         List<Image> imagesSearched = repository.findAll();
@@ -57,7 +49,6 @@ public class ImageService implements EntityService<Image>{
             return imagesSearched;
         }
     }
-
     @Override
     public Image create(Image image) throws BadRequestException {
         if (image.getId() != null) {
@@ -68,7 +59,6 @@ public class ImageService implements EntityService<Image>{
             return repository.save(image);
         }
     }
-
     @Override
     public void delete(Long id) throws ResourceNotFoundException {
         if (findById(id).isPresent()) {
@@ -79,11 +69,8 @@ public class ImageService implements EntityService<Image>{
             throw new ResourceNotFoundException("Attempt failed. Image with id " + id + " could not be found. Database remains untouched.");
         }
     }
-
-
     //additional services
-
-    public Optional<Image> findByTitle(String title) throws ResourceNotFoundException{
+    public Optional<Image> findByTitle(String title) throws ResourceNotFoundException {
         Optional<Image> imageSearched = repository.findByTitle(title);
         if (imageSearched.isPresent()) {
             logger.info("Success. Image found with title " + imageSearched.get().getTitle() + ".");

@@ -1,5 +1,4 @@
 package com.proyecto.proyectInt.controller;
-
 import com.proyecto.proyectInt.exception.BadRequestException;
 import com.proyecto.proyectInt.exception.ResourceNotFoundException;
 
@@ -14,19 +13,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
 @RestController
 @RequestMapping("/cities")
 public class CityController {
-
     /* = Attribute = */
     @Autowired
     private CityService cityservice;
-
     Logger logger = LogManager.getLogger(CityController.class);
-
     /* = Get = */
-    @GetMapping("/all")
+    @GetMapping("/findAll")
     public ResponseEntity <List<City>> getAllCities() throws ResourceNotFoundException {
         logger.info("Retrieving data from city table");
         return ResponseEntity.ok(cityservice.findAll());
@@ -36,13 +31,12 @@ public class CityController {
         logger.info("Retrieving data from city table");
         return ResponseEntity.ok(cityservice.findById(id));
     }
-    @PostMapping(value = "/add")
+    @PostMapping
     public ResponseEntity<String> addCity(@RequestBody City city) throws BadRequestException {
         cityservice.create(city);
         return ResponseEntity.ok("Ciudad agregada correctamente");
     }
-
-    @PutMapping
+    @PutMapping("update")
     public ResponseEntity<City> updateCity(@RequestBody City city) throws BadRequestException {
         logger.info("Updating city");
         return ResponseEntity.ok(cityservice.update(city));
@@ -53,9 +47,4 @@ public class CityController {
         cityservice.delete(id);
         return ResponseEntity.ok("City deleted");
     }
-
-
 }
-
-
-

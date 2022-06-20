@@ -37,7 +37,7 @@ public class HouseRuleController {
         logger.info("Adding new HouseRules");
         return ResponseEntity.ok(houseRuleService.create(houseRule));
     }
-    @PutMapping
+    @PutMapping("update")
     public ResponseEntity<HouseRule> updateHouseRule(@RequestBody HouseRule houseRule) throws BadRequestException {
         logger.info("Updating HouseRules");
         return ResponseEntity.ok(houseRuleService.update(houseRule));

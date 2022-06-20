@@ -1,5 +1,4 @@
 package com.proyecto.proyectInt.controller;
-
 import com.proyecto.proyectInt.exception.BadRequestException;
 import com.proyecto.proyectInt.exception.ResourceNotFoundException;
 import com.proyecto.proyectInt.model.Role;
@@ -12,16 +11,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
 @RestController
 @RequestMapping("/roles")
 public class RoleController {
-
     @Autowired
     RoleService roleService;
-
     Logger logger = LogManager.getLogger(UserController.class);
-
     @GetMapping("/all")
     public ResponseEntity<List<Role>> getRoleList() throws ResourceNotFoundException {
         logger.info("Retrieving data from role table");

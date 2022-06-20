@@ -1,5 +1,4 @@
 package com.proyecto.proyectInt.controller;
-
 import com.proyecto.proyectInt.exception.BadRequestException;
 import com.proyecto.proyectInt.exception.ResourceNotFoundException;
 import com.proyecto.proyectInt.model.User;
@@ -12,16 +11,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
 @RestController
 @RequestMapping("/users")
 public class UserController {
-
     @Autowired
     private UserService userService;
-
     Logger logger = LogManager.getLogger(UserController.class);
-
     @GetMapping("/all")
     public ResponseEntity<List<User>> getUserList() throws ResourceNotFoundException {
         logger.info("Retrieving data from user table");
@@ -48,7 +43,4 @@ public class UserController {
         userService.delete(id);
         return ResponseEntity.ok("User deleted");
     }
-
-
-
 }
