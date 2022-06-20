@@ -5,11 +5,28 @@ import ProductCard from './ProductsCard'
 import { FilterContext } from '../../context/filter-context'
 import { useLocation } from 'react-router-dom'
 
+// const URL_API = 'http://localhost:8080/products/findAll'
+
 const Recomendaciones = () => {
-    const {filter} = useContext(FilterContext);
-    console.log(filter);
     const [products, setProducts] = useState([]);
+    const {filter} = useContext(FilterContext);
     const locationPath = useLocation().pathname;
+
+    // const myHeaders = new Headers();
+    // myHeaders.append("Authorization", "Basic dXNlcjpnMTBCb29raW5n");
+
+    // const requestOptions = {
+    //     method: 'GET',
+    //     headers: myHeaders,
+    //     redirect: 'follow'
+    // };
+
+    // useEffect(() => {
+    //     fetch(URL_API, requestOptions)
+    //       .then((response) => response.json())
+    //       .then((data) => setProducts(data))
+    //       .catch(error => console.log('error', error));
+    // }, [])
 
     useEffect(() => {
         setProducts(productsList);
@@ -42,7 +59,6 @@ const Recomendaciones = () => {
                                 location={product.location}
                                 description={product.description}
                                 puntuation={product.puntuation}
-                                price={product.price}
                                 id={product.id}
                             />
                         )
@@ -57,7 +73,6 @@ const Recomendaciones = () => {
                                 location={product.location}
                                 description={product.description}
                                 puntuation={product.puntuation}
-                                price={product.price}
                                 id={product.id}
                             />
                         )

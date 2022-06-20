@@ -1,27 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Body, CategoryBlock, SectionTitle, FlexWrapper} from './IndexStyle'
 import CategoryCard from './CategoryCard'
+
+import useFetch from '../../hooks/useFetch'
 
 const URL_API = 'http://localhost:8080/categories/findAll'
 
 const Categorias = () => {
-    const [categories, setCatgeories] = useState([]);
 
     const myHeaders = new Headers();
     myHeaders.append("Authorization", "Basic dXNlcjpnMTBCb29raW5n");
 
-    const requestOptions = {
+    const { data } = useFetch(URL_API, {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow'
-    };
-
-    useEffect(() => {
-        fetch(URL_API, requestOptions)
-          .then((response) => response.json())
-          .then((data) => setCatgeories(data))
-          .catch(error => console.log('error', error));
-      }, [])
+    });
 
   return (
     <Body>
@@ -29,7 +23,7 @@ const Categorias = () => {
             <SectionTitle>Buscar por tipo de alojamiento</SectionTitle>
             <FlexWrapper>
                 {
-                    categories.map((item) => {
+                    data.map((item) => {
                         return (
                             <CategoryCard
                                 key={item.id}
