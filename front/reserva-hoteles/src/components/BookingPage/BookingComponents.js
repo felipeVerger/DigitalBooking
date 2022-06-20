@@ -2,6 +2,10 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {MdOutlineArrowBackIos} from "react-icons/md"
 
+export const Container = styled.div`
+  background-color: ${(props) => props.theme.content_background};
+`
+
 export const HeaderBody = styled.div`
   background: ${(props) => props.theme.primary};
   width: 100%;
@@ -51,3 +55,10 @@ export const CleanLink = styled(Link)`
   text-decoration: none;
 `
 
+export const BookingBlock = styled.div`
+  padding: 2.5rem;
+`
+
+export const BookingBlockInfo = styled.div`
+
+`
