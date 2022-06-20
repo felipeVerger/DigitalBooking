@@ -1,17 +1,9 @@
 package com.proyecto.proyectInt.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
-import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -74,7 +66,7 @@ public class Product {
     @JsonIgnore
     private Set<Image> images;
 
-    @OneToMany(mappedBy = "products", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private Set<Reservation> reservations;
 

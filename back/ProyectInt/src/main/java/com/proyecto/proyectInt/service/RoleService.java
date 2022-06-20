@@ -76,4 +76,6 @@ public class RoleService implements EntityService<Role>{
             throw new ResourceNotFoundException("Attempt failed. Role with id " + id + " could not be found. Database remains untouched.");
         }
     }
+
+
 }

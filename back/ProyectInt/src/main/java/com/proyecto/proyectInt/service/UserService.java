@@ -82,10 +82,10 @@ public class UserService implements EntityService<User>, UserDetailsService {
 
     //additional services
 
-    public Optional<User> findByEmail(String email) throws ResourceNotFoundException {
-        Optional<User> userSearched = repository.findByEmail(email);
-        if (userSearched.isPresent()) {
-            logger.info("Success. User found with email " + userSearched.get().getEmail() + ".");
+    public User findUserByEmail(String email) throws ResourceNotFoundException {
+        User userSearched = repository.findByEmail(email);
+        if (userSearched != null) {
+            logger.info("Success. User found with email " + userSearched.getEmail() + ".");
             return userSearched;
         } else {
             logger.error("Attempt failed. The user you are requesting does not exist in our database. Please check input email");
@@ -95,10 +95,14 @@ public class UserService implements EntityService<User>, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = repository.findByEmail(username);
-        if(user.isPresent()){
-            return user.get();
+        User user = repository.findByEmail(username);
+        if (user == null) {
+            logger.error("Attempt failed. The user you are requesting does not exist in our database. Please check spelling.");
+            throw new UsernameNotFoundException("User not found");
+        } else {
+            logger.info("Success. User found with username " + username + ".");
+            return repository.findByEmail(username);
         }
-        throw new UsernameNotFoundException("Given email does not exist as a registered user.");
     }
+
 }
