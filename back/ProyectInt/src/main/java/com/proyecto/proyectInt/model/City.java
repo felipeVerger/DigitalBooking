@@ -18,7 +18,7 @@ public class City {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "city_sequence")
     private Long id;
     @Column
-    private String city;
+    private String name;
     @Column
     private String country;
 
@@ -26,15 +26,15 @@ public class City {
     @JsonIgnore
     private Set<Product> products = new HashSet<>();
 
-    public City(String city, String country) {
-        this.city = city;
+    public City(String name, String country) {
+        this.name = name;
         this.country = country;
     }
     @Override
     public String toString() {
         return "City{" +
                 "id=" + id +
-                ", city='" + city + '\'' +
+                ", city='" + name + '\'' +
                 ", country='" + country +
                 '}';
     }

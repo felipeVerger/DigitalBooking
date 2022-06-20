@@ -72,10 +72,10 @@ public class CityService implements EntityService<City>{
         }
     }
     //additional services
-    public Optional<City> findByCity(String city) throws ResourceNotFoundException {
-        Optional<City> citySearched = repository.findByCity(city);
+    public Optional<City> findByName(String name) throws ResourceNotFoundException {
+        Optional<City> citySearched = repository.findByName(name);
         if (citySearched.isPresent()) {
-            logger.info("Success. City found with title " + city + ".");
+            logger.info("Success. City found with title " + name + ".");
             return citySearched;
         } else {
             logger.error("Attempt failed. The city you are requesting does not exist in our database. Please check input name");

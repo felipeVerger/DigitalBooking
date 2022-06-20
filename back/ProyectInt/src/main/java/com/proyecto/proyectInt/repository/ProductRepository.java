@@ -15,7 +15,7 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     @Query("SELECT p FROM Product p WHERE p.name = ?1")
     Optional<Product> findProductByProductName(String name);
 
-    @Query("SELECT CONCAT(p.city.city,', ',p.city.country) FROM Product p GROUP BY p.city.city")
+    @Query("SELECT CONCAT(p.city.name,', ',p.city.country) FROM Product p GROUP BY p.city.name")
     Optional<List<String>> getLocations();
 
     @Query("SELECT p FROM Product p WHERE p.category.title = ?1")
