@@ -1,34 +1,23 @@
 import React, {useState, useEffect, useContext} from "react";
 import {Dropdown} from './CityStyle';
-// import useFetch from '../../hooks/useFetch';
 import {useLocation} from 'react-router-dom';
 import { FilterContext } from "../../context/filter-context";
+import useFetch from "../../hooks/useFetch";
 
 const URL_API = 'http://localhost:8080/cities/findAll'
 
 const SearchCity = ({destination, setDestination}) => {
   const locationPath = useLocation().pathname;
-  const {filter} = useContext(FilterContext);
-  const  [citiesList, setCitiesList] = useState([]);
+  const { filter } = useContext(FilterContext);
 
   const myHeaders = new Headers();
-  // TO DO g10Booking
     myHeaders.append("Authorization", "Basic dXNlcjpnMTBCb29raW5n");
 
-  const requestOptions = {
+  const { data } = useFetch(URL_API, {
     method: 'GET',
     headers: myHeaders,
     redirect: 'follow'
-  };
-
-  useEffect(() => {
-    fetch(URL_API, requestOptions)
-      .then((response) => response.json())
-      .then((data) => setCitiesList(data))
-      .catch(error => console.log('error', error));
-  }, [])
-
-
+  });
 
   const handleCityChange = (city) => {
     setDestination(city.value);
@@ -37,11 +26,11 @@ const SearchCity = ({destination, setDestination}) => {
   // If citiesList is false nothing will be displayed, else the select will show
   return (
     <Dropdown
-      options={citiesList.map((item) => ({
+      options={data.map((item) => ({
         value: item.name + ", " + item.country,
         label: item.name + ", " + item.country,
       }))}
-      placeholder={locationPath === '/' ? destination : filter && locationPath === '/productsList' ? filter[0] : destination}
+      placeholder={locationPath === '/' ? destination : filter[1] === 'city' && locationPath === '/productsList' ? filter[0] : destination}
       onChange={handleCityChange}
     />
   )
