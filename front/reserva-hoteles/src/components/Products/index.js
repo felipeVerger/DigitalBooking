@@ -22,15 +22,15 @@ const Recomendaciones = () => {
         redirect: 'follow'
     })
 
-    /* Filtering the products based on the filter context. */
-    const filteredArray = filter ? products && filter[1] === 'category' ? products.filter((product) => product.category.title === filter[0]) 
-    : products && filter[1] === 'city' ? products.filter((product) => product.city.name + ', ' + product.city.country === filter[0]) : products : products;
-
-    
     /* A ternary operator that checks if the products array has more than 6 elements, if it does, it
     sorts the array randomly and then slices the first 6 elements, if it doesn't, it returns the
     products array. */
     const randomProducts = products && products.length > 6 ? products.sort(() => Math.random() - 0.5).slice(0, 6) : products; 
+
+    /* Filtering the products based on the filter context. */
+    const filteredArray = filter ? products && filter[1] === 'category' && locationPath === '/productsList' ? products.filter((product) => product.category.title === filter[0]) 
+    : products && filter[1] === 'city' && locationPath === '/productsList' ? products.filter((product) => product.city.name + ', ' + product.city.country === filter[0]) : randomProducts : randomProducts;
+
 
   return filteredArray.length === 0 && locationPath === '/productsList' ? <ErrorMessage>No se encontraron resultados</ErrorMessage> : 
   (
@@ -39,21 +39,7 @@ const Recomendaciones = () => {
             <Title>{locationPath === '/' ? 'Recomendaciones' : 'Buscaste: ' + filter[0]}</Title>
             <RecommendationContainer>
                 {
-                   filteredArray && locationPath === '/productsList' ? filteredArray.map((product) => {
-                        return (
-                            <ProductCard
-                                key={product.id}
-                                img={product.crimg}
-                                category={product.category.title}
-                                title={product.name}
-                                location={product.address}
-                                description={product.description}
-                                puntuation={product.puntuation}
-                                id={product.id}
-                            />
-                        )
-                   }) : 
-                     randomProducts.map((product) => {
+                   filteredArray.map((product) => {
                         return (
                             <ProductCard
                                 key={product.id}
@@ -62,11 +48,11 @@ const Recomendaciones = () => {
                                 title={product.name}
                                 location={product.address}
                                 description={product.description}
-                                puntuation={product.puntuation}
+                                puntuation={product.score}
                                 id={product.id}
                             />
                         )
-                     })
+                   })
                 }
             </RecommendationContainer>
         </Block>

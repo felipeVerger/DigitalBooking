@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom'
 
 export const Recommendation = styled.div`
   display: flex;
+  
   background: white;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
-
+  
   min-height: 279px;
   width: 49.5%;
   margin-bottom: 40px;
@@ -43,6 +44,7 @@ export const Image = styled.img`
 `;
 
 export const RecomendationInfo = styled.div`
+  width: 100%;
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -59,7 +61,7 @@ export const RecomendationInfo = styled.div`
 export const HotelTopInfoBlock = styled.div`
   display: flex;
   justify-content: space-between;
-
+  
   gap: 10px;
 `;
 

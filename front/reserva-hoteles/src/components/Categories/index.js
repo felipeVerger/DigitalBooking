@@ -1,6 +1,7 @@
 import React from 'react'
 import { Body, CategoryBlock, SectionTitle, FlexWrapper} from './IndexStyle'
 import CategoryCard from './CategoryCard'
+import Loading from '../Loading/index'
 
 import useFetch from '../../hooks/useFetch'
 
@@ -29,8 +30,8 @@ const Categorias = () => {
                                 key={item.id}
                                 img={item.urlImage}
                                 category={item.title}
-                                amount={item.description}
-                                type={item.type}
+                                amount={item.amount}
+                                type={item.title}
                             />
                         )
                     })
