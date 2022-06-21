@@ -1,73 +1,85 @@
 package com.proyecto.proyectInt.service;
-
 import com.proyecto.proyectInt.exception.BadRequestException;
 import com.proyecto.proyectInt.exception.ResourceNotFoundException;
-
 import com.proyecto.proyectInt.model.City;
-
 import com.proyecto.proyectInt.repository.CityRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
 @Service
-public class CityService {
-
-    private final CityRepository repository;
-
+public class CityService implements EntityService<City>{
     @Autowired
-    public CityService(CityRepository repository) {
-        this.repository = repository;
-    }
-
-    public Optional<City> search(Long id) throws ResourceNotFoundException {
+    CityRepository repository;
+    Logger logger = LogManager.getLogger(CityService.class);
+    @Override
+    public Optional<City> findById(Long id) throws ResourceNotFoundException {
         Optional<City> citySearched = repository.findById(id);
         if(citySearched.isPresent()){
+            logger.info("Success. City found with id "+id+ ".");
             return citySearched;
         }else{
-            throw new ResourceNotFoundException("Could not find the city with id: "+id+", there was an error.");
+            logger.error("Attempt failed. The city you are requesting does not exist in our database. Please check input id");
+            throw new ResourceNotFoundException("Attempt failed. The city you are requesting does not exist in our database. Please check input id.");
         }
     }
-
-    public List<City> searchAll() throws BadRequestException {
-        List<City> cities = repository.findAll();
-        if(cities.isEmpty()){
-            throw new BadRequestException("There are no registered cities");
-        }else{
-            return cities;
-        }
-
-    }
-
-    public City citySave(City city) throws BadRequestException{
-        Optional<City> searchedCity= repository.findById(city.getId());
-        if(searchedCity.isPresent()) {
-            throw new BadRequestException("There is already a city with id: " + city.getId() + ".");
-        }else {
-
-            return repository.save(city);
-        }
-    }
-
-    public void cityDelete(Long id) throws ResourceNotFoundException {
-        Optional<City> citySearched= search(id);
+    @Override
+    public City update(City city) throws BadRequestException{
+        Optional<City> citySearched = repository.findById(city.getId());
         if (citySearched.isPresent()){
-            repository.deleteById(id);
-        }
-        else{
-            throw new ResourceNotFoundException("It is not possible to remove the city class with id: "+id+", there was an error");
-        }
-
-    }
-
-    public City toUpdate(City city) throws ResourceNotFoundException {
-        Optional<City> citySearched = search(city.getId());
-        if (citySearched.isPresent())
+            logger.info("Success. City found and modified.");
             return repository.save(city);
-        else
-            return null;
+        }else{
+            logger.error("Attempt failed. The city you are requesting does not exist in our database. Please check spelling.");
+            throw new BadRequestException("Attempt failed. The city you are requesting does not exist in our database. Please check spelling.");
+        }
     }
 
+    @Override
+    public List<City> findAll() throws ResourceNotFoundException {
+        List<City> citiesSearched = repository.findAll();
+        if (citiesSearched.isEmpty()) {
+            logger.error("Attempt Failed. No cities found in our database.");
+            throw new ResourceNotFoundException("Attempt Failed. No cities found in our database.");
+        } else {
+            logger.info("Success. Retrieving list of cities.");
+            return citiesSearched;
+        }
+    }
+
+    @Override
+    public City create(City city) throws BadRequestException {
+        if (city.getId() != null) {
+            logger.error("Attempt failed. This city already exists in our database.");
+            throw new BadRequestException("Attempt failed. This city already exists in our database.");
+        } else {
+            logger.info("Success. New city added to the database.");
+            return repository.save(city);
+        }
+    }
+
+    @Override
+    public void delete(Long id) throws ResourceNotFoundException {
+        if (findById(id).isPresent()) {
+            logger.info("Success. City with id " + id + " has been eliminated from our database.");
+            repository.deleteById(id);
+        } else {
+            logger.error("Attempt failed. City with id " + id + " could not be found. Database remains untouched.");
+            throw new ResourceNotFoundException("Attempt failed. City with id " + id + " could not be found. Database remains untouched.");
+        }
+    }
+    //additional services
+    public Optional<City> findByName(String name) throws ResourceNotFoundException {
+        Optional<City> citySearched = repository.findByName(name);
+        if (citySearched.isPresent()) {
+            logger.info("Success. City found with title " + name + ".");
+            return citySearched;
+        } else {
+            logger.error("Attempt failed. The city you are requesting does not exist in our database. Please check input name");
+            throw new ResourceNotFoundException("Attempt failed. The city you are requesting does not exist in our database. Please check input name.");
+        }
+    }
 }

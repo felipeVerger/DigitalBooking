@@ -1,22 +1,28 @@
 package com.proyecto.proyectInt.controller;
-
+import com.proyecto.proyectInt.exception.BadRequestException;
+import com.proyecto.proyectInt.exception.ResourceNotFoundException;
+import com.proyecto.proyectInt.model.DTO.ProductDTO;
 import com.proyecto.proyectInt.model.Product;
 import com.proyecto.proyectInt.service.ProductService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
-
 @CrossOrigin
 @RestController
 @RequestMapping("/products")
 public class ProductController {
-
     /* = Attributes = */
-    private final ProductService productService;
+    @Autowired
+    ProductService productService;
+    private static final Logger logger = LogManager.getLogger(ProductController.class);
+
 
     /* = Constructor = */
     @Autowired
@@ -24,43 +30,38 @@ public class ProductController {
         this.productService = productService;
     }
 
+
     /* = Get = */
-    @GetMapping("/{id}")
-    public ResponseEntity<?> findProductById(@PathVariable Integer id) {
-
-        Product product = productService.findById(id);
-
-        if (product.getName() != null) {
-            return ResponseEntity.ok(product);
-        } else {
-            return new ResponseEntity("There's no product with that id, please verify and try again", HttpStatus.NOT_FOUND);
-        }
-    }
-
     @GetMapping("/findAll")
-    public List<Product> findAllProducts() {
-        return productService.findAll().stream().collect(Collectors.toList());
+    public ResponseEntity<List<ProductDTO>> getProductList() {
+        logger.info("Retrieving data from product table");
+        return ResponseEntity.ok(productService.findAll());
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<ProductDTO>> getProductById(@PathVariable Long id) {
+        logger.info("Retrieving data from product table");
+        return ResponseEntity.ok(productService.findById(id));
     }
 
     /* = Post = */
     @PostMapping("/create")
-    public ResponseEntity<?> createProduct(@RequestBody Product product) {
-
-        ResponseEntity response;
-
-        if (productService.findProductByName(product.getName()) != null) {
-            response = new ResponseEntity("The product must have a name", HttpStatus.CONFLICT);
-        } else if (product.getImages().size() == 0) {
-            response = new ResponseEntity("The photo gallery must contain at least one image, please add it", HttpStatus.CONFLICT);
-        }else if (product.getLatitude() != null && product.getLongitude() != null) {
-            response = new ResponseEntity("The coordinates must have latitude and longitude, please enter both of them", HttpStatus.CONFLICT);
-        } else if (product.getFeatures().size() == 0) {
-            response = new ResponseEntity("The array of services should contain at least one service", HttpStatus.CONFLICT);
-        }else{
-            response = new ResponseEntity(productService.create(product), HttpStatus.CREATED);
-        }
-
-        return response;
+    public ResponseEntity<ProductDTO> addProduct(@RequestBody ProductDTO product) throws BadRequestException {
+        logger.info("Adding new product");
+        return ResponseEntity.ok(productService.create(product));
     }
 
+    /* = Put = */
+    @PutMapping("/update")
+    public ResponseEntity<ProductDTO> updateProduct(@RequestBody ProductDTO product) {
+        logger.info("Updating product");
+        return ResponseEntity.ok(productService.update(product));
+    }
+
+    /* = Delete = */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
+        logger.info("Deleting product");
+        productService.delete(id);
+        return ResponseEntity.ok("Product deleted");
+    }
 }

@@ -1,3 +1,4 @@
+
 FROM maven:3.6.3-jdk-11-slim AS BUILD
 COPY ./ProyectInt/src /home/app/src
 COPY ./ProyectInt/pom.xml /home/app/pom.xml
