@@ -31,5 +31,4 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
             "OR r.checkOut BETWEEN :start and :end")
     List<Reservation> findSpecificReservation(Integer id, LocalDate start, LocalDate end);
 
-
 }
