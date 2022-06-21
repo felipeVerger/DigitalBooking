@@ -1,12 +1,22 @@
-import React from 'react'
+import React, { useEffect} from 'react'
 import Section from "../components/Section";
 import PageContainer from "../components/PageContainer";
 import Layout from "../components/Layout";
 import ProductPage from '../components/ProductPage';
+import { useParams } from 'react-router-dom';
+import useFetch from '../hooks/useFetch'
 
+const Product = () => {
+  const { id } = useParams(); 
 
-const Product = ({product}) => {
+  const myHeaders = new Headers();
+    myHeaders.append("Authorization", "Basic dXNlcjpnMTBCb29raW5n");
 
+  const { data } = useFetch('http://localhost:8080/products/' + id, {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+  })
 
 const productoTemp = {    "id": 1,
 "name": "Hotel Casa Gabriela",
@@ -39,7 +49,7 @@ const productoTemp = {    "id": 1,
     <PageContainer>
     <Layout>
       <Section>
-        <ProductPage product={productoTemp} />
+        <ProductPage product={productoTemp} productDetail={data}/>
       </Section>
       </Layout>
     </PageContainer>

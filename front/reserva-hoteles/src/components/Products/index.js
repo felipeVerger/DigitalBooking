@@ -1,5 +1,4 @@
 import React, {useContext, useEffect, useState} from 'react'
-import productsList from '../../staticData/products.json'
 import { Body, Block, Title, RecommendationContainer, ErrorMessage } from './indexStyle'
 import ProductCard from './ProductsCard'
 import { FilterContext } from '../../context/filter-context'
@@ -9,7 +8,6 @@ import useFetch from '../../hooks/useFetch';
 const URL_API = 'http://localhost:8080/products/findAll'
 
 const Recomendaciones = () => {
-    // const [products, setProducts] = useState([]);
     const {filter} = useContext(FilterContext);
     const locationPath = useLocation().pathname;
 
@@ -32,11 +30,11 @@ const Recomendaciones = () => {
     : products && filter[1] === 'city' && locationPath === '/productsList' ? products.filter((product) => product.city.name + ', ' + product.city.country === filter[0]) : randomProducts : randomProducts;
 
 
-  return filteredArray.length === 0 && locationPath === '/productsList' ? <ErrorMessage>No se encontraron resultados</ErrorMessage> : 
+  return !filter && locationPath === '/productsList' ? <ErrorMessage>No se encontraron resultados</ErrorMessage> : 
   (
     <Body>
         <Block>
-            <Title>{locationPath === '/' ? 'Recomendaciones' : 'Buscaste: ' + filter[0]}</Title>
+            <Title>{locationPath === '/' ? 'Recomendaciones' : `${filter[0]}: ${filteredArray.length} alojamientos encontrados`}</Title>
             <RecommendationContainer>
                 {
                    filteredArray.map((product) => {

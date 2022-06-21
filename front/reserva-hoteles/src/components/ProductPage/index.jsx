@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import {
   HeaderBody,
@@ -66,7 +66,9 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { DateRangePicker } from "react-date-range";
 
-const ProductPage = ({ product }) => {
+
+const ProductPage = ({ product, productDetail }) => {
+  const { name, subtitle, description, address, longitude, latitude } = productDetail;
   const getRatingComment = (rating) => {
     switch (rating) {
       case 8:
@@ -76,7 +78,6 @@ const ProductPage = ({ product }) => {
     }
   };
 
-  let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal() {
@@ -113,7 +114,7 @@ const ProductPage = ({ product }) => {
         <HeaderBlock>
           <HeaderInfo>
             <HeaderCategory>{product.category.title}</HeaderCategory>
-            <HeaderName>{product.name}</HeaderName>
+            <HeaderName>{name}</HeaderName>
           </HeaderInfo>
           <CleanLink to={"/"}>
             <BackIcon />
@@ -126,7 +127,7 @@ const ProductPage = ({ product }) => {
             <Span bold={true}>
               <LocationIcon /> {product.city.name + ", " + product.city.country}
             </Span>
-            <LocationSubtitle bold={false}>A 900m del centro.</LocationSubtitle>
+            <LocationSubtitle bold={false}>{address}</LocationSubtitle>
           </ContentDiv>
           <ReviewContent>
             <ContentDiv>
@@ -183,8 +184,8 @@ const ProductPage = ({ product }) => {
             </Carousel>
           </ImageGalleryMobile>
           <ContentBlock>
-            <ContentTitle>{product.title}</ContentTitle>
-            <DescriptionContent>{product.description}</DescriptionContent>
+            <ContentTitle>{subtitle}</ContentTitle>
+            <DescriptionContent>{description}</DescriptionContent>
           </ContentBlock>
 
           <TitleBlock>
@@ -284,7 +285,7 @@ const ProductPage = ({ product }) => {
         </MainContent>
       </MainContentBody>
     </>
-  );
+  ) ;
 };
 
 export default ProductPage;
