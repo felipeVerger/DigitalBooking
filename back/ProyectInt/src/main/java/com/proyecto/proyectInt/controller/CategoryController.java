@@ -18,6 +18,7 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
     Logger logger = LogManager.getLogger(CategoryController.class);
+
     @GetMapping("/findAll")
     public ResponseEntity<List<Category>> getAllCategories() throws ResourceNotFoundException {
         logger.info("Retrieving data from category table");

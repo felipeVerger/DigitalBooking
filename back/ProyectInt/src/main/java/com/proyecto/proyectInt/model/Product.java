@@ -1,9 +1,11 @@
 package com.proyecto.proyectInt.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -62,9 +64,10 @@ public class Product {
     @JoinColumn(name = "cities_id_city", nullable = false)
     private City city;
 
-    @OneToMany(mappedBy = "products", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
-    private Set<Image> images;
+    @OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name="products_id_product")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Set<Image> images = new HashSet<>();
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore

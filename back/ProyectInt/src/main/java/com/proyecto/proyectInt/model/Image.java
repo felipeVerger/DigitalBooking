@@ -20,20 +20,20 @@ public class Image {
     @Column
     private String url;
 
-    @ManyToOne
-    @JoinColumn(name = "products_id_product", nullable = false)
-    private Product products;
+//    @ManyToOne
+//    @JoinColumn(name = "products_id_product", nullable = false)
+//    private Product products;
     public Image(String title, String url) {
         this.title = title;
         this.url = url;
     }
-    @Override
-    public String toString() {
-        return "Image{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", url='" + url + '\'' +
-                ", product=" + products +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Image{" +
+//                "id=" + id +
+//                ", title='" + title + '\'' +
+//                ", url='" + url + '\'' +
+//                ", product=" + products +
+//                '}';
+//    }
 }

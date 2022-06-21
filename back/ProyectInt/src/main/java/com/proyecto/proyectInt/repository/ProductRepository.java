@@ -8,10 +8,12 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
 @Transactional
 public interface ProductRepository extends JpaRepository<Product,Long> {
+
     @Query("SELECT p FROM Product p WHERE p.name = ?1")
     Optional<Product> findProductByProductName(String name);
 
@@ -20,6 +22,9 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
 
     @Query("SELECT p FROM Product p WHERE p.category.title = ?1")
     Optional<List<Product>> getProductsByCategory(String category);
+
+    @Query("SELECT p FROM Product p WHERE p.city.name = ?1")
+    Set<Product> getProductsByCity(String name);
 
     @Query("SELECT p FROM Product p WHERE p.score = ?1")
     Optional<List<Product>> filterByScore(int score);

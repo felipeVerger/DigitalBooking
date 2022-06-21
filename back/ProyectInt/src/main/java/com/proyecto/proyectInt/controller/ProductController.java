@@ -1,6 +1,7 @@
 package com.proyecto.proyectInt.controller;
 import com.proyecto.proyectInt.exception.BadRequestException;
 import com.proyecto.proyectInt.exception.ResourceNotFoundException;
+import com.proyecto.proyectInt.model.DTO.ProductDTO;
 import com.proyecto.proyectInt.model.Product;
 import com.proyecto.proyectInt.service.ProductService;
 import org.apache.logging.log4j.LogManager;
@@ -21,29 +22,44 @@ public class ProductController {
     @Autowired
     ProductService productService;
     private static final Logger logger = LogManager.getLogger(ProductController.class);
+
+
+    /* = Constructor = */
+    @Autowired
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
+
+
+    /* = Get = */
     @GetMapping("/findAll")
-    public ResponseEntity<Set<Product>> getProductList() {
+    public ResponseEntity<List<ProductDTO>> getProductList() {
         logger.info("Retrieving data from product table");
         return ResponseEntity.ok(productService.findAll());
     }
-    /* = Get = */
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Product>> getProductById(@PathVariable Long id) {
+    public ResponseEntity<Optional<ProductDTO>> getProductById(@PathVariable Long id) {
         logger.info("Retrieving data from product table");
         return ResponseEntity.ok(productService.findById(id));
     }
-    @PostMapping
-    public ResponseEntity<Product> addProduct(@RequestBody Product product) throws BadRequestException {
+
+    /* = Post = */
+    @PostMapping("/create")
+    public ResponseEntity<ProductDTO> addProduct(@RequestBody ProductDTO product) throws BadRequestException {
         logger.info("Adding new product");
         return ResponseEntity.ok(productService.create(product));
     }
+
+    /* = Put = */
     @PutMapping("/update")
-    public ResponseEntity<Product> updateProduct(@RequestBody Product product) throws ResourceNotFoundException{
+    public ResponseEntity<ProductDTO> updateProduct(@RequestBody ProductDTO product) {
         logger.info("Updating product");
         return ResponseEntity.ok(productService.update(product));
     }
+
+    /* = Delete = */
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteProduct(@PathVariable Long id) throws Exception{
+    public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
         logger.info("Deleting product");
         productService.delete(id);
         return ResponseEntity.ok("Product deleted");

@@ -1,8 +1,8 @@
 package com.proyecto.proyectInt.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proyecto.proyectInt.exception.BadRequestException;
-import com.proyecto.proyectInt.exception.ResourceNotFoundException;
 import com.proyecto.proyectInt.model.*;
+import com.proyecto.proyectInt.model.DTO.ProductDTO;
 import com.proyecto.proyectInt.repository.ProductRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,63 +11,97 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 @Service
-public class ProductService {
+public class ProductService implements EntityService<ProductDTO> {
     /* = Attributes = */
     @Autowired
     ProductRepository productRepository;
-    @Autowired
-    ObjectMapper mapper;
+    final private ObjectMapper mapper;
     private static final Logger logger = LogManager.getLogger(ProductService.class);
+
     /* = Constructor = */
     @Autowired
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, ObjectMapper mapper) {
         this.productRepository = productRepository;
+        this.mapper = mapper;
     }
     /* = Methods = */
-    public Product create(Product product) throws BadRequestException {
+    public ProductDTO create(ProductDTO product) throws BadRequestException {
         if (product.getId() != null){
             logger.error("Attempt failed. This product already exists in our database.");
             throw new BadRequestException("Attempt failed. This product already exists in our database.");
         }else{
             logger.info("Success. New product added to the database.");
-            return productRepository.save(product);
+            productRepository.save(mapper.convertValue(product, Product.class));
+            return product;
         }
     }
-    public Set<Product> findAll(){
+    @Override
+    public List<ProductDTO> findAll(){
         List<Product> products = productRepository.findAll();
-        Set<Product> product1 = new HashSet<>();
+        List<ProductDTO> productsDto = new ArrayList<>();
 
         for (Product product : products) {
-            product1.add(mapper.convertValue(product, Product.class));
+            productsDto.add(mapper.convertValue(product, ProductDTO.class));
         }
-        return product1;
+        Collections.shuffle(productsDto);
+        return productsDto;
     }
-    public Optional<Product> findById(Long id) {
-        return productRepository.findById(id);
-    }
-    public Product update(Product product) throws ResourceNotFoundException{
-        if(findById(product.getId()) == null)
-            throw  new ResourceNotFoundException("Product: " + product.getId() +" not found.");
-        return productRepository.save(product);
-    }
-    public void delete(Long id) throws ResourceNotFoundException{
-        Optional<Product> productFound = findById(id);
+
+    public Optional<ProductDTO> findById(Long id) {
+        logger.info("Search product by id");
+        ProductDTO product = null;
+        Optional<Product> productFound = productRepository.findById(id);
         if (productFound.isPresent()) {
+            product = mapper.convertValue(productFound, ProductDTO.class);
+        }
+        return Optional.ofNullable(product);
+    }
+    public ProductDTO update(ProductDTO product) {
+        Product productRepo = productRepository.findById(product.getId()).get();
+        productRepo.setName(product.getName());
+        productRepo.setDescription(product.getDescription());
+        productRepo.setCity(product.getCity());
+        productRepo.setCategory(product.getCategory());
+        productRepo.setAddress(product.getAddress());
+        productRepo.setLatitude(product.getLatitude());
+        productRepo.setLongitude(product.getLongitude());
+        productRepo.setScore(product.getScore());
+        productRepo.setFeatures(product.getFeatures());
+        productRepo.setImages(product.getImages());
+        productRepository.save(productRepo);
+        return mapper.convertValue(product, ProductDTO.class);
+    }
+
+    public void delete(Long id) {
+        if(productRepository.findById(id).isPresent()){
             productRepository.deleteById(id);
+            logger.info("Product has been deleted correctly!");
+            System.out.println("Product has been deleted correctly!");
         } else {
-            throw new ResourceNotFoundException("The product with id: " + id + " can't be deleted, search error");
+            logger.error("Product not found!");
+            System.out.println("Product not found!");
         }
     }
-    //additional services
-//    public Product findProductByName(String name){
-//        return productRepository.findProductByProductName(name).orElse(null);
-//    }
-//
-//    public Optional<List<String>> getLocations(){
-//        return productRepository.getLocations();
-////    }
-//
-//    public Optional<List<Product>> getProductsByCategory(String category){
-//        return productRepository.getProductsByCategory(category);
-//    }
+
+    public ProductDTO findProductByName(String name) {
+        logger.info("Search product by name");
+
+        ProductDTO productDTO = null;
+        Optional<Product> prod = productRepository.findProductByProductName(name);
+        if(prod.isPresent()) {
+            productDTO = mapper.convertValue(prod, ProductDTO.class);
+        }
+        return productDTO;
+    }
+
+    public Set<Product> listProductsByCity(String name){
+        logger.info("List all products filtered by city");
+        return productRepository.getProductsByCity(name);
+
+    }
+
+    public Optional<List<Product>> listProductsByCategory(String title){
+        logger.info("List all products filtered by category");
+        return productRepository.getProductsByCategory(title);
+    }
 }
