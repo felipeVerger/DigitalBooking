@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -64,4 +66,39 @@ public class ProductController {
         productService.delete(id);
         return ResponseEntity.ok("Product deleted");
     }
+
+    //additional methods
+
+    // TODO CONTROLAR SI ESTOY HACIENDO BIEN CON DTO
+
+    @GetMapping("/{name}")
+    public ResponseEntity<ProductDTO> getProductByName(@PathVariable String name) {
+        logger.info("Retrieving data from products' table");
+        return ResponseEntity.ok(productService.findProductByName(name));
+    }
+
+    @GetMapping("/{city}")
+    public ResponseEntity<List<Product>> getProductByCity(@PathVariable String city) {
+        logger.info("Retrieving data from products' table");
+        return ResponseEntity.ok(productService.listProductsByCity(city));
+    }
+
+    @GetMapping("/{category}")
+    public ResponseEntity <List<Product>> getProductByCategory(@PathVariable String category) {
+        logger.info("Retrieving data from products' table");
+        return ResponseEntity.ok(productService.listProductsByCategory(category));
+    }
+
+    @GetMapping("/{score}")
+    public ResponseEntity<List<Product>> getProductByScore(@PathVariable int score) {
+        logger.info("Retrieving data from products' table");
+        return ResponseEntity.ok(productService.listProductsByScore(score));
+    }
+
+    @GetMapping("/{startDate}/{endDate}/{city}")
+    public ResponseEntity<List<Product>> getProductByDate(@PathVariable LocalDate startDate, @PathVariable LocalDate endDate, @PathVariable String city) {
+        logger.info("Retrieving data from products' table");
+        return ResponseEntity.ok(productService.findProductsByDatesAndCity(startDate, endDate, city));
+    }
+
 }

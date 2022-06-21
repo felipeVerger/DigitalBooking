@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.*;
 @Service
 public class ProductService implements EntityService<ProductDTO> {
@@ -94,14 +95,27 @@ public class ProductService implements EntityService<ProductDTO> {
         return productDTO;
     }
 
-    public Set<Product> listProductsByCity(String name){
+    public List<Product> listProductsByCity(String name){
         logger.info("List all products filtered by city");
         return productRepository.getProductsByCity(name);
 
     }
 
-    public Optional<List<Product>> listProductsByCategory(String title){
+    public List<Product> listProductsByCategory(String title){
         logger.info("List all products filtered by category");
         return productRepository.getProductsByCategory(title);
     }
+
+    public List<Product> listProductsByScore(int score){
+        logger.info("List all products filtered by score");
+        return productRepository.filterByScore(score);
+    }
+
+    public List<Product> findProductsByDatesAndCity(LocalDate startDate, LocalDate endDate, String city){
+        logger.info("List all products filtered by dates and city");
+        return productRepository.findProductsByDatesAndCity(startDate, endDate, city);
+    }
+
+
+
 }
