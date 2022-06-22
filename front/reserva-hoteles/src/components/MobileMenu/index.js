@@ -22,6 +22,11 @@ const MobileMenu = ({ isMenuOpen, toggle }) => {
   const { user, setUser } = useContext(UserContext);
   const { open, toggleOpen } = useContext(MenuContext);
   const location = useLocation().pathname;
+
+  const handleUserSession = () => {
+    setUser(null);
+    localStorage.removeItem('token');
+  }
   return (
     <MobileMenuContainer isMenuOpen={open} onClick={toggleOpen}>
       <MobileMenuHeader>
@@ -49,7 +54,7 @@ const MobileMenu = ({ isMenuOpen, toggle }) => {
       <MenuLinksContainer>
         <MenuLink to={"/"}>Inicio</MenuLink>
         {user ? (
-          <MenuLink to={"/"} onClick={() => setUser(null)}>
+          <MenuLink to={"/"} onClick={handleUserSession}>
             Cerrar sesion
           </MenuLink>
         ) : (

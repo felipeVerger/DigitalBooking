@@ -27,15 +27,15 @@ const Header = () => {
 
   const location = useLocation().pathname;
 
-
   const { toggleOpen } = useContext(MenuContext);
 
   const {user, setUser} = useContext(UserContext);
 
 
-
-
-
+  const handleUserSession = () => {
+    setUser(null);
+    localStorage.removeItem('token');
+  }
 
   return (
     <HeaderContainer>
@@ -51,7 +51,7 @@ const Header = () => {
             <AvatarIcon name={user.nombre} round size="40px" color={themes.light.primary} />
                   {/* <HeaderButton onClick={() => {setUser(null)}}>Cerrar sesion</HeaderButton> */}
                   <UserInfo>
-                  <Greeting>Hola, <AiOutlineClose style={{cursor: "pointer"}} onClick={()=> setUser(null)}/></Greeting>
+                  <Greeting>Hola, <AiOutlineClose style={{cursor: "pointer"}} onClick={handleUserSession}/></Greeting>
                   <UserName>{user.nombre}</UserName>
                   </UserInfo>
 

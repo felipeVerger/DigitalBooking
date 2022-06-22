@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom'
 import useFetch from '../../hooks/useFetch';
 import Loading from '../Loading'
 
-const URL_API = 'http://34.223.225.243:8080/products/findAll'
+const URL_API = 'http://localhost:8080/products/findAll'
 
 const Recomendaciones = () => {
     const {filter} = useContext(FilterContext);

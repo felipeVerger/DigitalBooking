@@ -65,6 +65,7 @@ import { es } from "date-fns/locale";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { DateRangePicker } from "react-date-range";
+import { Link } from "react-router-dom";
 
 
 const ProductPage = ({ product, productDetail }) => {
@@ -240,7 +241,9 @@ const ProductPage = ({ product, productDetail }) => {
                   <Span bold={true}>
                     Agrega tus fechas de viaje para obtener precios exactos
                   </Span>
+                  <Link to={localStorage.getItem('token') ? '/product/:id/booking' : '/login'} style={{width: '100%'}}>
                     <ReservationButton>Iniciar Reserva</ReservationButton>
+                  </Link>
                 </ReservationBlock>
               </Row>
             </CalendarContent>
