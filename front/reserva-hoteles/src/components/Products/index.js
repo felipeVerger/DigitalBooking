@@ -4,6 +4,7 @@ import ProductCard from './ProductsCard'
 import { FilterContext } from '../../context/filter-context'
 import { useLocation } from 'react-router-dom'
 import useFetch from '../../hooks/useFetch';
+import Loading from '../Loading'
 
 const URL_API = 'http://34.223.225.243:8080/products/findAll'
 
@@ -14,7 +15,7 @@ const Recomendaciones = () => {
     const myHeaders = new Headers();
     myHeaders.append("Authorization", "Basic dXNlcjpnMTBCb29raW5n");
 
-    const { data: products } = useFetch(URL_API, {
+    const { data: products, loading, error } = useFetch(URL_API, {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow'
@@ -30,7 +31,7 @@ const Recomendaciones = () => {
     : products && filter[1] === 'city' && locationPath === '/productsList' ? products.filter((product) => product.city.name + ', ' + product.city.country === filter[0]) : randomProducts : randomProducts;
 
 
-  return !filter && locationPath === '/productsList' ? <ErrorMessage>No se encontraron resultados</ErrorMessage> : 
+  return loading ? <Loading/> : !filter && locationPath === '/productsList' ? <ErrorMessage>No se encontraron resultados</ErrorMessage> : 
   (
     <Body>
         <Block>

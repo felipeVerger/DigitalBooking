@@ -5,6 +5,7 @@ import Layout from "../components/Layout";
 import ProductPage from '../components/ProductPage';
 import { useParams } from 'react-router-dom';
 import useFetch from '../hooks/useFetch'
+import Loading from '../components/Loading';
 
 const Product = () => {
   const { id } = useParams(); 
@@ -57,7 +58,7 @@ const productoTemp = {    "id": 1,
     <PageContainer>
     <Layout>
       <Section>
-      {loading ? <h1> LOADING...</h1> : <ProductPage product={productoTemp} productDetail={data}/>}
+      {loading ? <Loading/> : <ProductPage product={productoTemp} productDetail={data}/>}
       </Section>
       </Layout>
     </PageContainer>

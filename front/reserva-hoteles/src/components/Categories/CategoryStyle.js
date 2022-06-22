@@ -19,7 +19,7 @@ export const Box = styled.div`
 `;
 
 export const InfoSection = styled.section`
-  padding: 10px;
+  padding: 5px;
 `;
 
 export const CategoryText = styled.h4`
