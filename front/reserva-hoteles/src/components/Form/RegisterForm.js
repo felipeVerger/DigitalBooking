@@ -36,6 +36,7 @@ const RegisterForm = () => {
     e.preventDefault();
     console.log(formValues);
     setErrors(validate(formValues));
+    localStorage.setItem('token', 1)
     setToSumbit(true);
   };
 

@@ -411,7 +411,7 @@ background-color: ${props => props.theme.primary};
 color: ${props => props.theme.color_text_secondary};
 padding: 12px 28px;
 border: none;
-width: 80%;
+width: 100%;
 
 `
 export const Row = styled.div`
