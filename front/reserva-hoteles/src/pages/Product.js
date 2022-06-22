@@ -12,11 +12,14 @@ const Product = () => {
   const myHeaders = new Headers();
     myHeaders.append("Authorization", "Basic dXNlcjpnMTBCb29raW5n");
 
-  const { data } = useFetch('http://localhost:8080/products/' + id, {
+    console.log(id)
+  const { data, loading, error } = useFetch('http://34.223.225.243:8080/products/' + id, {
     method: 'GET',
     headers: myHeaders,
     redirect: 'follow'
   })
+
+
 
 const productoTemp = {    "id": 1,
 "name": "Hotel Casa Gabriela",
@@ -45,14 +48,20 @@ const productoTemp = {    "id": 1,
 }
 }
 
+
+
+
   return (
+
+
     <PageContainer>
     <Layout>
       <Section>
-        <ProductPage product={productoTemp} productDetail={data}/>
+      {loading ? <h1> LOADING...</h1> : <ProductPage product={productoTemp} productDetail={data}/>}
       </Section>
       </Layout>
     </PageContainer>
+
   )
 }
 

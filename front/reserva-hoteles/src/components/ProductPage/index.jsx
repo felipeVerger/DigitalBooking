@@ -68,10 +68,24 @@ import { DateRangePicker } from "react-date-range";
 
 
 const ProductPage = ({ product, productDetail }) => {
-  const { name, subtitle, description, address, longitude, latitude } = productDetail;
+  console.log(productDetail)
+  const { name, subtitle, description, address, score, city = {}, category = {}, longitude, latitude } = productDetail;
   const getRatingComment = (rating) => {
     switch (rating) {
-      case 8:
+      case 10:
+        return "Excelente";
+        case 9:
+        case 8:
+        return "Muy bueno";
+        case 7:
+        return "Bueno";
+        case 6:
+        case 5:
+        case 4:
+        return "Aceptable";
+        case 3:
+        case 2:
+        case 1:
         return "Muy bueno";
       default:
         return "No calificado";
@@ -94,6 +108,8 @@ const ProductPage = ({ product, productDetail }) => {
     key: "selection",
   };
 
+  console.log(category.title)
+
 
   return (
     <>
@@ -113,7 +129,7 @@ const ProductPage = ({ product, productDetail }) => {
       <HeaderBody>
         <HeaderBlock>
           <HeaderInfo>
-            <HeaderCategory>{product.category.title}</HeaderCategory>
+            <HeaderCategory>{category.title}</HeaderCategory>
             <HeaderName>{name}</HeaderName>
           </HeaderInfo>
           <CleanLink to={"/"}>
@@ -125,29 +141,29 @@ const ProductPage = ({ product, productDetail }) => {
         <LocationBlock>
           <ContentDiv>
             <Span bold={true}>
-              <LocationIcon /> {product.city.name + ", " + product.city.country}
+              <LocationIcon /> {city.name + ", " + city.country}
             </Span>
             <LocationSubtitle bold={false}>{address}</LocationSubtitle>
           </ContentDiv>
           <ReviewContent>
             <ContentDiv>
               <Span bold={true} color="primary">
-                {getRatingComment(product.rating)}
+                {getRatingComment(score)}
               </Span>
               <Span>
                 {[1, 2, 3, 4, 5].map((_, i) => {
-                  if (i + 1 <= product.rating / 2) {
+                  if (i + 1 <= score / 2) {
                     return <Star />;
                   } else if (
-                    i < product.rating / 2 &&
-                    i + ((product.rating / 2) % 1) >= i + 0.5
+                    i < score / 2 &&
+                    i + ((score / 2) % 1) >= i + 0.5
                   ) {
                     return <HalfStar />;
                   } else return <EmptyStar />;
                 })}
               </Span>
             </ContentDiv>
-            <RatingDisplay>{product.rating}</RatingDisplay>
+            <RatingDisplay>{score}</RatingDisplay>
           </ReviewContent>
         </LocationBlock>
       </LocationBody>
