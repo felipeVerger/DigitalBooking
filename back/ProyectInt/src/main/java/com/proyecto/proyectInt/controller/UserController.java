@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,4 +44,17 @@ public class UserController {
         userService.delete(id);
         return ResponseEntity.ok("User deleted");
     }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<User> getUserByEmail(@PathVariable String email) throws ResourceNotFoundException {
+        logger.info("Retrieving data from user table");
+        return ResponseEntity.ok(userService.findByEmail(email));
+    }
+
+    // para que funcione este getmapping hay que tener un metododefinido para bsucar usuario con userdetails
+
+    //@GetMapping("/username/{username}")
+    //public ResponseEntity<UserDetails> getUserByUsername(@PathVariable String username) throws ResourceNotFoundException {
+    //    logger.info("Retrieving data from user table");
+    //    return ResponseEntity.ok(userService.loadUserByUsername(username));
 }

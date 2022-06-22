@@ -46,9 +46,25 @@ public class ReservationController {
         return ResponseEntity.ok("Reservation deleted");
     }
     //additional methods
-//    @GetMapping("/{date1}{date2}")
-//    public ResponseEntity<List<Reservation>> getReservationByDate(@PathVariable LocalDate date1, @PathVariable LocalDate date2) throws ResourceNotFoundException {
-//        logger.info("Retrieving data from reservation table");
-//        return ResponseEntity.ok(reservationService.filterByDate(date1, date2));
-//    }
+    @GetMapping("/date/{date1}{date2}")
+    public ResponseEntity<List<Reservation>> getReservationByDate(@PathVariable LocalDate date1, @PathVariable LocalDate date2) throws ResourceNotFoundException {
+        logger.info("Retrieving data from reservation table");
+        return ResponseEntity.ok(reservationService.filterByDate(date1, date2));
+    }
+    @GetMapping("/product/{id}")
+    public ResponseEntity<List<Reservation>> getReservationByProductId(@PathVariable Long id) throws ResourceNotFoundException {
+        logger.info("Retrieving data from reservation table");
+        return ResponseEntity.ok(reservationService.findByProductId(id));
+    }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<List<Reservation>> getReservationByUserId(@PathVariable Long id) throws ResourceNotFoundException {
+        logger.info("Retrieving data from reservation table");
+        return ResponseEntity.ok(reservationService.findByUserId(id));
+    }
+    @GetMapping("/product_date/{id}/{start}/{end}")
+    public ResponseEntity<List<Reservation>> getSpecificReservation(@PathVariable Integer id, @PathVariable LocalDate start, @PathVariable LocalDate end) throws ResourceNotFoundException {
+        logger.info("Retrieving data from reservation table");
+        return ResponseEntity.ok(reservationService.findSpecificReservation(id, start, end));
+    }
 }

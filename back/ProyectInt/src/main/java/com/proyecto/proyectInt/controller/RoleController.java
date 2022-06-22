@@ -1,5 +1,4 @@
 package com.proyecto.proyectInt.controller;
-import com.proyecto.proyectInt.exception.BadRequestException;
 import com.proyecto.proyectInt.exception.ResourceNotFoundException;
 import com.proyecto.proyectInt.model.Role;
 import org.apache.logging.log4j.LogManager;

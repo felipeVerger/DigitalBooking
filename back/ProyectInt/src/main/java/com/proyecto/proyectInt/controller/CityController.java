@@ -47,4 +47,9 @@ public class CityController {
         cityservice.delete(id);
         return ResponseEntity.ok("City deleted");
     }
+    @GetMapping("/name/{name}")
+    public ResponseEntity<Optional<City>> getCityByName(@PathVariable String name) throws ResourceNotFoundException {
+        logger.info("Retrieving data from city table");
+        return ResponseEntity.ok(cityservice.findByName(name));
+    }
 }
