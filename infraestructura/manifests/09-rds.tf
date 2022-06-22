@@ -7,7 +7,7 @@ module "db" {
   engine_version      = "8.0"
   instance_class      = "db.t2.small"
   allocated_storage   = 20
-  snapshot_identifier = "arn:aws:rds:us-west-2:145504712931:snapshot:toprod"
+  snapshot_identifier = "arn:aws:rds:us-west-2:145504712931:snapshot:dbking"
 
 
   db_name  = "proyecto_integrador"
@@ -22,11 +22,14 @@ module "db" {
   # DB parameter group
   family = "mysql8.0"
 
+  skip_final_snapshot = true
+
   # DB option group
   major_engine_version = "8.0"
 
   publicly_accessible = true
 
   vpc_security_group_ids = [aws_security_group.allow_rds.id]
+
 
 }

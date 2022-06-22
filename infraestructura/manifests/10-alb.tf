@@ -7,12 +7,15 @@ module "alb" {
   /*Option-1: Give as list with specific subnets or in next line, pass all public subnets 
   subnets = [
     module.vpc.public_subnets[0],
+
     module.vpc.public_subnets[1]
   ]*/
   subnets         = module.vpc.public_subnets
   security_groups = [module.loadbalancer_sg.security_group_id]
+
+
   # Listeners
-  # HTTP Listener - HTTP to HTTPS Redirect
+  # ! HTTP Listener - HTTP to HTTPS Redirect
   http_tcp_listeners = [
     {
       port        = 80
@@ -28,14 +31,18 @@ module "alb" {
   # Target Groups
   target_groups = [
     {
-      backend_protocol     = "HTTP"
-      backend_port         = 80
-      target_type          = "instance"
+      backend_protocol = "HTTP"
+      backend_port     = 80
+      target_type      = "instance"
+      targets = [{
+        target_id = module.ec2_public[0].id
+        port      = 80
+      }]
       deregistration_delay = 10
       health_check = {
         enabled             = true
         interval            = 30
-        path                = "/index.html"
+        path                = "/"
         port                = "traffic-port"
         healthy_threshold   = 3
         unhealthy_threshold = 3
@@ -45,9 +52,32 @@ module "alb" {
       }
       protocol_version = "HTTP1"
     },
+    {
+      backend_protocol = "HTTP"
+      backend_port     = 8080
+      target_type      = "instance"
+      targets = [{
+        target_id = module.ec2_private[0].id
+        port      = 8080
+      }]
+      deregistration_delay = 10
+      health_check = {
+        enabled             = true
+        interval            = 30
+        path                = "/products"
+        port                = "traffic-port"
+        healthy_threshold   = 3
+        unhealthy_threshold = 3
+        timeout             = 6
+        protocol            = "HTTP"
+        matcher             = "200-399"
+      }
+      protocol_version = "HTTP1"
+    }
+
   ]
 
-  # HTTPS Listener
+  # ! HTTPS Listener
   https_listeners = [
     {
       port            = 443
@@ -61,7 +91,7 @@ module "alb" {
       }
     },
   ]
-
+  #!
   # HTTPS Listener Rules
   https_listener_rules = [
     # Rule-1: /app1* should go to App1 EC2 Instances
@@ -81,6 +111,7 @@ module "alb" {
   ]
   tags = local.common_tags # ALB Tags
 }
+
 
 
 
