@@ -1,0 +1,13 @@
+---
+- hosts: front
+
+  become: yes
+  tasks:
+
+  - name: pull frontend docker container  
+    shell: "docker pull varesinatalia/realia:latest"
+
+  - name: run frontend docker containers
+    shell: "docker run -p 80:80 --name digitalwebtier varesinatalia/realia:latest"
+
+
