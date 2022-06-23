@@ -158,6 +158,14 @@ const Form = ({product}) => {
     return errors;
   };
 
+  function getWindowDimensions() {
+    const { innerWidth: width, innerHeight: height } = window;
+    return {
+      width,
+      height
+    };
+  }
+
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && toSumbit) {
@@ -221,7 +229,7 @@ const Form = ({product}) => {
           <CalendarContainer>
             <DateRange
               minDate={new Date()}
-              months={2}
+              months={getWindowDimensions().width > 768 ? 2 : 1}
               direction="horizontal"
               disabledDates={[]}
               onChange={(item) => setDates([item.selection])}

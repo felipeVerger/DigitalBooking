@@ -8,6 +8,9 @@ flex-direction: row;
 @media only screen and (max-width: 1200px) {
     flex-direction: column;
   }
+  @media only screen and (max-width: 768px) {
+   padding: 1rem;
+  }
 
 
     
@@ -27,6 +30,10 @@ flex-wrap: wrap;
 display: flex;
 flex-direction: row;
 width: 100%;
+@media only screen and (max-width: 1200px) {
+    flex-direction: column;
+  }
+
 `
 
 export const Label = styled.div`
