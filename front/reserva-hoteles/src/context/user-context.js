@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { useEffect } from "react";
+import { MdEmail } from "react-icons/md";
 
 export const UserContext = React.createContext();
 
@@ -9,7 +10,8 @@ export const UserProvider = ({children}) => {
   const [user, setUser] = useState(null);
   useEffect(() => {
     sessionStorage.getItem('token')!= null ? setUser({
-      nombre: sessionStorage.getItem('name')
+      nombre: sessionStorage.getItem('name'),
+      email: sessionStorage.getItem('email')
     }    ) : setUser(null);
 
  }, [])

@@ -34,7 +34,7 @@ const Header = () => {
 
   const handleUserSession = () => {
     setUser(null);
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
   }
 
   return (
