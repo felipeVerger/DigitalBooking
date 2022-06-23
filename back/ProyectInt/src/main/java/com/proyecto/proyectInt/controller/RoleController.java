@@ -1,5 +1,4 @@
 package com.proyecto.proyectInt.controller;
-import com.proyecto.proyectInt.exception.BadRequestException;
 import com.proyecto.proyectInt.exception.ResourceNotFoundException;
 import com.proyecto.proyectInt.model.Role;
 import org.apache.logging.log4j.LogManager;
@@ -26,21 +25,5 @@ public class RoleController {
     public ResponseEntity<Optional<Role>> getRoleById(@PathVariable Long id) throws ResourceNotFoundException {
         logger.info("Retrieving data from role table");
         return ResponseEntity.ok(roleService.findById(id));
-    }
-    @PostMapping
-    public ResponseEntity<Role> addRole(@RequestBody Role role) throws BadRequestException {
-        logger.info("Adding new role");
-        return ResponseEntity.ok(roleService.create(role));
-    }
-    @PutMapping
-    public ResponseEntity<Role> updateRole(@RequestBody Role role) throws BadRequestException {
-        logger.info("Updating role");
-        return ResponseEntity.ok(roleService.update(role));
-    }
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteRole(@PathVariable Long id) throws ResourceNotFoundException {
-        logger.info("Deleting role");
-        roleService.delete(id);
-        return ResponseEntity.ok("Role deleted");
     }
 }

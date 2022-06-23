@@ -71,31 +71,31 @@ public class ProductController {
 
     // TODO CONTROLAR SI ESTOY HACIENDO BIEN CON DTO
 
-    @GetMapping("/{name}")
+    @GetMapping("/name/{name}")
     public ResponseEntity<ProductDTO> getProductByName(@PathVariable String name) {
         logger.info("Retrieving data from products' table");
         return ResponseEntity.ok(productService.findProductByName(name));
     }
 
-    @GetMapping("/{city}")
+    @GetMapping("/city/{city}")
     public ResponseEntity<List<Product>> getProductByCity(@PathVariable String city) {
         logger.info("Retrieving data from products' table");
         return ResponseEntity.ok(productService.listProductsByCity(city));
     }
 
-    @GetMapping("/{category}")
+    @GetMapping("/category/{category}")
     public ResponseEntity <List<Product>> getProductByCategory(@PathVariable String category) {
         logger.info("Retrieving data from products' table");
         return ResponseEntity.ok(productService.listProductsByCategory(category));
     }
 
-    @GetMapping("/{score}")
+    @GetMapping("/score/{score}")
     public ResponseEntity<List<Product>> getProductByScore(@PathVariable int score) {
         logger.info("Retrieving data from products' table");
         return ResponseEntity.ok(productService.listProductsByScore(score));
     }
 
-    @GetMapping("/{startDate}/{endDate}/{city}")
+    @GetMapping("/date/{startDate}/{endDate}/{city}")
     public ResponseEntity<List<Product>> getProductByDate(@PathVariable LocalDate startDate, @PathVariable LocalDate endDate, @PathVariable String city) {
         logger.info("Retrieving data from products' table");
         return ResponseEntity.ok(productService.findProductsByDatesAndCity(startDate, endDate, city));

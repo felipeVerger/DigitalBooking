@@ -42,7 +42,7 @@ const Recomendaciones = () => {
                         return (
                             <ProductCard
                                 key={product.id}
-                                img={product.category.urlImage}
+                                img={product.images && product.images[0] ? product.images[0].url : ""}
                                 category={product.category.title}
                                 title={product.name}
                                 location={product.address}

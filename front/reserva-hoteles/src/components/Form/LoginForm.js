@@ -10,7 +10,7 @@ import {
   FormSwitchText,
   ErrorText,
 } from "./FormComponents";
-import { Link, useNavigate, Navigate} from "react-router-dom";
+import { Link, useNavigate, Navigate, useLocation} from "react-router-dom";
 import { UserContext } from "../../context/user-context";
 
 const LoginForm = () => {
@@ -56,6 +56,10 @@ const LoginForm = () => {
     return errors;
   };
 
+  const location = useLocation();
+
+  const prevUrl = 
+
   useEffect(() => {
     if (Object.keys(errors).length === 0 && toSumbit) {
       login();
@@ -63,11 +67,11 @@ const LoginForm = () => {
   }, [errors]);
 
     if (user) {
-
       return <Navigate to={'/'} />
   }
   else return(
     <FormContainer>
+      {localStorage.getItem('token') ? null : <h2>Debes registrarte para reservar un producto</h2>}
       <FormTitle>Iniciar sesión</FormTitle>
       <InputContainer>
         <Label htmlFor={"email"}>Correo electrónico</Label>

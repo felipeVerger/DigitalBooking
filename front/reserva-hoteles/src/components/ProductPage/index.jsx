@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Carousel } from "react-responsive-carousel";
 import {
   HeaderBody,
@@ -65,7 +65,7 @@ import { es } from "date-fns/locale";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { DateRangePicker } from "react-date-range";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const ProductPage = ({ product, productDetail }) => {
@@ -108,8 +108,6 @@ const ProductPage = ({ product, productDetail }) => {
     endDate: new Date(),
     key: "selection",
   };
-
-  console.log(category.title)
 
 
   return (
