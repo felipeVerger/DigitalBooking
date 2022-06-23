@@ -60,7 +60,7 @@ const ProductBooking = () => {
         <Layout>
             <Section>
               
-            {loading ? <Loading/> : <Booking product={data}/> }
+            {loading ? <Loading/> : <Booking product={productoTemp}/> }
                
             </Section>
         </Layout>

@@ -21,7 +21,7 @@ import {
   Dates,
   Div
 } from "./FormStyle";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import { UserContext } from "../../context/user-context";
 import { DateRange } from "react-date-range";
@@ -53,12 +53,42 @@ const Form = ({product}) => {
     setformValues({ ...formValues, [name]: value });
   };
 
-  const login = () => {
-    setUser({
-      email: formValues.email,
-      nombre: formValues.email.split("@")[0],
+
+
+  const register = async  () => {
+    let url = 'http://localhost:8080/';
+    let body = JSON.stringify({
+      "name": formValues.nombre,
+      "lastName": formValues.apellido,
+      "email": formValues.email,
+      "city": formValues.ciudad,
+      "startDate": dates.startDate,
+      "endDate": dates.endDate
     });
+    let options = {
+      method: 'POST',
+      headers: myHeaders,
+      redirect: 'follow',
+      body: body
+    }
+    console.log(formValues);
+    const response = await fetch(url, options)
+    .catch(() => {
+      
+      return;});
     navigate("/");
+  };
+
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", "Basic dXNlcjpnMTBCb29raW5n");
+  myHeaders.append("Content-Type", "application/json");
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrors(validate(formValues));
+    console.log(validate(formValues))
+    setToSumbit(true);
   };
 
   const optionsString = [
@@ -102,26 +132,28 @@ const Form = ({product}) => {
     },
   ]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setErrors(validate(formValues));
-    setToSumbit(true);
-  };
-
   const validate = (values) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     const errors = {};
+    if (!values.nombre) {
+      errors.nombre = "Este campo es obligatorio.";
+    }
+
+    if (!values.apellido) {
+      errors.apellido = "Este campo es obligatorio.";
+    }
+
+    if (!values.ciudad) {
+      errors.ciudad = "Este campo es obligatorio.";
+    }
+
     if (!values.email) {
       errors.email = "Este campo es obligatorio.";
     } else if (!regex.test(values.email)) {
       errors.email = "El correo electrónico ingresado no es valido.";
     }
 
-    if (!values.password) {
-      errors.password = "Este campo es obligatorio.";
-    } else if (values.password.length < 6) {
-      errors.password = "La contraseña tiene que ser minimo de 6 caracteres.";
-    }
+
 
     return errors;
   };
@@ -129,7 +161,7 @@ const Form = ({product}) => {
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && toSumbit) {
-      login();
+      register();
     }
   }, [errors]);
 
@@ -237,7 +269,9 @@ const Form = ({product}) => {
           </Dates>
           </Row>
           <Div>
+            <Link to={"successful"}>
             <ReservationButton>Confirmar Reserva</ReservationButton>
+            </Link>
           </Div>
         </ConfirmationBlock>
 

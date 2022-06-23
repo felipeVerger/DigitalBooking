@@ -46,7 +46,7 @@ const RegisterForm = () => {
     console.log(formValues);
     const response = await fetch(url, options)
     .catch(() => {
-      
+      alert("Hubo un error. Reintentalo mas tarde.")
       return;});
     const data = await response.json();
     // return data;

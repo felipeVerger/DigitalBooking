@@ -25,12 +25,13 @@ import {
 import Form from './Form'
 
 const Booking = ({product}) => {
+  const {category = {} } = product;
   return (
     <Container>
         <HeaderBody>
         <HeaderBlock>
           <HeaderInfo>
-            <HeaderCategory>{product.category.title}</HeaderCategory>
+            <HeaderCategory>{category.title}</HeaderCategory>
             <HeaderName>{product.name}</HeaderName>
           </HeaderInfo>
           <CleanLink to={"/product/" + product.id}>
