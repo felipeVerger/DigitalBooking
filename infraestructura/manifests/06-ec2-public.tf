@@ -4,7 +4,7 @@ module "ec2_public" {
 
   source = "terraform-aws-modules/ec2-instance/aws"
   name   = "${var.environment}-BastionHost"
-  count  = 3
+  count  = 2
 
   ami           = data.aws_ami.amzlinux2.id
   instance_type = "t2.small"
