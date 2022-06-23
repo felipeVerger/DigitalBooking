@@ -25,7 +25,7 @@ const MobileMenu = ({ isMenuOpen, toggle }) => {
 
   const handleUserSession = () => {
     setUser(null);
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
   }
   return (
     <MobileMenuContainer isMenuOpen={open} onClick={toggleOpen}>

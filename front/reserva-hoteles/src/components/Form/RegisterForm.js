@@ -27,6 +27,10 @@ const RegisterForm = () => {
 
   const { user, setUser } = useContext(UserContext);
 
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", "Basic dXNlcjpnMTBCb29raW5n");
+  myHeaders.append("Content-Type", "application/json");
+
   const register = async  () => {
     let url = 'http://localhost:8080/auth/signup';
     let body = JSON.stringify({
@@ -54,9 +58,6 @@ const RegisterForm = () => {
     sessionStorage.setItem('lastName', data.lastName);
     navigate("/");
   };
-  const myHeaders = new Headers();
-  myHeaders.append("Authorization", "Basic dXNlcjpnMTBCb29raW5n");
-  myHeaders.append("Content-Type", "application/json");
 
 
   const handleSubmit = async (e) => {

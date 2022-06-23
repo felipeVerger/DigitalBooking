@@ -9,6 +9,9 @@ import {
   Sumbit,
   FormSwitchText,
   ErrorText,
+  ErrorMessage,
+  ErrorReservation,
+  WarningIcon
 } from "./FormComponents";
 import { Link, useNavigate, Navigate, useLocation} from "react-router-dom";
 import { UserContext } from "../../context/user-context";
@@ -82,9 +85,6 @@ const LoginForm = () => {
     return errors;
   };
 
-  const location = useLocation();
-
-  const prevUrl = 
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && toSumbit) {
@@ -97,7 +97,7 @@ const LoginForm = () => {
   }
   else return(
     <FormContainer>
-      {localStorage.getItem('token') ? null : <h2>Debes registrarte para reservar un producto</h2>}
+      {localStorage.getItem('token') ? null : <ErrorReservation><ErrorMessage><WarningIcon/> Para realizar una reserva necesitas estar logueado</ErrorMessage></ErrorReservation>}
       <FormTitle>Iniciar sesión</FormTitle>
       <InputContainer>
         <Label htmlFor={"email"}>Correo electrónico</Label>

@@ -241,7 +241,7 @@ const ProductPage = ({ product, productDetail }) => {
                   <Span bold={true}>
                     Agrega tus fechas de viaje para obtener precios exactos
                   </Span>
-                  <Link to={localStorage.getItem('token') ? '/product/:id/booking' : '/login'} style={{width: '100%'}}>
+                  <Link to={sessionStorage.getItem('token') ? '/product/:id/booking' : '/login'} style={{width: '100%'}}>
                     <ReservationButton>Iniciar Reserva</ReservationButton>
                   </Link>
                 </ReservationBlock>
