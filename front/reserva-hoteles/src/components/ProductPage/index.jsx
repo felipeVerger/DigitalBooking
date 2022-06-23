@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-import React, {useState} from "react";
-=======
-import React, {useContext} from "react";
->>>>>>> Stashed changes
+import React, {useState, useContext} from "react";
 import { Carousel } from "react-responsive-carousel";
 import {
   HeaderBody,
