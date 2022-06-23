@@ -223,7 +223,7 @@ const Form = ({product}) => {
                 placeholder={"Rosario, Santa Fe"}
                 onChange={handleChange}
               />
-              <ErrorText>{errors.email}</ErrorText>
+              <ErrorText>{errors.ciudad}</ErrorText>
             </InputContainer>
           </FormBlock>
           <FormTitle>Selecciona tu fecha de reserva</FormTitle>
