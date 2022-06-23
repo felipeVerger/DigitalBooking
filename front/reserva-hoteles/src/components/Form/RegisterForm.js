@@ -44,7 +44,10 @@ const RegisterForm = () => {
       body: body
     }
     console.log(formValues);
-    const response = await fetch(url, options);
+    const response = await fetch(url, options)
+    .catch(() => {
+      
+      return;});
     const data = await response.json();
     // return data;
     console.log(data);
