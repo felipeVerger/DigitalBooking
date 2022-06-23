@@ -38,9 +38,10 @@ export const Image = styled.img`
   height: 100%;
   border-radius: 8px;
   overflow: hidden;
+  object-fit: cover;
   @media screen and (max-width: 640px) {
     width: 100%;
-    height: 231px;
+    max-height: 231px;
   }
 `;
 

@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PageContainer from '../components/PageContainer'
 import Layout from '../components/Layout'
 import Section from '../components/Section'
 import Products from '../components/Products'
 import Navbar from '../components/Navbar'
-
 
 const ProductsList = () => {
 
