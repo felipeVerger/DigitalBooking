@@ -91,17 +91,20 @@ public class AuthController {
 
         logger.info("userLastname");
         logger.info(user.getLastname());
-
-        userRepository.save(user);
-        emailSenderService.sendSimpleEmail(user.getEmail(), "Confirmación de cuenta",
-                "Hola " + user.getUsername() + ", ¡Bienvenido a Digital Booking Grupo 10!" + "\n\n" +
-                        "Estaremos atentos a todas tus peticiones a través de este correo electrónico" + "\n\n" +
-                        "¡Tu estancia con nosotros será inolvidable!");
-        Login userAuth = new Login(user.getEmail(), signUpRequest.getPassword());
-        logger.info(user.getEmail());
-        logger.info(signUpRequest.getPassword());
-
-        return this.authenticateUser(userAuth);
+        userRepository.save(user);logger.info("userLastname");
+        logger.info("userSaved!");
+        try {
+            Login userAuth = new Login(user.getEmail(), signUpRequest.getPassword());
+            logger.info("userAuth!");
+            return this.authenticateUser(userAuth);
+        } finally {
+            logger.info("emailSending!");
+//            emailSenderService.sendSimpleEmail(user.getEmail(), "Confirmación de cuenta",
+//                    "Hola " + user.getUsername() + ", ¡Bienvenido a Digital Booking Grupo 10!" + "\n\n" +
+//                            "Estaremos atentos a todas tus peticiones a través de este correo electrónico" + "\n\n" +
+//                            "¡Tu estancia con nosotros será inolvidable!");
+            logger.info("emailSended!");
+        }
     }
 
 }
