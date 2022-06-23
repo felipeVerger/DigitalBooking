@@ -10,7 +10,7 @@ module "ec2_private" {
   subnet_id              = module.vpc.private_subnets[0]
   vpc_security_group_ids = [aws_security_group.backend.id, aws_security_group.ssh.id]
 
-  user_data = data.template_file.app_tier.rendered
+  user_data = file("app-install.sh")
 
   tags = local.common_tags
 }
