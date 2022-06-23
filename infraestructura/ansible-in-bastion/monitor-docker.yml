@@ -1,0 +1,18 @@
+---
+- hosts: all
+
+  become: yes
+  tasks:
+
+  # Install Docker
+  # --
+  #
+
+  - name: monitor docker containers
+    shell: "docker run -d --name ouroboros \
+ -v /var/run/docker.sock:/var/run/docker.sock \
+ -e LATEST=true \
+ pyouroboros/ouroboros"
+
+
+
