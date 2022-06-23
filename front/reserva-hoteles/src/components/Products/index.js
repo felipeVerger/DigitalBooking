@@ -18,10 +18,10 @@ const Recomendaciones = () => {
 
   useEffect(() => {
     const fetchProductsData = async () => { 
-      const productUrl = 'http://localhost:8080/products/findAll';
-      const productByCityUrl = 'http://localhost:8080/products/city/'
-      const productByCategoryUrl = 'http://localhost:8080/products/category/'
-      const productByCityAndDateUrl = 'http://localhost:8080/products/date/'
+      const productUrl = 'http://34.219.159.171:8080/products/findAll';
+      const productByCityUrl = 'http://34.219.159.171:8080/products/city/'
+      const productByCategoryUrl = 'http://34.219.159.171:8080/products/category/'
+      const productByCityAndDateUrl = 'http://34.219.159.171:8080/products/date/'
 
       if(filter && filter[1] === 'city' && locationPath === '/productsList'){
         let productsByCity = await fetchData(productByCityUrl + filter[0], options);

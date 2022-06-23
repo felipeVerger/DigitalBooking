@@ -14,7 +14,7 @@ const Product = () => {
     myHeaders.append("Authorization", "Basic dXNlcjpnMTBCb29raW5n");
 
     console.log(id)
-  const { data, loading, error } = useFetch('http://34.223.225.243:8080/products/' + id, {
+  const { data, loading, error } = useFetch('http://34.219.159.171:8080/products/' + id, {
     method: 'GET',
     headers: myHeaders,
     redirect: 'follow'

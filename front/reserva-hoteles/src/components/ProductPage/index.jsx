@@ -72,7 +72,7 @@ import {UserContext} from "../../context/user-context";
 const ProductPage = ({ product, productDetail }) => {
   const {user, setUser} = useContext(UserContext);
 
-  const { name, subtitle, description, address, score, city = {}, category = {}, longitude, latitude } = productDetail;
+  const {id, name, subtitle, description, address, score, city = {}, category = {}, longitude, latitude } = productDetail;
   const getRatingComment = (rating) => {
     switch (rating) {
       case 10:
@@ -241,7 +241,7 @@ const ProductPage = ({ product, productDetail }) => {
                   <Span bold={true}>
                     Agrega tus fechas de viaje para obtener precios exactos
                   </Span>
-                  <Link to={sessionStorage.getItem('token') != null ? '/product/:id/booking' : '/login'} style={{width: '100%'}}>
+                  <Link to={sessionStorage.getItem('token') != null ? `/product/${id}/booking` : '/login'} style={{width: '100%'}}>
                     <ReservationButton>Iniciar Reserva</ReservationButton>
                   </Link>
                 </ReservationBlock>
