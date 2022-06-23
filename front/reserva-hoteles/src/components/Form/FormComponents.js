@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { RiErrorWarningFill } from 'react-icons/ri';
 
 export const FormContainer = styled.form`
   min-height: 50vh;
@@ -92,3 +93,27 @@ export const ErrorText = styled.p`
   width: 100%;
   padding: 5px;
 `;
+
+export const ErrorReservation = styled.div`
+  background: rgb(249, 184, 184);
+  width: 470px;
+  height: 60px;
+  border-radius: 5px;
+  @media screen and (max-width: 768px){
+    width: 100%;
+  }
+  @media screen and (max-width: 504px){
+    height: 70px;
+  }
+`
+
+export const ErrorMessage = styled.p`
+  color: rgb(155, 17, 17);
+  font-weight: 600;
+  padding: 1rem;
+  text-align: center;
+`
+
+export const WarningIcon = styled(RiErrorWarningFill)`
+  font-size: 30px;
+`
