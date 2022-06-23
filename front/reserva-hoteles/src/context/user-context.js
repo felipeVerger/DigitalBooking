@@ -5,15 +5,17 @@ export const UserContext = React.createContext();
 
 export const UserProvider = ({children}) => {
 
-  const [userData, setUserData] = useState(null)
+
+  const [user, setUser] = useState(null);
   useEffect(() => {
-    sessionStorage.getItem('token') ? setUserData({
+    sessionStorage.getItem('token')!= null ? setUser({
       nombre: sessionStorage.getItem('name')
-    }    ) : setUserData(null);
+    }    ) : setUser(null);
 
  }, [])
 
-  const [user, setUser] = useState(userData);
+
+
 
   return (<UserContext.Provider value={{user , setUser}}>{children}</UserContext.Provider>);
 };
