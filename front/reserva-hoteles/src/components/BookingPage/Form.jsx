@@ -165,9 +165,10 @@ const Form = ({product}) => {
     }
   }, [errors]);
 
-  if (user) {
+  if (!user) {
     return <Navigate to={"/"} />;
   }
+
   return (
    
       <FormContainer>
@@ -249,7 +250,7 @@ const Form = ({product}) => {
     </ColumnForm>
         <ConfirmationBlock>
           <Title>Detalle de la reserva</Title>
-          <Image src={product.images[0]} />
+          <Image src={product.images[0].url} />
 
           <SubTitle>{product.category.title}</SubTitle>
           <Title>{product.name}</Title>

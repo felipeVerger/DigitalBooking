@@ -24,7 +24,11 @@ import {
 } from "../ProductPage/ProductPageComponents";
 import Form from './Form'
 
+
+
 const Booking = ({product}) => {
+  console.log(product.houseRules !== undefined);
+  console.log(product.healthAndHygiene !== undefined);
   const {category = {} } = product;
   return (
     <Container>
@@ -49,27 +53,26 @@ const Booking = ({product}) => {
               <Policy>
                 <PolicyTitle>Normas de la casa</PolicyTitle>
                 <PolicyContent>
-                  {product.houseRules.map((content) => {
+                  {product.houseRules !== undefined ? product.houseRules.map((content) => {
                     return <PolicyItem>{content}</PolicyItem>;
-                  })}
+                  }) : null}
                 </PolicyContent>
               </Policy>
               ;
               <Policy>
                 <PolicyTitle>Salud y seguridad</PolicyTitle>
                 <PolicyContent>
-                  {product.healthAndHygiene.map((content) => {
+                  {product.healthAndHygiene !== undefined ? product.healthAndHygiene.map((content) => {
                     return <PolicyItem>{content}</PolicyItem>;
-                  })}
+                  }) : null}
                 </PolicyContent>
               </Policy>
               ;
               <Policy>
                 <PolicyTitle>Politica de cancelacion</PolicyTitle>
                 <PolicyContent>
-                  {product.cancellationPolicy.map((content) => {
-                    return <PolicyItem>{content}</PolicyItem>;
-                  })}
+                    <PolicyItem>{product.cancellationPolicy}</PolicyItem>;
+
                 </PolicyContent>
               </Policy>
               ;

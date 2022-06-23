@@ -47,20 +47,12 @@ const ProductBooking = () => {
 }
 }
 
-  if(error){
-    return(
-    <PageContainer>
-        <Layout>
-            <Section><h1>A ocurrido un error.</h1> </Section>
-            </Layout>
-    </PageContainer>)
-  }
   return (
     <PageContainer>
         <Layout>
             <Section>
               
-            {loading ? <Loading/> : <Booking product={productoTemp}/> }
+            {loading ? <Loading/> : <Booking product={data}/> }
                
             </Section>
         </Layout>
