@@ -76,7 +76,7 @@ const Form = ({product}) => {
     .catch(() => {
       
       return;});
-    navigate("/");
+    navigate("successful");
   };
 
   const myHeaders = new Headers();
@@ -191,6 +191,7 @@ const Form = ({product}) => {
                 placeholder={"Bruno"}
                 onChange={handleChange}
               />
+              <ErrorText>{errors.nombre}</ErrorText>
             </InputContainer>
             <InputContainer>
               <LabelColor htmlFor={"apellido"}>Apellido</LabelColor>
@@ -222,7 +223,7 @@ const Form = ({product}) => {
                 placeholder={"Rosario, Santa Fe"}
                 onChange={handleChange}
               />
-              <ErrorText>{errors.apellido}</ErrorText>
+              <ErrorText>{errors.email}</ErrorText>
             </InputContainer>
           </FormBlock>
           <FormTitle>Selecciona tu fecha de reserva</FormTitle>
@@ -278,9 +279,7 @@ const Form = ({product}) => {
           </Dates>
           </Row>
           <Div>
-            <Link to={"successful"}>
-            <ReservationButton>Confirmar Reserva</ReservationButton>
-            </Link>
+            <ReservationButton onClick={handleSubmit}>Confirmar Reserva</ReservationButton>
           </Div>
         </ConfirmationBlock>
 
