@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService implements EntityService<User>, UserDetailsService {
+public class UserService implements EntityService<User> {
 
     @Autowired
     UserRepository repository;
@@ -90,18 +90,6 @@ public class UserService implements EntityService<User>, UserDetailsService {
         } else {
             logger.error("Attempt failed. The user you are requesting does not exist in our database. Please check input email");
             throw new ResourceNotFoundException("Attempt failed. The user you are requesting does not exist in our database. Please check input email.");
-        }
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = repository.findByEmail(username);
-        if (user == null) {
-            logger.error("Attempt failed. The user you are requesting does not exist in our database. Please check spelling.");
-            throw new UsernameNotFoundException("User not found");
-        } else {
-            logger.info("Success. User found with username " + username + ".");
-            return repository.findByEmail(username);
         }
     }
 

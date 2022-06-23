@@ -18,8 +18,8 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "users")
-public class User implements UserDetails {
+@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = {"email"}))
+public class User {
 
     @Id
     @SequenceGenerator(name = "user_sequence", sequenceName = "user_sequence", allocationSize = 1)
@@ -47,6 +47,12 @@ public class User implements UserDetails {
     @JsonIgnore
     private Set<Reservation> reservations;
 
+//    public User(String name, String lastName, String email, String password) {
+//        this.username = name;
+//        this.lastname = lastName;
+//        this.email = email;
+//        this.password = password;
+//    }
     public User(String name, String lastName, String email, String password, Role role, String city) {
         this.username = name;
         this.lastname = lastName;
@@ -56,26 +62,26 @@ public class User implements UserDetails {
         this.city = city;
     }
     //metodos de la interfaz UserDetails
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.getName());
-        return Collections.singletonList(authority);
-    }
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.getName());
+//        return Collections.singletonList(authority);
+//    }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+//    @Override
+//    public boolean isAccountNonExpired() {
+//        return true;
+//    }
+//    @Override
+//    public boolean isAccountNonLocked() {
+//        return true;
+//    }
+//    @Override
+//    public boolean isCredentialsNonExpired() {
+//        return true;
+//    }
+//    @Override
+//    public boolean isEnabled() {
+//        return true;
+//    }
 }
