@@ -31,7 +31,7 @@ const ProductBooking = () => {
 "houseRules": ["Check-out: 10:00", "No se permiten fiestas", "No fumar"],
 "healthAndHygiene": ["Se aplican las pautas de distanciamento social y otras normas relacionadas con el coronavirus", "Detector de humo", "Deposito de seguridad"],
 "cancellationPolicy": ["Agrega las fechas de tu viaje para obtener detalles de cancelacion de esta estadia"],
-"images": ["https://pix10.agoda.net/hotelImages/109/10997/10997_17090816420056162871.jpg?ca=6&ce=1&s=1024x768", "https://media.radissonhotels.net/image/metropolitan-hotel-sofia-a-member-of-radisson-individuals/exteriorview/16256-145921-f72742573_3xl.jpg?impolicy=Card&gravity=North", "https://digital.ihg.com/is/image/ihg/even-hotels-eugene-5405616297-4x3", "https://assets.tivolihotels.com/image/upload/q_auto,f_auto,c_limit,w_1378/media/minor/tivoli/images/brand_level/footer/1920x1000/thr_aboutus1_1920x1000.jpg", "https://www.princehotels.com/wp-content/uploads/2019/04/aboutslider2-1.jpg"],
+"images": [  "https://pix10.agoda.net/hotelImages/109/10997/10997_17090816420056162871.jpg?ca=6&ce=1&s=1024x768", "https://media.radissonhotels.net/image/metropolitan-hotel-sofia-a-member-of-radisson-individuals/exteriorview/16256-145921-f72742573_3xl.jpg?impolicy=Card&gravity=North", "https://digital.ihg.com/is/image/ihg/even-hotels-eugene-5405616297-4x3", "https://assets.tivolihotels.com/image/upload/q_auto,f_auto,c_limit,w_1378/media/minor/tivoli/images/brand_level/footer/1920x1000/thr_aboutus1_1920x1000.jpg", "https://www.princehotels.com/wp-content/uploads/2019/04/aboutslider2-1.jpg"],
 "category": {
     "id": 1,
     "title": "Hoteles",
@@ -52,7 +52,7 @@ const ProductBooking = () => {
         <Layout>
             <Section>
               
-            {loading ? <Loading/> : <Booking product={data}/> }
+            {loading ? <Loading/> : <Booking product={productoTemp}/> }
                
             </Section>
         </Layout>

@@ -250,7 +250,7 @@ const Form = ({product}) => {
     </ColumnForm>
         <ConfirmationBlock>
           <Title>Detalle de la reserva</Title>
-          <Image src={product.images[0].url} />
+          <Image src={product.images[0]} />
 
           <SubTitle>{product.category.title}</SubTitle>
           <Title>{product.name}</Title>
