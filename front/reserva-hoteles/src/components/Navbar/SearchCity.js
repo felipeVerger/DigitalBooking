@@ -27,8 +27,8 @@ const SearchCity = ({destination, setDestination}) => {
   return (
     <Dropdown
       options={data.map((item) => ({
-        value: item.name + ", " + item.country,
-        label: item.name + ", " + item.country,
+        value: item.name,
+        label: item.name,
       }))}
       placeholder={locationPath === '/' ? destination : filter[1] === 'city' && locationPath === '/productsList' ? filter[0] : destination}
       onChange={handleCityChange}

@@ -27,18 +27,7 @@ const RegisterForm = () => {
 
   const { user, setUser } = useContext(UserContext);
 
-  const register = () => {
-    setUser({ ...formValues });
-    navigate("/");
-  };
-  const myHeaders = new Headers();
-  myHeaders.append("Authorization", "Basic dXNlcjpnMTBCb29raW5n");
-  myHeaders.append("Content-Type", "application/json");
-
-
-  const handleSubmit = async (e) => {
-    setErrors(validate(formValues));
-    console.log(validate(formValues))
+  const register = async  () => {
     let url = 'http://localhost:8080/auth/signup';
     let body = JSON.stringify({
       "name": formValues.nombre,
@@ -54,7 +43,6 @@ const RegisterForm = () => {
       redirect: 'follow',
       body: body
     }
-    e.preventDefault();
     console.log(formValues);
     const response = await fetch(url, options);
     const data = await response.json();
@@ -64,6 +52,17 @@ const RegisterForm = () => {
     sessionStorage.setItem('email', data.email);
     sessionStorage.setItem('name', data.name);
     sessionStorage.setItem('lastName', data.lastName);
+    navigate("/");
+  };
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", "Basic dXNlcjpnMTBCb29raW5n");
+  myHeaders.append("Content-Type", "application/json");
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrors(validate(formValues));
+    console.log(validate(formValues))
     setToSumbit(true);
   };
 
@@ -97,7 +96,7 @@ const RegisterForm = () => {
 
     if (!values.confirmarPass) {
       errors.confirmarPass = "Este campo es obligatorio.";
-    } else if (values.confirmarPass != values.password) {
+    } else if (values.confirmarPass !== values.password) {
       errors.confirmarPass = "La contraseña no coincide.";
     }
 

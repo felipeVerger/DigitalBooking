@@ -33,7 +33,7 @@ export const HorizontalBlock = styled.div`
 
 export const InputContainer = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: column;
   max-width: 80vw;
   width: 800px;
@@ -45,7 +45,9 @@ export const TextField = styled.input`
 
   height: 40px;
   border: solid 1.5px #d3d3d3;
-  box-shadow: 0 0 5pt 0.5pt #d3d3d3;
+  box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+
+
   text-indent: 5px;
   &:focus {
     outline-width: 0px;
