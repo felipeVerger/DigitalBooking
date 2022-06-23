@@ -10,7 +10,18 @@ import {
     BackIcon,
     BookingBlock,
     BookingBlockInfo,
+    MainContent,
+    MainContentBody,
 } from './BookingComponents'
+import {
+  ContentBlock,
+  Separator,
+  Policy,
+  PolicyTitle,
+  PolicyContent,
+  PoliciesContainer,
+  PolicyItem
+} from "../ProductPage/ProductPageComponents";
 import Form from './Form'
 
 const Booking = ({product}) => {
@@ -22,16 +33,49 @@ const Booking = ({product}) => {
             <HeaderCategory>{product.category.title}</HeaderCategory>
             <HeaderName>{product.name}</HeaderName>
           </HeaderInfo>
-          <CleanLink to={"/"}>
+          <CleanLink to={"/product/" + product.id}>
             <BackIcon />
           </CleanLink>
         </HeaderBlock>
       </HeaderBody>
-      <BookingBlock>
-        <BookingBlockInfo>
-          <Form />
-        </BookingBlockInfo>
-      </BookingBlock>
+      <MainContentBody>
+        <MainContent>
+          <Form product={product}/>
+
+      <Separator />
+          <ContentBlock>
+            <PoliciesContainer>
+              <Policy>
+                <PolicyTitle>Normas de la casa</PolicyTitle>
+                <PolicyContent>
+                  {product.houseRules.map((content) => {
+                    return <PolicyItem>{content}</PolicyItem>;
+                  })}
+                </PolicyContent>
+              </Policy>
+              ;
+              <Policy>
+                <PolicyTitle>Salud y seguridad</PolicyTitle>
+                <PolicyContent>
+                  {product.healthAndHygiene.map((content) => {
+                    return <PolicyItem>{content}</PolicyItem>;
+                  })}
+                </PolicyContent>
+              </Policy>
+              ;
+              <Policy>
+                <PolicyTitle>Politica de cancelacion</PolicyTitle>
+                <PolicyContent>
+                  {product.cancellationPolicy.map((content) => {
+                    return <PolicyItem>{content}</PolicyItem>;
+                  })}
+                </PolicyContent>
+              </Policy>
+              ;
+            </PoliciesContainer>
+          </ContentBlock>
+          </MainContent>
+      </MainContentBody>
     </Container>
   )
 }

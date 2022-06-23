@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 import React, {useState} from "react";
+=======
+import React, {useContext} from "react";
+>>>>>>> Stashed changes
 import { Carousel } from "react-responsive-carousel";
 import {
   HeaderBody,
@@ -66,10 +70,12 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { DateRangePicker } from "react-date-range";
 import { Link, useNavigate } from "react-router-dom";
+import {UserContext} from "../../context/user-context";
 
 
 const ProductPage = ({ product, productDetail }) => {
-  console.log(productDetail)
+  const {user, setUser} = useContext(UserContext);
+
   const { name, subtitle, description, address, score, city = {}, category = {}, longitude, latitude } = productDetail;
   const getRatingComment = (rating) => {
     switch (rating) {
@@ -256,7 +262,7 @@ const ProductPage = ({ product, productDetail }) => {
                 <Span bold={true}>
                   Agrega tus fechas de viaje para obtener precios exactos
                 </Span>
-                <ReservationButton>Iniciar Reserva</ReservationButton>
+                <ReservationButton><CleanLink to="booking">Iniciar Reserva</CleanLink></ReservationButton>
               </ReservationBlock>
             </MobileCalendar>
           </ContentBlock>
