@@ -13,7 +13,6 @@ const ProductBooking = () => {
 "longitude": "72",
 "latitude": "39",
 "title": "Una experiencia unica en el corazon de Colombia",
-"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent auctor nibh dapibus faucibus pellentesque. Etiam eu auctor sem, quis cursus ex. Maecenas gravida mollis pellentesque. Nunc feugiat laoreet libero quis vestibulum. In et finibus ipsum. Etiam pulvinar mauris arcu, et rhoncus quam laoreet quis. Aliquam lacinia erat at ipsum finibus tincidunt. Ut luctus, orci at ultricies convallis, nunc metus luctus nibh, non suscipit ex neque suscipit lorem. Pellentesque ornare laoreet odio, in fermentum purus aliquam eget. Integer non faucibus mi, sed tincidunt mi. Pellentesque nec convallis sem. Aliquam erat volutpat. Phasellus enim ligula, suscipit vel nisi non, aliquet laoreet mauris. Cras et ante ut purus euismod ultricies. Donec molestie, enim vel commodo tempor, ex leo sollicitudin libero, sed varius lectus ante nec tellus. Curabitur efficitur, dui quis cursus volutpat, lorem ante pretium nunc, at auctor tortor nulla id orci.",
 "houseRules": ["Check-out: 10:00", "No se permiten fiestas", "No fumar"],
 "healthAndHygiene": ["Se aplican las pautas de distanciamento social y otras normas relacionadas con el coronavirus", "Detector de humo", "Deposito de seguridad"],
 "cancellationPolicy": ["Agrega las fechas de tu viaje para obtener detalles de cancelacion de esta estadia"],

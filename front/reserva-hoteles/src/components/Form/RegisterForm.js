@@ -31,12 +31,39 @@ const RegisterForm = () => {
     setUser({ ...formValues });
     navigate("/");
   };
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", "Basic dXNlcjpnMTBCb29raW5n");
+  myHeaders.append("Content-Type", "application/json");
+
 
   const handleSubmit = async (e) => {
+    setErrors(validate(formValues));
+    console.log(validate(formValues))
+    let url = 'http://localhost:8080/auth/signup';
+    let body = JSON.stringify({
+      "name": formValues.nombre,
+      "lastName": formValues.apellido,
+      "email": formValues.email,
+      "role": "ROLE_USER",
+      "password": formValues.password,
+      "city": formValues.ciudad
+    });
+    let options = {
+      method: 'POST',
+      headers: myHeaders,
+      redirect: 'follow',
+      body: body
+    }
     e.preventDefault();
     console.log(formValues);
-    setErrors(validate(formValues));
-    localStorage.setItem('token', 1)
+    const response = await fetch(url, options);
+    const data = await response.json();
+    // return data;
+    console.log(data);
+    sessionStorage.setItem('token', data.token);
+    sessionStorage.setItem('email', data.email);
+    sessionStorage.setItem('name', data.name);
+    sessionStorage.setItem('lastName', data.lastName);
     setToSumbit(true);
   };
 
@@ -50,6 +77,10 @@ const RegisterForm = () => {
 
     if (!values.apellido) {
       errors.apellido = "Este campo es obligatorio.";
+    }
+
+    if (!values.ciudad) {
+      errors.ciudad = "Este campo es obligatorio.";
     }
 
     if (!values.email) {
@@ -98,14 +129,24 @@ const RegisterForm = () => {
           <InputContainer>
             <Label htmlFor={"apellido"}>Apellido</Label>
             <TextField
-              name={"apellido"}
-              type={"text"}
-              placeholder={"Doe"}
-              onChange={handleChange}
+                name={"apellido"}
+                type={"text"}
+                placeholder={"Doe"}
+                onChange={handleChange}
             />
             <ErrorText>{errors.apellido}</ErrorText>
           </InputContainer>
         </HorizontalBlock>
+        <InputContainer>
+          <Label htmlFor={"ciudad"}>Ciudad</Label>
+          <TextField
+              name={"ciudad"}
+              type={"text"}
+              placeholder={"Bogotá"}
+              onChange={handleChange}
+          />
+          <ErrorText>{errors.ciudad}</ErrorText>
+        </InputContainer>
 
         <InputContainer>
           <Label htmlFor={"email"}>Correo electrónico</Label>
