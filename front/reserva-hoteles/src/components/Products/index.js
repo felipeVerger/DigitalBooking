@@ -38,17 +38,8 @@ const Recomendaciones = () => {
   }, []) 
 
 
-    
-
-    /* A ternary operator that checks if the products array has more than 6 elements, if it does, it
-    sorts the array randomly and then slices the first 6 elements, if it doesn't, it returns the
-    products array. */
     const randomProducts = products && products.length > 6 ? products.sort(() => Math.random() - 0.5).slice(0, 6) : products;
     const filteredProducts = locationPath === '/productsList' ? products : randomProducts; 
-
-    /* Filtering the products based on the filter context. */
-    // const filteredArray = filter ? products && filter[1] === 'category' && locationPath === '/productsList' ? products.filter((product) => product.category.title === filter[0]) 
-    // : products && filter[1] === 'city' && locationPath === '/productsList' ? products.filter((product) => product.city.name + ', ' + product.city.country === filter[0]) : randomProducts : randomProducts;
 
   if (!filteredProducts.length) {
     return <Loading/>
