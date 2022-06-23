@@ -32,11 +32,37 @@ const LoginForm = () => {
     navigate("/");
   };
 
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", "Basic dXNlcjpnMTBCb29raW5n");
+  myHeaders.append("Content-Type", "application/json");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors(validate(formValues));
     setToSumbit(true);
+    let url = 'http://localhost:8080/auth/signin';
+    let body = JSON.stringify({
+      "email": formValues.email,
+      "password": formValues.password
+    });
+    let options = {
+      method: 'POST',
+      headers: myHeaders,
+      redirect: 'follow',
+      body: body
+    }
+    e.preventDefault();
+    console.log(formValues);
+    const response = await fetch(url, options);
+    const data = await response.json();
+    // return data;
+    console.log(data);
+    sessionStorage.setItem('token', data.token);
+    sessionStorage.setItem('email', data.email);
+    sessionStorage.setItem('name', data.name);
+    sessionStorage.setItem('lastName', data.lastName);
   };
+
 
   const validate = (values) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
