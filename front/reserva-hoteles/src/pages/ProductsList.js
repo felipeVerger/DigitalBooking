@@ -2,16 +2,18 @@ import React from 'react'
 import PageContainer from '../components/PageContainer'
 import Layout from '../components/Layout'
 import Section from '../components/Section'
-import Recomendaciones from '../components/Products'
+import Products from '../components/Products'
 import Navbar from '../components/Navbar'
 
+
 const ProductsList = () => {
+
   return (
     <PageContainer>
         <Layout>
             <Section>
                 <Navbar/>
-                <Recomendaciones/>
+                <Products/>
             </Section>
         </Layout>
     </PageContainer>

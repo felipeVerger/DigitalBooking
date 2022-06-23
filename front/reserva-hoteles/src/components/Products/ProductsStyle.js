@@ -37,6 +37,7 @@ export const Image = styled.img`
   width: 311.1px;
   height: 100%;
   border-radius: 8px;
+  overflow: hidden;
   @media screen and (max-width: 640px) {
     width: 100%;
     height: 231px;

@@ -7,6 +7,7 @@ import useFetch from '../../hooks/useFetch';
 import Loading from '../Loading'
 
 const URL_API = 'http://localhost:8080/products/findAll'
+const URL_API_CITY = 'http://localhost:8080/products/city/'
 
 const Recomendaciones = () => {
     const {filter} = useContext(FilterContext);
@@ -42,7 +43,7 @@ const Recomendaciones = () => {
                         return (
                             <ProductCard
                                 key={product.id}
-                                img={product.images && product.images[0] ? product.images[0].url : ""}
+                                img={product.images && product.images[1] ? product.images[1].url : ""}
                                 category={product.category.title}
                                 title={product.name}
                                 location={product.address}
