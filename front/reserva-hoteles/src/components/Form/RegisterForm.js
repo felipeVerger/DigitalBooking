@@ -13,6 +13,7 @@ import {
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import { UserContext } from "../../context/user-context";
 
+
 const RegisterForm = () => {
   const [formValues, setformValues] = useState({});
   const [errors, setErrors] = useState({});
@@ -59,7 +60,7 @@ const RegisterForm = () => {
     sessionStorage.setItem('email', data.email);
     sessionStorage.setItem('name', data.name);
     sessionStorage.setItem('lastName', data.lastName);
-    navigate("/");
+    window.location.reload();
   };
 
 
