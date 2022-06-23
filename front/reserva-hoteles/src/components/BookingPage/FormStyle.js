@@ -116,7 +116,7 @@ border-radius: 2rem;
 padding: 1rem;
 display: flex;
 flex-direction: column;
-justify-content: center;
+
 @media only screen and (max-width: 1200px) {
     width: 100%;
   }
