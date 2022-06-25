@@ -40,6 +40,7 @@ const Navbar = () => {
           <SearchCalendar 
             data={data} 
             setData={setData}
+            
           />
           <Button type="submit">Buscar</Button>
         </Form>

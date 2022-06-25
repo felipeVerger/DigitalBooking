@@ -35,6 +35,14 @@ const getDateString = (date) => {
   );
 };
 
+function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height
+  };
+}
+
 const SearchCalendar = ({data, setData}) => {
   const {filter} = useContext(FilterContext);
   const [calendarOpen, setCalendarOpen] = useState(false);
@@ -78,10 +86,12 @@ const SearchCalendar = ({data, setData}) => {
     >
         {calendarOpen ? (
             <DateRange
+                months={getWindowDimensions().width > 768 ? 2 : 1}
                 minDate={new Date()}
                 locale={es}
                 ranges={[selectionRange]}
                 onChange={handleDateSelect}
+                direction={"horizontal"}
             />
         ) : (
           <>
