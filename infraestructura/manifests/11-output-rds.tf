@@ -1,4 +1,4 @@
-output "rds" {
+/*output "rds" {
   description = "The name of the RDS instance"
   value       = module.db.db_instance_name
 
@@ -15,6 +15,6 @@ output "rds_password" {
   value       = module.db.db_instance_password
 
 }
-
+*/
 
 

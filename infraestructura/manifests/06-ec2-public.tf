@@ -17,3 +17,4 @@ module "ec2_public" {
 
   tags = local.common_tags
 }
+

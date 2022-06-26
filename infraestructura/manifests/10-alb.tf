@@ -37,6 +37,10 @@ module "alb" {
       targets = [{
         target_id = module.ec2_public[0].id
         port      = 80
+        },
+        {
+          target_id = module.ec2_public[1].id
+          port      = 80
       }]
       deregistration_delay = 10
       health_check = {
@@ -59,6 +63,10 @@ module "alb" {
       targets = [{
         target_id = module.ec2_private[0].id
         port      = 8080
+        },
+        {
+          target_id = module.ec2_private[1].id
+          port      = 8080
       }]
       deregistration_delay = 10
       health_check = {

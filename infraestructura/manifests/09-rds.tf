@@ -1,4 +1,4 @@
-module "db" {
+/*module "db" {
   source = "terraform-aws-modules/rds/aws"
 
   identifier = "proyecto-integrador"
@@ -33,3 +33,4 @@ module "db" {
 
 
 }
+*/
