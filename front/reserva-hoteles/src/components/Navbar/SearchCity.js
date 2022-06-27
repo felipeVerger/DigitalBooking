@@ -4,7 +4,7 @@ import {useLocation} from 'react-router-dom';
 import { FilterContext } from "../../context/filter-context";
 import useFetch from "../../hooks/useFetch";
 
-const URL_API = 'http://internal-dev-dinamita-lb-backend-649823592.us-west-2.elb.amazonaws.com/cities/findAll'
+const URL_API = 'http://localhost:8080/cities/findAll'
 
 const SearchCity = ({destination, setDestination}) => {
   const locationPath = useLocation().pathname;

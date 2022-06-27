@@ -56,7 +56,7 @@ const Form = ({product}) => {
 
 
   const register = async  () => {
-    let url = 'http://internal-dev-dinamita-lb-backend-649823592.us-west-2.elb.amazonaws.com/';
+    let url = 'http://localhost:8080/';
     let body = JSON.stringify({
       "name": formValues.nombre,
       "lastName": formValues.apellido,
