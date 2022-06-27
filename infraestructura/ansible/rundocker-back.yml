@@ -14,29 +14,34 @@
       docker_host_info:
         containers: yes
       register: docker_info
+      ignore_errors: yes
 
     - name: Stop running containers
       docker_container:
         name: "{{ item }}"
         state: stopped
       loop: "{{ docker_info.containers | map(attribute='Id') | list }}"
+      ignore_errors: yes
 
      - name: Remove Stoped docker containers
       shell: |
          docker rm $(docker ps -a -q);
       when: docker_info.containers != 0
+      ignore_errors: yes
 
     - name: Get details of all images
       docker_host_info:
         images: yes
         verbose_output: yes
       register: image_info
+      ignore_errors: yes
 
     - name: Remove all images
       docker_image:
         name: "{{ item }}"
         state: absent
       loop: "{{ image_info.images | map(attribute='Id') | list }}"
+      ignore_errors: yes
 
     - name: Pull default Docker image
       community.docker.docker_image:
@@ -45,6 +50,3 @@
 
     - name: run frontend docker containers
       shell: "docker run -d -p 8080:8080 --name digitalapptier varesinatalia/digitalbooking10:latest"
-
-    - name: run monitor container
-      shell: "docker run -d --name ouroboros -v /var/run/docker.sock:/var/run/docker.sock -e LATEST=true pyouroboros/ouroboros"
