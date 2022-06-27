@@ -43,7 +43,7 @@ const LoginForm = () => {
     e.preventDefault();
     setErrors(validate(formValues));
     setToSumbit(true);
-    let url = 'http://localhost:8080/auth/signin';
+    let url = 'http://internal-dev-dinamita-lb-backend-649823592.us-west-2.elb.amazonaws.com/auth/signin';
     let body = JSON.stringify({
       "email": formValues.email,
       "password": formValues.password
