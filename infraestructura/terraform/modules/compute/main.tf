@@ -113,9 +113,9 @@ resource "aws_launch_template" "frontend" {
   vpc_security_group_ids = [var.sg_private]
   key_name               = var.public_key_pair_project
   update_default_version = true
-  user_data = base64encode(templatefile("scripts/ubuntu_apache.sh", {
-    ENV = "${var.env}-frontend"
-  }))
+  //user_data = base64encode(templatefile("scripts/ubuntu_apache.sh", {
+  // ENV = "${var.env}-frontend"
+  //}))
 
   monitoring {
     enabled = true
@@ -148,9 +148,9 @@ resource "aws_launch_template" "backend" {
   vpc_security_group_ids = [var.sg_private]
   key_name               = var.public_key_pair_project
   update_default_version = true
-  user_data = base64encode(templatefile("scripts/ubuntu_apache.sh", {
-    ENV = "${var.env}-backend"
-  }))
+  //user_data = base64encode(templatefile("scripts/ubuntu_apache.sh", {
+  // ENV = "${var.env}-backend"
+  //}))
 
   monitoring {
     enabled = true
@@ -380,7 +380,7 @@ resource "aws_autoscaling_policy" "predictive_backend" {
   autoscaling_group_name = aws_autoscaling_group.backend.name
   predictive_scaling_configuration {
     metric_specification {
-      target_value = 32
+      target_value = 82
       predefined_scaling_metric_specification {
         predefined_metric_type = "ASGAverageCPUUtilization"
         resource_label         = "scaling_metric_label"
@@ -415,7 +415,7 @@ resource "aws_cloudwatch_metric_alarm" "cpu_up_backend" {
   namespace           = "AWS/EC2"
   period              = "120"
   statistic           = "Average"
-  threshold           = "30"
+  threshold           = "80"
 
   dimensions = {
     "AutoScalingGroupName" = aws_autoscaling_group.backend.name

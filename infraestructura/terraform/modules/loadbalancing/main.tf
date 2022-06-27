@@ -27,7 +27,6 @@ resource "aws_lb_listener" "frontend" {
       protocol    = "HTTPS"
       status_code = "HTTP_301"
     }
-    target_group_arn = aws_lb_target_group.frontend.arn
   }
 }
 resource "aws_lb_listener" "frontend_https" {
@@ -36,12 +35,7 @@ resource "aws_lb_listener" "frontend_https" {
   protocol          = "HTTPS"
   certificate_arn   = "arn:aws:acm:us-west-2:145504712931:certificate/ba16e0c2-ea84-41d5-8359-3553f2f03940"
   default_action {
-    type = "fixed-response"
-    fixed_response {
-      status_code  = "200"
-      content_type = "text/plain"
-      message_body = "Fixed Static message - for Root Context"
-    }
+    type             = "forward"
     target_group_arn = aws_lb_target_group.frontend.arn
   }
 }
