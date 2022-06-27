@@ -29,20 +29,20 @@ variable "public_key_pair_project" {
 # Instance type
 variable "instance_type_bastion" {
   type    = string
-  default = "t2.micro"
+  default = "t2.small"
 }
 
 variable "instance_type_frontend" {
   type    = string
-  default = "t2.micro"
+  default = "t2.small"
 }
 
 variable "instance_type_backend" {
   type    = string
-  default = "t2.micro"
+  default = "t2.small"
 }
 
 variable "instance_type_database" {
   type    = string
-  default = "t2.micro"
+  default = "t2.small"
 }
