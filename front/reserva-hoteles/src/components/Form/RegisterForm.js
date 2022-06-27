@@ -33,7 +33,7 @@ const RegisterForm = () => {
   myHeaders.append("Content-Type", "application/json");
 
   const register = async  () => {
-    let url = 'http://localhost:8080/auth/signup';
+    let url = 'http://internal-dev-dinamita-lb-backend-649823592.us-west-2.elb.amazonaws.com/auth/signup';
     let body = JSON.stringify({
       "name": formValues.nombre,
       "lastName": formValues.apellido,

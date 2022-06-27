@@ -5,7 +5,7 @@ import Loading from '../Loading/index'
 
 import useFetch from '../../hooks/useFetch'
 
-const URL_API = 'http://localhost:8080/categories/findAll'
+const URL_API = 'http://internal-dev-dinamita-lb-backend-649823592.us-west-2.elb.amazonaws.com/categories/findAll'
 
 const Categorias = () => {
 

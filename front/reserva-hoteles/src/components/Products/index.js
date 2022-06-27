@@ -7,8 +7,8 @@ import useFetch from '../../hooks/useFetch';
 import Loading from '../Loading';
 import { fetchData, options } from '../../utils/fetchData';
 
-const URL_API = 'http://localhost:8080/products/findAll'
-const URL_API_CITY = 'http://localhost:8080/products/city/'
+const URL_API = 'http://internal-dev-dinamita-lb-backend-649823592.us-west-2.elb.amazonaws.com/products/findAll'
+const URL_API_CITY = 'http://internal-dev-dinamita-lb-backend-649823592.us-west-2.elb.amazonaws.com/products/city/'
 
 const Recomendaciones = () => {
     const {filter} = useContext(FilterContext);
