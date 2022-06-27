@@ -68,6 +68,7 @@ resource "aws_launch_template" "project_bastion_lt" {
   vpc_security_group_ids = [var.sg_bastion]
   key_name               = var.public_key_pair_bastion
   update_default_version = true
+
   user_data = base64encode(templatefile("scripts/ubuntu_keyfile.sh", {
     KEY_PRIVATE = "${var.project}.com/aws/${var.env}-${var.project}-key-private"
   }))
@@ -92,6 +93,9 @@ resource "aws_launch_template" "project_bastion_lt" {
     Name = "${var.env}-${var.project}-bastion-lt"
   }
 }
+
+
+
 
 resource "aws_autoscaling_group" "bastion" {
   name                = "${var.env}-${var.project}-asg-bastion"
@@ -227,35 +231,16 @@ resource "aws_db_instance" "database" {
   parameter_group_name   = "default.mysql8.0"
   skip_final_snapshot    = true
 }
-
-
 */
-
-
-
 ###########
 ## Frontend
 ###########
 resource "aws_autoscaling_group" "frontend" {
-  name                 = "${var.env}-${var.project}-asg-frontend"
-  vpc_zone_identifier  = tolist(var.subnet_frontend)
-  min_size             = 2
-  max_size             = 2
-  desired_capacity     = 2
-  health_check_type    = "ELB"
-  termination_policies = ["OldestInstance"]
-  enabled_metrics = [
-    "GroupMinSize",
-    "GroupMaxSize",
-    "GroupDesiredCapacity",
-    "GroupInServiceInstances",
-    "GroupTotalInstances"
-  ]
-  metrics_granularity = "1Minute"
-  target_group_arns   = [var.lb_tg_arn_frontend]
-  lifecycle {
-    create_before_destroy = true
-  }
+  name                = "${var.env}-${var.project}-asg-frontend"
+  vpc_zone_identifier = tolist(var.subnet_frontend)
+  min_size            = 2
+  max_size            = 2
+  desired_capacity    = 2
 
   launch_template {
     id      = aws_launch_template.frontend.id
@@ -263,194 +248,20 @@ resource "aws_autoscaling_group" "frontend" {
   }
 }
 
-# Predictive
-resource "aws_autoscaling_policy" "predictive_frontend" {
-  name                   = "${var.env}-${var.project}-asg-pl-predictive-frontend"
-  policy_type            = "PredictiveScaling"
-  autoscaling_group_name = aws_autoscaling_group.frontend.name
-  predictive_scaling_configuration {
-    metric_specification {
-      target_value = 32
-      predefined_scaling_metric_specification {
-        predefined_metric_type = "ASGAverageCPUUtilization"
-        resource_label         = "scaling_metric_label"
-      }
-      predefined_load_metric_specification {
-        predefined_metric_type = "ASGTotalCPUUtilization"
-        resource_label         = "load_metric_label"
-      }
-    }
-    mode                         = "ForecastAndScale"
-    scheduling_buffer_time       = 10
-    max_capacity_breach_behavior = "IncreaseMaxCapacity"
-    max_capacity_buffer          = 10
-  }
-}
-
-# Scale up alarm
-resource "aws_autoscaling_policy" "cpu_up_frontend" {
-  name                   = "${var.env}-${var.project}-asg-pl-cpu-up-frontend"
-  autoscaling_group_name = aws_autoscaling_group.frontend.name
-  adjustment_type        = "ChangeInCapacity"
-  scaling_adjustment     = "1"
-  cooldown               = "300"
-  policy_type            = "SimpleScaling"
-}
-resource "aws_cloudwatch_metric_alarm" "cpu_up_frontend" {
-  alarm_name          = "${var.env}-${var.project}-alarm-cpu-up-frontend"
-  alarm_description   = "Alarm when CPU >= 30"
-  comparison_operator = "GreaterThanOrEqualToThreshold"
-  evaluation_periods  = "2"
-  metric_name         = "CPUUtilization"
-  namespace           = "AWS/EC2"
-  period              = "120"
-  statistic           = "Average"
-  threshold           = "30"
-
-  dimensions = {
-    "AutoScalingGroupName" = aws_autoscaling_group.frontend.name
-  }
-
-  actions_enabled = true
-  alarm_actions   = [aws_autoscaling_policy.cpu_up_frontend.arn]
-}
-
-# Scale down alarm
-resource "aws_autoscaling_policy" "cpu_down_frontend" {
-  name                   = "${var.env}-${var.project}-asg-pl-cpu-down-frontend"
-  autoscaling_group_name = aws_autoscaling_group.frontend.name
-  adjustment_type        = "ChangeInCapacity"
-  scaling_adjustment     = "-1"
-  cooldown               = "300"
-  policy_type            = "SimpleScaling"
-}
-resource "aws_cloudwatch_metric_alarm" "cpu_down_frontend" {
-  alarm_name          = "${var.env}-${var.project}-alarm-cpu-down-frontend"
-  alarm_description   = "Alarm when CPU <= 5"
-  comparison_operator = "LessThanOrEqualToThreshold"
-  evaluation_periods  = "2"
-  metric_name         = "CPUUtilization"
-  namespace           = "AWS/EC2"
-  period              = "120"
-  statistic           = "Average"
-  threshold           = "5"
-
-  dimensions = {
-    "AutoScalingGroupName" = aws_autoscaling_group.frontend.name
-  }
-
-  actions_enabled = true
-  alarm_actions   = [aws_autoscaling_policy.cpu_down_frontend.arn]
-}
-
 ###########
 ## Backend
 ###########
 resource "aws_autoscaling_group" "backend" {
-  name                 = "${var.env}-${var.project}-asg-backend"
-  vpc_zone_identifier  = tolist(var.subnet_backend)
-  min_size             = 2
-  max_size             = 2
-  desired_capacity     = 2
-  health_check_type    = "ELB"
-  termination_policies = ["OldestInstance"]
-  enabled_metrics = [
-    "GroupMinSize",
-    "GroupMaxSize",
-    "GroupDesiredCapacity",
-    "GroupInServiceInstances",
-    "GroupTotalInstances"
-  ]
-  metrics_granularity = "1Minute"
-  target_group_arns   = [var.lb_tg_arn_backend]
-  lifecycle {
-    create_before_destroy = true
-  }
+  name                = "${var.env}-${var.project}-asg-backend"
+  vpc_zone_identifier = tolist(var.subnet_backend)
+  min_size            = 2
+  max_size            = 2
+  desired_capacity    = 2
 
   launch_template {
     id      = aws_launch_template.backend.id
     version = "$Latest"
   }
-}
-
-# Predictive
-resource "aws_autoscaling_policy" "predictive_backend" {
-  name                   = "${var.env}-${var.project}-asg-pl-predictive-backend"
-  policy_type            = "PredictiveScaling"
-  autoscaling_group_name = aws_autoscaling_group.backend.name
-  predictive_scaling_configuration {
-    metric_specification {
-      target_value = 82
-      predefined_scaling_metric_specification {
-        predefined_metric_type = "ASGAverageCPUUtilization"
-        resource_label         = "scaling_metric_label"
-      }
-      predefined_load_metric_specification {
-        predefined_metric_type = "ASGTotalCPUUtilization"
-        resource_label         = "load_metric_label"
-      }
-    }
-    mode                         = "ForecastAndScale"
-    scheduling_buffer_time       = 10
-    max_capacity_breach_behavior = "IncreaseMaxCapacity"
-    max_capacity_buffer          = 10
-  }
-}
-
-# Scale up alarm
-resource "aws_autoscaling_policy" "cpu_up_backend" {
-  name                   = "${var.env}-${var.project}-asg-pl-cpu-up-backend"
-  autoscaling_group_name = aws_autoscaling_group.backend.name
-  adjustment_type        = "ChangeInCapacity"
-  scaling_adjustment     = "1"
-  cooldown               = "300"
-  policy_type            = "SimpleScaling"
-}
-resource "aws_cloudwatch_metric_alarm" "cpu_up_backend" {
-  alarm_name          = "${var.env}-${var.project}-alarm-cpu-up-backend"
-  alarm_description   = "Alarm when CPU >= 30"
-  comparison_operator = "GreaterThanOrEqualToThreshold"
-  evaluation_periods  = "2"
-  metric_name         = "CPUUtilization"
-  namespace           = "AWS/EC2"
-  period              = "120"
-  statistic           = "Average"
-  threshold           = "80"
-
-  dimensions = {
-    "AutoScalingGroupName" = aws_autoscaling_group.backend.name
-  }
-
-  actions_enabled = true
-  alarm_actions   = [aws_autoscaling_policy.cpu_up_backend.arn]
-}
-
-# Scale down alarm
-resource "aws_autoscaling_policy" "cpu_down_backend" {
-  name                   = "${var.env}-${var.project}-asg-pl-cpu-down-backend"
-  autoscaling_group_name = aws_autoscaling_group.backend.name
-  adjustment_type        = "ChangeInCapacity"
-  scaling_adjustment     = "-1"
-  cooldown               = "300"
-  policy_type            = "SimpleScaling"
-}
-resource "aws_cloudwatch_metric_alarm" "cpu_down_backend" {
-  alarm_name          = "${var.env}-${var.project}-alarm-cpu-down-backend"
-  alarm_description   = "Alarm when CPU <= 5"
-  comparison_operator = "LessThanOrEqualToThreshold"
-  evaluation_periods  = "2"
-  metric_name         = "CPUUtilization"
-  namespace           = "AWS/EC2"
-  period              = "120"
-  statistic           = "Average"
-  threshold           = "5"
-
-  dimensions = {
-    "AutoScalingGroupName" = aws_autoscaling_group.backend.name
-  }
-
-  actions_enabled = true
-  alarm_actions   = [aws_autoscaling_policy.cpu_down_backend.arn]
 }
 
 
