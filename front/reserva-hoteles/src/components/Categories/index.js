@@ -5,7 +5,7 @@ import Loading from '../Loading/index'
 
 import useFetch from '../../hooks/useFetch'
 
-const URL_API = 'http://34.219.159.171:8080/categories/findAll'
+const URL_API = `${process.env.REACT_APP_URL_REMOTE}/categories/findAll`
 
 const Categorias = () => {
 
@@ -18,7 +18,7 @@ const Categorias = () => {
         redirect: 'follow'
     });
 
-  return loading ? <Loading/> : (
+  return loading ? <Loading/> : error ? <h1>Hubo un error, intente mas tarde</h1> : (
     <Body>
         <CategoryBlock>
             <SectionTitle>Buscar por tipo de alojamiento</SectionTitle>
