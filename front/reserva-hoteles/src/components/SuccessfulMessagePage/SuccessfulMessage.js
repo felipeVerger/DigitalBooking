@@ -23,7 +23,6 @@ export const Box = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
     padding: 1rem;
     @media screen and (max-width: 768px) {
         width: 100%;

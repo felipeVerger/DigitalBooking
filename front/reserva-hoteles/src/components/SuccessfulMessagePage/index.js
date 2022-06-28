@@ -13,7 +13,7 @@ const Message = () => {
   return (
     <Container>
         <Box>
-            <Logo src={require("../../assets/successful.png")} />
+            <Logo src={require("../../assets/logo-exito.png")} />
             <Gratitude>¡Muchas gracias!</Gratitude>
             <MessageText>Su reserva se ha realizado con éxito.</MessageText>
             <Link to={'/'}>
