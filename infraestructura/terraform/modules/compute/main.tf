@@ -220,12 +220,16 @@ resource "aws_autoscaling_group" "frontend" {
 ## Backend
 ###########
 resource "aws_autoscaling_group" "backend" {
-  name                = "${var.env}-${var.project}-asg-backend"
-  vpc_zone_identifier = tolist(var.subnet_backend)
-  min_size            = 2
-  max_size            = 2
-  desired_capacity    = 2
-  target_group_arns   = [var.lb_tg_arn_backend]
+  name                      = "${var.env}-${var.project}-asg-backend"
+  vpc_zone_identifier       = tolist(var.subnet_backend)
+  min_size                  = 1
+  max_size                  = 2
+  desired_capacity          = 2
+  health_check_grace_period = 600
+  health_check_type         = "EC2"
+
+
+  target_group_arns = [var.lb_tg_arn_backend]
   lifecycle {
     create_before_destroy = true
   }
