@@ -7,9 +7,6 @@ import useFetch from '../../hooks/useFetch';
 import Loading from '../Loading';
 import { fetchData, options } from '../../utils/fetchData';
 
-const URL_API = 'http://localhost:8080/products/findAll'
-const URL_API_CITY = 'http://localhost:8080/products/city/'
-
 const Recomendaciones = () => {
     const {filter} = useContext(FilterContext);
     const locationPath = useLocation().pathname;
@@ -18,10 +15,10 @@ const Recomendaciones = () => {
 
   useEffect(() => {
     const fetchProductsData = async () => { 
-      const productUrl = 'http://34.219.159.171:8080/products/findAll';
-      const productByCityUrl = 'http://34.219.159.171:8080/products/city/'
-      const productByCategoryUrl = 'http://34.219.159.171:8080/products/category/'
-      const productByCityAndDateUrl = 'http://34.219.159.171:8080/products/date/'
+      const productUrl = `${process.env.REACT_APP_URL_REMOTE}/products/findAll`;
+      const productByCityUrl = `${process.env.REACT_APP_URL_REMOTE}/products/city/`;
+      const productByCategoryUrl = `${process.env.REACT_APP_URL_REMOTE}/products/category/`;
+      const productByCityAndDateUrl = `${process.env.REACT_APP_URL_REMOTE}/products/date/`;
 
       if(filter && filter[1] === 'city' && locationPath === '/productsList'){
         let productsByCity = await fetchData(productByCityUrl + filter[0], options);
