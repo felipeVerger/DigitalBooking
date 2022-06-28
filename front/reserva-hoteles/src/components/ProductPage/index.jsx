@@ -71,11 +71,12 @@ import { DateRangePicker } from "react-date-range";
 import { Link, useNavigate } from "react-router-dom";
 import {UserContext} from "../../context/user-context";
 import Map from './Map'
-import { MapContainer } from "react-leaflet";
+import ShareSocialMedia from "./ShareSocialMedia";
 
 
 const ProductPage = ({ product, productDetail }) => {
   const {user, setUser} = useContext(UserContext);
+  const [toggleShareLinks, setToggleShareLinks] =useState(false);
 
   const {id, name, subtitle, description, address, score, city = {}, category = {}, longitude, latitude } = productDetail;
   const getRatingComment = (rating) => {
@@ -116,6 +117,9 @@ const ProductPage = ({ product, productDetail }) => {
     key: "selection",
   };
 
+  const handleShareLinks = () => {
+    setToggleShareLinks(!toggleShareLinks);
+  }
 
   return (
     <>
@@ -176,7 +180,8 @@ const ProductPage = ({ product, productDetail }) => {
       <MainContentBody>
         <MainContent>
           <IconContainer>
-            <ShareIcon />
+            <ShareIcon onClick={handleShareLinks}/>
+            {toggleShareLinks ? <ShareSocialMedia id={id}/> : ''}
             <HeartIcon />
           </IconContainer>
           <ImageGallery>
@@ -276,7 +281,7 @@ const ProductPage = ({ product, productDetail }) => {
         <Separator/>
         <MapBlock>
           <LocationMap>{city.name + ', ' + city.country}</LocationMap>
-          <Map/>
+          <Map latitude={latitude} longitude={longitude}/>
         </MapBlock>
       </MapContent>
       <MainContentBody>

@@ -8,7 +8,7 @@ import { HiLocationMarker } from 'react-icons/hi';
 
 const position = [51.505, -0.09]
 
-const Map = () => {
+const Map = ({ latitude, longitude }) => {
   return (
       <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
       <TileLayer
