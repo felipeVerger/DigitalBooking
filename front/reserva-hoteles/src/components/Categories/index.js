@@ -5,7 +5,7 @@ import Loading from '../Loading/index'
 
 import useFetch from '../../hooks/useFetch'
 
-const URL_API = 'http://localhost:8080/categories/findAll'
+const URL_API = 'http://34.219.159.171:8080/categories/findAll'
 
 const Categorias = () => {
 

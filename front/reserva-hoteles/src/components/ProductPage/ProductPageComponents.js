@@ -8,6 +8,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Calendar from "react-date-range/dist/components/Calendar";
 
 import {AiOutlineShareAlt, AiOutlineHeart, AiFillHeart} from 'react-icons/ai';
+import styles from "react-date-range/dist/styles";
 
 export const HeaderBody = styled.div`
   background: ${(props) => props.theme.primary};
@@ -441,9 +442,8 @@ justify-content: center;
     display: flex;
     flex-direction: column;
   }
-
-
 `
+
 export const PoliciesContainer = styled.div`
 display: flex;
 flex-direction: row;
@@ -489,4 +489,26 @@ justify-content: flex-start;
 
 export const PolicyItem = styled.span`
 padding: 2rem 0;
+`
+
+export const MapContent = styled.div`
+  width: 100vw;
+  max-width: 1920px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 2rem;
+`
+
+export const MapBlock = styled.div`
+  margin: 0 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 2rem;
+`
+
+export const LocationMap = styled.p`
+  color: ${(props) => props.theme.primary};
+  font-size: 1.5rem;
 `

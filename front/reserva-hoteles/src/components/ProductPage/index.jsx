@@ -58,6 +58,9 @@ import {
   PoliciesContainer,
   PolicyItem,
   MoreImagesButton,
+  MapContent,
+  MapBlock,
+  LocationMap
 } from "./ProductPageComponents";
 import Modal from "react-modal";
 import { DateRange } from "react-date-range";
@@ -67,6 +70,8 @@ import "react-date-range/dist/theme/default.css";
 import { DateRangePicker } from "react-date-range";
 import { Link, useNavigate } from "react-router-dom";
 import {UserContext} from "../../context/user-context";
+import Map from './Map'
+import { MapContainer } from "react-leaflet";
 
 
 const ProductPage = ({ product, productDetail }) => {
@@ -264,6 +269,16 @@ const ProductPage = ({ product, productDetail }) => {
           </ContentBlock>
         </MainContent>
       </CalendarBody>
+      <MapContent>
+        <TitleBlock>
+          <ContentTitle>¿Donde vas a estar?</ContentTitle>
+        </TitleBlock>
+        <Separator/>
+        <MapBlock>
+          <LocationMap>{city.name + ', ' + city.country}</LocationMap>
+          <Map/>
+        </MapBlock>
+      </MapContent>
       <MainContentBody>
         <MainContent>
           <TitleBlock>
