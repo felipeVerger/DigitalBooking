@@ -113,9 +113,9 @@ resource "aws_launch_template" "frontend" {
   vpc_security_group_ids = [var.sg_private]
   key_name               = var.public_key_pair_project
   update_default_version = true
-  //user_data = base64encode(templatefile("scripts/ubuntu_apache.sh", {
-  // ENV = "${var.env}-frontend"
-  //}))
+  user_data = base64encode(templatefile("scripts/ubuntu_apache.sh", {
+    ENV = "${var.env}-frontend"
+  }))
 
   monitoring {
     enabled = true
@@ -148,9 +148,9 @@ resource "aws_launch_template" "backend" {
   vpc_security_group_ids = [var.sg_private]
   key_name               = var.public_key_pair_project
   update_default_version = true
-  //user_data = base64encode(templatefile("scripts/ubuntu_apache.sh", {
-  // ENV = "${var.env}-backend"
-  //}))
+  user_data = base64encode(templatefile("scripts/ubuntu_apache.sh", {
+    ENV = "${var.env}-backend"
+  }))
 
   monitoring {
     enabled = true

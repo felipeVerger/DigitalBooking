@@ -48,5 +48,5 @@
         name: "{{ default_container_image }}"
         source: pull
 
-    - name: run frontend docker containers
+    - name: run backend docker containers
       shell: "docker run -d -p 8080:8080 --name digitalapptier varesinatalia/digitalbooking10:latest"
