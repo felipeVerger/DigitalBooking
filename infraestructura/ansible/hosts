@@ -1,14 +1,18 @@
 #[bastion]
-#ec2-52-33-218-119.us-west-2.compute.amazonaws.com
-#52.33.218.119
+#ec2-34-212-220-61.us-west-2.compute.amazonaws.com
+#34.212.220.61
+#[privatelb]
+#dev-dinamita-lb-frontend-244646937.us-west-2.elb.amazonaws.com
+#[publiclb]
+#internal-dev-dinamita-lb-backend-1931547639.us-west-2.elb.amazonaws.com
 
 [front]
-10.0.3.153
-10.0.4.151
+10.0.3.42
+10.0.4.7
 
 [back]
-10.0.5.178
-10.0.6.122
+10.0.5.219
+10.0.6.130
 
 [front:vars]
 ansible_user=ubuntu

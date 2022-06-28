@@ -49,4 +49,4 @@
         source: pull
 
     - name: run backend docker containers
-      shell: "docker run -d -p 8080:8080 --name digitalapptier varesinatalia/digitalbooking10:latest"
+      shell: "docker run -d -p 80:8080 --name digitalapptier varesinatalia/digitalbooking10:latest"
