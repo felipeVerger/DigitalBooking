@@ -1,20 +1,20 @@
 #[bastion]
-#ec2-54-213-14-15.us-west-2.compute.amazonaws.com
-#54.213.14.15
+#ec2-52-33-218-119.us-west-2.compute.amazonaws.com
+#52.33.218.119
 
 [front]
-10.0.3.69
-10.0.4.146
+10.0.3.153
+10.0.4.151
 
 [back]
-10.0.5.107
-10.0.6.19
+10.0.5.178
+10.0.6.122
 
 [front:vars]
 ansible_user=ubuntu
-ansible_ssh_private_key_file=/home/ubuntu/0821-g10.pem
+ansible_ssh_private_key_file=/home/ubuntu/ansible/0821-g10.pem
 
 
 [back:vars]
-ansible_user=ec2-user
-ansible_ssh_private_key_file=/home/ubuntu/0821-g10.pem
+ansible_user=ubuntu
+ansible_ssh_private_key_file=/home/ubuntu/ansible/0821-g10.pem

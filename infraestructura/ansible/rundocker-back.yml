@@ -23,7 +23,7 @@
       loop: "{{ docker_info.containers | map(attribute='Id') | list }}"
       ignore_errors: yes
 
-     - name: Remove Stoped docker containers
+    - name: Remove Stoped docker containers
       shell: |
          docker rm $(docker ps -a -q);
       when: docker_info.containers != 0
