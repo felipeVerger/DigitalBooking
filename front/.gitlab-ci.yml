@@ -32,7 +32,7 @@ build:
 
 publish:
   stage: publish
-  needs: [test]
+  #needs: [test]
   image: docker:latest
   services: 
     - name: docker:19.03.8-dind
