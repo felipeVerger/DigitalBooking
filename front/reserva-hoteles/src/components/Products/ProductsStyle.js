@@ -183,6 +183,7 @@ export const ProductFiltered = styled.div`
 
   width: 100%;
   min-height: 300px;
+  /* max-height: 300px; */
   margin-bottom: 40px;
   @media screen and (max-width: 1280px) {
     width: 100%;
