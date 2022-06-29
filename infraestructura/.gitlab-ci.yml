@@ -13,6 +13,8 @@ stages:
   - build
   - deploy
 
+variables:
+  TF_ROOT: ${CI_PROJECT_DIR}/infraestructura/terraform/  # The relative path to the root directory of the Terraform project
 
 init:
   before_script: 
