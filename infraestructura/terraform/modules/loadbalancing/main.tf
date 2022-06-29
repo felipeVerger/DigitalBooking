@@ -53,7 +53,17 @@ resource "aws_route53_record" "app_dns" {
   }
 
 }
+resource "aws_route53_record" "app_dns_w" {
+  zone_id = data.aws_route53_zone.mydomain.zone_id
+  name    = "digitalbooking.cf"
+  type    = "A"
+  alias {
+    name                   = aws_lb.frontend.dns_name
+    zone_id                = aws_lb.frontend.zone_id
+    evaluate_target_health = false
+  }
 
+}
 # This alb places at frontend subnet and forward traffic internally to backend subnet
 resource "aws_lb" "backend" {
   name               = "${var.env}-${var.project}-elb-backend"
@@ -98,9 +108,22 @@ resource "aws_lb_listener" "backend_https" {
 data "aws_route53_zone" "backenddomain" {
   name = "digitalbooking.gq"
 }
+
 resource "aws_route53_record" "api_dns" {
   zone_id = data.aws_route53_zone.backenddomain.zone_id
   name    = "digitalbooking.gq"
+  type    = "A"
+  alias {
+    name                   = aws_lb.backend.dns_name
+    zone_id                = aws_lb.backend.zone_id
+    evaluate_target_health = false
+  }
+
+}
+
+resource "aws_route53_record" "api_dns_w" {
+  zone_id = data.aws_route53_zone.backenddomain.zone_id
+  name    = "www.digitalbooking.gq"
   type    = "A"
   alias {
     name                   = aws_lb.backend.dns_name
