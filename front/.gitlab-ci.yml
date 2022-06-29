@@ -19,36 +19,30 @@ build:
       - front/reserva-hoteles/build
       - front/reserva-hoteles/node_modules/
 
-test:
+.test:
   stage: test
   needs: [build]
   image: node
   script:
     - echo "Testing App"
-    #- cd front/reserva-hoteles/
-    #- npm install
-    #- CI=true npm test --passWithNoTests
+    - cd front/reserva-hoteles/
+    - npm install
+    - CI=true npm test --passWithNoTests
     - echo "Test successfully!"
 
-variables:
-  DOCKER_REGISTRY: 145504712931.dkr.ecr.us-west-2.amazonaws.com
-  AWS_DEFAULT_REGION: us-west-2
-  REPOSITORY_NAME: digitalbookingweb
 publish:
-  image: 
-    name: amazon/aws-cli
-    entrypoint: [""]
-  services:
-    - docker:dind
+  stage: publish
+  #needs: [test]
+  image: docker:latest
+  services: 
+    - name: docker:19.03.8-dind
   before_script:
     - cd front/
-    - amazon-linux-extras install docker
-    - aws --version
-    - docker --version
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - docker build -t $DOCKER_REGISTRY/$REPOSITORY_NAME:latest . 
-    - aws ecr get-login-password | docker login --username AWS --password-stdin $DOCKER_REGISTRY
-    - docker push $DOCKER_REGISTRY/$REPOSITORY_NAME:latest
+    - docker build --pull -t "$CI_REGISTRY_IMAGE"/realia .
+    - docker push "$CI_REGISTRY_IMAGE"/realia
+    - echo "Registry image:" $CI_REGISTRY_IMAGE/realia
 
 deploy:
   stage: deploy
