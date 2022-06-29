@@ -11,8 +11,9 @@ stages:
   - init
   - validate
   - build
-  - deploy
   - infracost
+  - deploy
+  
 
 variables:
   TF_ROOT: ${CI_PROJECT_DIR}/infraestructura/terraform/  # The relative path to the root directory of the Terraform project
@@ -27,11 +28,6 @@ validate:
 
 build:
   extends: .build
-
-deploy:
-  extends: .deploy
-  dependencies:
-    - build
 
 infracost:
   stage: infracost
@@ -83,9 +79,13 @@ infracost:
   variables:
     INFRACOST_API_KEY: $INFRACOST_API_KEY
     GITLAB_TOKEN: $GITLAB_TOKEN # With `api` scope to post merge request comments
-    # If you're using Terraform Cloud/Enterprise and have variables stored on there you can specify the following to automatically retrieve the variables:
-    # INFRACOST_TERRAFORM_CLOUD_TOKEN: $INFRACOST_TERRAFORM_CLOUD_TOKEN
-    # INFRACOST_TERRAFORM_CLOUD_HOST: app.terraform.io
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
+
+
+deploy:
+  extends: .deploy
+  dependencies:
+    - build
 
