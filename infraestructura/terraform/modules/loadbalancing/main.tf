@@ -49,20 +49,28 @@ resource "aws_route53_record" "app_dns" {
   alias {
     name                   = aws_lb.frontend.dns_name
     zone_id                = aws_lb.frontend.zone_id
-    evaluate_target_health = true
+    evaluate_target_health = false
   }
 
 }
+resource "aws_route53_record" "app_dns_w" {
+  zone_id = data.aws_route53_zone.mydomain.zone_id
+  name    = "digitalbooking.cf"
+  type    = "A"
+  alias {
+    name                   = aws_lb.frontend.dns_name
+    zone_id                = aws_lb.frontend.zone_id
+    evaluate_target_health = false
+  }
 
-
-
+}
 # This alb places at frontend subnet and forward traffic internally to backend subnet
 resource "aws_lb" "backend" {
-  name               = "${var.env}-${var.project}-lb-backend"
-  internal           = true
+  name               = "${var.env}-${var.project}-elb-backend"
+  internal           = false
   load_balancer_type = "application"
   security_groups    = [var.sg_http]
-  subnets            = tolist(var.subnet_frontend)
+  subnets            = tolist(var.subnet_public)
 }
 resource "aws_lb_target_group" "backend" {
   name     = "${var.env}-${var.project}-lb-tg-backend"
@@ -79,11 +87,51 @@ resource "aws_lb_listener" "backend" {
   port              = var.lb_listener_port
   protocol          = var.lb_listener_protocol
   default_action {
+    type = "redirect"
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+}
+resource "aws_lb_listener" "backend_https" {
+  load_balancer_arn = aws_lb.backend.arn
+  port              = 443
+  protocol          = "HTTPS"
+  certificate_arn   = "arn:aws:acm:us-west-2:145504712931:certificate/82bd51b2-2924-4d78-9638-42a764ea5631"
+  default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.backend.arn
   }
 }
+data "aws_route53_zone" "backenddomain" {
+  name = "digitalbooking.gq"
+}
 
+resource "aws_route53_record" "api_dns" {
+  zone_id = data.aws_route53_zone.backenddomain.zone_id
+  name    = "digitalbooking.gq"
+  type    = "A"
+  alias {
+    name                   = aws_lb.backend.dns_name
+    zone_id                = aws_lb.backend.zone_id
+    evaluate_target_health = false
+  }
+
+}
+
+resource "aws_route53_record" "api_dns_w" {
+  zone_id = data.aws_route53_zone.backenddomain.zone_id
+  name    = "www.digitalbooking.gq"
+  type    = "A"
+  alias {
+    name                   = aws_lb.backend.dns_name
+    zone_id                = aws_lb.backend.zone_id
+    evaluate_target_health = false
+  }
+
+}
 
 
 /*
