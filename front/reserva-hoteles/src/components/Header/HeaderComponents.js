@@ -72,6 +72,9 @@ export const Slogan = styled(Link)`
   font-size: 24px;
   text-decoration: none;
   white-space: nowrap;
+  &:hover {
+    color: ${(props) => props.theme.primary};
+  }
   @media only screen and (max-width: 1100px) {
     display: none;
   }

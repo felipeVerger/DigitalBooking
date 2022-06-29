@@ -18,7 +18,7 @@ const Categorias = () => {
         redirect: 'follow'
     });
 
-  return loading ? <Loading/> : error ? <h1>Hubo un error, intente mas tarde</h1> : (
+  return loading ? <Loading/> : data.length === 0 ? <h1>Hubo un error, intente mas tarde</h1> : (
     <Body>
         <CategoryBlock>
             <SectionTitle>Buscar por tipo de alojamiento</SectionTitle>

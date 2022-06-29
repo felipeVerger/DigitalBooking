@@ -14,6 +14,7 @@ import ProductsList from "./pages/ProductsList";
 import Product from "./pages/Product";
 import ProductBooking from "./pages/ProductBooking";
 import SuccessfulMessage from "./pages/SuccessfulMessage";
+import Favorites from "./pages/Favorites";
 import Error from "./pages/Error";
 
 
@@ -33,6 +34,7 @@ function App() {
                 <Route path="/product/:id" element={<Product />} />
                 <Route path="/product/:id/booking" element={<ProductBooking />} />
                 <Route path="/product/:id/booking/successful" element={<SuccessfulMessage />} />
+                <Route path='/favorites' element={<Favorites/>}/>
                 <Route path="*" element={<Error />} />
               </Routes>
             </BrowserRouter>

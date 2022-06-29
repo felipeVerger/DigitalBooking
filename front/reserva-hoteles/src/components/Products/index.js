@@ -3,7 +3,6 @@ import { Body, Block, Title, RecommendationContainer, ErrorMessage } from './ind
 import ProductCard from './ProductsCard'
 import { FilterContext } from '../../context/filter-context'
 import { useLocation } from 'react-router-dom'
-import useFetch from '../../hooks/useFetch';
 import Loading from '../Loading';
 import { fetchData, options } from '../../utils/fetchData';
 
@@ -32,20 +31,22 @@ const Recomendaciones = () => {
       }
     }
     fetchProductsData();
-  }, []) 
+  }, [filter]) 
 
 
     const randomProducts = products && products.length > 6 ? products.sort(() => Math.random() - 0.5).slice(0, 6) : products;
     const filteredProducts = locationPath === '/productsList' ? products : randomProducts; 
+    
 
   if (!filteredProducts.length) {
     return <Loading/>
-  }
-  return !filter && locationPath === '/productsList' ? <ErrorMessage>No se encontraron resultados</ErrorMessage> : 
-  (
+  } else if (filteredProducts.length === 0) {
+     <ErrorMessage>No se encontraron resultados, intente mas tarde</ErrorMessage>
+  } else {
+    return (
     <Body>
         <Block>
-            <Title>{locationPath === '/' ? 'Recomendaciones' : `${filter[0]}: ${randomProducts.length} alojamientos encontrados`}</Title>
+            <Title>Recomendaciones</Title>
             <RecommendationContainer>
                 {
                    filteredProducts.map((product) => {
@@ -67,6 +68,7 @@ const Recomendaciones = () => {
         </Block>
     </Body>
   );
+}
 }
 
 export default Recomendaciones
