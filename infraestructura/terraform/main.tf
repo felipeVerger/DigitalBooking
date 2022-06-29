@@ -37,7 +37,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 3.27"
+      version = "~> 4.15"
     }
   }
   required_version = ">= 0.14.9"
@@ -104,4 +104,10 @@ module "compute" {
   lb_tg_arn_backend  = module.loadbalancing.lb_tg_arn_backend
 
   depends_on = [module.loadbalancing]
+}
+
+
+resource "aws_s3_bucket" "bucket" {
+  bucket = "dinamita-assetsbank"
+
 }

@@ -1,37 +1,46 @@
 ---
 - hosts: all
-  
-  become: yes
+  become: true
+
   tasks:
+    - name: Update system
+      shell: "sudo apt-get update && sudo apt-get upgrade -y"
+      
+    - name: Install aptitude
+      apt:
+        name: aptitude
+        state: latest
+        update_cache: true
 
+    - name: Install required system packages
+      apt:
+        pkg:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - python3-pip
+          - virtualenv
+          - python3-setuptools
+        state: latest
+        update_cache: true
 
-  - name: update 
-    shell: "sudo yum update"
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
 
-  # Install Docker
-  # --
-  # 
-  - name: install docker 
-    yum:
-      name: 
-        - docker
-      update_cache: yes
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu focal stable
+        state: present
 
-  - name: add userpermissions
-    shell: "usermod -aG docker {{ lookup('env','USER') }}"
+    - name: Update apt and install docker-ce
+      apt:
+        name: docker-ce
+        state: latest
+        update_cache: true
 
-  # Installs Docker SDK
-  # --
-  # 
-  - name: Install and upgrade pip
-  pip:
-    name: pip
-    extra_args: --upgrade
-    executable: pip3
-  
-  - name: install python sdk
-    become_user: "{{ lookup('env','USER') }}"
-    pip:
-      name:
-        - docker
-        - docker-compose
+    - name: Install Docker Module for Python
+      pip:
+        name: docker

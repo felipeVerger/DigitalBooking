@@ -113,9 +113,9 @@ resource "aws_launch_template" "frontend" {
   vpc_security_group_ids = [var.sg_private]
   key_name               = var.public_key_pair_project
   update_default_version = true
-  //user_data = base64encode(templatefile("scripts/ubuntu_apache.sh", {
-  // ENV = "${var.env}-frontend"
-  //}))
+  user_data = base64encode(templatefile("scripts/ubuntu_apache.sh", {
+    ENV = "${var.env}-frontend"
+  }))
 
   monitoring {
     enabled = true
@@ -148,9 +148,9 @@ resource "aws_launch_template" "backend" {
   vpc_security_group_ids = [var.sg_private]
   key_name               = var.public_key_pair_project
   update_default_version = true
-  //user_data = base64encode(templatefile("scripts/ubuntu_apache.sh", {
-  // ENV = "${var.env}-backend"
-  //}))
+  user_data = base64encode(templatefile("scripts/ubuntu_apache.sh", {
+    ENV = "${var.env}-backend"
+  }))
 
   monitoring {
     enabled = true
@@ -176,50 +176,12 @@ resource "aws_launch_template" "backend" {
   }
 }
 /*
-resource "aws_launch_template" "database" {
-  name                   = "${var.env}-${var.project}-database"
-  image_id               = data.aws_ami.ubuntu.id
-  instance_type          = var.instance_type_database
-  vpc_security_group_ids = [var.sg_private]
-  key_name               = var.public_key_pair_project
-  update_default_version = true
-  user_data = base64encode(templatefile("scripts/ubuntu_apache.sh", {
-    ENV = "${var.env}-database"
-  }))
-
-  monitoring {
-    enabled = true
-  }
-
-  block_device_mappings {
-    # device_name = "/dev/xvda" // Root: Amazon Linux 2 AMI (HVM)
-    device_name = "/dev/sda1" // Root: Ubuntu Server 20.04 LTS (HVM)
-    ebs {
-      volume_size = 20
-    }
-  }
-
-  tag_specifications {
-    resource_type = "instance"
-    tags = {
-      Name = "${var.env}-${var.project}-database"
-    }
-  }
-
-  tags = {
-    Name = "${var.env}-${var.project}-lt-database"
-  }
-}
-
-
-or
-
 resource "aws_db_instance" "database" {
-  allocated_storage      = 10
+  allocated_storage      = 20
   engine                 = "mysql"
   engine_version         = "8.0"
-  instance_class         = "db.t2.small"
-  name                   = "proyecto_integrador_dev"
+  instance_class         = "db.t3.small"
+  name                   = "dbking"
   username               = "root"
   db_subnet_group_name   = var.subnet_database.name
   vpc_security_group_ids = [var.sg_private]
@@ -228,8 +190,8 @@ resource "aws_db_instance" "database" {
   skip_final_snapshot    = true
 }
 
-
 */
+
 
 
 
@@ -242,6 +204,10 @@ resource "aws_autoscaling_group" "frontend" {
   min_size            = 2
   max_size            = 2
   desired_capacity    = 2
+  target_group_arns   = [var.lb_tg_arn_frontend]
+  lifecycle {
+    create_before_destroy = true
+  }
 
   launch_template {
     id      = aws_launch_template.frontend.id
@@ -254,17 +220,27 @@ resource "aws_autoscaling_group" "frontend" {
 ## Backend
 ###########
 resource "aws_autoscaling_group" "backend" {
-  name                = "${var.env}-${var.project}-asg-backend"
-  vpc_zone_identifier = tolist(var.subnet_backend)
-  min_size            = 2
-  max_size            = 2
-  desired_capacity    = 2
+  name                      = "${var.env}-${var.project}-asg-backend"
+  vpc_zone_identifier       = tolist(var.subnet_backend)
+  min_size                  = 1
+  max_size                  = 2
+  desired_capacity          = 2
+  health_check_grace_period = 600
+  health_check_type         = "EC2"
+
+
+  target_group_arns = [var.lb_tg_arn_backend]
+  lifecycle {
+    create_before_destroy = true
+  }
 
   launch_template {
     id      = aws_launch_template.backend.id
     version = "$Latest"
   }
 }
+
+
 ###########
 ## Database
 ###########
@@ -275,16 +251,6 @@ resource "aws_autoscaling_group" "database" {
   min_size             = 2
   max_size             = 2
   desired_capacity     = 2
-  health_check_type    = "ELB"
-  termination_policies = ["OldestInstance"]
-  enabled_metrics = [
-    "GroupMinSize",
-    "GroupMaxSize",
-    "GroupDesiredCapacity",
-    "GroupInServiceInstances",
-    "GroupTotalInstances"
-  ]
-  metrics_granularity = "1Minute"
   target_group_arns   = [var.lb_tg_arn_database]
   lifecycle {
     create_before_destroy = true
@@ -296,83 +262,4 @@ resource "aws_autoscaling_group" "database" {
   }
 }
 
-# Predictive
-resource "aws_autoscaling_policy" "predictive_database" {
-  name                   = "${var.env}-${var.project}-asg-pl-predictive-database"
-  policy_type            = "PredictiveScaling"
-  autoscaling_group_name = aws_autoscaling_group.database.name
-  predictive_scaling_configuration {
-    metric_specification {
-      target_value = 32
-      predefined_scaling_metric_specification {
-        predefined_metric_type = "ASGAverageCPUUtilization"
-        resource_label         = "scaling_metric_label"
-      }
-      predefined_load_metric_specification {
-        predefined_metric_type = "ASGTotalCPUUtilization"
-        resource_label         = "load_metric_label"
-      }
-    }
-    mode                         = "ForecastAndScale"
-    scheduling_buffer_time       = 10
-    max_capacity_breach_behavior = "IncreaseMaxCapacity"
-    max_capacity_buffer          = 10
-  }
-}
-
-# Scale up alarm
-resource "aws_autoscaling_policy" "cpu_up_database" {
-  name                   = "${var.env}-${var.project}-asg-pl-cpu-up-database"
-  autoscaling_group_name = aws_autoscaling_group.database.name
-  adjustment_type        = "ChangeInCapacity"
-  scaling_adjustment     = "1"
-  cooldown               = "300"
-  policy_type            = "SimpleScaling"
-}
-resource "aws_cloudwatch_metric_alarm" "cpu_up_database" {
-  alarm_name          = "${var.env}-${var.project}-alarm-cpu-up-database"
-  alarm_description   = "Alarm when CPU >= 30"
-  comparison_operator = "GreaterThanOrEqualToThreshold"
-  evaluation_periods  = "2"
-  metric_name         = "CPUUtilization"
-  namespace           = "AWS/EC2"
-  period              = "120"
-  statistic           = "Average"
-  threshold           = "30"
-
-  dimensions = {
-    "AutoScalingGroupName" = aws_autoscaling_group.database.name
-  }
-
-  actions_enabled = true
-  alarm_actions   = [aws_autoscaling_policy.cpu_up_database.arn]
-}
-
-# Scale down alarm
-resource "aws_autoscaling_policy" "cpu_down_database" {
-  name                   = "${var.env}-${var.project}-asg-pl-cpu-down-database"
-  autoscaling_group_name = aws_autoscaling_group.database.name
-  adjustment_type        = "ChangeInCapacity"
-  scaling_adjustment     = "-1"
-  cooldown               = "300"
-  policy_type            = "SimpleScaling"
-}
-resource "aws_cloudwatch_metric_alarm" "cpu_down_database" {
-  alarm_name          = "${var.env}-${var.project}-alarm-cpu-down-database"
-  alarm_description   = "Alarm when CPU <= 5"
-  comparison_operator = "LessThanOrEqualToThreshold"
-  evaluation_periods  = "2"
-  metric_name         = "CPUUtilization"
-  namespace           = "AWS/EC2"
-  period              = "120"
-  statistic           = "Average"
-  threshold           = "5"
-
-  dimensions = {
-    "AutoScalingGroupName" = aws_autoscaling_group.database.name
-  }
-
-  actions_enabled = true
-  alarm_actions   = [aws_autoscaling_policy.cpu_down_database.arn]
-}
 */
