@@ -6,7 +6,7 @@ trigger_front:
   trigger:
     include: front/.gitlab-ci.yml
   rules:
-    - if: '($CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH) && $CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_PIPELINE_SOURCE == "merge_request_event"'
 
 
 trigger_back:
@@ -14,12 +14,12 @@ trigger_back:
   trigger:
     include: back/.gitlab-ci.yml
   rules:
-    - if: '($CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH) && $CI_PIPELINE_SOURCE == "merge_request_event"' 
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_PIPELINE_SOURCE == "merge_request_event"'
     
 trigger_infra:
   stage: triggers
   trigger:
     include: infraestructura/.gitlab-ci.yml
   rules:
-    - if: '($CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH) && $CI_PIPELINE_SOURCE == "merge_request_event"' 
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_PIPELINE_SOURCE == "merge_request_event"' 
   
