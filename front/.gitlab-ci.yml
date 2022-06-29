@@ -19,7 +19,7 @@ build:
       - front/reserva-hoteles/build
       - front/reserva-hoteles/node_modules/
 
-test:
+.test:
   stage: test
   needs: [build]
   image: node
