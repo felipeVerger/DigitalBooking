@@ -28,22 +28,16 @@ test:
     paths:
       - back/ProyectInt/target/*.jar
 
-variables:
-  DOCKER_REGISTRY: 145504712931.dkr.ecr.us-west-2.amazonaws.com
-  AWS_DEFAULT_REGION: us-west-2
-  REPOSITORY_NAME: digitalbooking10
 publish:
-  image: 
-    name: amazon/aws-cli
-    entrypoint: [""]
-  services:
-    - docker:dind
+  stage: publish
+  needs: [test]
+  image: docker:latest
+  services: 
+    - name: docker:19.03.8-dind
   before_script:
-    - cd back/
-    - amazon-linux-extras install docker
-    - aws --version
-    - docker --version
+    - cd front/
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - docker build -t $DOCKER_REGISTRY/$REPOSITORY_NAME:latest . 
-    - aws ecr get-login-password | docker login --username AWS --password-stdin $DOCKER_REGISTRY
-    - docker push $DOCKER_REGISTRY/$REPOSITORY_NAME:latest
+    - docker build --pull -t "$CI_REGISTRY_IMAGE"/digitalbooking10 .
+    - docker push "$CI_REGISTRY_IMAGE"/digitalbooking10
+    - echo "Registry image:" $CI_REGISTRY_IMAGE/digitalbooking10

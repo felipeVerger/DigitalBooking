@@ -6,7 +6,7 @@ trigger_front:
   trigger:
     include: front/.gitlab-ci.yml
   rules:
-    - if: $CI_COMMIT_BRANCH == "103-arreglar-deploy-con-ansible"
+    - if: $CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "103-arreglar-deploy-con-ansible"
 
 
 trigger_back:
@@ -14,12 +14,12 @@ trigger_back:
   trigger:
     include: back/.gitlab-ci.yml
   rules:
-    - if: $CI_COMMIT_BRANCH == "main"
-
-trigger_db:
+    - if: $CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "103-arreglar-deploy-con-ansible"
+    
+trigger_infra:
   stage: triggers
   trigger:
-    include: back/ProyectInt/assets/.gitlab-ci.yml
+    include: infraestructura/.gitlab-ci.yml
   rules:
-    - when: manual
+    - if: $CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "103-arreglar-deploy-con-ansible"
   
