@@ -6,7 +6,7 @@ trigger_front:
   trigger:
     include: front/.gitlab-ci.yml
   rules:
-    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "103-arreglar-deploy-con-ansible"
 
 
 trigger_back:
