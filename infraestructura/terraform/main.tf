@@ -105,3 +105,9 @@ module "compute" {
 
   depends_on = [module.loadbalancing]
 }
+
+
+resource "aws_s3_bucket" "bucket" {
+  bucket = "dinamita-assetsbank"
+
+}

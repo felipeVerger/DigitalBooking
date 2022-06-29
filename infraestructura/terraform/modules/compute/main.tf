@@ -177,11 +177,11 @@ resource "aws_launch_template" "backend" {
 }
 /*
 resource "aws_db_instance" "database" {
-  allocated_storage      = 10
+  allocated_storage      = 20
   engine                 = "mysql"
   engine_version         = "8.0"
-  instance_class         = "db.t2.small"
-  name                   = "proyecto_integrador_dev"
+  instance_class         = "db.t3.small"
+  name                   = "dbking"
   username               = "root"
   db_subnet_group_name   = var.subnet_database.name
   vpc_security_group_ids = [var.sg_private]
@@ -190,8 +190,8 @@ resource "aws_db_instance" "database" {
   skip_final_snapshot    = true
 }
 
-
 */
+
 
 
 
