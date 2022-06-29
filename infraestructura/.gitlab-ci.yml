@@ -16,7 +16,7 @@ stages:
 
 init:
   before_script: 
-      - cd terraform/
+      - cd infraestructura/terraform/
   extends: .init
 
 validate:
