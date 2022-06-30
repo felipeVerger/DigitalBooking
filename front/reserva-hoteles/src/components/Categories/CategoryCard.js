@@ -9,9 +9,7 @@ const CategoryCard = ({ img, category, amount, type }) => {
 
   return (
     <Box onClick={() => setFilter([category, 'category'])}>
-        <Link to={'/productsList'}>
-            <Image src={img} alt="imagen-categorias" />
-        </Link>
+        <Image src={img} alt="imagen-categorias" />
         <InfoSection>
             <CategoryText>{category}</CategoryText>
             <CategoryInfo>{amount} {type}</CategoryInfo>

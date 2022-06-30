@@ -4,7 +4,7 @@ import Layout from '../components/Layout'
 import Section from '../components/Section'
 import Message from '../components/SuccessfulMessagePage/index'
 
-const SuccessfulMessage = ({ message }) => {
+const SuccessfulMessageProduct = ({ message }) => {
   return (
     <PageContainer>
         <Layout>
@@ -16,4 +16,4 @@ const SuccessfulMessage = ({ message }) => {
   )
 }
 
-export default SuccessfulMessage
+export default SuccessfulMessageProduct;

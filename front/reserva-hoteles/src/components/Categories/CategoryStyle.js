@@ -9,7 +9,7 @@ export const Box = styled.div`
   flex: 1;
   transition: transform 500ms ease;
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
   }
   @media screen and (max-width: 768px) {
     display: flex;

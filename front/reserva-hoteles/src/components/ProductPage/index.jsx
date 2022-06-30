@@ -101,6 +101,8 @@ const ProductPage = ({ product, productDetail }) => {
     }
   };
 
+  // console.log(latitude);
+
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal() {

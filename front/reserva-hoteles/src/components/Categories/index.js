@@ -1,5 +1,5 @@
 import React from 'react'
-import { Body, CategoryBlock, SectionTitle, FlexWrapper} from './IndexStyle'
+import { Body, CategoryBlock, SectionTitle, FlexWrapper, ErrorMessage} from './IndexStyle'
 import CategoryCard from './CategoryCard'
 import Loading from '../Loading/index'
 
@@ -18,28 +18,34 @@ const Categorias = () => {
         redirect: 'follow'
     });
 
-  return loading ? <Loading/> : data.length === 0 ? <h1>Hubo un error, intente mas tarde</h1> : (
-    <Body>
-        <CategoryBlock>
-            <SectionTitle>Buscar por tipo de alojamiento</SectionTitle>
-            <FlexWrapper>
-                {
-                    data.map((item) => {
-                        return (
-                            <CategoryCard
-                                key={item.id}
-                                img={item.urlImage}
-                                category={item.title}
-                                amount={item.amount}
-                                type={item.title}
-                            />
-                        )
-                    })
-                }
-            </FlexWrapper>
-        </CategoryBlock>
-    </Body>
-  )
+  if (loading) {
+    return <Loading/>
+  } else if (data.length === 0){
+    return <ErrorMessage>Hubo un error, intente mas tarde</ErrorMessage>
+  } else {
+    return (
+        <Body>
+            <CategoryBlock>
+                <SectionTitle>Buscar por tipo de alojamiento</SectionTitle>
+                <FlexWrapper>
+                    {
+                        data?.map((item) => {
+                            return (
+                                <CategoryCard
+                                    key={item.id}
+                                    img={item.urlImage}
+                                    category={item.title}
+                                    amount={item.amount}
+                                    type={item.title}
+                                />
+                            )
+                        })
+                    }
+                </FlexWrapper>
+            </CategoryBlock>
+        </Body>
+        )
+    }
 }
 
 export default Categorias

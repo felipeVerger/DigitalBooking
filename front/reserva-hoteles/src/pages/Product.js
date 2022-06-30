@@ -13,8 +13,7 @@ const Product = () => {
   const myHeaders = new Headers();
     myHeaders.append("Authorization", "Basic dXNlcjpnMTBCb29raW5n");
 
-    console.log(id)
-  const { data, loading, error } = useFetch('http://34.219.159.171:8080/products/' + id, {
+  const { data, loading, error } = useFetch(`${process.env.REACT_APP_URL_REMOTE}/products/` + id, {
     method: 'GET',
     headers: myHeaders,
     redirect: 'follow'

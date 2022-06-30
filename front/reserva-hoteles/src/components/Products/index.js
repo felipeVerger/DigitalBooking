@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
-import { Body, Block, Title, RecommendationContainer, ErrorMessage } from './indexStyle'
+import { Body, Block, Title, RecommendationContainer, ErrorBlock, ErrorMessage, ErrorIcon } from './indexStyle'
 import ProductCard from './ProductsCard'
 import { FilterContext } from '../../context/filter-context'
 import { useLocation } from 'react-router-dom'
@@ -11,18 +11,19 @@ const Recomendaciones = () => {
     const locationPath = useLocation().pathname;
 
     const [products, setProducts] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchProductsData = async () => { 
       const productUrl = `${process.env.REACT_APP_URL_REMOTE}/products/findAll`;
       const productByCityUrl = `${process.env.REACT_APP_URL_REMOTE}/products/city/`;
       const productByCategoryUrl = `${process.env.REACT_APP_URL_REMOTE}/products/category/`;
-      const productByCityAndDateUrl = `${process.env.REACT_APP_URL_REMOTE}/products/date/`;
+      const productByCityAndDateUrl = `${process.env.REACT_APP_URL_REMOTE}/products/date/startDate/endDate/city`;
 
-      if(filter && filter[1] === 'city' && locationPath === '/productsList'){
+      if(filter && filter[1] === 'city'){
         let productsByCity = await fetchData(productByCityUrl + filter[0], options);
         setProducts(productsByCity);
-      } else if (filter && filter[1] === 'category' && locationPath === '/productsList'){
+      } else if (filter && filter[1] === 'category'){
         let productsByCategory = await fetchData(productByCategoryUrl + filter[0], options);
         setProducts(productsByCategory);
       } else {
@@ -35,13 +36,22 @@ const Recomendaciones = () => {
 
 
     const randomProducts = products && products.length > 6 ? products.sort(() => Math.random() - 0.5).slice(0, 6) : products;
-    const filteredProducts = locationPath === '/productsList' ? products : randomProducts; 
+    // const filteredProducts = locationPath === '/productsList' ? products : randomProducts; 
     
+    const handleLoading = () => {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 3000)
+    }
 
-  if (!filteredProducts.length) {
-    return <Loading/>
-  } else if (filteredProducts.length === 0) {
-     <ErrorMessage>No se encontraron resultados, intente mas tarde</ErrorMessage>
+  if (!randomProducts.length) {
+    handleLoading();
+    return isLoading ? <Loading/> : (
+      <ErrorBlock>
+        <ErrorIcon/>
+        <ErrorMessage>Lo sentimos, no se encontraron resultados para tu busqueda</ErrorMessage>
+      </ErrorBlock>
+    )
   } else {
     return (
     <Body>
@@ -49,7 +59,7 @@ const Recomendaciones = () => {
             <Title>Recomendaciones</Title>
             <RecommendationContainer>
                 {
-                   filteredProducts.map((product) => {
+                   randomProducts.map((product) => {
                         return (
                             <ProductCard
                                 key={product.id}

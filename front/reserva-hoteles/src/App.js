@@ -16,6 +16,7 @@ import ProductBooking from "./pages/ProductBooking";
 import SuccessfulMessage from "./pages/SuccessfulMessage";
 import Favorites from "./pages/Favorites";
 import Error from "./pages/Error";
+import SuccessfulMessageProduct from "./pages/SuccessfulMessageProduct";
 
 
 function App() {
@@ -33,7 +34,8 @@ function App() {
                 <Route path="/productsList" element={<ProductsList/>}/>
                 <Route path="/product/:id" element={<Product />} />
                 <Route path="/product/:id/booking" element={<ProductBooking />} />
-                <Route path="/product/:id/booking/successful" element={<SuccessfulMessage />} />
+                <Route path="/product/:id/booking/successful" element={<SuccessfulMessage message={'Su reserva se ha realizado con éxito.'}/>} />
+                <Route path="/admin/successful-product-creation" element={<SuccessfulMessageProduct message={'Tu propiedad se ha creado con éxito.'}/>} />
                 <Route path='/favorites' element={<Favorites/>}/>
                 <Route path="*" element={<Error />} />
               </Routes>

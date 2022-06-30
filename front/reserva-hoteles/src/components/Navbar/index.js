@@ -24,7 +24,6 @@ const Navbar = () => {
     e.preventDefault();
     if (destination !== '¿A dónde vamos?') {
       setFilter([destination, 'city']);
-      navigate('/productsList');
     }
   };
 
