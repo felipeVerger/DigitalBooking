@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { BiError } from 'react-icons/bi';
 
 export const Body = styled.div`
   background: ${(props) => props.theme.content_background};
@@ -38,12 +39,24 @@ export const RecommendationContainer = styled.div`
   justify-content: space-between;
 `;
 
+export const ErrorBlock =  styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 7rem;
+`
+
 export const ErrorMessage = styled.h3`
   font-size: 24px;
   font-weight: 700;
   color: black;
   text-align: center;
-  margin: 25vh;
+`
+
+export const ErrorIcon = styled(BiError)`
+  font-size: 50px;
+  color: red;
 `
 
 export const Button = styled(Link)`

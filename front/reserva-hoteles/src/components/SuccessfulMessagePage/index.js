@@ -9,13 +9,13 @@ import {
 } from './SuccessfulMessage'
 import { Link } from 'react-router-dom'
 
-const Message = () => {
+const Message = ({ message }) => {
   return (
     <Container>
         <Box>
             <Logo src={require("../../assets/logo-exito.png")} />
             <Gratitude>¡Muchas gracias!</Gratitude>
-            <MessageText>Su reserva se ha realizado con éxito.</MessageText>
+            <MessageText>{message}</MessageText>
             <Link to={'/'}>
                 <Button>ok</Button>
             </Link>

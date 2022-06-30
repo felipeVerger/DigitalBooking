@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 import { Popup, Marker } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -6,9 +6,12 @@ import './MapStyle.css';
 import { HiLocationMarker } from 'react-icons/hi';
 
 
-const position = [51.505, -0.09]
+
 
 const Map = ({ latitude, longitude }) => {
+  
+  let position = [51.505, -0.09];
+  
   return (
       <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
       <TileLayer

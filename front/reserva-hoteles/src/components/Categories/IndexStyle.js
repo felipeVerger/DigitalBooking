@@ -35,3 +35,7 @@ export const FlexWrapper = styled.div`
     width: 100%;
   }
 `;
+
+export const ErrorMessage = styled.h2`
+  margin: 4rem;
+`
