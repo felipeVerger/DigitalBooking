@@ -33,7 +33,7 @@ const RegisterForm = () => {
   myHeaders.append("Content-Type", "application/json");
 
   const register = async  () => {
-    let url = 'http://localhost:8080/auth/signup';
+    let url = `${process.env.REACT_APP_URL_REMOTE}/auth/signup`;
     let body = JSON.stringify({
       "name": formValues.nombre,
       "lastName": formValues.apellido,
