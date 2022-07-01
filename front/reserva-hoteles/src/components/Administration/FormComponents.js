@@ -172,6 +172,9 @@ export const PolicyBody = styled.div`
 export const PolicyBlock = styled.div`
   width: 100%;
   padding: 2rem;
+  @media screen and (max-width: 1124px){
+    padding: 1rem 2rem;
+  }
 `
 
 export const PolicyName = styled.h5`
@@ -228,3 +231,9 @@ export const SubmitButton = styled(Link)`
     color: white;
   }
 `
+
+export const ErrorText = styled.p`
+  color: red;
+  width: 100%;
+  padding: 5px;
+`;
