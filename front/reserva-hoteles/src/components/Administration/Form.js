@@ -197,7 +197,6 @@ const FormComponent = () => {
             <Label htmlFor='descripcion'>Descripcion</Label>
             <DescriptionField
                 name={'descripcion'}
-                type={'textarea'}
                 placeholder='Escribir aqui'
                 onChange={handleChange}
             />

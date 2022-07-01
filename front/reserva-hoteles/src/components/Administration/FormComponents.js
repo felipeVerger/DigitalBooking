@@ -46,7 +46,7 @@ export const DescriptionBlock = styled.div`
   margin-top: 30px;
 `
 
-export const DescriptionField = styled.input`
+export const DescriptionField = styled.textarea`
   border-radius: 5px;
   width: 100%;
   height: 120px;
@@ -181,7 +181,7 @@ export const PolicyName = styled.h5`
   color: ${(props) => props.theme.primary};
 `
 
-export const PolicyField = styled.input`
+export const PolicyField = styled.textarea`
   border-radius: 5px;
   width: 100%;
   height: 200px;
