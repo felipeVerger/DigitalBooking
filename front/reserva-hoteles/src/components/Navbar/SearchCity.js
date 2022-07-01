@@ -13,7 +13,7 @@ const SearchCity = ({destination, setDestination}) => {
   const myHeaders = new Headers();
     myHeaders.append("Authorization", "Basic dXNlcjpnMTBCb29raW5n");
 
-  const { data } = useFetch(URL_API, {
+  const { data: cities } = useFetch(URL_API, {
     method: 'GET',
     headers: myHeaders,
     redirect: 'follow'
@@ -26,7 +26,7 @@ const SearchCity = ({destination, setDestination}) => {
   // If citiesList is false nothing will be displayed, else the select will show
   return (
     <Dropdown
-      options={data.map((item) => ({
+      options={cities.map((item) => ({
         value: item.name,
         label: item.name + ', ' + item.country,
       }))}
