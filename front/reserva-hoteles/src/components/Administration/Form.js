@@ -145,165 +145,175 @@ const FormComponent = () => {
 
   return (
     <Form>
-        <InputContainer>
-            <Label htmlFor='nombre'>Nombre de la propiedad</Label>
-            <TextField
-                name={'nombre'}
-                type={'text'}
-                placeholder={'Hotel Hermitage'}
+      <InputContainer>
+        <Label htmlFor="nombre">Nombre de la propiedad</Label>
+        <TextField
+          name={"nombre"}
+          type={"text"}
+          placeholder={"Hotel Hermitage"}
+          onChange={handleChange}
+        />
+        <ErrorText>{errors.nombre}</ErrorText>
+      </InputContainer>
+      <InputContainer>
+        <Label htmlFor="categoria">Categoria</Label>
+        <SelectField
+          options={categories.map((item) => ({
+            value: item.title,
+            label: item.title,
+          }))}
+          name={"categoria"}
+          type={"text"}
+          placeholder={"Hotel"}
+          onChange={handleChange}
+        />
+        <ErrorText>{errors.categoria}</ErrorText>
+      </InputContainer>
+      <InputContainer>
+        <Label htmlFor="direccion">Direccion</Label>
+        <TextField
+          name={"direccion"}
+          type={"text"}
+          placeholder="Av. Colon 1124"
+          onChange={handleChange}
+        />
+        <ErrorText>{errors.direccion}</ErrorText>
+      </InputContainer>
+      <InputContainer>
+        <Label htmlFor="ciudad">Ciudad</Label>
+        <SelectField
+          options={cities.map((item) => ({
+            value: item.name,
+            label: item.name,
+          }))}
+          name={"ciudad"}
+          type={"text"}
+          placeholder="Ciudad"
+          onChange={handleChange}
+        />
+        <ErrorText>{errors.ciudad}</ErrorText>
+      </InputContainer>
+      <DescriptionBlock>
+        <Label htmlFor="descripcion">Descripcion</Label>
+        <DescriptionField
+          name={"descripcion"}
+          placeholder="Escribir aqui"
+          onChange={handleChange}
+        />
+        <ErrorText>{errors.descripcion}</ErrorText>
+      </DescriptionBlock>
+      <InputContainer>
+        <Label htmlFor="latitud">Latitud</Label>
+        <TextField
+          name={"latitud"}
+          type={"text"}
+          placeholder="44.6578"
+          onChange={handleChange}
+        />
+        <ErrorText>{errors.latitud}</ErrorText>
+      </InputContainer>
+      <InputContainer>
+        <Label htmlFor="longitud">Longitud</Label>
+        <TextField
+          name={"longitud"}
+          type={"text"}
+          placeholder="-34.6578"
+          onChange={handleChange}
+        />
+        <ErrorText>{errors.longitud}</ErrorText>
+      </InputContainer>
+      <AtributesContainer>
+        <AtrTitle>Agregar atributos</AtrTitle>
+        <Block>
+          <FlexWrapper>
+            <AtributeInputBlock>
+                <Label htmlFor="nombreAtributo">Nombre</Label>
+                <AtributeNameField
+                name={"nombreAtributo"}
+                type={"text"}
+                placeholder="Wifi"
                 onChange={handleChange}
-            />
-            <ErrorText>{errors.nombre}</ErrorText>
-        </InputContainer>
-        <InputContainer>
-            <Label htmlFor='categoria'>Categoria</Label>
-            <SelectField
-                options={categories.map((item) => ({
-                    value: item.title,
-                    label: item.title
-                }))}
-                name={'categoria'}
-                type={'text'}
-                placeholder={'Hotel'}
-                onChange={handleChange}
-            />
-            <ErrorText>{errors.categoria}</ErrorText>
-        </InputContainer>
-        <InputContainer>
-            <Label htmlFor='direccion'>Direccion</Label>
-            <TextField
-                name={'direccion'}
-                type={'text'}
-                placeholder='Av. Colon 1124'
-                onChange={handleChange}
-            />
-            <ErrorText>{errors.direccion}</ErrorText>
-        </InputContainer>
-        <InputContainer>
-            <Label htmlFor='ciudad'>Ciudad</Label>
-            <SelectField
-                options={cities.map((item) => ({
-                    value: item.name,
-                    label: item.name
-                }))}
-                name={'ciudad'}
-                type={'text'}
-                placeholder='Ciudad'
-                onChange={handleChange}
-            />
-            <ErrorText>{errors.ciudad}</ErrorText>
-        </InputContainer>
-        <DescriptionBlock>
-            <Label htmlFor='descripcion'>Descripcion</Label>
-            <DescriptionField
-                name={'descripcion'}
-                placeholder='Escribir aqui'
-                onChange={handleChange}
-            />
-            <ErrorText>{errors.descripcion}</ErrorText>
-        </DescriptionBlock>
-        <InputContainer>
-            <Label htmlFor='latitud'>Latitud</Label>
-            <TextField
-                name={'latitud'}
-                type={'text'}
-                placeholder='44.6578'
-                onChange={handleChange}
-            />
-            <ErrorText>{errors.latitud}</ErrorText>
-        </InputContainer>
-        <InputContainer>
-            <Label htmlFor='longitud'>Longitud</Label>
-            <TextField
-                name={'longitud'}
-                type={'text'}
-                placeholder='-34.6578'
-                onChange={handleChange}
-            />
-            <ErrorText>{errors.longitud}</ErrorText>
-        </InputContainer>
-        <AtributesContainer>
-            <AtrTitle>Agregar atributos</AtrTitle>
-            <Block>
-                <FlexWrapper>
-                    <AtributeInputBlock>
-                        <Label htmlFor='nombreAtributo'>Nombre</Label>
-                        <AtributeNameField
-                            name={'nombreAtributo'}
-                            type={'text'}
-                            placeholder='Wifi'
-                            onChange={handleChange}
-                        />
-                        <ErrorText>{errors.nombreAtributo}</ErrorText>
-                    </AtributeInputBlock>
-                    <AtributeInputBlock>
-                        <Label htmlFor='icono'>Icono</Label>
-                        <AtributeIconField
-                            name={'icono'}
-                            type={'text'}
-                            placeholder='fa-Wifi'
-                            onChange={handleChange}
-                        />
-                        <ErrorText>{errors.icono}</ErrorText>
-                    </AtributeInputBlock>
-                </FlexWrapper>
-                <Button><ButtonIcon/></Button>
-            </Block>
-        </AtributesContainer>
-        <PolicyContainer>
-            <PolicyTitle>Pliticas del producto</PolicyTitle>
-            <PolicyBody>
-                <PolicyBlock>
-                    <PolicyName>Normas de la casa</PolicyName>
-                    <Label htmlFor='normas'>Descripcion</Label>
-                    <PolicyField
-                        name={'normas'}
-                        type={'textarea'}
-                        placeholder='Escribir aqui'
-                        onChange={handleChange}
-                    />
-                    <ErrorText>{errors.normas}</ErrorText>
-                </PolicyBlock>
-                <PolicyBlock>
-                    <PolicyName>Salud y seguridad</PolicyName>
-                    <Label htmlFor='salud'>Descripcion</Label>
-                    <PolicyField
-                        name={'salud'}
-                        type={'textarea'}
-                        placeholder='Escribir aqui'
-                        onChange={handleChange}
-                    />
-                    <ErrorText>{errors.salud}</ErrorText>
-                </PolicyBlock>
-                <PolicyBlock>
-                    <PolicyName>Politica de cancelacion</PolicyName>
-                    <Label htmlFor='cancelacion'>Descripcion</Label>
-                    <PolicyField
-                        name={'cancelacion'}
-                        type={'textarea'}
-                        placeholder='Escribir aqui'
-                        onChange={handleChange}
-                    />
-                    <ErrorText>{errors.cancelacion}</ErrorText>
-                </PolicyBlock>
-            </PolicyBody>
-        </PolicyContainer>
-        <ImageContainer>
-            <ImageTitle>Cargar imagenes</ImageTitle>
-            <ImageBlock>
-                <TextField
-                    name='imagen'
-                    type={'url'}
-                    placeholder='Insertar https://'
-                    onChange={handleChange}
                 />
-                <Button><ButtonIcon/></Button>
-            </ImageBlock>
-            <ErrorText>{errors.imagen}</ErrorText>
-        </ImageContainer>
-        <SubmitButton type='submit' onClick={handleSubmit} to={'/administration/successful-product-creation'}>Crear</SubmitButton>
+                <ErrorText>{errors.nombreAtributo}</ErrorText>
+            </AtributeInputBlock>
+            <AtributeInputBlock>
+                <Label htmlFor="icono">Icono</Label>
+                <AtributeIconField
+                name={"icono"}
+                type={"text"}
+                placeholder="fa-Wifi"
+                onChange={handleChange}
+                />
+                <ErrorText>{errors.icono}</ErrorText>
+            </AtributeInputBlock>
+          </FlexWrapper>
+            <Button>
+                <ButtonIcon />
+            </Button>
+        </Block>
+      </AtributesContainer>
+      <PolicyContainer>
+        <PolicyTitle>Pliticas del producto</PolicyTitle>
+        <PolicyBody>
+          <PolicyBlock>
+            <PolicyName>Normas de la casa</PolicyName>
+            <Label htmlFor="normas">Descripcion</Label>
+            <PolicyField
+              name={"normas"}
+              type={"textarea"}
+              placeholder="Escribir aqui"
+              onChange={handleChange}
+            />
+            <ErrorText>{errors.normas}</ErrorText>
+          </PolicyBlock>
+          <PolicyBlock>
+            <PolicyName>Salud y seguridad</PolicyName>
+            <Label htmlFor="salud">Descripcion</Label>
+            <PolicyField
+              name={"salud"}
+              type={"textarea"}
+              placeholder="Escribir aqui"
+              onChange={handleChange}
+            />
+            <ErrorText>{errors.salud}</ErrorText>
+          </PolicyBlock>
+          <PolicyBlock>
+            <PolicyName>Politica de cancelacion</PolicyName>
+            <Label htmlFor="cancelacion">Descripcion</Label>
+            <PolicyField
+              name={"cancelacion"}
+              type={"textarea"}
+              placeholder="Escribir aqui"
+              onChange={handleChange}
+            />
+            <ErrorText>{errors.cancelacion}</ErrorText>
+          </PolicyBlock>
+        </PolicyBody>
+      </PolicyContainer>
+      <ImageContainer>
+        <ImageTitle>Cargar imagenes</ImageTitle>
+        <ImageBlock>
+          <TextField
+            name="imagen"
+            type={"url"}
+            placeholder="Insertar https://"
+            onChange={handleChange}
+          />
+          <Button>
+            <ButtonIcon />
+          </Button>
+        </ImageBlock>
+        <ErrorText>{errors.imagen}</ErrorText>
+      </ImageContainer>
+      <SubmitButton
+        type="submit"
+        onClick={handleSubmit}
+        to={"/administration/successful-product-creation"}
+      >
+        Crear
+      </SubmitButton>
     </Form>
-  )
+  );
 }
 
 export default FormComponent;
