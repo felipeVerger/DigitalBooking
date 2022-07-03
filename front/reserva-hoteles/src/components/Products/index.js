@@ -37,17 +37,14 @@ const Recomendaciones = () => {
 
     const randomProducts = products && products.length > 6 ? products.sort(() => Math.random() - 0.5).slice(0, 6) : products;
     // const filteredProducts = locationPath === '/productsList' ? products : randomProducts; 
-    
-    const handleLoading = () => {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 3000)
-    }
 
 
   if (!randomProducts.length) {
-    handleLoading();
-    return isLoading ? <Loading/> : (
+    setTimeout(() => {
+      return <Loading/>
+    }, 5000)
+  } else if (products.length === 0){
+    return (
       <ErrorBlock>
         <ErrorIcon/>
         <ErrorMessage>Lo sentimos, no se encontraron resultados para tu busqueda</ErrorMessage>
