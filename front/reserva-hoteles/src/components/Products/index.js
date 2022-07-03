@@ -44,6 +44,7 @@ const Recomendaciones = () => {
       }, 3000)
     }
 
+
   if (!randomProducts.length) {
     handleLoading();
     return isLoading ? <Loading/> : (
