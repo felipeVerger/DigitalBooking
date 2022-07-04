@@ -78,7 +78,7 @@ const ProductPage = ({ product, productDetail }) => {
   const {user, setUser} = useContext(UserContext);
   const [toggleShareLinks, setToggleShareLinks] =useState(false);
 
-  const {id, name, subtitle, description, address, score, longitude, latitude, city = {}, category = {} } = productDetail;
+  const {id, name, subtitle, description, images, address, score, longitude, latitude, city = {}, category = {} } = productDetail;
   const getRatingComment = (rating) => {
     switch (rating) {
       case 10:
@@ -282,7 +282,7 @@ const ProductPage = ({ product, productDetail }) => {
         <Separator/>
         <MapBlock>
           <LocationMap>{city.name + ', ' + city.country}</LocationMap>
-          <Map latitude={latitude} longitude={longitude}/>
+          <Map latitude={productDetail.latitude} longitude={productDetail.longitude}/>
         </MapBlock>
       </MapContent>
       <MainContentBody>
