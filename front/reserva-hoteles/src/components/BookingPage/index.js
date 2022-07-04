@@ -26,17 +26,18 @@ import Form from './Form'
 
 
 
-const Booking = ({product}) => {
-  console.log(product.houseRules !== undefined);
-  console.log(product.healthAndHygiene !== undefined);
-  const {category = {} } = product;
+const Booking = ({product, productDetail}) => {
+  // const {category = {} } = product;
+  const {id, name, subtitle, description, address, images, score, longitude, latitude, city = {}, category = {} } = productDetail;
+  console.log(productDetail);
+
   return (
     <Container>
         <HeaderBody>
         <HeaderBlock>
           <HeaderInfo>
             <HeaderCategory>{category.title}</HeaderCategory>
-            <HeaderName>{product.name}</HeaderName>
+            <HeaderName>{name}</HeaderName>
           </HeaderInfo>
           <CleanLink to={"/product/" + product.id}>
             <BackIcon />
