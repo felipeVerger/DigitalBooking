@@ -40,7 +40,7 @@ export const Image = styled.img`
   border-radius: 8px;
   @media screen and (max-width: 640px) {
     width: 100%;
-    height: 231px;
+    height: 280px;
   }
 `;
 

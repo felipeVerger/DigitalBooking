@@ -101,7 +101,7 @@ const ProductPage = ({ product, productDetail }) => {
     }
   };
 
-
+  console.log(images);
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal() {

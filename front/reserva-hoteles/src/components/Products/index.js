@@ -2,16 +2,13 @@ import React, {useContext, useEffect, useState} from 'react'
 import { Body, Block, Title, RecommendationContainer, ErrorBlock, ErrorMessage, ErrorIcon } from './indexStyle'
 import ProductCard from './ProductsCard'
 import { FilterContext } from '../../context/filter-context'
-import { useLocation } from 'react-router-dom'
 import Loading from '../Loading';
 import { fetchData, options } from '../../utils/fetchData';
 
 const Recomendaciones = () => {
     const {filter} = useContext(FilterContext);
-    const locationPath = useLocation().pathname;
-
     const [products, setProducts] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [dataFavorites, setDataFavorites] = useState();
 
   useEffect(() => {
     const fetchProductsData = async () => { 
@@ -34,6 +31,18 @@ const Recomendaciones = () => {
     fetchProductsData();
   }, [filter]) 
 
+
+  useEffect(() => {
+    const fetchFavoritesData = async () => {
+      const favoritesUrl = `${process.env.REACT_APP_URL_REMOTE}/favs/findAll`;
+
+      if (sessionStorage.getItem('token')) {
+        const favoriteProducts = await fetchData(favoritesUrl, options);
+        setDataFavorites(favoriteProducts);
+      }
+    }
+    fetchFavoritesData();
+  }, [])
 
     const randomProducts = products && products.length > 6 ? products.sort(() => Math.random() - 0.5).slice(0, 6) : products;
     // const filteredProducts = locationPath === '/productsList' ? products : randomProducts; 
@@ -68,6 +77,7 @@ const Recomendaciones = () => {
                                 description={product.description}
                                 puntuation={product.score}
                                 id={product.id}
+                                dataFavorites={dataFavorites}
                             />
                         )
                    })

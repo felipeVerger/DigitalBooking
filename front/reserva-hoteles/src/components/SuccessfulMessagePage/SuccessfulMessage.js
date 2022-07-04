@@ -39,6 +39,7 @@ export const Gratitude = styled.h2`
 
 export const MessageText = styled.p`
     color: ${(props) => props.theme.secondary};
+    font-size: 24px;
 `
 
 export const Button = styled.button`
