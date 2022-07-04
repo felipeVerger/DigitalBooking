@@ -35,6 +35,15 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     @Query(value = "SELECT * FROM products p INNER JOIN reservations r ON p.id_product = r.products_id_product INNER JOIN cities c ON " +
             "cities_id_city = c.id WHERE ?1 < r.check_out AND ?2 > check_in AND c.name = ?3", nativeQuery = true)
     List<Product> findProductsByDatesAndCity(LocalDate start, LocalDate end, String city);
+
+    @Query(value = "SELECT * FROM products p INNER JOIN categories ca ON p.id_product = ca.products_id_product INNER JOIN cities c ON " +
+            "cities_id_city = c.id WHERE ?1 = ca.title AND c.name = ?2", nativeQuery = true)
+    List<Product> findProductsByCategoryAndCity(String category, String city);
+
+    @Query(value = "SELECT * FROM products p INNER JOIN reservations r ON p.id_product = r.products_id_product INNER JOIN categories ca ON ca.id_category = ca.products_id_product INNER JOIN cities c ON " +
+            "cities_id_city = c.id WHERE ?1 < r.check_out AND ?2 > check_in AND c.name = ?3 AND ca.title = ?4", nativeQuery = true)
+    List<Product> findProductsByDatesAndCityAndCategory(LocalDate start, LocalDate end, String city, String category);
 }
+
 
 
