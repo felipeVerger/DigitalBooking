@@ -12,7 +12,7 @@ const Categorias = () => {
     const myHeaders = new Headers();
     myHeaders.append("Authorization", "Basic dXNlcjpnMTBCb29raW5n");
 
-    const { data, loading, error } = useFetch(URL_API, {
+    const { data, loading } = useFetch(URL_API, {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow'

@@ -37,12 +37,18 @@ const Header = () => {
     sessionStorage.removeItem('token');
   }
 
+  const handleLogoClick = () => {
+    if (location === "/") {
+      location.reload();
+    }
+  }
+
   return (
     <HeaderContainer>
       <HeaderBody>
         <HeaderBlock>
-          <LogoContainer to={"/"}>
-            <Logo src={require("../../assets/logo.png")} />
+          <LogoContainer onClick={handleLogoClick} to={"/"}>
+            <Logo src={require("../../assets/logo.png")}/>
           </LogoContainer>
           <Slogan to={"/"}>Sentite como en tu hogar</Slogan>
         </HeaderBlock>
