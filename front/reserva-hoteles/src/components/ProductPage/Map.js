@@ -6,9 +6,10 @@ import './MapStyle.css';
 import { HiLocationMarker } from 'react-icons/hi';
 
 const Map = ({ latitude, longitude }) => {
+  console.log("🚀 ~ file: Map.js ~ line 9 ~ Map ~ latitude", latitude)
   
-  const position = [51.505, -0.09];
-  
+  let position = [51.505, -0.09];
+
   return (
       <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
       <TileLayer
@@ -19,7 +20,7 @@ const Map = ({ latitude, longitude }) => {
         <Popup>
           A pretty CSS3 popup. <br /> Easily customizable.
         </Popup>
-    </Marker>
+      </Marker>
     </MapContainer>
   )
 }
