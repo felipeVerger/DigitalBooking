@@ -33,8 +33,7 @@ public class User {
     private String email;
     @Column
     private String password;
-    @Column
-    private String city;
+
     @ManyToOne
     @JoinColumn(name = "roles_id_role")
     private Role role;
@@ -59,7 +58,6 @@ public class User {
         this.email = email;
         this.password = password;
         this.role = role;
-        this.city = city;
     }
     //metodos de la interfaz UserDetails
 //    @Override
