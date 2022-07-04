@@ -1,6 +1,7 @@
 package com.proyecto.proyectInt.controller;
 import com.proyecto.proyectInt.exception.BadRequestException;
 import com.proyecto.proyectInt.exception.ResourceNotFoundException;
+import com.proyecto.proyectInt.model.Category;
 import com.proyecto.proyectInt.model.DTO.ProductDTO;
 import com.proyecto.proyectInt.model.Product;
 import com.proyecto.proyectInt.service.ProductService;
@@ -99,6 +100,18 @@ public class ProductController {
     public ResponseEntity<List<Product>> getProductByDate(@PathVariable LocalDate startDate, @PathVariable LocalDate endDate, @PathVariable String city) {
         logger.info("Retrieving data from products' table");
         return ResponseEntity.ok(productService.findProductsByDatesAndCity(startDate, endDate, city));
+    }
+
+    @GetMapping("/{category}/{city}")
+    public ResponseEntity<List<Product>> getProductByCategoryAndCity(@PathVariable String category, @PathVariable String city) {
+        logger.info("Retrieving data from products' table");
+        return ResponseEntity.ok(productService.findProductsByCategoryAndCity(category, city));
+    }
+
+    @GetMapping("/date/{startDate}/{endDate}/{city}/{category}")
+    public ResponseEntity<List<Product>> getProductBy3(@PathVariable LocalDate startDate, @PathVariable LocalDate endDate, @PathVariable String city, @PathVariable String category) {
+        logger.info("Retrieving data from products' table");
+        return ResponseEntity.ok(productService.findProductsByDatesAndCityAndCategory(startDate, endDate, city, category));
     }
 
 }
