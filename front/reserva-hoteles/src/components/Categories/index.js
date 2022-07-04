@@ -12,7 +12,7 @@ const Categorias = () => {
     const myHeaders = new Headers();
     myHeaders.append("Authorization", "Basic dXNlcjpnMTBCb29raW5n");
 
-    const { data, loading } = useFetch(URL_API, {
+    const { data, loading, error } = useFetch(URL_API, {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow'
@@ -20,7 +20,7 @@ const Categorias = () => {
 
   if (loading) {
     return <Loading/>
-  } else if (data.length === 0){
+  } else if (error){
     return <ErrorMessage>Hubo un error, intente mas tarde</ErrorMessage>
   } else {
     return (
