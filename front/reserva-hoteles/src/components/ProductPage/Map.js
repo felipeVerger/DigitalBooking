@@ -5,12 +5,9 @@ import 'leaflet/dist/leaflet.css';
 import './MapStyle.css';
 import { HiLocationMarker } from 'react-icons/hi';
 
-
-
-
 const Map = ({ latitude, longitude }) => {
   
-  let position = [51.505, -0.09];
+  const position = [51.505, -0.09];
   
   return (
       <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
