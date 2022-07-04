@@ -47,12 +47,7 @@ const productoTemp = {    "id": 1,
 }
 }
 
-
-
-
   return (
-
-
     <PageContainer>
     <Layout>
       <Section>

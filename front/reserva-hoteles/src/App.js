@@ -18,6 +18,7 @@ import Favorites from "./pages/Favorites";
 import Error from "./pages/Error";
 import SuccessfulMessageProduct from "./pages/SuccessfulMessageProduct";
 import Admin from "./pages/Admin";
+import MyBookings from "./pages/MyBookings";
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
                 <Route path="/administration/successful-product-creation" element={<SuccessfulMessageProduct message={'Tu propiedad se ha creado con éxito.'}/>} />
                 <Route path='/favorites' element={<Favorites/>}/>
                 <Route path='/administration' element={<Admin/>}/>
+                <Route path='/:userId/bookings' element={<MyBookings/>}/>
                 <Route path="*" element={<Error />} />
               </Routes>
             </BrowserRouter>

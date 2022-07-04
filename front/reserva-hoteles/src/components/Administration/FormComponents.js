@@ -18,6 +18,9 @@ export const InputContainer = styled.div`
   max-width: 100%;
   width: 800px;
   margin-top: 30px;
+  @media screen and (max-width: 1500px){
+    width: 100%;
+  }
 `;
 
 export const TextField = styled.input`
@@ -42,11 +45,10 @@ export const Label = styled.label`
 
 export const DescriptionBlock = styled.div`
   width: 100%;
-  /* padding: 30px 1rem; */
   margin-top: 30px;
 `
 
-export const DescriptionField = styled.input`
+export const DescriptionField = styled.textarea`
   border-radius: 5px;
   width: 100%;
   height: 120px;
@@ -75,7 +77,7 @@ export const AtributesContainer = styled.div`
   align-items: flex-start;
   flex-direction: column;
   width: 100%;
-  margin-top: 30px;
+  margin-top: 40px;
 `;
 export const AtrTitle = styled.h3`
   color: ${(props) => props.theme.primary};
@@ -83,12 +85,18 @@ export const AtrTitle = styled.h3`
 
 export const Block = styled.div`
   background: rgb(234, 234, 234);
-  height: 150px;
+  border-radius: 5px;
+  height: 100%;
+  max-height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 0 2rem;
+  padding: 0 3rem;
+  gap: 20px;
+  @media screen and (max-width: 1124px){
+    gap: 10px;
+  }
 `;
 
 export const FlexWrapper = styled.div`
@@ -96,8 +104,10 @@ export const FlexWrapper = styled.div`
   align-items: center;
   gap: 20px;
   width: 100%;
+  /* padding: 0 2rem; */
   @media screen and (max-width: 1124px){
     flex-direction: column;
+    gap: 0;
   }
 `
 
@@ -122,7 +132,7 @@ export const AtributeNameField = styled.input`
 export const AtributeIconField = styled.input`
   border-radius: 5px;
   /* width: 650px; */
-  width: 90%;
+  width: 100%;
   height: 40px;
   border: solid 1.5px #d3d3d3;
   box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
@@ -150,7 +160,7 @@ export const PolicyContainer = styled.div`
   align-items: flex-start;
   flex-direction: column;
   width: 100%;
-  margin-top: 30px;
+  margin-top: 40px;
 `
 
 export const PolicyTitle = styled.h3`
@@ -172,13 +182,16 @@ export const PolicyBody = styled.div`
 export const PolicyBlock = styled.div`
   width: 100%;
   padding: 2rem;
+  @media screen and (max-width: 1124px){
+    padding: 1rem 2rem;
+  }
 `
 
 export const PolicyName = styled.h5`
   color: ${(props) => props.theme.primary};
 `
 
-export const PolicyField = styled.input`
+export const PolicyField = styled.textarea`
   border-radius: 5px;
   width: 100%;
   height: 200px;
@@ -195,7 +208,7 @@ export const ImageContainer = styled.div`
   align-items: flex-start;
   flex-direction: column;
   width: 100%;
-  margin-top: 30px;
+  margin-top: 40px;
 `
 export const ImageTitle = styled.h3`
   color: ${(props) => props.theme.primary};
@@ -203,6 +216,7 @@ export const ImageTitle = styled.h3`
 
 export const ImageBlock = styled.div`
   background: rgb(234, 234, 234);
+  border-radius: 5px;
   height: 150px;
   display: flex;
   align-items: center;
@@ -228,3 +242,9 @@ export const SubmitButton = styled(Link)`
     color: white;
   }
 `
+
+export const ErrorText = styled.p`
+  color: red;
+  width: 100%;
+  padding: 5px;
+`;

@@ -7,11 +7,11 @@ export const Recommendation = styled.div`
   background: white;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
-  
+
   min-height: 279px;
   width: 49.5%;
   margin-bottom: 40px;
-
+  
   @media screen and (max-width: 1280px) {
     width: 100%;
   }
@@ -36,6 +36,7 @@ export const ImageBlock = styled.div`
 export const Image = styled.img`
   width: 311.1px;
   height: 100%;
+  max-height: 300px;
   border-radius: 8px;
   @media screen and (max-width: 640px) {
     width: 100%;
