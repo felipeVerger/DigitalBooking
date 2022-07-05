@@ -30,18 +30,35 @@ trigger_infra:
 deploy:
   stage: deploy
   needs: [ trigger_back, trigger_front ]
-  image: alpine
+  image: ubuntu
+
   before_script:
-    - 'command -v ssh-agent >/dev/null || ( apk add --update openssh )' 
+  ## Install ssh-agent if not already installed, it is required by Docker.
+  ## (change apt-get to yum if you use an RPM-based image)
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )'
+  ## Run ssh-agent (inside the build environment)
     - eval $(ssh-agent -s)
+  ## Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
+  ## We're using tr to fix line endings which makes ed25519 keys work
+  ## without extra base64 encoding.
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+  ## Create the SSH directory and give it the right permissions
     - mkdir -p ~/.ssh
-    - echo "$SSH_PRIVATE_KEY" > 0821-g10.pem
-    - chmod 700 0821-g10.pem
-    - echo "$PROD_SERVER_IP" >> ~/.ssh/known_hosts
+    - chmod 700 ~/.ssh
+  ## Use ssh-keyscan to scan the keys of your private server. Replace gitlab.com
+  ## with your own domain name. You can copy and repeat that command if you have
+  ## more than one server to connect to.
+    - ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
 
+  ##
+  ## Alternatively, assuming you created the SSH_SERVER_HOSTKEYS variable
+  ## previously, uncomment the following two lines instead.
+  ##
+  #- echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
+  #- chmod 644 ~/.ssh/known_hosts
   script:
-    - ssh -i 0821-g10.pem ubuntu@$PROD_SERVER_IP
+    - ssh ubuntu@$PROD_SERVER_IP
     - ls -la
     - cd ansible/
     - ansible-playbook rundocker-back.yml -i hosts
