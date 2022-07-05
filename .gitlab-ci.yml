@@ -1,12 +1,14 @@
 stages:
   - triggers
+  - deploy
       
 trigger_front:
   stage: triggers
   trigger:
     include: front/.gitlab-ci.yml
   rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: $CI_COMMIT_BRANCH == '107-automatizar-deploy'
+    #- if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "merge_request_event"'
 
 
 trigger_back:
@@ -14,12 +16,30 @@ trigger_back:
   trigger:
     include: back/.gitlab-ci.yml
   rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: $CI_COMMIT_BRANCH == '107-automatizar-deploy'
+    #- if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "merge_request_event"'
     
 trigger_infra:
   stage: triggers
   trigger:
     include: infraestructura/.gitlab-ci.yml
   rules:
-    - if: '$CI_COMMIT_BRANCH == "main" && $CI_PIPELINE_SOURCE == "merge_request_event"' 
+    - if: $CI_COMMIT_BRANCH == '107-automatizar-deploy'
+    #- if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "merge_request_event"' 
+
+deploy:
+  stage: deploy
+  needs: [triggers]
+  image: kroniak/ssh-client
+  before_script:
+    - echo "deploying app"
+  script:  
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > 0821-g10.pem
+    - chmod 400 0821-g10.pem
+    - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY ubuntu@$PROD_SERVER_IP -y
+    - cd ansible
+    - ansible-playbook rundocker-back.yml -i hosts
+    - ansible-playbook rundocker-front.yml -i hosts  
+  rules:
+    - if: $CI_COMMIT_BRANCH == '107-automatizar-deploy'
   
