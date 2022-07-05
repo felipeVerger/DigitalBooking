@@ -58,6 +58,7 @@ deploy:
   #- echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
   #- chmod 644 ~/.ssh/known_hosts
   script:
+    - echo "$PROD_SERVER_IP"
     - ssh ubuntu@$PROD_SERVER_IP /bin/bash <<'EOT'
       ls -la 
       cd ansible/
