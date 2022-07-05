@@ -59,7 +59,7 @@ deploy:
   #- chmod 644 ~/.ssh/known_hosts
   script:
     - echo "$PROD_SERVER_IP" 
-    - ssh ubuntu@$PROD_SERVER_IP /bin/bash <<'EOT'
+    - cat <<'EOT' | ssh ubuntu@$PROD_SERVER_IP /bin/bash
       ls -la 
       cd ansible/
       ansible-playbook rundocker-back.yml -i hosts
