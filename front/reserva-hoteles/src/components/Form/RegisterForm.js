@@ -40,7 +40,6 @@ const RegisterForm = () => {
       "email": formValues.email,
       "role": "ROLE_USER",
       "password": formValues.password,
-      "city": formValues.ciudad
     });
     let options = {
       method: 'POST',
@@ -81,10 +80,6 @@ const RegisterForm = () => {
 
     if (!values.apellido) {
       errors.apellido = "Este campo es obligatorio.";
-    }
-
-    if (!values.ciudad) {
-      errors.ciudad = "Este campo es obligatorio.";
     }
 
     if (!values.email) {
@@ -141,16 +136,6 @@ const RegisterForm = () => {
             <ErrorText>{errors.apellido}</ErrorText>
           </InputContainer>
         </HorizontalBlock>
-        <InputContainer>
-          <Label htmlFor={"ciudad"}>Ciudad</Label>
-          <TextField
-              name={"ciudad"}
-              type={"text"}
-              placeholder={"Bogotá"}
-              onChange={handleChange}
-          />
-          <ErrorText>{errors.ciudad}</ErrorText>
-        </InputContainer>
 
         <InputContainer>
           <Label htmlFor={"email"}>Correo electrónico</Label>
