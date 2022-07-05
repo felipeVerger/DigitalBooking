@@ -59,9 +59,8 @@ deploy:
   #- chmod 644 ~/.ssh/known_hosts
   script:
     - echo "$PROD_SERVER_IP"
-    - ssh -T ubuntu@$PROD_SERVER_IP "|
-     cd ansible/ 
-     ansible-playbook rundocker-back.yml -i hosts 
+    - ssh -T ubuntu@$PROD_SERVER_IP "cd ansible/ \
+     ansible-playbook rundocker-back.yml -i hosts \
      ansible-playbook rundocker-front.yml -i hosts"
      
   rules:
