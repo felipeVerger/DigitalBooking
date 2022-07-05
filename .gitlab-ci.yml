@@ -29,6 +29,7 @@ trigger_infra:
 
 deploy:
   stage: deploy
+  
   image: alpine
   before_script:
     - 'command -v ssh-agent >/dev/null || ( apk add --update openssh )' 
