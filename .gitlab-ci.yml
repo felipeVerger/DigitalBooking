@@ -36,7 +36,7 @@ deploy:
   script:  
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > 0821-g10.pem
     - chmod 400 0821-g10.pem
-    - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY ubuntu@$PROD_SERVER_IP -y
+    - ssh -o -i 0821-g10.pem ubuntu@$PROD_SERVER_IP -y
     - cd ansible
     - ansible-playbook rundocker-back.yml -i hosts
     - ansible-playbook rundocker-front.yml -i hosts  
