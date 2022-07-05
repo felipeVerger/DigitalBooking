@@ -22,7 +22,7 @@ trigger_infra:
   trigger:
     include: infraestructura/.gitlab-ci.yml
   rules:
-    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH' 
+    - if: '$CI_COMMIT_BRANCH == "main"' 
 
 deploy:
   stage: deploy
@@ -65,7 +65,5 @@ deploy:
       ansible --version; \
       ansible-playbook rundocker-back.yml -i hosts; \
       ansible-playbook rundocker-front.yml -i hosts"
-     
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+      
   when: manual 
