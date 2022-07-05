@@ -7,8 +7,8 @@ trigger_front:
   trigger:
     include: front/.gitlab-ci.yml
   rules:
-    - if: $CI_COMMIT_BRANCH == '107-automatizar-deploy'
-    #- if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "merge_request_event"'
+    #- if: $CI_COMMIT_BRANCH == '107-automatizar-deploy'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "merge_request_event"'
 
 
 trigger_back:
@@ -16,16 +16,16 @@ trigger_back:
   trigger:
     include: back/.gitlab-ci.yml
   rules:
-    - if: $CI_COMMIT_BRANCH == '107-automatizar-deploy'
-    #- if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "merge_request_event"'
+    #- if: $CI_COMMIT_BRANCH == '107-automatizar-deploy'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "merge_request_event"'
     
 trigger_infra:
   stage: triggers
   trigger:
     include: infraestructura/.gitlab-ci.yml
   rules:
-    - if: $CI_COMMIT_BRANCH == '107-automatizar-deploy'
-    #- if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "merge_request_event"' 
+    # - if: $CI_COMMIT_BRANCH == '107-automatizar-deploy'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "merge_request_event"' 
 
 deploy:
   stage: deploy
@@ -59,10 +59,10 @@ deploy:
   #- chmod 644 ~/.ssh/known_hosts
   script:
     - echo "$PROD_SERVER_IP"
-    - ssh -T ubuntu@$PROD_SERVER_IP "cd ansible/ 
+    - ssh -T ubuntu@$PROD_SERVER_IP "|
+     cd ansible/ 
      ansible-playbook rundocker-back.yml -i hosts 
      ansible-playbook rundocker-front.yml -i hosts"
-    - ls -la 
      
   rules:
     - if: $CI_COMMIT_BRANCH == '107-automatizar-deploy'
