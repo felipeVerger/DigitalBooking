@@ -48,7 +48,7 @@ deploy:
   ## Use ssh-keyscan to scan the keys of your private server. Replace gitlab.com
   ## with your own domain name. You can copy and repeat that command if you have
   ## more than one server to connect to.
-    - ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
+    - ssh-keyscan $PROD_SERVER_IP >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
 
   ##
