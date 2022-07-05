@@ -29,7 +29,7 @@ trigger_infra:
 
 deploy:
   stage: deploy
-  
+  needs: [ trigger_back, trigger_front ]
   image: alpine
   before_script:
     - 'command -v ssh-agent >/dev/null || ( apk add --update openssh )' 
@@ -44,6 +44,6 @@ deploy:
     - ssh $SSH_USER@$PROD_SERVER_IP
     - cd ansible
     - ansible-playbook rundocker-back.yml -i hosts
-    - ansible-playbook rundocker-front.yml -i hosts  
+    - ansible-playbook rundocker-front.yml -i hosts 
   rules:
     - if: $CI_COMMIT_BRANCH == '107-automatizar-deploy'
