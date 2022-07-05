@@ -29,7 +29,7 @@ trigger_infra:
 
 deploy:
   stage: deploy
-  needs: [triggers]
+  needs: [trigger_front, trigger_back]
   image: kroniak/ssh-client
   before_script:
     - echo "deploying app"
