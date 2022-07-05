@@ -29,7 +29,7 @@ trigger_infra:
 
 deploy:
   stage: deploy
-  needs: [ trigger_back, trigger_front ]
+  #needs: [ trigger_back, trigger_front ]
   image: ubuntu
 
   before_script:
