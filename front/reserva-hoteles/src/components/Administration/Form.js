@@ -36,6 +36,8 @@ const URL_API_CATEGORIES = `${process.env.REACT_APP_URL_REMOTE}/categories/findA
 
 const FormComponent = () => {
   const [formValues, setformValues] = useState({});
+  const [city, setCity] = useState();
+  const [category, setCategory] = useState();
   const [errors, setErrors] = useState({});
   const [toSumbit, setToSumbit] = useState(false);
   const navigate = useNavigate();
@@ -44,6 +46,13 @@ const FormComponent = () => {
     const { name, value } = e.target;
     setformValues({ ...formValues, [name]: value });
   };
+
+  const handleCityChange = (e) => {
+    setCity(e.value);
+  }
+  const handleCategoryChange = (e) => {
+    setCategory(e.value);
+  }
 
   const myHeaders = new Headers();
   myHeaders.append("Authorization", "Basic dXNlcjpnMTBCb29raW5n");
@@ -65,9 +74,9 @@ const FormComponent = () => {
     const URL_API_CREATE_PRODUCT = `${process.env.REACT_APP_URL_REMOTE}/products/create`;
     const body = JSON.stringify({
         "name": formValues.nombre,
-        "category": formValues.categoria,
+        "category": category,
         "address": formValues.direccion,
-        "city": formValues.ciudad,
+        "city": city,
         "description": formValues.descripcion,
         "latitude": formValues.latitud,
         "longitude": formValues.longitud,
@@ -88,13 +97,16 @@ const FormComponent = () => {
             return;
         })
     const data = await response.json();
+    console.log(data);
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors(validate(formValues));
+    // setErrors(validate(city))
+    // setErrors(validate(category))
     // console.log(validate(formValues))
-    // console.log(formValues);
+    console.log(formValues);
     setToSumbit(true);
   };
 
@@ -103,13 +115,13 @@ const FormComponent = () => {
     if(!values.nombre){
         errors.nombre = "Este campo es obligatorio."
     }
-    if(!values.categoria){
+    if(!category){
         errors.categoria = "Este campo es obligatorio."
     }
     if(!values.direccion){
         errors.direccion = "Este campo es obligatorio."
     }
-    if(!values.ciudad){
+    if(!city){
         errors.ciudad = "Este campo es obligatorio."
     }
     if(!values.descripcion){
@@ -143,6 +155,11 @@ const FormComponent = () => {
     return errors;
   }
 
+  useEffect(() => {
+    if (Object.keys(errors).length === 0 && toSumbit) {
+      createProduct();
+    }
+  }, [errors]);
   return (
     <Form>
       <InputContainer>
@@ -162,10 +179,9 @@ const FormComponent = () => {
             value: item.title,
             label: item.title,
           }))}
-          name={"categoria"}
-          type={"text"}
-          placeholder={"Hotel"}
-          onChange={handleChange}
+          name={'categoria'}
+          placeholder={'Hotel'}
+          onChange={handleCategoryChange}
         />
         <ErrorText>{errors.categoria}</ErrorText>
       </InputContainer>
@@ -186,10 +202,9 @@ const FormComponent = () => {
             value: item.name,
             label: item.name,
           }))}
-          name={"ciudad"}
-          type={"text"}
+          name={'ciudad'}
           placeholder="Ciudad"
-          onChange={handleChange}
+          onChange={handleCityChange}
         />
         <ErrorText>{errors.ciudad}</ErrorText>
       </InputContainer>

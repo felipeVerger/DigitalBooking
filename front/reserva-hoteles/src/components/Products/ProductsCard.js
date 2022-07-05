@@ -27,7 +27,7 @@ import { HiLocationMarker } from "react-icons/hi";
 import { BiWifi } from "react-icons/bi";
 import { FaSwimmingPool } from "react-icons/fa";
 
-const RecomendationCard = ({id, img, category, title, location, description, puntuation, dataFavorites}) => {
+const RecomendationCard = ({id, img, category, title, location, description, puntuation}) => {
   const locationPath = useLocation().pathname;
 
   const score = Math.round(puntuation * 10) / 10;

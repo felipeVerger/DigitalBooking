@@ -15,14 +15,14 @@ import {
 } from "./FormComponents";
 import { Link, useNavigate, Navigate, useLocation} from "react-router-dom";
 import { UserContext } from "../../context/user-context";
+import { BookingContext } from "../../context/booking-context";
 
 const LoginForm = () => {
   const [formValues, setformValues] = useState({});
   const [errors, setErrors] = useState({});
   const [toSumbit, setToSumbit] = useState(false);
-
-  const navigate = useNavigate();
-
+  const { isRegistered, setIsRegistered } =  useContext(BookingContext);
+  const navigate = useNavigate()
   const {user, setUser} = useContext(UserContext);
 
   const handleChange = (e) => {
@@ -98,7 +98,11 @@ const LoginForm = () => {
   }
   else return(
     <FormContainer>
-      {localStorage.getItem('token') ? null : <ErrorReservation><ErrorMessage><WarningIcon/> Para realizar una reserva necesitas estar logueado</ErrorMessage></ErrorReservation>}
+      {isRegistered ? null :
+      <ErrorReservation>
+        <ErrorMessage><WarningIcon/> Para realizar una reserva necesitas estar logueado</ErrorMessage>
+      </ErrorReservation>
+      }
       <FormTitle>Iniciar sesión</FormTitle>
       <InputContainer>
         <Label htmlFor={"email"}>Correo electrónico</Label>

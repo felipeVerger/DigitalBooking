@@ -1,10 +1,8 @@
 import React, {useContext} from 'react'
 import {Box, Image, InfoSection, CategoryText, CategoryInfo} from './CategoryStyle'
 import { FilterContext } from '../../context/filter-context'
-import {Link} from 'react-router-dom'
 
 const CategoryCard = ({ img, category, amount, type }) => {
-
   const { setFilter } = useContext(FilterContext);
 
   return (

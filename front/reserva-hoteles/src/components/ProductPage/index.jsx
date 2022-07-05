@@ -72,13 +72,15 @@ import { Link, useNavigate } from "react-router-dom";
 import {UserContext} from "../../context/user-context";
 import Map from './Map'
 import ShareSocialMedia from "./ShareSocialMedia";
+import { BookingContext } from "../../context/booking-context";
 
 
 const ProductPage = ({ product, productDetail }) => {
+  const {id, name, subtitle, description, images = {}, address, score, longitude, latitude, city = {}, category = {} } = productDetail;
   const {user, setUser} = useContext(UserContext);
   const [toggleShareLinks, setToggleShareLinks] =useState(false);
+  const  {setIsRegistered} = useContext(BookingContext);
 
-  const {id, name, subtitle, description, images, address, score, longitude, latitude, city = {}, category = {} } = productDetail;
   const getRatingComment = (rating) => {
     switch (rating) {
       case 10:
@@ -101,7 +103,6 @@ const ProductPage = ({ product, productDetail }) => {
     }
   };
 
-  console.log(images);
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal() {
@@ -120,6 +121,15 @@ const ProductPage = ({ product, productDetail }) => {
 
   const handleShareLinks = () => {
     setToggleShareLinks(!toggleShareLinks);
+  }
+
+  const handleReservation = () => {
+    if (sessionStorage.getItem('token') != null) {
+      return `/product/${id}/booking`;
+    } else {
+      setIsRegistered(false);
+      return '/login'
+    }
   }
 
   return (
@@ -252,7 +262,7 @@ const ProductPage = ({ product, productDetail }) => {
                   <Span bold={true}>
                     Agrega tus fechas de viaje para obtener precios exactos
                   </Span>
-                  <Link to={sessionStorage.getItem('token') != null ? `/product/${id}/booking` : '/login'} style={{width: '100%'}}>
+                  <Link to={handleReservation()} style={{width: '100%'}}>
                     <ReservationButton>Iniciar Reserva</ReservationButton>
                   </Link>
                 </ReservationBlock>
