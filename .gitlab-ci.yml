@@ -62,6 +62,7 @@ deploy:
     - |
       ssh -T ubuntu@$PROD_SERVER_IP "
       cd "ansible/"; \
+      export PATH=$PATH:/home/ubuntu/.local/bin/ansible; \
       ansible-playbook rundocker-back.yml -i hosts; \
       ansible-playbook rundocker-front.yml -i hosts"
      
