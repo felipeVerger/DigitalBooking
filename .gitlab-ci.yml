@@ -67,5 +67,5 @@ deploy:
       ansible-playbook rundocker-front.yml -i hosts"
      
   rules:
-    - if: $CI_COMMIT_BRANCH == '107-automatizar-deploy'
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
   when: manual 
