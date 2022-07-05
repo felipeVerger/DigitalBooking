@@ -22,7 +22,7 @@ trigger_infra:
   trigger:
     include: infraestructura/.gitlab-ci.yml
   rules:
-    - if: '$CI_COMMIT_BRANCH == "main"' 
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH' 
 
 deploy:
   stage: deploy
