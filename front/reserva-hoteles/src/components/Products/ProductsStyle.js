@@ -200,6 +200,7 @@ export const ProductFiltered = styled.div`
 export const FilteredImage = styled.img`
   width: 400px;
   height: 100%;
+  max-height: 300px;
   border-radius: 8px;
   @media screen and (max-width: 640px) {
     width: 100%;

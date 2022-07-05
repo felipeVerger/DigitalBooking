@@ -10,6 +10,8 @@ const Recomendaciones = () => {
     const [products, setProducts] = useState([]);
     const [dataFavorites, setDataFavorites] = useState();
 
+    console.log(filter);
+
   useEffect(() => {
     const fetchProductsData = async () => { 
       const productUrl = `${process.env.REACT_APP_URL_REMOTE}/products/findAll`;
@@ -32,17 +34,17 @@ const Recomendaciones = () => {
   }, [filter]) 
 
 
-  useEffect(() => {
-    const fetchFavoritesData = async () => {
-      const favoritesUrl = `${process.env.REACT_APP_URL_REMOTE}/favs/findAll`;
+  // useEffect(() => {
+  //   const fetchFavoritesData = async () => {
+  //     const favoritesUrl = `${process.env.REACT_APP_URL_REMOTE}/favs/findAll`;
 
-      if (sessionStorage.getItem('token')) {
-        const favoriteProducts = await fetchData(favoritesUrl, options);
-        setDataFavorites(favoriteProducts);
-      }
-    }
-    fetchFavoritesData();
-  }, [])
+  //     if (sessionStorage.getItem('token')) {
+  //       const favoriteProducts = await fetchData(favoritesUrl, options);
+  //       setDataFavorites(favoriteProducts);
+  //     }
+  //   }
+  //   fetchFavoritesData();
+  // }, [])
 
     const randomProducts = products && products.length > 6 ? products.sort(() => Math.random() - 0.5).slice(0, 6) : products;
     // const filteredProducts = locationPath === '/productsList' ? products : randomProducts; 
@@ -77,7 +79,7 @@ const Recomendaciones = () => {
                                 description={product.description}
                                 puntuation={product.score}
                                 id={product.id}
-                                dataFavorites={dataFavorites}
+                                // dataFavorites={dataFavorites}
                             />
                         )
                    })
