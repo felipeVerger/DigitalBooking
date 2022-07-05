@@ -59,10 +59,8 @@ deploy:
   #- chmod 644 ~/.ssh/known_hosts
   script:
     - echo "$PROD_SERVER_IP"
-    - ssh -T ubuntu@$PROD_SERVER_IP "ls -la"
+    - ssh -T ubuntu@$PROD_SERVER_IP "cd ansible/ && ansible-playbook rundocker-back.yml -i hosts && ansible-playbook rundocker-front.yml -i hosts "
     - ls -la 
-    - cd ansible/
-    - ansible-playbook rundocker-back.yml -i hosts
-    - ansible-playbook rundocker-front.yml -i hosts 
+     
   rules:
     - if: $CI_COMMIT_BRANCH == '107-automatizar-deploy'
