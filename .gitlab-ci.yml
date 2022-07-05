@@ -58,10 +58,10 @@ deploy:
   #- echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts'
   #- chmod 644 ~/.ssh/known_hosts
   script:
-    - ssh ubuntu@$PROD_SERVER_IP
-    - ls -la
-    - cd ansible/
-    - ansible-playbook rundocker-back.yml -i hosts
-    - ansible-playbook rundocker-front.yml -i hosts 
+    - ssh ubuntu@$PROD_SERVER_IP /bin/bash <<'EOT'
+      cd ansible/
+      ansible-playbook rundocker-back.yml -i hosts
+      ansible-playbook rundocker-front.yml -i hosts 
+      EOT
   rules:
     - if: $CI_COMMIT_BRANCH == '107-automatizar-deploy'
