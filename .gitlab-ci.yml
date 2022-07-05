@@ -71,4 +71,4 @@ deploy:
      
   rules:
     - if: $CI_COMMIT_BRANCH == '107-automatizar-deploy'
-  when: manual
+  when: manual 
