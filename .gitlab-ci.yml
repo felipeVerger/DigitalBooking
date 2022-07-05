@@ -65,6 +65,7 @@ deploy:
       cd "ansible/"; \
       ls -la; \
       export PATH=$PATH:/home/ubuntu/.local/bin/ansible; \
+      ansible --version; \
       ansible-playbook rundocker-back.yml -i hosts; \
       ansible-playbook rundocker-front.yml -i hosts"
      
