@@ -59,6 +59,7 @@ deploy:
   #- chmod 644 ~/.ssh/known_hosts
   script:
     - ssh ubuntu@$PROD_SERVER_IP /bin/bash <<'EOT'
+      ls -la 
       cd ansible/
       ansible-playbook rundocker-back.yml -i hosts
       ansible-playbook rundocker-front.yml -i hosts 
