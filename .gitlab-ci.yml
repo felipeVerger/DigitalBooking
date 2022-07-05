@@ -42,7 +42,8 @@ deploy:
 
   script:
     - ssh ubuntu@$PROD_SERVER_IP
-    - cd ansible
+    - ls -la
+    - cd ansible/
     - ansible-playbook rundocker-back.yml -i hosts
     - ansible-playbook rundocker-front.yml -i hosts 
   rules:
