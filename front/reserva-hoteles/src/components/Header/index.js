@@ -31,7 +31,6 @@ const Header = () => {
 
   const {user, setUser} = useContext(UserContext);
 
-
   const handleUserSession = () => {
     setUser(null);
     sessionStorage.removeItem('token');
