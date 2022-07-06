@@ -213,10 +213,10 @@ const ProductPage = ({ product, productDetail }) => {
           </ImageGallery>
           <ImageGalleryMobile>
             <Carousel>
-              {product.images.map((url, i) => {
+              {images?.map((image) => {
                 return (
-                  <div key={i}>
-                    <MobileImage src={url} />
+                  <div key={image.id}>
+                    <MobileImage src={image.url} />
                   </div>
                 );
               })}
