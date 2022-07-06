@@ -38,6 +38,9 @@ export const Image = styled.img`
   height: 100%;
   max-height: 300px;
   border-radius: 8px;
+  @media screen and (max-width: 1300px) {
+    height: 100%;
+  }
   @media screen and (max-width: 640px) {
     width: 100%;
     height: 280px;

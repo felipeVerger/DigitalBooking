@@ -16,6 +16,7 @@ import {
 import { Link, useNavigate, Navigate, useLocation} from "react-router-dom";
 import { UserContext } from "../../context/user-context";
 import { BookingContext } from "../../context/booking-context";
+import Swal from "sweetalert2";
 
 const LoginForm = () => {
   const [formValues, setformValues] = useState({});
@@ -56,15 +57,29 @@ const LoginForm = () => {
     }
     e.preventDefault();
     console.log(formValues);
-    const response = await fetch(url, options);
-    const data = await response.json();
+    const response = await fetch(url, options)
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        } else {
+          if (response.status === 401) {
+            return Swal.fire({
+              icon: 'error',
+              text: 'Lamentablemente no ha podido iniciar sesion. Por favor, intente mas tarde',
+            })
+          }
+        }    
+      })
+      .then((data) => {
+        sessionStorage.setItem('token', data.token);
+        sessionStorage.setItem('email', data.email);
+        sessionStorage.setItem('name', data.name);
+        sessionStorage.setItem('lastName', data.lastName);
+        // window.location.reload();
+        console.log(data);
+      })
     // return data;
-    console.log(data);
-    sessionStorage.setItem('token', data.token);
-    sessionStorage.setItem('email', data.email);
-    sessionStorage.setItem('name', data.name);
-    sessionStorage.setItem('lastName', data.lastName);
-    window.location.reload();
+    // console.log(data);
   };
 
 

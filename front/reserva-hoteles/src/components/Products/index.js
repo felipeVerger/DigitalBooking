@@ -55,9 +55,7 @@ const Recomendaciones = () => {
 
 
   if (!randomProducts.length) {
-    setTimeout(() => {
-      return <Loading/>
-    }, 5000)
+    return <Loading/>
   } else if (products.length === 0){
     return (
       <ErrorBlock>

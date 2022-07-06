@@ -35,6 +35,9 @@ const Header = () => {
   const handleUserSession = () => {
     setUser(null);
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('email');
+    sessionStorage.removeItem('name');
+    sessionStorage.removeItem('lastName');
   }
 
   const handleLogoClick = () => {
