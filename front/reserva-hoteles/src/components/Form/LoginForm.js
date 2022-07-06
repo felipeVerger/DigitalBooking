@@ -75,7 +75,8 @@ const LoginForm = () => {
         sessionStorage.setItem('email', data.email);
         sessionStorage.setItem('name', data.name);
         sessionStorage.setItem('lastName', data.lastName);
-        // window.location.reload();
+        sessionStorage.setItem('role', data.authorities[0].authority);
+        window.location.reload();
         console.log(data);
       })
     // return data;

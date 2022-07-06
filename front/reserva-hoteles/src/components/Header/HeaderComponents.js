@@ -129,3 +129,26 @@ font-weight: 700;
 width: 100vw;
 `
 
+export const AdminBlock = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  margin-right: 20px;
+`
+
+export const AdminButton = styled(Link)`
+  color: ${props => props.theme.primary};
+  text-decoration: none;
+  font-size: 20px;
+  &:hover {
+    color: ${props => props.theme.secondary};
+    border-bottom: 3px solid ${props => props.theme.secondary};
+  }
+`
+
+export const Separator = styled.div`
+  border-left: 3px solid ${(props) => props.theme.secondary};
+  height: 60px;
+  opacity: 0.8;
+`
