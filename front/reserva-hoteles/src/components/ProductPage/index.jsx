@@ -77,7 +77,7 @@ import  * as Icon from "react-icons/md";
 
 
 const ProductPage = ({ product, productDetail }) => {
-  const {id, name, subtitle, description, images, address, score, longitude, latitude, city = {}, category = {}, features = []} = productDetail;
+  const {id, name, subtitle, description, images = [], address, score, longitude, latitude, city = {}, category = {}, features = []} = productDetail;
   console.log("🚀 ~ file: index.jsx ~ line 80 ~ ProductPage ~ images", images)
 
   const {user, setUser} = useContext(UserContext);
@@ -205,20 +205,20 @@ const ProductPage = ({ product, productDetail }) => {
             <OtherImagesContaienr>
               {Array.from(
                 Array(
-                  Math.min(Math.max(product.images.length - 1, 0), 4)
+                  Math.min(Math.max(images.length - 1, 0), 4)
                 ).keys()
               ).map((_, i) => {
-                return <SubImage index={i} src={product.images[i + 1]} />;
+                return <SubImage index={i} src={images[i + 1].url} />;
               })}
               <MoreImagesButton onClick={openModal}>Ver más</MoreImagesButton>
             </OtherImagesContaienr>
           </ImageGallery>
           <ImageGalleryMobile>
             <Carousel>
-              {product.images.map((url, i) => {
+              {images.map((img, i) => {
                 return (
                   <div key={i}>
-                    <MobileImage src={url} />
+                    <MobileImage src={img.url} />
                   </div>
                 );
               })}
