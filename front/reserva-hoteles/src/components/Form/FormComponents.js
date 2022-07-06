@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { RiErrorWarningFill } from 'react-icons/ri';
+import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai';
 
 export const FormContainer = styled.form`
   min-height: 50vh;
@@ -38,6 +39,7 @@ export const InputContainer = styled.div`
   flex-direction: column;
   max-width: 80vw;
   width: 800px;
+  position: relative;
 `;
 
 export const TextField = styled.input`
@@ -116,4 +118,17 @@ export const ErrorMessage = styled.p`
 
 export const WarningIcon = styled(RiErrorWarningFill)`
   font-size: 30px;
+`
+
+export const OpenEye = styled(AiFillEye)`
+  position: absolute;
+  font-size: 20px;
+  bottom: 35px;
+  right: 10px;
+`
+export const ClosedEye = styled(AiFillEyeInvisible)`
+  font-size: 20px;
+  position: absolute;
+  bottom: 35px;
+  right: 10px;
 `
