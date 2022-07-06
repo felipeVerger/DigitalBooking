@@ -73,11 +73,13 @@ import {UserContext} from "../../context/user-context";
 import Map from './Map'
 import ShareSocialMedia from "./ShareSocialMedia";
 import { BookingContext } from "../../context/booking-context";
+import  * as Icon from "react-icons/md";
 
 
 const ProductPage = ({ product, productDetail }) => {
-  const {id, name, subtitle, description, images, address, score, longitude, latitude, city = {}, category = {} } = productDetail;
+  const {id, name, subtitle, description, images, address, score, longitude, latitude, city = {}, category = {}, features = []} = productDetail;
   console.log("🚀 ~ file: index.jsx ~ line 80 ~ ProductPage ~ images", images)
+
   const {user, setUser} = useContext(UserContext);
   const [toggleShareLinks, setToggleShareLinks] =useState(false);
   const  {setIsRegistered} = useContext(BookingContext);
@@ -225,24 +227,28 @@ const ProductPage = ({ product, productDetail }) => {
           <ContentBlock>
             <ContentTitle>{subtitle}</ContentTitle>
             <DescriptionContent>{description}</DescriptionContent>
-          </ContentBlock>
-
+            </ContentBlock>
+            {features.length > 0 && <>
           <TitleBlock>
             <ContentTitle>¿Que ofrece este lugar?</ContentTitle>
           </TitleBlock>
           <Separator />
           <ContentBlock>
             <FeaturesBlock>
-              <Feature>
-                <FeatureIcon />
-                Cocina
-              </Feature>
-              <Feature>
-                <TvIcon />
-                Televisor
-              </Feature>
+              {features.map(
+                (f) => { 
+                  let FIcon = Icon[f.iconName];  
+               return <Feature>
+                    <FeatureIcon ><FIcon /></FeatureIcon>
+                      {f.feature}
+                  </Feature>
+                }
+              )}
             </FeaturesBlock>
-          </ContentBlock>
+            </ContentBlock>
+            </>
+            }
+
         </MainContent>
       </MainContentBody>
       <CalendarBody>

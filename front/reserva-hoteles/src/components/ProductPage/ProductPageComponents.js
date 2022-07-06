@@ -10,6 +10,7 @@ import Calendar from "react-date-range/dist/components/Calendar";
 import {AiOutlineShareAlt, AiOutlineHeart, AiFillHeart} from 'react-icons/ai';
 import styles from "react-date-range/dist/styles";
 
+
 export const HeaderBody = styled.div`
   background: ${(props) => props.theme.primary};
   width: 100%;
@@ -335,6 +336,7 @@ flex-wrap: wrap;
 `
 
 export const Feature = styled.div`
+vertical-align: middle;
 width: 25%;
 padding: 2rem 5rem 2rem 5rem;
 font-weight: 700;
@@ -350,9 +352,9 @@ font-size: 24px;
   }
 `
 
-export const FeatureIcon = styled(MdKitchen)`
+export const FeatureIcon = styled.div`
 color: ${props => props.theme.primary};
-padding-right: 12px;
+padding: 1.3rem 0.2rem 2rem 2rem;
 font-size: 48px;
 
 `
