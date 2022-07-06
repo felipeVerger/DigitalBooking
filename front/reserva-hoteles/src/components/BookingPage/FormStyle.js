@@ -16,7 +16,7 @@ flex-direction: row;
     
 `
 export const FormTitle = styled.h2`
-    color: ${(props) => props.theme.primary};
+    color: ${(props) => props.theme.color_text_primary};
     font-weight: 700;
 `
 

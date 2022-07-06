@@ -62,6 +62,7 @@ export const MainContentBody = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: row;
+  background-color: ${props => props.theme.color_text_secondary};
 `
 
 export const MainContent = styled.div`

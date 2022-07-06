@@ -40,7 +40,18 @@ import {MdLocationOn} from 'react-icons/md';
 
 
 const Form = ({product}) => {
-  const [formValues, setformValues] = useState({});
+
+  
+  const name = sessionStorage.getItem("name");
+  const lastName = sessionStorage.getItem("lastName");
+  const email = sessionStorage.getItem("email");
+
+  const [formValues, setformValues] = useState({
+    nombre: name,
+    email: email,
+    apellido: lastName
+    
+  });
   const [errors, setErrors] = useState({});
   const [toSumbit, setToSumbit] = useState(false);
 
@@ -90,6 +101,7 @@ const Form = ({product}) => {
     console.log(validate(formValues))
     setToSumbit(true);
   };
+
 
   const optionsString = [
    "0:00 AM",
@@ -186,6 +198,7 @@ const Form = ({product}) => {
             <InputContainer>
               <LabelColor htmlFor={"nombre"}>Nombre</LabelColor>
               <TextField
+              value={name != null ? name : ""}
                 name={"nombre"}
                 type={"text"}
                 placeholder={"Bruno"}
@@ -196,6 +209,7 @@ const Form = ({product}) => {
             <InputContainer>
               <LabelColor htmlFor={"apellido"}>Apellido</LabelColor>
               <TextField
+               value={lastName != null ? lastName : ""}
                 name={"apellido"}
                 type={"text"}
                 placeholder={"Rodriguez"}
@@ -206,6 +220,7 @@ const Form = ({product}) => {
             <InputContainer>
               <LabelColor htmlFor={"email"}>Correo electrónico</LabelColor>
               <TextField
+               value={email != null ? email : ""}
                 label={"Correo electrónico"}
                 errors={errors}
                 name={"email"}
