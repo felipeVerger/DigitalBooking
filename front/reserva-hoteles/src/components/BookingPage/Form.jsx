@@ -54,9 +54,12 @@ const Form = ({product}) => {
   };
 
 
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", "Basic dXNlcjpnMTBCb29raW5n");
+  myHeaders.append("Content-Type", "application/json");
 
   const register = async  () => {
-    let url = 'http://localhost:8080/';
+    let url = `${process.env.REACT_APP_URL_REMOTE}/reservations`;
     let body = JSON.stringify({
       "name": formValues.nombre,
       "lastName": formValues.apellido,
@@ -79,9 +82,6 @@ const Form = ({product}) => {
     navigate("successful");
   };
 
-  const myHeaders = new Headers();
-  myHeaders.append("Authorization", "Basic dXNlcjpnMTBCb29raW5n");
-  myHeaders.append("Content-Type", "application/json");
 
 
   const handleSubmit = async (e) => {

@@ -76,7 +76,8 @@ import { BookingContext } from "../../context/booking-context";
 
 
 const ProductPage = ({ product, productDetail }) => {
-  const {id, name, subtitle, description, images = {}, address, score, longitude, latitude, city = {}, category = {} } = productDetail;
+  const {id, name, subtitle, description, images, address, score, longitude, latitude, city = {}, category = {} } = productDetail;
+  console.log("🚀 ~ file: index.jsx ~ line 80 ~ ProductPage ~ images", images)
   const {user, setUser} = useContext(UserContext);
   const [toggleShareLinks, setToggleShareLinks] =useState(false);
   const  {setIsRegistered} = useContext(BookingContext);
@@ -142,8 +143,8 @@ const ProductPage = ({ product, productDetail }) => {
         contentLabel="Example Modal"
       >
         <Carousel>
-          {product.images.map((url, i) => {
-            return <ImageModal src={url} key={i} />;
+          {images?.map((image) => {
+            return <ImageModal src={image.url} key={image.id} />;
           })}
         </Carousel>
       </Modal>
@@ -197,7 +198,7 @@ const ProductPage = ({ product, productDetail }) => {
           </IconContainer>
           <ImageGallery>
             <MainImageContainer>
-              <MainImage src={product.images[0]} />
+              <MainImage src={ images && images[0] ? images[0].url : ''} />
             </MainImageContainer>
             <OtherImagesContaienr>
               {Array.from(
@@ -292,7 +293,7 @@ const ProductPage = ({ product, productDetail }) => {
         <Separator/>
         <MapBlock>
           <LocationMap>{city.name + ', ' + city.country}</LocationMap>
-          <Map latitude={productDetail.latitude} longitude={productDetail.longitude}/>
+          <Map latitude={productDetail.latitude} longitude={productDetail.longitude} address={address} name={name}/>
         </MapBlock>
       </MapContent>
       <MainContentBody>
