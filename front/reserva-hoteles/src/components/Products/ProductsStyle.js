@@ -15,7 +15,7 @@ export const Recommendation = styled.div`
   @media screen and (max-width: 1280px) {
     width: 100%;
   }
-  @media screen and (max-width: 640px) {
+  @media screen and (max-width: 768px) {
     flex-direction: column;
   }
   @media screen and (max-width: 1007px) {
@@ -35,13 +35,12 @@ export const ImageBlock = styled.div`
 
 export const Image = styled.img`
   width: 311.1px;
-  height: 100%;
-  max-height: 300px;
+  height: 300px;
+  max-height: 100%;
+  object-fit: cover;
+  overflow: hidden;
   border-radius: 8px;
-  @media screen and (max-width: 1300px) {
-    height: 100%;
-  }
-  @media screen and (max-width: 640px) {
+  @media screen and (max-width: 768px) {
     width: 100%;
     height: 280px;
   }

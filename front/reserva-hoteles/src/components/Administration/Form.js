@@ -30,6 +30,7 @@ import {
 } from './FormComponents';
 import useFetch from '../../hooks/useFetch';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const URL_API_CITY = `${process.env.REACT_APP_URL_REMOTE}/cities/findAll`;
 const URL_API_CATEGORIES = `${process.env.REACT_APP_URL_REMOTE}/categories/findAll`
@@ -53,6 +54,14 @@ const FormComponent = () => {
   const handleCategoryChange = (e) => {
     setCategory(e.value);
   }
+
+  // if the button is clicked add one more field of atributesContainer
+  const handleButton = (e) => {
+    e.preventDefault();
+    document.getElementById("atributeBlock").innerHTML += `
+        <div>hola mundo</div>
+    `
+  };
 
   const myHeaders = new Headers();
   myHeaders.append("Authorization", "Basic dXNlcjpnMTBCb29raW5n");
@@ -85,6 +94,7 @@ const FormComponent = () => {
         "healthHygiene": formValues.salud,
         "images": formValues.imagen
     })
+    console.log(body);
     let options = {
         method: 'POST',
         headers: myHeaders,
@@ -92,12 +102,21 @@ const FormComponent = () => {
         body: body,
     }
     const response = await fetch(URL_API_CREATE_PRODUCT, options)
-        .catch(() => {
-            alert('Hubo un error, intentelo mas tarde')
-            return;
+        .then((res) => {
+          if (res.status === 200) {
+            navigate('/administration/successful-product-creation');
+          } else {
+            Swal.fire({
+              title: 'Error',
+              text: 'Lamentablemente, el producto no ha podido crearse. Por favor, intente mas tarde',
+              icon: 'error',
+              confirmButtonText: 'Aceptar'
+            })
+          }
         })
-    const data = await response.json();
-    console.log(data);
+        .catch(() => {
+          console.log('Ha ocurrido un error. Por favor, intente mas tarde');
+        })
   }
 
   const handleSubmit = async (e) => {
@@ -106,7 +125,6 @@ const FormComponent = () => {
     // setErrors(validate(city))
     // setErrors(validate(category))
     // console.log(validate(formValues))
-    console.log(formValues);
     setToSumbit(true);
   };
 
@@ -239,7 +257,7 @@ const FormComponent = () => {
       </InputContainer>
       <AtributesContainer>
         <AtrTitle>Agregar atributos</AtrTitle>
-        <Block>
+        <Block id='atributeBlock'>
           <FlexWrapper>
             <AtributeInputBlock>
                 <Label htmlFor="nombreAtributo">Nombre</Label>
@@ -262,7 +280,7 @@ const FormComponent = () => {
                 <ErrorText>{errors.icono}</ErrorText>
             </AtributeInputBlock>
           </FlexWrapper>
-            <Button>
+            <Button onClick={handleButton}>
                 <ButtonIcon />
             </Button>
         </Block>
@@ -314,7 +332,7 @@ const FormComponent = () => {
             placeholder="Insertar https://"
             onChange={handleChange}
           />
-          <Button>
+          <Button onClick={handleButton}>
             <ButtonIcon />
           </Button>
         </ImageBlock>
