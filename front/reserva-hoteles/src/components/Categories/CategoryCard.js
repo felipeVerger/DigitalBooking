@@ -3,10 +3,10 @@ import {Box, Image, InfoSection, CategoryText, CategoryInfo} from './CategorySty
 import { FilterContext } from '../../context/filter-context'
 
 const CategoryCard = ({ img, category, amount, type }) => {
-  const { setFilter } = useContext(FilterContext);
+  const { setFilter, filter } = useContext(FilterContext);
 
   return (
-    <Box onClick={() => setFilter([category, 'category'])}>
+    <Box onClick={() => setFilter({...filter, category: [category, 'category']}) }>
         <Image src={img} alt="imagen-categorias" />
         <InfoSection>
             <CategoryText>{category}</CategoryText>

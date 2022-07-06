@@ -13,7 +13,7 @@ import SearchCity from "./SearchCity";
 import SearchCalendar from "./SearchCalendar";
 
 const Navbar = () => {
-  const {setFilter} = useContext(FilterContext);
+  const {setFilter, filter} = useContext(FilterContext);
   const [destination, setDestination] = useState('¿A donde vamos?');
   const [data, setData] = useState({
     date: { startDate: null, endDate: null },
@@ -23,7 +23,7 @@ const Navbar = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (destination !== '¿A dónde vamos?') {
-      setFilter([destination, 'city']);
+      setFilter({...filter, city: [destination, 'city']});
     }
   };
 

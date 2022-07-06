@@ -17,14 +17,18 @@ const Recomendaciones = () => {
       const productUrl = `${process.env.REACT_APP_URL_REMOTE}/products/findAll`;
       const productByCityUrl = `${process.env.REACT_APP_URL_REMOTE}/products/city/`;
       const productByCategoryUrl = `${process.env.REACT_APP_URL_REMOTE}/products/category/`;
+      const productByCategoryAndCity = `${process.env.REACT_APP_URL_REMOTE}/products/`;
       const productByCityAndDateUrl = `${process.env.REACT_APP_URL_REMOTE}/products/date/startDate/endDate/city`;
 
-      if(filter && filter[1] === 'city'){
-        let productsByCity = await fetchData(productByCityUrl + filter[0], options);
+      if(filter && filter.city && filter.city[1] === 'city'){
+        let productsByCity = await fetchData(productByCityUrl + filter.city[0], options);
         setProducts(productsByCity);
-      } else if (filter && filter[1] === 'category'){
-        let productsByCategory = await fetchData(productByCategoryUrl + filter[0], options);
+      } else if (filter && filter.category[1] === 'category'){
+        let productsByCategory = await fetchData(productByCategoryUrl + filter.category[0], options);
         setProducts(productsByCategory);
+      } else if ( filter && filter.city && filter.category[1] === 'category' && filter.city[1] === 'city'){
+        let productsByCategoryAndCity = await fetchData(productByCategoryAndCity + filter.category[0] + '/' + filter.city[0], options);
+        setProducts(productsByCategoryAndCity);
       } else {
         const productsData = await fetchData(productUrl, options);
         setProducts(productsData);
