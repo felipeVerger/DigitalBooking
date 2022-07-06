@@ -12,6 +12,7 @@ import {
 } from "./FormComponents";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import { UserContext } from "../../context/user-context";
+import Swal from 'sweetalert2';
 
 
 const RegisterForm = () => {
@@ -49,17 +50,25 @@ const RegisterForm = () => {
     }
     console.log(formValues);
     const response = await fetch(url, options)
-    .catch(() => {
-      alert("Hubo un error. Reintentalo mas tarde.")
-      return;});
-    const data = await response.json();
-    // return data;
-    console.log(data);
-    sessionStorage.setItem('token', data.token);
-    sessionStorage.setItem('email', data.email);
-    sessionStorage.setItem('name', data.name);
-    sessionStorage.setItem('lastName', data.lastName);
-    window.location.reload();
+    .then((res) => {
+      if (res.status === 200) {
+        return res.json();
+      } else {
+        if (response.status === 401) {
+          return Swal.fire({
+            icon: 'error',
+            text: 'Lamentablemente no ha podido iniciar sesion. Por favor, intente mas tarde',
+          })
+        }
+      }
+    })
+    .then((data) => {
+      sessionStorage.setItem('token', data.token);
+      sessionStorage.setItem('email', data.email);
+      sessionStorage.setItem('name', data.name);
+      sessionStorage.setItem('lastName', data.lastName);
+      window.location.reload();
+    })
   };
 
 
