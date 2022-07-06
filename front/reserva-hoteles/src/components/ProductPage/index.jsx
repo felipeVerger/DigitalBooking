@@ -78,7 +78,6 @@ import  * as Icon from "react-icons/md";
 
 const ProductPage = ({ product, productDetail }) => {
   const {id, name, subtitle, description, images = [], address, score, longitude, latitude, city = {}, category = {}, features = []} = productDetail;
-  console.log("🚀 ~ file: index.jsx ~ line 80 ~ ProductPage ~ images", images)
 
   const {user, setUser} = useContext(UserContext);
   const [toggleShareLinks, setToggleShareLinks] =useState(false);

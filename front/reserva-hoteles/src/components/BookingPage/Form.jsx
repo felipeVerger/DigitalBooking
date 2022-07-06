@@ -9,6 +9,7 @@ import {
   FormTitle,
   CalendarContainer,
   IconContainer,
+  Title,
   SubTitle,
   Span,
   Column,
@@ -19,7 +20,9 @@ import {
   IconContainerSmall,
   Row,
   Dates,
-  Div
+  Div,
+  InfoDetailProduct,
+  CategoryTitle
 } from "./FormStyle";
 import { Link, useNavigate } from "react-router-dom";
 import { Navigate } from "react-router-dom";
@@ -33,16 +36,18 @@ import { addDays } from "date-fns";
 import { themes } from "../../assets/themes";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import Select from "react-select";
-import { Title } from "./BookingComponents";
 import { ReservationButton, Separator } from "../ProductPage/ProductPageComponents";
 import {MdLocationOn} from 'react-icons/md';
 
 
 
 const Form = ({product}) => {
+  const {id, name, address, images, city = {}, category = {} } = product;
   const [formValues, setformValues] = useState({});
   const [errors, setErrors] = useState({});
   const [toSumbit, setToSumbit] = useState(false);
+
+  console.log(product);
 
   const navigate = useNavigate();
 
@@ -242,7 +247,7 @@ const Form = ({product}) => {
               rangeColors={[themes.light.primary]}
             />
           </CalendarContainer>
-          <FormTitle>Tu horario de reserva</FormTitle>
+          <FormTitle>Tu horario de llegada</FormTitle>
           <FormBlock>
             <SubTitle>
               <IconContainer>
@@ -252,18 +257,19 @@ const Form = ({product}) => {
               las 11:00PM
             </SubTitle>
             <Column>
-            <Span>Indica tu horario estimado de llegada</Span>
-            <Padding><Select options={options} /></Padding>;
+              <Span>Indica tu horario estimado de llegada</Span>
+              <Select options={options} />;
             </Column>
           </FormBlock>
     </ColumnForm>
         <ConfirmationBlock>
           <Title>Detalle de la reserva</Title>
-          <Image src={product.images[0]} />
-
-          <SubTitle>{product.category.title}</SubTitle>
-          <Title>{product.name}</Title>
-          <Span><IconContainerSmall><MdLocationOn/></IconContainerSmall>{product.address}, {product.city.name}, {product.city.country}</Span>
+          <Image src={images && images[0] ? images[0]?.url : null} />
+          <InfoDetailProduct>
+            <CategoryTitle>{category.title}</CategoryTitle>
+            <Title>{name}</Title>
+            <Span><IconContainerSmall><MdLocationOn/></IconContainerSmall>{address}, {city.name}, {city.country}</Span>
+          </InfoDetailProduct>
           <Separator />
           <Row>
           <SubTitle>Check in</SubTitle>

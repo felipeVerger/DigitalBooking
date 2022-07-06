@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const FormContainer = styled.div`
 padding: 3rem;
-background-color: ${(props) => props.theme.background};
+background-color: ${(props) => props.theme.content_background};
 display: flex;
 flex-direction: row;
 @media only screen and (max-width: 1200px) {
@@ -21,7 +21,9 @@ export const FormTitle = styled.h2`
 `
 
 export const FormBlock = styled.div`
+background-color: ${(props) => props.theme.background};
 margin: 50px 0 50px 0;
+padding: 1rem 0 0 0;
 border-radius: 2rem;
 box-shadow: 0px 10px 6px 5px rgba(0,0,0,0.1);
 flex-wrap: wrap;
@@ -68,6 +70,12 @@ export const LabelColor = styled(Label)`
 color: ${props => props.theme.primary};
 `
 
+export const InfoDetailProduct = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+`
 
 export const CalendarContainer = styled.div`
 display: flex;
@@ -93,7 +101,7 @@ export const Span = styled.div`
 font-size: 24px;
 display: flex;
 flex-direction: row;
-
+margin-bottom: 20px;
 `
 
 export const Column = styled.div`
@@ -105,6 +113,7 @@ export const ColumnForm = styled.div`
 display: flex;
 flex-direction: column;
 padding: 1rem;
+margin-right: 2rem;
 width: 60%;
 @media only screen and (max-width: 1200px) {
     width: 100%;
@@ -123,6 +132,7 @@ border-radius: 2rem;
 padding: 1rem;
 display: flex;
 flex-direction: column;
+background-color: ${props => props.theme.background};
 
 @media only screen and (max-width: 1200px) {
     width: 100%;
@@ -132,13 +142,14 @@ flex-direction: column;
 export const Image = styled.img`
 width: 100%;
 padding: 1rem 0;
+max-height: 400px;
 `
 
 export const IconContainerSmall = styled.div`
 color: ${props => props.theme.primary};
 font-size: 24px;
 line-height: 0;
-padding: 0.5rem;
+padding: 0.5rem 0 0 0;
 `
 
 export const Row = styled.div`
@@ -157,10 +168,22 @@ background-color: ${props => props.theme.primary};
 color: ${props => props.theme.color_text_secondary};
 padding: 12px 28px;
 border: none;
+border-radius: 10px;
 width: 80%;
 `
 
 export const Div = styled.div`
 display: flex;
 justify-content: center;
+`
+
+export const Title = styled.h2`
+    color: ${(props) => props.theme.primary};
+    font-weight: 700;
+`
+
+export const CategoryTitle = styled.h4`
+  color: ${(props) => props.theme.primary};
+  opacity: 0.6;
+  font-weight: 700;
 `
