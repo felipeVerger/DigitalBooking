@@ -11,7 +11,9 @@ export const UserProvider = ({children}) => {
   useEffect(() => {
     sessionStorage.getItem('token')!= null ? setUser({
       nombre: sessionStorage.getItem('name'),
-      email: sessionStorage.getItem('email')
+      email: sessionStorage.getItem('email'),
+      token: sessionStorage.getItem('token'),
+      role: sessionStorage.getItem('role')
     }    ) : setUser(null);
 
  }, [])

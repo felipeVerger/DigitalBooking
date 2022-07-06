@@ -67,6 +67,7 @@ const RegisterForm = () => {
       sessionStorage.setItem('email', data.email);
       sessionStorage.setItem('name', data.name);
       sessionStorage.setItem('lastName', data.lastName);
+      sessionStorage.setItem('role', data.authorities[0].authority);
       window.location.reload();
     })
   };
