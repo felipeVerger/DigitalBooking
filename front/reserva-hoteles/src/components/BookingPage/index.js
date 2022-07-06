@@ -12,6 +12,7 @@ import {
     BookingBlockInfo,
     MainContent,
     MainContentBody,
+    Title
 } from './BookingComponents'
 import {
   ContentBlock,
@@ -46,8 +47,8 @@ const Booking = ({product, productDetail}) => {
       </HeaderBody>
       <MainContentBody>
         <MainContent>
-          <Form product={product}/>
-
+          <Form product={productDetail}/>
+      <Title>Que tenes que saber</Title>
       <Separator />
           <ContentBlock>
             <PoliciesContainer>

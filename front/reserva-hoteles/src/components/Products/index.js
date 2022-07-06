@@ -10,7 +10,7 @@ const Recomendaciones = () => {
     const [products, setProducts] = useState([]);
     const [dataFavorites, setDataFavorites] = useState();
 
-    console.log(filter);
+    // console.log(filter);
 
   useEffect(() => {
     const fetchProductsData = async () => { 

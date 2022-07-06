@@ -13,7 +13,10 @@ import {
   AvatarIcon,
   UserInfo,
   Greeting,
-  UserName
+  UserName,
+  AdminBlock,
+  AdminButton,
+  Separator
 } from "./HeaderComponents";
 import { FaBars } from "react-icons/fa";
 import MobileMenu from "../MobileMenu";
@@ -30,7 +33,6 @@ const Header = () => {
   const { toggleOpen } = useContext(MenuContext);
 
   const {user, setUser} = useContext(UserContext);
-
 
   const handleUserSession = () => {
     setUser(null);
@@ -57,6 +59,18 @@ const Header = () => {
         </HeaderBlock>
         {user ? (
           <HeaderBlock>
+            {user.role === 'ROLE_ADMIN' ? 
+            <AdminBlock>
+              <AdminButton to={"/administration"}>Administracion</AdminButton>
+              <Separator/>
+            </AdminBlock>
+            : user.role === 'ROLE_USER' ?
+            <AdminBlock>
+              <AdminButton to={"/favorites"}>Favoritos</AdminButton>
+              <AdminButton to={`/${user.id}/bookings`}>Reservas</AdminButton>
+              <Separator/>
+            </AdminBlock>
+            : null}
             <AvatarIcon name={user.nombre} round size="40px" color={themes.light.primary} />
                   {/* <HeaderButton onClick={() => {setUser(null)}}>Cerrar sesion</HeaderButton> */}
                   <UserInfo>

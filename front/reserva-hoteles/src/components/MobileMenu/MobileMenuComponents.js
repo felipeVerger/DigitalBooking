@@ -90,3 +90,13 @@ font-weight: 700;
 export const UserIcon = styled.div`
 padding-right: 1px;
 `
+
+export const AdminButton = styled(Link)`
+  color: ${props => props.theme.primary};
+  text-decoration: none;
+  font-size: 20px;
+  &:hover {
+    color: ${props => props.theme.secondary};
+    border-bottom: 3px solid ${props => props.theme.secondary};
+  }
+`
