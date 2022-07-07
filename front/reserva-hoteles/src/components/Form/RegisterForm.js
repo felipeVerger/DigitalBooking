@@ -189,9 +189,9 @@ const RegisterForm = () => {
             type={"password"}
             onChange={handleChange}
           />
-          <div onClick={handleShowPass}>
+          {/* <div onClick={handleShowPass}>
             {showPass ? <OpenEye/> : <ClosedEye/>}
-          </div>
+          </div> */}
           <ErrorText>{errors.password}</ErrorText>
         </InputContainer>
 
@@ -204,9 +204,9 @@ const RegisterForm = () => {
             type={"password"}
             onChange={handleChange}
           />
-          <div onClick={handleShowPass2}>
+          {/* <div onClick={handleShowPass2}>
             {showPass2 ? <OpenEye/> : <ClosedEye/>}
-          </div>
+          </div> */}
           <ErrorText>{errors.confirmarPass}</ErrorText>
         </InputContainer>
 

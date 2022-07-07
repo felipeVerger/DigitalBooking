@@ -35,9 +35,7 @@ const Navbar = () => {
   let formatEndDate = () => {
     if (data.date.endDate !== null) {
       let endDate = data.date.endDate;
-      let endDateFormatted = `${endDate.getFullYear()}-
-      ${endDate.getMonth() + 1 < 10 ? 0 : ""}${( endDate.getMonth() + 1 )}-
-      ${endDate.getDate() < 10 ? 0 : ""}${endDate.getDate()}`;
+      let endDateFormatted = `${endDate.getFullYear()}-${endDate.getMonth() + 1 < 10 ? 0 : ""}${( endDate.getMonth() + 1 )}-${endDate.getDate() < 10 ? 0 : ""}${endDate.getDate()}`;
       return endDateFormatted;
     }
   }

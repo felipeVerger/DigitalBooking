@@ -55,6 +55,7 @@ const FormComponent = () => {
     setCategory(e.value);
   }
 
+
   const myHeaders = new Headers();
   myHeaders.append("Authorization", "Basic dXNlcjpnMTBCb29raW5n");
   myHeaders.append("Content-Type", "application/json");
@@ -75,17 +76,26 @@ const FormComponent = () => {
     const URL_API_CREATE_PRODUCT = `${process.env.REACT_APP_URL_REMOTE}/products/create`;
     const body = JSON.stringify({
         "name": formValues.nombre,
-        "category": category,
+        "subtitle": formValues.nombre,
+        "category": {
+          id: category,
+        },
         "address": formValues.direccion,
-        "city": city,
+        "city": {
+          id: city,
+      },
         "description": formValues.descripcion,
-        "latitude": formValues.latitud,
         "longitude": formValues.longitud,
-        "features": formValues.nombreAtributo,
-        "houseRules": formValues.normas,
-        "healthHygiene": formValues.salud,
-        "images": formValues.imagen
-    })
+        "latitude": formValues.latitud,
+        "cancellationPolicy": formValues.cancelacion,
+        "price": 3520.0,
+        "score": 5,
+        "images": [],
+        "reservations": null,
+        "favorites": null,
+        "healthHygiene": null,
+        "houseRules": null
+    });
     console.log(body);
     let options = {
         method: 'POST',
@@ -93,7 +103,7 @@ const FormComponent = () => {
         redirect: 'follow',
         body: body,
     }
-    const response = await fetch(URL_API_CREATE_PRODUCT, options)
+    await fetch(URL_API_CREATE_PRODUCT, options)
         .then((res) => {
           if (res.status === 200) {
             navigate('/administration/successful-product-creation');
@@ -105,9 +115,6 @@ const FormComponent = () => {
               confirmButtonText: 'Aceptar'
             })
           }
-        })
-        .catch(() => {
-          console.log('Ha ocurrido un error. Por favor, intente mas tarde');
         })
   }
 
@@ -191,7 +198,7 @@ const FormComponent = () => {
         <Label htmlFor="categoria">Categoría</Label>
         <SelectField
           options={categories.map((item) => ({
-            value: item.title,
+            value: item.id,
             label: item.title,
           }))}
           name={'categoria'}
@@ -214,7 +221,7 @@ const FormComponent = () => {
         <Label htmlFor="ciudad">Ciudad</Label>
         <SelectField
           options={cities.map((item) => ({
-            value: item.name,
+            value: item.id,
             label: item.name,
           }))}
           name={'ciudad'}

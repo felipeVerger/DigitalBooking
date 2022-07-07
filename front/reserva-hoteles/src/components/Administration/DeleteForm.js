@@ -32,12 +32,11 @@ const DeleteForm = () => {
     fetch(URL_API_DELETE_PRODUCT + id, options)
       .then((response) => {
         if (response.ok) {
+          navigate('/')
           return Swal.fire({
-            position: 'top-end',
             icon: 'success',
             title: 'El producto se ha eliminado correctamente',
             showConfirmButton: false,
-            timer: 1500
           });
         } else {
           return Swal.fire({

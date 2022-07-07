@@ -55,7 +55,7 @@ const Recomendaciones = () => {
     const randomProducts = products && products.length > 6 ? products.sort(() => Math.random() - 0.5).slice(0, 6) : products;
     // const filteredProducts = locationPath === '/productsList' ? products : randomProducts; 
 
-    // console.log(products);
+    console.log(products);
 
   if (!randomProducts.length) {
     return <Loading/>

@@ -157,9 +157,9 @@ const LoginForm = () => {
           type={"password"}
           onChange={handleChange}
         />
-        <div onClick={handleShowPass}>
+        {/* <div onClick={handleShowPass}>
           { showPass ? <OpenEye/> : <ClosedEye/>}
-        </div>
+        </div> */}
         <ErrorText>{errors.password}</ErrorText>
       </InputContainer>
 
