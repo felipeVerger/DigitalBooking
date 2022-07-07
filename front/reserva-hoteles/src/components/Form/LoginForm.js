@@ -11,7 +11,9 @@ import {
   ErrorText,
   ErrorMessage,
   ErrorReservation,
-  WarningIcon
+  WarningIcon,
+  OpenEye,
+  ClosedEye
 } from "./FormComponents";
 import { Link, useNavigate, Navigate, useLocation} from "react-router-dom";
 import { UserContext } from "../../context/user-context";
@@ -25,6 +27,16 @@ const LoginForm = () => {
   const { isRegistered, setIsRegistered } =  useContext(BookingContext);
   const navigate = useNavigate()
   const {user, setUser} = useContext(UserContext);
+  const [showPass, setShowPass] = useState(false);
+
+  const handleShowPass = () => {
+    setShowPass(!showPass);
+    if (showPass) {
+      document.getElementById("password").type = "password";
+    } else {
+      document.getElementById("password").type = "text";
+    }
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -136,6 +148,7 @@ const LoginForm = () => {
         <Label htmlFor={"password"}>Contraseña</Label>
 
         <TextField
+          id="password"
           label={"Correo electrónico"}
           errors={errors}
           name={"password"}
@@ -143,6 +156,9 @@ const LoginForm = () => {
           type={"password"}
           onChange={handleChange}
         />
+        <div onClick={handleShowPass}>
+          { showPass ? <OpenEye/> : <ClosedEye/>}
+        </div>
         <ErrorText>{errors.password}</ErrorText>
       </InputContainer>
 

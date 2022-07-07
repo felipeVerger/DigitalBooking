@@ -9,6 +9,8 @@ import {
   InputContainer,
   FormSwitchText,
   ErrorText,
+  OpenEye,
+  ClosedEye
 } from "./FormComponents";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import { UserContext } from "../../context/user-context";
@@ -18,6 +20,23 @@ import Swal from 'sweetalert2';
 const RegisterForm = () => {
   const [formValues, setformValues] = useState({});
   const [errors, setErrors] = useState({});
+  const [showPass, setShowPass] = useState(false);
+  const [showPass2, setShowPass2] = useState(false);
+
+  
+  /**
+   * If showPass is true, then set showPass to false and change the type of the password input to
+   * "password". If showPass is false, then set showPass to true and change the type of the password
+   * input to "text".
+   */
+  const handleShowPass = () => {
+    setShowPass(!showPass);
+    showPass ? (document.getElementById("password").type = "password") : (document.getElementById("password").type = "text");
+  }
+  const handleShowPass2 = () => {
+    setShowPass2(!showPass2);
+    showPass2 ? (document.getElementById("password2").type = "password") : (document.getElementById("password2").type = "text");
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -162,22 +181,30 @@ const RegisterForm = () => {
         <InputContainer>
           <Label htmlFor={"password"}>Contraseña</Label>
           <TextField
+            id="password"
             name={"password"}
             placeholder={"●●●●●●"}
             type={"password"}
             onChange={handleChange}
           />
+          <div onClick={handleShowPass}>
+            {showPass ? <OpenEye/> : <ClosedEye/>}
+          </div>
           <ErrorText>{errors.password}</ErrorText>
         </InputContainer>
 
         <InputContainer>
           <Label htmlFor={"confirmarPass"}>Confirmar contraseña</Label>
           <TextField
+            id="password2"
             name={"confirmarPass"}
             placeholder={"●●●●●●"}
             type={"password"}
             onChange={handleChange}
           />
+          <div onClick={handleShowPass2}>
+            {showPass2 ? <OpenEye/> : <ClosedEye/>}
+          </div>
           <ErrorText>{errors.confirmarPass}</ErrorText>
         </InputContainer>
 
