@@ -63,7 +63,7 @@ const Header = () => {
           <HeaderBlock>
             {user.role === 'ROLE_ADMIN' ? 
             <AdminBlock>
-              <AdminButton to={"/administration"}>Administracion</AdminButton>
+              <AdminButton to={"/administration"}>Administración</AdminButton>
               <Separator/>
             </AdminBlock>
             : user.role === 'ROLE_USER' ?

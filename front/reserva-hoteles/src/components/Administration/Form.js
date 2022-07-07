@@ -191,7 +191,7 @@ const FormComponent = () => {
         <ErrorText>{errors.nombre}</ErrorText>
       </InputContainer>
       <InputContainer>
-        <Label htmlFor="categoria">Categoria</Label>
+        <Label htmlFor="categoria">Categoría</Label>
         <SelectField
           options={categories.map((item) => ({
             value: item.title,
@@ -204,7 +204,7 @@ const FormComponent = () => {
         <ErrorText>{errors.categoria}</ErrorText>
       </InputContainer>
       <InputContainer>
-        <Label htmlFor="direccion">Direccion</Label>
+        <Label htmlFor="direccion">Dirección</Label>
         <TextField
           name={"direccion"}
           type={"text"}
@@ -227,7 +227,7 @@ const FormComponent = () => {
         <ErrorText>{errors.ciudad}</ErrorText>
       </InputContainer>
       <DescriptionBlock>
-        <Label htmlFor="descripcion">Descripcion</Label>
+        <Label htmlFor="descripcion">Descripción</Label>
         <DescriptionField
           name={"descripcion"}
           placeholder="Escribir aqui"
@@ -286,11 +286,11 @@ const FormComponent = () => {
         </Block>
       </AtributesContainer>
       <PolicyContainer>
-        <PolicyTitle>Pliticas del producto</PolicyTitle>
+        <PolicyTitle>Políticas del producto</PolicyTitle>
         <PolicyBody>
           <PolicyBlock>
             <PolicyName>Normas de la casa</PolicyName>
-            <Label htmlFor="normas">Descripcion</Label>
+            <Label htmlFor="normas">Descripción</Label>
             <PolicyField
               name={"normas"}
               type={"textarea"}
@@ -301,7 +301,7 @@ const FormComponent = () => {
           </PolicyBlock>
           <PolicyBlock>
             <PolicyName>Salud y seguridad</PolicyName>
-            <Label htmlFor="salud">Descripcion</Label>
+            <Label htmlFor="salud">Descripción</Label>
             <PolicyField
               name={"salud"}
               type={"textarea"}
@@ -311,8 +311,8 @@ const FormComponent = () => {
             <ErrorText>{errors.salud}</ErrorText>
           </PolicyBlock>
           <PolicyBlock>
-            <PolicyName>Politica de cancelacion</PolicyName>
-            <Label htmlFor="cancelacion">Descripcion</Label>
+            <PolicyName>Politica de cancelación</PolicyName>
+            <Label htmlFor="cancelacion">Descripción</Label>
             <PolicyField
               name={"cancelacion"}
               type={"textarea"}
