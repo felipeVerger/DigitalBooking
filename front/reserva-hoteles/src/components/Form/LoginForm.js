@@ -83,6 +83,7 @@ const LoginForm = () => {
         }    
       })
       .then((data) => {
+        sessionStorage.setItem('id', data.id);
         sessionStorage.setItem('token', data.token);
         sessionStorage.setItem('email', data.email);
         sessionStorage.setItem('name', data.name);
@@ -92,7 +93,6 @@ const LoginForm = () => {
         console.log(data);
       })
     // return data;
-    // console.log(data);
   };
 
 

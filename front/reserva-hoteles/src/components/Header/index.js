@@ -36,6 +36,7 @@ const Header = () => {
 
   const handleUserSession = () => {
     setUser(null);
+    sessionStorage.removeItem('id');
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('email');
     sessionStorage.removeItem('name');
