@@ -2,6 +2,7 @@ package com.proyecto.proyectInt.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -69,24 +70,25 @@ public class Product {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Set<Image> images = new HashSet<>();
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
+    @OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name="products_id_product")
+    @JsonManagedReference
     private Set<Reservation> reservations;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Favorite> favorites;
 
     @OneToMany(mappedBy = "products", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
+    @JsonManagedReference
     private Set<HealthHygiene> healthHygiene;
 
     @OneToMany(mappedBy = "products", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
+    @JsonManagedReference
     private Set<HouseRule> houseRules;
 
 
-    public Product(String name, String description,String subtitle, Double price, String address, String longitude, String latitude , String cancellationPolicy, Category category, Set<Feature> features, Set<Image> images, City city, int score, Set<HouseRule> houseRules, Set<HealthHygiene> healthHygiene) {
+    public Product(String name, String description,String subtitle, Double price, String address, String longitude, String latitude , String cancellationPolicy, Category category, Set<Feature> features, Set<Image> images, Set<Reservation> reservations, City city, int score, Set<HouseRule> houseRules, Set<HealthHygiene> healthHygiene) {
         this.name = name;
         this.description = description;
         this.subtitle = subtitle;
@@ -98,6 +100,7 @@ public class Product {
         this.category = category;
         this.features = features;
         this.images = images;
+        this.reservations = reservations;
         this.city = city;
         this.score = score;
         this.houseRules = houseRules;

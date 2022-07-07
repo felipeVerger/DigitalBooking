@@ -1,5 +1,10 @@
 package com.proyecto.proyectInt.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.proyecto.proyectInt.repository.FavoriteRepository;
+import com.proyecto.proyectInt.repository.ReservationRepository;
+import com.proyecto.proyectInt.security.jwt.JwtProvider;
+import com.proyecto.proyectInt.service.EmailService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +12,7 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -43,7 +49,6 @@ public class User {
     private Set<Favorite> favorites;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
     private Set<Reservation> reservations;
 
 //    public User(String name, String lastName, String email, String password) {
@@ -52,12 +57,14 @@ public class User {
 //        this.email = email;
 //        this.password = password;
 //    }
-    public User(String name, String lastName, String email, String password, Role role, String city) {
+    public User(String name, String lastName, String email, String password, Role role, String city, Set<Favorite> favorites, Set<Reservation> reservations) {
         this.username = name;
         this.lastname = lastName;
         this.email = email;
         this.password = password;
         this.role = role;
+        this.favorites = favorites;
+        this.reservations = reservations;
     }
     //metodos de la interfaz UserDetails
 //    @Override

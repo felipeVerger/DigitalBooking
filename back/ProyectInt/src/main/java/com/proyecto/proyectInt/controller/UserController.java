@@ -23,11 +23,12 @@ public class UserController {
 //        logger.info("Retrieving data from user table");
 //        return ResponseEntity.ok(userService.findAll());
 //    }
-//    @GetMapping("/{id}")
-//    public ResponseEntity<Optional<User>> getUserById(@PathVariable Long id) throws ResourceNotFoundException {
-//        logger.info("Retrieving data from user table");
-//        return ResponseEntity.ok(userService.findById(id));
-//    }
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<User>> getUserById(@PathVariable Long id) throws ResourceNotFoundException {
+        Optional<User> user = userService.findById(id);
+        logger.info("Retrieving data from user table");
+        return ResponseEntity.ok(user);
+    }
 //    @PostMapping
 //    public ResponseEntity<User> addUser(@RequestBody User user) throws BadRequestException {
 //        logger.info("Adding new user");

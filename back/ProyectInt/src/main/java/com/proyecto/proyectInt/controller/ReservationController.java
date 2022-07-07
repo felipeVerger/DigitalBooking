@@ -32,6 +32,12 @@ public class ReservationController {
     @PostMapping
     public ResponseEntity<Reservation> addReservation(@RequestBody Reservation reservation) throws  BadRequestException {
         logger.info("Adding new reservation");
+        logger.info(reservation.getUser().getId());
+        logger.info(reservation.getProduct().getId());
+        logger.info(reservation.getAdditionalInfo());
+        logger.info(reservation.getArrivalTime());
+        logger.info(reservation.getCheckIn());
+        logger.info(reservation.getCheckOut());
         return ResponseEntity.ok(reservationService.create(reservation));
     }
     @PutMapping("update")
