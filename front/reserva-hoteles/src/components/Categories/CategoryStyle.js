@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Box = styled.div`
-  /* min-width: 330px; */
+  min-width: 20%;
   background: #ffffff;
   border: 1px solid #f3f1ed;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
