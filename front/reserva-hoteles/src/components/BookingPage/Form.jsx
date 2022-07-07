@@ -55,7 +55,7 @@ const Form = ({product}) => {
     apellido: lastNameUser
     
   });
-  const {id, name, address, images, city = {}, category = {} } = product;
+  const {id, name, reservations, address, images, city = {}, category = {} } = product;
   const [errors, setErrors] = useState({});
   const [toSumbit, setToSumbit] = useState(false);
 
@@ -144,6 +144,54 @@ const Form = ({product}) => {
   ];
 
   const options = optionsString.map((i) => { return {value: i, label: i}})
+
+
+  function getDates(startDate, stopDate) {
+    var dateArray = new Array();
+    var currentDate = startDate;
+    while (currentDate <= stopDate) {
+        dateArray.push(new Date (currentDate));
+        currentDate = currentDate.addDays(1);
+    }
+    return dateArray;
+}
+
+useEffect(() => {
+  setDisabled(getDisabledDays(reservations));
+},
+[reservations])
+
+  let getDisabledDays = (reservations) => {
+    let arr = [];
+
+    if(reservations){
+
+    reservations.forEach(element => {
+      let startArr = element.checkIn.split("-");
+      let endArr = element.checkOut.split("-");
+
+      
+      let startDate = new Date(startArr[0], parseInt(startArr[1]) - 1, startArr[2]);
+      let endDate = new Date(endArr[0], parseInt(endArr[1]) - 1, endArr[2]);
+
+
+      let range = getDates(startDate, endDate);
+
+      arr = arr.concat(range);
+
+      
+    });
+  }
+
+
+
+  console.log(arr);
+    return arr;
+
+
+  }
+
+  const [disabled, setDisabled] = useState([]);
 
 
   const defaultOption = options[12];
@@ -259,7 +307,7 @@ const Form = ({product}) => {
               minDate={new Date()}
               months={getWindowDimensions().width > 768 ? 2 : 1}
               direction="horizontal"
-              disabledDates={[]}
+              disabledDates={disabled}
               onChange={(item) => setDates([item.selection])}
               showSelectionPreview={true}
               moveRangeOnFirstSelection={false}

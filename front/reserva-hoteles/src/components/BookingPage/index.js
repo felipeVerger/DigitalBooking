@@ -29,7 +29,7 @@ import Form from './Form'
 
 const Booking = ({product, productDetail}) => {
   // const {category = {} } = product;
-  const {id, name, subtitle, description, address, images, score, longitude, latitude, city = {}, category = {} , healthHygiene, houseRules, cancellationPolicy} = productDetail;
+  const {id, name, city = {}, category = {} , healthHygiene, houseRules, cancellationPolicy} = productDetail;
 
   return (
     <Container>
@@ -55,7 +55,8 @@ const Booking = ({product, productDetail}) => {
                 <PolicyTitle>Normas de la casa</PolicyTitle>
                 <PolicyContent>
                   {houseRules && houseRules.map((content) => {
-                    return <PolicyItem>{content}</PolicyItem>;
+                    console.log(content);
+                    return <PolicyItem>{content.description}</PolicyItem>;
                   })}
                 </PolicyContent>
               </Policy>
@@ -64,13 +65,14 @@ const Booking = ({product, productDetail}) => {
                 <PolicyTitle>Salud y seguridad</PolicyTitle>
                 <PolicyContent>
                   {healthHygiene && healthHygiene.map((content) => {
-                    return <PolicyItem>{content}</PolicyItem>;
+                    console.log(content);
+                    return <PolicyItem>{content.description}</PolicyItem>;
                   }) }
                 </PolicyContent>
               </Policy>
               ;
               <Policy>
-                <PolicyTitle>Politica de cancelacion</PolicyTitle>
+                <PolicyTitle>Politica de cancelación</PolicyTitle>
                 <PolicyContent>
                     <PolicyItem>{cancellationPolicy && cancellationPolicy}</PolicyItem>;
 

@@ -76,6 +76,7 @@ const LoginForm = () => {
         } else {
           if (response.status === 401) {
             return Swal.fire({
+              title: `Error ${response.status}`,
               icon: 'error',
               text: 'Lamentablemente no ha podido iniciar sesion. Por favor, intente mas tarde',
             })
@@ -83,6 +84,7 @@ const LoginForm = () => {
         }    
       })
       .then((data) => {
+        sessionStorage.setItem('id', data.id);
         sessionStorage.setItem('token', data.token);
         sessionStorage.setItem('email', data.email);
         sessionStorage.setItem('name', data.name);
@@ -92,7 +94,6 @@ const LoginForm = () => {
         console.log(data);
       })
     // return data;
-    // console.log(data);
   };
 
 

@@ -36,6 +36,7 @@ const Header = () => {
 
   const handleUserSession = () => {
     setUser(null);
+    sessionStorage.removeItem('id');
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('email');
     sessionStorage.removeItem('name');
@@ -62,7 +63,7 @@ const Header = () => {
           <HeaderBlock>
             {user.role === 'ROLE_ADMIN' ? 
             <AdminBlock>
-              <AdminButton to={"/administration"}>Administracion</AdminButton>
+              <AdminButton to={"/administration"}>Administración</AdminButton>
               <Separator/>
             </AdminBlock>
             : user.role === 'ROLE_USER' ?

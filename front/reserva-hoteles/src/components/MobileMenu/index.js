@@ -26,6 +26,7 @@ const MobileMenu = ({ isMenuOpen, toggle }) => {
 
   const handleUserSession = () => {
     setUser(null);
+    sessionStorage.removeItem("id");
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('email');
     sessionStorage.removeItem('name');
@@ -61,14 +62,14 @@ const MobileMenu = ({ isMenuOpen, toggle }) => {
         <MenuLink to={"/"}>Inicio</MenuLink>
         {user && user.role === 'ROLE_ADMIN' ? (
           <>
-            <MenuLink to={"/administration"}>Administracion</MenuLink>
-            <MenuLink to={"/"} onClick={handleUserSession}>Cerrar sesion</MenuLink>
+            <MenuLink to={"/administration"}>Administración</MenuLink>
+            <MenuLink to={"/"} onClick={handleUserSession}>Cerrar sesión</MenuLink>
           </>
         ) : user && user.role === 'ROLE_USER' ? (
           <>
             <MenuLink to={"/favorites"}>Favoritos</MenuLink>
             <MenuLink to={`/${user.id}/bookings`}>Reservas</MenuLink>
-            <MenuLink to={"/"} onClick={handleUserSession}>Cerrar sesion</MenuLink>
+            <MenuLink to={"/"} onClick={handleUserSession}>Cerrar sesión</MenuLink>
           </>
         ) : (
           <>

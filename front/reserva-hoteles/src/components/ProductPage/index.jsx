@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react";
+import React, {useState, useContext, useEffect} from "react";
 import { Carousel } from "react-responsive-carousel";
 import {
   HeaderBody,
@@ -77,11 +77,70 @@ import  * as Icon from "react-icons/md";
 
 
 const ProductPage = ({ product, productDetail }) => {
-  const {id, name, subtitle, description, images = [], address, score, longitude, latitude, city = {}, category = {}, features = []} = productDetail;
+
+  let getDisabledDays = (reservations) => {
+    let arr = [];
+
+    if(reservations){
+
+    reservations.forEach(element => {
+      let startArr = element.checkIn.split("-");
+      let endArr = element.checkOut.split("-");
+
+      
+      let startDate = new Date(startArr[0], parseInt(startArr[1]) - 1, startArr[2]);
+      let endDate = new Date(endArr[0], parseInt(endArr[1]) - 1, endArr[2]);
+
+
+      let range = getDates(startDate, endDate);
+
+      arr = arr.concat(range);
+
+      
+    });
+  }
+
+  console.log(arr);
+    return arr;
+
+
+  }
+  const {id, name, subtitle, description, reservations, images = [], address, score, longitude, latitude, city = {}, category = {}, features = []} = productDetail;
 
   const {user, setUser} = useContext(UserContext);
+  const [disabled, setDisabled] = useState([]);
   const [toggleShareLinks, setToggleShareLinks] =useState(false);
   const  {setIsRegistered} = useContext(BookingContext);
+
+
+  Date.prototype.addDays = function(days) {
+    var date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
+    return date;
+}
+
+function getDates(startDate, stopDate) {
+    var dateArray = new Array();
+    var currentDate = startDate;
+    while (currentDate <= stopDate) {
+        dateArray.push(new Date (currentDate));
+        currentDate = currentDate.addDays(1);
+    }
+    return dateArray;
+}
+
+console.log("DISABLED " + disabled);
+
+useEffect(() => {
+  setDisabled(getDisabledDays(reservations));
+},
+[reservations])
+
+
+
+
+
+
 
   const getRatingComment = (rating) => {
     switch (rating) {
@@ -260,9 +319,11 @@ const ProductPage = ({ product, productDetail }) => {
                   minDate={new Date()}
                   months={2}
                   direction="horizontal"
-                  disabledDates={[
+                  disabledDates={
+                    disabled
 
-                  ]}
+
+                  }
                 />
                 <ReservationBlock>
                   <Span bold={true}>
@@ -279,7 +340,7 @@ const ProductPage = ({ product, productDetail }) => {
                 minDate={new Date()}
                 months={1}
                 direction="horizontal"
-                disabledDates={[]}
+                disabledDates={disabled}
               />
               <ReservationBlock>
                 <Span bold={true}>
