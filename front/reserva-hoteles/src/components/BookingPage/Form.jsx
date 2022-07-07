@@ -52,8 +52,8 @@ const Form = ({product}) => {
   const [formValues, setformValues] = useState({
     nombre: nameUser,
     email: emailUser,
-    apellido: lastNameUser
-    
+    apellido: lastNameUser,
+    time: "10:00:00",
   });
   const {id, name, reservations, address, images, city = {}, category = {} } = product;
   const [errors, setErrors] = useState({});
@@ -80,12 +80,13 @@ const Form = ({product}) => {
     let body = JSON.stringify({
       "productId": product.id,
       "userId": user.id, 
-      "name": formValues.nombre,
-      "lastName": formValues.apellido,
-      "email": formValues.email,
-      "city": formValues.ciudad,
-      "startDate":  dates[0].startDate.getFullYear() + "-" + ('0' + (dates[0].startDate.getMonth()+1)).slice(-2) + "-" + ('0' + dates[0].startDate.getDate()).slice(-2) ,
-      "endDate": dates[0].endDate.getFullYear() + "-" + ('0' + (dates[0].endDate.getMonth()+1)).slice(-2) + "-" + ('0' + dates[0].endDate.getDate()).slice(-2) ,
+      "arrivalTime": formValues.time,
+      // "name": formValues.nombre,
+      // "lastName": formValues.apellido,
+      // "email": formValues.email,
+      // "city": formValues.ciudad,
+      "checkIn":  dates[0].startDate.getFullYear() + "-" + ('0' + (dates[0].startDate.getMonth()+1)).slice(-2) + "-" + ('0' + dates[0].startDate.getDate()).slice(-2) ,
+      "checkOut": dates[0].endDate.getFullYear() + "-" + ('0' + (dates[0].endDate.getMonth()+1)).slice(-2) + "-" + ('0' + dates[0].endDate.getDate()).slice(-2) ,
     });
     let options = {
       method: 'POST',
@@ -93,10 +94,10 @@ const Form = ({product}) => {
       redirect: 'follow',
       body: body
     }
-    console.log(formValues);
-    const response = await fetch(url, options)
+    console.log(body);
+    await fetch(url, options)
       .then((res) => {
-        if (res.staus === 200){
+        if (res.status === 200){
           navigate("successful");
         } else {
           return Swal.fire({
@@ -194,6 +195,7 @@ useEffect(() => {
   }
 
   const [disabled, setDisabled] = useState([]);
+
 
 
   const defaultOption = options[12];
@@ -330,8 +332,8 @@ useEffect(() => {
             </SubTitle>
             <Column>
               <Span>Indica tu horario estimado de llegada</Span>
-              <Select options={options} />;
-            </Column>
+              <Select options={options}  defaultValue={defaultOption}/>;
+            </Column> 
           </FormBlock>
     </ColumnForm>
         <ConfirmationBlock>
