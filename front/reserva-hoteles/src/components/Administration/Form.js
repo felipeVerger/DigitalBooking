@@ -30,12 +30,15 @@ import {
 } from './FormComponents';
 import useFetch from '../../hooks/useFetch';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const URL_API_CITY = `${process.env.REACT_APP_URL_REMOTE}/cities/findAll`;
 const URL_API_CATEGORIES = `${process.env.REACT_APP_URL_REMOTE}/categories/findAll`
 
 const FormComponent = () => {
   const [formValues, setformValues] = useState({});
+  const [city, setCity] = useState();
+  const [category, setCategory] = useState();
   const [errors, setErrors] = useState({});
   const [toSumbit, setToSumbit] = useState(false);
   const navigate = useNavigate();
@@ -43,6 +46,21 @@ const FormComponent = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setformValues({ ...formValues, [name]: value });
+  };
+
+  const handleCityChange = (e) => {
+    setCity(e.value);
+  }
+  const handleCategoryChange = (e) => {
+    setCategory(e.value);
+  }
+
+  // if the button is clicked add one more field of atributesContainer
+  const handleButton = (e) => {
+    e.preventDefault();
+    document.getElementById("atributeBlock").innerHTML += `
+        <div>hola mundo</div>
+    `
   };
 
   const myHeaders = new Headers();
@@ -65,9 +83,9 @@ const FormComponent = () => {
     const URL_API_CREATE_PRODUCT = `${process.env.REACT_APP_URL_REMOTE}/products/create`;
     const body = JSON.stringify({
         "name": formValues.nombre,
-        "category": formValues.categoria,
+        "category": category,
         "address": formValues.direccion,
-        "city": formValues.ciudad,
+        "city": city,
         "description": formValues.descripcion,
         "latitude": formValues.latitud,
         "longitude": formValues.longitud,
@@ -76,6 +94,7 @@ const FormComponent = () => {
         "healthHygiene": formValues.salud,
         "images": formValues.imagen
     })
+    console.log(body);
     let options = {
         method: 'POST',
         headers: myHeaders,
@@ -83,18 +102,29 @@ const FormComponent = () => {
         body: body,
     }
     const response = await fetch(URL_API_CREATE_PRODUCT, options)
-        .catch(() => {
-            alert('Hubo un error, intentelo mas tarde')
-            return;
+        .then((res) => {
+          if (res.status === 200) {
+            navigate('/administration/successful-product-creation');
+          } else {
+            Swal.fire({
+              title: 'Error',
+              text: 'Lamentablemente, el producto no ha podido crearse. Por favor, intente mas tarde',
+              icon: 'error',
+              confirmButtonText: 'Aceptar'
+            })
+          }
         })
-    const data = await response.json();
+        .catch(() => {
+          console.log('Ha ocurrido un error. Por favor, intente mas tarde');
+        })
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors(validate(formValues));
+    // setErrors(validate(city))
+    // setErrors(validate(category))
     // console.log(validate(formValues))
-    // console.log(formValues);
     setToSumbit(true);
   };
 
@@ -103,13 +133,13 @@ const FormComponent = () => {
     if(!values.nombre){
         errors.nombre = "Este campo es obligatorio."
     }
-    if(!values.categoria){
+    if(!category){
         errors.categoria = "Este campo es obligatorio."
     }
     if(!values.direccion){
         errors.direccion = "Este campo es obligatorio."
     }
-    if(!values.ciudad){
+    if(!city){
         errors.ciudad = "Este campo es obligatorio."
     }
     if(!values.descripcion){
@@ -143,6 +173,11 @@ const FormComponent = () => {
     return errors;
   }
 
+  useEffect(() => {
+    if (Object.keys(errors).length === 0 && toSumbit) {
+      createProduct();
+    }
+  }, [errors]);
   return (
     <Form>
       <InputContainer>
@@ -162,10 +197,9 @@ const FormComponent = () => {
             value: item.title,
             label: item.title,
           }))}
-          name={"categoria"}
-          type={"text"}
-          placeholder={"Hotel"}
-          onChange={handleChange}
+          name={'categoria'}
+          placeholder={'Hotel'}
+          onChange={handleCategoryChange}
         />
         <ErrorText>{errors.categoria}</ErrorText>
       </InputContainer>
@@ -186,10 +220,9 @@ const FormComponent = () => {
             value: item.name,
             label: item.name,
           }))}
-          name={"ciudad"}
-          type={"text"}
+          name={'ciudad'}
           placeholder="Ciudad"
-          onChange={handleChange}
+          onChange={handleCityChange}
         />
         <ErrorText>{errors.ciudad}</ErrorText>
       </InputContainer>
@@ -224,7 +257,7 @@ const FormComponent = () => {
       </InputContainer>
       <AtributesContainer>
         <AtrTitle>Agregar atributos</AtrTitle>
-        <Block>
+        <Block id='atributeBlock'>
           <FlexWrapper>
             <AtributeInputBlock>
                 <Label htmlFor="nombreAtributo">Nombre</Label>
@@ -247,7 +280,7 @@ const FormComponent = () => {
                 <ErrorText>{errors.icono}</ErrorText>
             </AtributeInputBlock>
           </FlexWrapper>
-            <Button>
+            <Button onClick={handleButton}>
                 <ButtonIcon />
             </Button>
         </Block>
@@ -299,7 +332,7 @@ const FormComponent = () => {
             placeholder="Insertar https://"
             onChange={handleChange}
           />
-          <Button>
+          <Button onClick={handleButton}>
             <ButtonIcon />
           </Button>
         </ImageBlock>

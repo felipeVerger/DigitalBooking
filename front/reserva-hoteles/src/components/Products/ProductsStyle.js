@@ -7,15 +7,15 @@ export const Recommendation = styled.div`
   background: white;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
-  
+
   min-height: 279px;
   width: 49.5%;
   margin-bottom: 40px;
-
+  
   @media screen and (max-width: 1280px) {
     width: 100%;
   }
-  @media screen and (max-width: 640px) {
+  @media screen and (max-width: 768px) {
     flex-direction: column;
   }
   @media screen and (max-width: 1007px) {
@@ -35,11 +35,14 @@ export const ImageBlock = styled.div`
 
 export const Image = styled.img`
   width: 311.1px;
-  height: 100%;
+  height: 300px;
+  max-height: 100%;
+  object-fit: cover;
+  overflow: hidden;
   border-radius: 8px;
-  @media screen and (max-width: 640px) {
+  @media screen and (max-width: 768px) {
     width: 100%;
-    height: 231px;
+    height: 280px;
   }
 `;
 
@@ -199,6 +202,7 @@ export const ProductFiltered = styled.div`
 export const FilteredImage = styled.img`
   width: 400px;
   height: 100%;
+  max-height: 300px;
   border-radius: 8px;
   @media screen and (max-width: 640px) {
     width: 100%;

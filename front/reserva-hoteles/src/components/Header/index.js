@@ -13,7 +13,10 @@ import {
   AvatarIcon,
   UserInfo,
   Greeting,
-  UserName
+  UserName,
+  AdminBlock,
+  AdminButton,
+  Separator
 } from "./HeaderComponents";
 import { FaBars } from "react-icons/fa";
 import MobileMenu from "../MobileMenu";
@@ -31,23 +34,43 @@ const Header = () => {
 
   const {user, setUser} = useContext(UserContext);
 
-
   const handleUserSession = () => {
     setUser(null);
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('email');
+    sessionStorage.removeItem('name');
+    sessionStorage.removeItem('lastName');
+  }
+
+  const handleLogoClick = () => {
+    if (location === "/") {
+      location.reload();
+    }
   }
 
   return (
     <HeaderContainer>
       <HeaderBody>
         <HeaderBlock>
-          <LogoContainer to={"/"}>
-            <Logo src={require("../../assets/logo.png")} />
+          <LogoContainer onClick={handleLogoClick} to={"/"}>
+            <Logo src={require("../../assets/logo.png")}/>
           </LogoContainer>
           <Slogan to={"/"}>Sentite como en tu hogar</Slogan>
         </HeaderBlock>
         {user ? (
           <HeaderBlock>
+            {user.role === 'ROLE_ADMIN' ? 
+            <AdminBlock>
+              <AdminButton to={"/administration"}>Administracion</AdminButton>
+              <Separator/>
+            </AdminBlock>
+            : user.role === 'ROLE_USER' ?
+            <AdminBlock>
+              <AdminButton to={"/favorites"}>Favoritos</AdminButton>
+              <AdminButton to={`/${user.id}/bookings`}>Reservas</AdminButton>
+              <Separator/>
+            </AdminBlock>
+            : null}
             <AvatarIcon name={user.nombre} round size="40px" color={themes.light.primary} />
                   {/* <HeaderButton onClick={() => {setUser(null)}}>Cerrar sesion</HeaderButton> */}
                   <UserInfo>

@@ -72,13 +72,17 @@ import { Link, useNavigate } from "react-router-dom";
 import {UserContext} from "../../context/user-context";
 import Map from './Map'
 import ShareSocialMedia from "./ShareSocialMedia";
+import { BookingContext } from "../../context/booking-context";
+import  * as Icon from "react-icons/md";
 
 
 const ProductPage = ({ product, productDetail }) => {
+  const {id, name, subtitle, description, images = [], address, score, longitude, latitude, city = {}, category = {}, features = []} = productDetail;
+
   const {user, setUser} = useContext(UserContext);
   const [toggleShareLinks, setToggleShareLinks] =useState(false);
+  const  {setIsRegistered} = useContext(BookingContext);
 
-  const {id, name, subtitle, description, address, score, city = {}, category = {}, longitude, latitude } = productDetail;
   const getRatingComment = (rating) => {
     switch (rating) {
       case 10:
@@ -101,8 +105,6 @@ const ProductPage = ({ product, productDetail }) => {
     }
   };
 
-  // console.log(latitude);
-
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal() {
@@ -123,6 +125,15 @@ const ProductPage = ({ product, productDetail }) => {
     setToggleShareLinks(!toggleShareLinks);
   }
 
+  const handleReservation = () => {
+    if (sessionStorage.getItem('token') != null) {
+      return `/product/${id}/booking`;
+    } else {
+      setIsRegistered(false);
+      return '/login'
+    }
+  }
+
   return (
     <>
       <Modal
@@ -133,8 +144,8 @@ const ProductPage = ({ product, productDetail }) => {
         contentLabel="Example Modal"
       >
         <Carousel>
-          {product.images.map((url, i) => {
-            return <ImageModal src={url} key={i} />;
+          {images?.map((image) => {
+            return <ImageModal src={image.url} key={image.id} />;
           })}
         </Carousel>
       </Modal>
@@ -188,25 +199,25 @@ const ProductPage = ({ product, productDetail }) => {
           </IconContainer>
           <ImageGallery>
             <MainImageContainer>
-              <MainImage src={product.images[0]} />
+              <MainImage src={ images && images[0] ? images[0].url : ''} />
             </MainImageContainer>
             <OtherImagesContaienr>
               {Array.from(
                 Array(
-                  Math.min(Math.max(product.images.length - 1, 0), 4)
+                  Math.min(Math.max(images.length - 1, 0), 4)
                 ).keys()
               ).map((_, i) => {
-                return <SubImage index={i} src={product.images[i + 1]} />;
+                return <SubImage index={i} src={images[i + 1].url} />;
               })}
               <MoreImagesButton onClick={openModal}>Ver más</MoreImagesButton>
             </OtherImagesContaienr>
           </ImageGallery>
           <ImageGalleryMobile>
             <Carousel>
-              {product.images.map((url, i) => {
+              {images.map((img, i) => {
                 return (
                   <div key={i}>
-                    <MobileImage src={url} />
+                    <MobileImage src={img.url} />
                   </div>
                 );
               })}
@@ -215,24 +226,28 @@ const ProductPage = ({ product, productDetail }) => {
           <ContentBlock>
             <ContentTitle>{subtitle}</ContentTitle>
             <DescriptionContent>{description}</DescriptionContent>
-          </ContentBlock>
-
+            </ContentBlock>
+            {features.length > 0 && <>
           <TitleBlock>
             <ContentTitle>¿Que ofrece este lugar?</ContentTitle>
           </TitleBlock>
           <Separator />
           <ContentBlock>
             <FeaturesBlock>
-              <Feature>
-                <FeatureIcon />
-                Cocina
-              </Feature>
-              <Feature>
-                <TvIcon />
-                Televisor
-              </Feature>
+              {features.map(
+                (f) => { 
+                  let FIcon = Icon[f.iconName];  
+               return <Feature>
+                    <FeatureIcon ><FIcon /></FeatureIcon>
+                      {f.feature}
+                  </Feature>
+                }
+              )}
             </FeaturesBlock>
-          </ContentBlock>
+            </ContentBlock>
+            </>
+            }
+
         </MainContent>
       </MainContentBody>
       <CalendarBody>
@@ -253,7 +268,7 @@ const ProductPage = ({ product, productDetail }) => {
                   <Span bold={true}>
                     Agrega tus fechas de viaje para obtener precios exactos
                   </Span>
-                  <Link to={sessionStorage.getItem('token') != null ? `/product/${id}/booking` : '/login'} style={{width: '100%'}}>
+                  <Link to={handleReservation()} style={{width: '100%'}}>
                     <ReservationButton>Iniciar Reserva</ReservationButton>
                   </Link>
                 </ReservationBlock>
@@ -283,7 +298,7 @@ const ProductPage = ({ product, productDetail }) => {
         <Separator/>
         <MapBlock>
           <LocationMap>{city.name + ', ' + city.country}</LocationMap>
-          <Map latitude={latitude} longitude={longitude}/>
+          <Map latitude={productDetail.latitude} longitude={productDetail.longitude} address={address} name={name}/>
         </MapBlock>
       </MapContent>
       <MainContentBody>

@@ -11,19 +11,32 @@ import {
   ErrorText,
   ErrorMessage,
   ErrorReservation,
-  WarningIcon
+  WarningIcon,
+  OpenEye,
+  ClosedEye
 } from "./FormComponents";
 import { Link, useNavigate, Navigate, useLocation} from "react-router-dom";
 import { UserContext } from "../../context/user-context";
+import { BookingContext } from "../../context/booking-context";
+import Swal from "sweetalert2";
 
 const LoginForm = () => {
   const [formValues, setformValues] = useState({});
   const [errors, setErrors] = useState({});
   const [toSumbit, setToSumbit] = useState(false);
-
-  const navigate = useNavigate();
-
+  const { isRegistered, setIsRegistered } =  useContext(BookingContext);
+  const navigate = useNavigate()
   const {user, setUser} = useContext(UserContext);
+  const [showPass, setShowPass] = useState(false);
+
+  const handleShowPass = () => {
+    setShowPass(!showPass);
+    if (showPass) {
+      document.getElementById("password").type = "password";
+    } else {
+      document.getElementById("password").type = "text";
+    }
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -56,15 +69,30 @@ const LoginForm = () => {
     }
     e.preventDefault();
     console.log(formValues);
-    const response = await fetch(url, options);
-    const data = await response.json();
+     await fetch(url, options)
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        } else {
+          if (response.status === 401) {
+            return Swal.fire({
+              icon: 'error',
+              text: 'Lamentablemente no ha podido iniciar sesion. Por favor, intente mas tarde',
+            })
+          }
+        }    
+      })
+      .then((data) => {
+        sessionStorage.setItem('token', data.token);
+        sessionStorage.setItem('email', data.email);
+        sessionStorage.setItem('name', data.name);
+        sessionStorage.setItem('lastName', data.lastName);
+        sessionStorage.setItem('role', data.authorities[0].authority);
+        window.location.reload();
+        console.log(data);
+      })
     // return data;
-    console.log(data);
-    sessionStorage.setItem('token', data.token);
-    sessionStorage.setItem('email', data.email);
-    sessionStorage.setItem('name', data.name);
-    sessionStorage.setItem('lastName', data.lastName);
-    window.location.reload();
+    // console.log(data);
   };
 
 
@@ -89,7 +117,6 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && toSumbit) {
-      login();
     }
   }, [errors]);
 
@@ -98,7 +125,11 @@ const LoginForm = () => {
   }
   else return(
     <FormContainer>
-      {localStorage.getItem('token') ? null : <ErrorReservation><ErrorMessage><WarningIcon/> Para realizar una reserva necesitas estar logueado</ErrorMessage></ErrorReservation>}
+      {isRegistered ? null :
+      <ErrorReservation>
+        <ErrorMessage><WarningIcon/> Para realizar una reserva necesitas estar logueado</ErrorMessage>
+      </ErrorReservation>
+      }
       <FormTitle>Iniciar sesión</FormTitle>
       <InputContainer>
         <Label htmlFor={"email"}>Correo electrónico</Label>
@@ -117,6 +148,7 @@ const LoginForm = () => {
         <Label htmlFor={"password"}>Contraseña</Label>
 
         <TextField
+          id="password"
           label={"Correo electrónico"}
           errors={errors}
           name={"password"}
@@ -124,6 +156,9 @@ const LoginForm = () => {
           type={"password"}
           onChange={handleChange}
         />
+        <div onClick={handleShowPass}>
+          { showPass ? <OpenEye/> : <ClosedEye/>}
+        </div>
         <ErrorText>{errors.password}</ErrorText>
       </InputContainer>
 

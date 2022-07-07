@@ -4,7 +4,7 @@ import {MdOutlineArrowBackIos} from "react-icons/md"
 
 
 export const Container = styled.div`
-  background-color: ${(props) => props.theme.content_background};
+  background-color: ${(props) => props.theme.background};
 `
 
 export const HeaderBody = styled.div`
@@ -62,6 +62,7 @@ export const MainContentBody = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: row;
+  background-color: ${props => props.theme.color_text_secondary};
 `
 
 export const MainContent = styled.div`
@@ -79,4 +80,5 @@ export const MainContent = styled.div`
 export const Title = styled.h2`
     color: ${(props) => props.theme.primary};
     font-weight: 700;
+    padding: 3rem 0 0 3rem;
 `

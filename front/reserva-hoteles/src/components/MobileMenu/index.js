@@ -10,6 +10,7 @@ import {
   Greeting,
   UserName,
   UserIcon,
+  AdminButton
 } from "./MobileMenuComponents";
 import { AiOutlineClose } from "react-icons/ai";
 import { MenuContext } from "../../context/menu-context";
@@ -26,7 +27,11 @@ const MobileMenu = ({ isMenuOpen, toggle }) => {
   const handleUserSession = () => {
     setUser(null);
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('email');
+    sessionStorage.removeItem('name');
+    sessionStorage.removeItem('lastName');
   }
+  
   return (
     <MobileMenuContainer isMenuOpen={open} onClick={toggleOpen}>
       <MobileMenuHeader>

@@ -15,6 +15,7 @@ export const Body = styled.div`
 
 export const Block = styled.div`
   max-width: 1920px;
+  width: 100%;
   padding: 1rem 2rem 1rem 2rem;
   display: flex;
   flex-direction: column;

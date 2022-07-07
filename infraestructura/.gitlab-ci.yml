@@ -37,15 +37,6 @@ infracost:
     name: infracost/infracost:ci-0.10
     entrypoint: [""]
   script:
-    # If you use private modules, add an environment variable or secret
-    # called GIT_SSH_KEY with your private key, so Infracost can access
-    # private repositories (similar to how Terraform/Terragrunt does).
-    # - mkdir -p ~/.ssh
-    # - eval `ssh-agent -s`
-    # - echo "$GIT_SSH_KEY" | tr -d '\r' | ssh-add -
-    # Update this to github.com, gitlab.com, bitbucket.org, ssh.dev.azure.com or your source control server's domain
-    # - ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
-
     # Clone the base branch of the pull request (e.g. main/master) into a temp directory.
     - git clone $CI_REPOSITORY_URL --branch=$CI_MERGE_REQUEST_TARGET_BRANCH_NAME --single-branch /tmp/base
 

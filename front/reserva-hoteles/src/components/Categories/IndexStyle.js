@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Body = styled.div`
   background: white;
   max-width: 1920px;
-
+  width: 100%;
 `;
 
 export const CategoryBlock = styled.div`
@@ -27,7 +27,7 @@ export const SectionTitle = styled.h2`
 export const FlexWrapper = styled.div`
   display: flex;
   gap: 20px;
-  flex-flow: wrap;
+  flex-wrap: wrap;
   
   @media screen and (max-width: 768px) {
     display: flex;

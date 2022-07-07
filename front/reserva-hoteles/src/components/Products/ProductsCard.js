@@ -22,6 +22,7 @@ import {
 import { useLocation } from "react-router-dom";
 
 import { AiFillStar, AiFillHeart, AiOutlineStar } from "react-icons/ai";
+import {AiOutlineHeart} from "react-icons/ai";
 import { HiLocationMarker } from "react-icons/hi";
 import { BiWifi } from "react-icons/bi";
 import { FaSwimmingPool } from "react-icons/fa";
@@ -70,6 +71,9 @@ const RecomendationCard = ({id, img, category, title, location, description, pun
     let element = document.querySelector("main");
     element.scrollTop = 0;
   };
+
+  // Favorites implementation
+
 
   return locationPath === '/' ? (
     <Recommendation>

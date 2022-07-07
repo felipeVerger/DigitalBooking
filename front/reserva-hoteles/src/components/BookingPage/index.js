@@ -12,6 +12,7 @@ import {
     BookingBlockInfo,
     MainContent,
     MainContentBody,
+    Title
 } from './BookingComponents'
 import {
   ContentBlock,
@@ -26,52 +27,52 @@ import Form from './Form'
 
 
 
-const Booking = ({product}) => {
-  console.log(product.houseRules !== undefined);
-  console.log(product.healthAndHygiene !== undefined);
-  const {category = {} } = product;
+const Booking = ({product, productDetail}) => {
+  // const {category = {} } = product;
+  const {id, name, subtitle, description, address, images, score, longitude, latitude, city = {}, category = {} , healthHygiene, houseRules, cancellationPolicy} = productDetail;
+
   return (
     <Container>
         <HeaderBody>
         <HeaderBlock>
           <HeaderInfo>
             <HeaderCategory>{category.title}</HeaderCategory>
-            <HeaderName>{product.name}</HeaderName>
+            <HeaderName>{name}</HeaderName>
           </HeaderInfo>
-          <CleanLink to={"/product/" + product.id}>
+          <CleanLink to={"/product/" + id}>
             <BackIcon />
           </CleanLink>
         </HeaderBlock>
       </HeaderBody>
       <MainContentBody>
         <MainContent>
-          <Form product={product}/>
-
+          <Form product={productDetail}/>
+      <Title>Que tenes que saber</Title>
       <Separator />
           <ContentBlock>
             <PoliciesContainer>
               <Policy>
                 <PolicyTitle>Normas de la casa</PolicyTitle>
                 <PolicyContent>
-                  {product.houseRules !== undefined ? product.houseRules.map((content) => {
+                  {houseRules && houseRules.map((content) => {
                     return <PolicyItem>{content}</PolicyItem>;
-                  }) : null}
+                  })}
                 </PolicyContent>
               </Policy>
               ;
               <Policy>
                 <PolicyTitle>Salud y seguridad</PolicyTitle>
                 <PolicyContent>
-                  {product.healthAndHygiene !== undefined ? product.healthAndHygiene.map((content) => {
+                  {healthHygiene && healthHygiene.map((content) => {
                     return <PolicyItem>{content}</PolicyItem>;
-                  }) : null}
+                  }) }
                 </PolicyContent>
               </Policy>
               ;
               <Policy>
                 <PolicyTitle>Politica de cancelacion</PolicyTitle>
                 <PolicyContent>
-                    <PolicyItem>{product.cancellationPolicy}</PolicyItem>;
+                    <PolicyItem>{cancellationPolicy && cancellationPolicy}</PolicyItem>;
 
                 </PolicyContent>
               </Policy>

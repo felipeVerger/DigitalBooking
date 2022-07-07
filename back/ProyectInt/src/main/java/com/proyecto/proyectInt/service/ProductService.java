@@ -116,6 +116,16 @@ public class ProductService implements EntityService<ProductDTO> {
         return productRepository.findProductsByDatesAndCity(startDate, endDate, city);
     }
 
+    public List<Product> findProductsByCategoryAndCity(String category, String city){
+        logger.info("List all products filtered by dates and city");
+        return productRepository.findProductsByCategoryAndCity(category, city);
+    }
+
+    public List<Product> findProductsByDatesAndCityAndCategory(LocalDate startDate, LocalDate endDate, String city, String category){
+        logger.info("List all products filtered by dates and city");
+        return productRepository.findProductsByDatesAndCityAndCategory(startDate, endDate, city, category);
+    }
+
 
 
 }

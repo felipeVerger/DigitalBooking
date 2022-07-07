@@ -2,7 +2,6 @@ stages:
   - build
   - test
   - publish
-  - deploy
 
 build:
   stage: build
@@ -44,15 +43,3 @@ publish:
     - docker push "$CI_REGISTRY_IMAGE"/realia
     - echo "Registry image:" $CI_REGISTRY_IMAGE/realia
 
-deploy:
-  stage: deploy
-  image: kroniak/ssh-client
-  #before_script:
-    #- echo "deploying app"
-  script:  
-    - echo "deploying app"
-    #- echo "$SSH_PRIVATE_KEY" | tr -d '\r' > key.pem
-    #- chmod 400 key.pem
-    #- ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY root@$PROD_SERVER_IP "docker pull registry.gitlab.com/alfredomartinezzz/budgefy"
-    #- ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY root@$PROD_SERVER_IP "docker stop budgefycontainer || true && docker rm budgefycontainer || true"
-    #- ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY root@$PROD_SERVER_IP "docker run -p 3001:80 -d --name budgefycontainer registry.gitlab.com/alfredomartinezzz/budgefy" 

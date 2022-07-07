@@ -9,14 +9,34 @@ import {
   InputContainer,
   FormSwitchText,
   ErrorText,
+  OpenEye,
+  ClosedEye
 } from "./FormComponents";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import { UserContext } from "../../context/user-context";
+import Swal from 'sweetalert2';
 
 
 const RegisterForm = () => {
   const [formValues, setformValues] = useState({});
   const [errors, setErrors] = useState({});
+  const [showPass, setShowPass] = useState(false);
+  const [showPass2, setShowPass2] = useState(false);
+
+  
+  /**
+   * If showPass is true, then set showPass to false and change the type of the password input to
+   * "password". If showPass is false, then set showPass to true and change the type of the password
+   * input to "text".
+   */
+  const handleShowPass = () => {
+    setShowPass(!showPass);
+    showPass ? (document.getElementById("password").type = "password") : (document.getElementById("password").type = "text");
+  }
+  const handleShowPass2 = () => {
+    setShowPass2(!showPass2);
+    showPass2 ? (document.getElementById("password2").type = "password") : (document.getElementById("password2").type = "text");
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,7 +60,6 @@ const RegisterForm = () => {
       "email": formValues.email,
       "role": "ROLE_USER",
       "password": formValues.password,
-      "city": formValues.ciudad
     });
     let options = {
       method: 'POST',
@@ -50,17 +69,26 @@ const RegisterForm = () => {
     }
     console.log(formValues);
     const response = await fetch(url, options)
-    .catch(() => {
-      alert("Hubo un error. Reintentalo mas tarde.")
-      return;});
-    const data = await response.json();
-    // return data;
-    console.log(data);
-    sessionStorage.setItem('token', data.token);
-    sessionStorage.setItem('email', data.email);
-    sessionStorage.setItem('name', data.name);
-    sessionStorage.setItem('lastName', data.lastName);
-    window.location.reload();
+    .then((res) => {
+      if (res.status === 200) {
+        return res.json();
+      } else {
+        if (response.status === 401) {
+          return Swal.fire({
+            icon: 'error',
+            text: 'Lamentablemente no ha podido iniciar sesion. Por favor, intente mas tarde',
+          })
+        }
+      }
+    })
+    .then((data) => {
+      sessionStorage.setItem('token', data.token);
+      sessionStorage.setItem('email', data.email);
+      sessionStorage.setItem('name', data.name);
+      sessionStorage.setItem('lastName', data.lastName);
+      sessionStorage.setItem('role', data.authorities[0].authority);
+      window.location.reload();
+    })
   };
 
 
@@ -81,10 +109,6 @@ const RegisterForm = () => {
 
     if (!values.apellido) {
       errors.apellido = "Este campo es obligatorio.";
-    }
-
-    if (!values.ciudad) {
-      errors.ciudad = "Este campo es obligatorio.";
     }
 
     if (!values.email) {
@@ -141,16 +165,6 @@ const RegisterForm = () => {
             <ErrorText>{errors.apellido}</ErrorText>
           </InputContainer>
         </HorizontalBlock>
-        <InputContainer>
-          <Label htmlFor={"ciudad"}>Ciudad</Label>
-          <TextField
-              name={"ciudad"}
-              type={"text"}
-              placeholder={"Bogotá"}
-              onChange={handleChange}
-          />
-          <ErrorText>{errors.ciudad}</ErrorText>
-        </InputContainer>
 
         <InputContainer>
           <Label htmlFor={"email"}>Correo electrónico</Label>
@@ -167,22 +181,30 @@ const RegisterForm = () => {
         <InputContainer>
           <Label htmlFor={"password"}>Contraseña</Label>
           <TextField
+            id="password"
             name={"password"}
             placeholder={"●●●●●●"}
             type={"password"}
             onChange={handleChange}
           />
+          <div onClick={handleShowPass}>
+            {showPass ? <OpenEye/> : <ClosedEye/>}
+          </div>
           <ErrorText>{errors.password}</ErrorText>
         </InputContainer>
 
         <InputContainer>
           <Label htmlFor={"confirmarPass"}>Confirmar contraseña</Label>
           <TextField
+            id="password2"
             name={"confirmarPass"}
             placeholder={"●●●●●●"}
             type={"password"}
             onChange={handleChange}
           />
+          <div onClick={handleShowPass2}>
+            {showPass2 ? <OpenEye/> : <ClosedEye/>}
+          </div>
           <ErrorText>{errors.confirmarPass}</ErrorText>
         </InputContainer>
 

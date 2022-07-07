@@ -20,7 +20,7 @@ const Categorias = () => {
 
   if (loading) {
     return <Loading/>
-  } else if (data.length === 0){
+  } else if (error){
     return <ErrorMessage>Hubo un error, intente mas tarde</ErrorMessage>
   } else {
     return (
