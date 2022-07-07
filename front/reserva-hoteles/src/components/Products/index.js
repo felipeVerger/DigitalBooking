@@ -6,13 +6,11 @@ import Loading from '../Loading';
 import { fetchData, options } from '../../utils/fetchData';
 
 const Recomendaciones = () => {
-    const {filter} = useContext(FilterContext);
+    const {filter, setFilter} = useContext(FilterContext);
     const [products, setProducts] = useState([]);
     // const [dataFavorites, setDataFavorites] = useState();
 
-    console.log(filter.date[1]);
-    console.log(filter.date[0].startDate);
-    console.log(filter.date[0].endDate);
+    console.log(filter);
 
   useEffect(() => {
     const fetchProductsData = async () => {
@@ -29,7 +27,7 @@ const Recomendaciones = () => {
         } else if (filter.category && filter.category[1] === "category") {
           let productsByCategory = await fetchData(productByCategoryUrl + filter.category[0], options);
           setProducts(productsByCategory);
-        } else if (filter.date && filter.date[1] === "date" && filter.date[0].startDate !== '' && filter.date[0].endDate !== '') {
+        } else if (filter.date && filter.date[1] === "date" && filter.city && filter.city[1] === "city") {
           let productsByCityAndDate = await fetchData(productByCityAndDateUrl + filter.date[0].startDate + "/" + filter.date[0].endDate + "/" + filter.city[0], options);
           setProducts(productsByCityAndDate);
         } else {
@@ -57,6 +55,7 @@ const Recomendaciones = () => {
     const randomProducts = products && products.length > 6 ? products.sort(() => Math.random() - 0.5).slice(0, 6) : products;
     // const filteredProducts = locationPath === '/productsList' ? products : randomProducts; 
 
+    // console.log(products);
 
   if (!randomProducts.length) {
     return <Loading/>

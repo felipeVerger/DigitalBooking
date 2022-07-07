@@ -56,6 +56,26 @@ export const FormBody = styled.div`
     width: 100vw;
 `
 
+export const NavigationButtonsBlock = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+`
+
+export const NavButton = styled.button`
+  color: ${props => props.theme.background};
+  background-color: ${props => props.theme.primary};
+  border: none;
+  border-radius: 5px;
+  width: 100px;
+  height: 30px;
+  &:focus {
+    background-color: ${props => props.theme.secondary};
+  }
+`
+
 export const Title = styled.h2`
     color: ${(props) => props.theme.primary};
 `

@@ -6,7 +6,7 @@ const CategoryCard = ({ img, category, amount, type }) => {
   const { setFilter, filter } = useContext(FilterContext);
 
   return (
-    <Box onClick={() => setFilter({...filter, category: [category, 'category']}) }>
+    <Box onClick={() => setFilter({category: [category, 'category']}) }>
         <Image src={img} alt="imagen-categorias" />
         <InfoSection>
             <CategoryText>{category}</CategoryText>
