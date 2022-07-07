@@ -107,7 +107,7 @@ const FormComponent = () => {
             navigate('/administration/successful-product-creation');
           } else {
             Swal.fire({
-              title: 'Error',
+              title: `Error ${res.status}`,
               text: 'Lamentablemente, el producto no ha podido crearse. Por favor, intente mas tarde',
               icon: 'error',
               confirmButtonText: 'Aceptar'

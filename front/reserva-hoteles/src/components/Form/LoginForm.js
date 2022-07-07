@@ -76,6 +76,7 @@ const LoginForm = () => {
         } else {
           if (response.status === 401) {
             return Swal.fire({
+              title: `Error ${response.status}`,
               icon: 'error',
               text: 'Lamentablemente no ha podido iniciar sesion. Por favor, intente mas tarde',
             })
