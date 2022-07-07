@@ -75,7 +75,7 @@ public class AuthController {
         User user = userRepository.findByEmail(userDetails.getUsername());
 
 
-        return ResponseEntity.ok(new JwtRes(jwt, userDetails.getUsername(), user.getUsername(), user.getLastname(), userDetails.getAuthorities()));
+        return ResponseEntity.ok(new JwtRes(jwt, user.getId(), userDetails.getUsername(), user.getUsername(), user.getLastname(), userDetails.getAuthorities()));
     }
 
 

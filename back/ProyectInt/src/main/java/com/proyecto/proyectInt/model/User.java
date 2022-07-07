@@ -38,10 +38,8 @@ public class User {
     @Column
     private String email;
     @Column
-    @JsonIgnore
     private String password;
-    @Column
-    private String city;
+
     @ManyToOne
     @JoinColumn(name = "roles_id_role")
     private Role role;
@@ -63,8 +61,8 @@ public class User {
         this.username = name;
         this.lastname = lastName;
         this.email = email;
+        this.password = password;
         this.role = role;
-        this.city = city;
         this.favorites = favorites;
         this.reservations = reservations;
     }
