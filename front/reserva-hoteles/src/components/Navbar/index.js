@@ -8,7 +8,6 @@ import {
 } from "./IndexStyle";
 
 import { FilterContext } from "../../context/filter-context";
-import {useNavigate} from 'react-router-dom'
 import SearchCity from "./SearchCity";
 import SearchCalendar from "./SearchCalendar";
 
@@ -18,19 +17,29 @@ const Navbar = () => {
   const [data, setData] = useState({
     date: { startDate: null, endDate: null },
   });
-  const navigate = useNavigate();
+  
 
   // change start date format to year-month-day
   let formatStartDate = () => {
+    if (data.date.startDate !== null) {
     let startDate = data.date.startDate;
-    let startDateFormatted = `${startDate.getFullYear()}-${(startDate.getMonth() + 1)}-${startDate.getDate()}`;
+    let startDateFormatted = `${startDate.getFullYear()}-${
+      startDate.getMonth() + 1 < 10 ? 0 : ""
+    }${startDate.getMonth() + 1}-${
+      startDate.getDate() < 10 ? 0 : ""
+    }${startDate.getDate()}`;
     return startDateFormatted;
+    }
   }
   // change end date format to year-month-day
   let formatEndDate = () => {
-    let endDate = data.date.endDate;
-    let endDateFormatted = `${endDate.getFullYear()}-${( endDate.getMonth() + 1 )}-${endDate.getDate()}`;
-    return endDateFormatted;
+    if (data.date.endDate !== null) {
+      let endDate = data.date.endDate;
+      let endDateFormatted = `${endDate.getFullYear()}-
+      ${endDate.getMonth() + 1 < 10 ? 0 : ""}${( endDate.getMonth() + 1 )}-
+      ${endDate.getDate() < 10 ? 0 : ""}${endDate.getDate()}`;
+      return endDateFormatted;
+    }
   }
   
   const handleSubmit = (e) => {
