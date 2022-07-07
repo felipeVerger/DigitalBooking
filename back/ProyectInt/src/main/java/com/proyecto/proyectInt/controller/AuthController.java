@@ -1,5 +1,7 @@
 package com.proyecto.proyectInt.controller;
 
+import com.proyecto.proyectInt.model.Favorite;
+import com.proyecto.proyectInt.model.Reservation;
 import com.proyecto.proyectInt.model.Role;
 import com.proyecto.proyectInt.model.User;
 import com.proyecto.proyectInt.repository.RoleRepository;
@@ -26,6 +28,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashSet;
+import java.util.Set;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -42,6 +46,8 @@ public class AuthController {
     private EmailService emailSenderService;
 
     private Role roleSelected;
+    private Set<Favorite> favorites = new HashSet<>();
+    private Set<Reservation> reservations = new HashSet<>();
 
     @Autowired
     public AuthController(AuthenticationManager authenticationManager, UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder encoder, JwtProvider jwtProvider, EmailService emailSenderService) {
@@ -87,7 +93,7 @@ public class AuthController {
         this.roleSelected = this.roleRepository.findRoleByName(signUpRequest.getRole());
 
         User user = new User(signUpRequest.getName(), signUpRequest.getLastName(),
-                signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()), roleSelected, signUpRequest.getCity());
+                signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()), roleSelected, signUpRequest.getCity(), this.favorites, this.reservations);
 
         logger.info("userLastname");
         logger.info(user.getLastname());

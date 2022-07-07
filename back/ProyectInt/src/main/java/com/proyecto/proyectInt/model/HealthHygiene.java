@@ -1,4 +1,5 @@
 package com.proyecto.proyectInt.model;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,7 @@ public class HealthHygiene {
     private String description;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "products_id_product", nullable = false)
     private Product products;
 }

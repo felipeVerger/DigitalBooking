@@ -35,7 +35,7 @@ public class ProductDTO {
     public ProductDTO() {
     }
 
-    public ProductDTO(String name, String description,String subtitle, Double price, String address, String longitude, String latitude , String cancellationPolicy, Category category, Set<Feature> features, Set<Image> images, City city, int score, Set<HouseRule> houseRules, Set<HealthHygiene> healthHygiene) {
+    public ProductDTO(String name, String description,String subtitle, Double price, String address, String longitude, String latitude , String cancellationPolicy, Category category, Set<Feature> features, Set<Image> images, Set<Reservation> reservations, City city, int score, Set<HouseRule> houseRules, Set<HealthHygiene> healthHygiene) {
         this.name = name;
         this.description = description;
         this.subtitle = subtitle;
@@ -47,6 +47,7 @@ public class ProductDTO {
         this.category = category;
         this.features = features;
         this.images = images;
+        this.reservations = reservations;
         this.city = city;
         this.score = score;
         this.houseRules = houseRules;
