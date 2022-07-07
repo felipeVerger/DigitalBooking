@@ -55,7 +55,8 @@ const Booking = ({product, productDetail}) => {
                 <PolicyTitle>Normas de la casa</PolicyTitle>
                 <PolicyContent>
                   {houseRules && houseRules.map((content) => {
-                    return <PolicyItem>{content}</PolicyItem>;
+                    console.log(content);
+                    return <PolicyItem>{content.description}</PolicyItem>;
                   })}
                 </PolicyContent>
               </Policy>
@@ -64,7 +65,8 @@ const Booking = ({product, productDetail}) => {
                 <PolicyTitle>Salud y seguridad</PolicyTitle>
                 <PolicyContent>
                   {healthHygiene && healthHygiene.map((content) => {
-                    return <PolicyItem>{content}</PolicyItem>;
+                    console.log(content);
+                    return <PolicyItem>{content.description}</PolicyItem>;
                   }) }
                 </PolicyContent>
               </Policy>
