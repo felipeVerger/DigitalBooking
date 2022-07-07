@@ -158,7 +158,7 @@ useEffect(() => {
         case 3:
         case 2:
         case 1:
-        return "Muy bueno";
+        return "Malo";
       default:
         return "No calificado";
     }
