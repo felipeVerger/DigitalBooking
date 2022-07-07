@@ -38,6 +38,7 @@ import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import Select from "react-select";
 import { ReservationButton, Separator } from "../ProductPage/ProductPageComponents";
 import {MdLocationOn} from 'react-icons/md';
+import Swal from 'sweetalert2';
 
 
 
@@ -92,10 +93,16 @@ const Form = ({product}) => {
     }
     console.log(formValues);
     const response = await fetch(url, options)
-    .catch(() => {
-      
-      return;});
-    navigate("successful");
+      .then((res) => {
+        if (res.staus === 200){
+          navigate("successful");
+        } else {
+          return Swal.fire({
+            icon: 'error',
+            text: 'Lamentablemente la reserva no ha podido realizarse. Por favor, intente mas tarde',
+          })
+        }
+      })
   };
 
 
@@ -203,7 +210,7 @@ const Form = ({product}) => {
             <InputContainer>
               <LabelColor htmlFor={"nombre"}>Nombre</LabelColor>
               <TextField
-              value={nameUser != null ? nameUser : ""}
+                value={nameUser != null ? nameUser : ""}
                 name={"nombre"}
                 type={"text"}
                 placeholder={"Bruno"}

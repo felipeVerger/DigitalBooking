@@ -61,14 +61,14 @@ const MobileMenu = ({ isMenuOpen, toggle }) => {
         <MenuLink to={"/"}>Inicio</MenuLink>
         {user && user.role === 'ROLE_ADMIN' ? (
           <>
-            <MenuLink to={"/"} onClick={handleUserSession}>Cerrar sesion</MenuLink>
             <MenuLink to={"/administration"}>Administracion</MenuLink>
+            <MenuLink to={"/"} onClick={handleUserSession}>Cerrar sesion</MenuLink>
           </>
         ) : user && user.role === 'ROLE_USER' ? (
           <>
-            <MenuLink to={"/"} onClick={handleUserSession}>Cerrar sesion</MenuLink>
             <MenuLink to={"/favorites"}>Favoritos</MenuLink>
             <MenuLink to={`/${user.id}/bookings`}>Reservas</MenuLink>
+            <MenuLink to={"/"} onClick={handleUserSession}>Cerrar sesion</MenuLink>
           </>
         ) : (
           <>
