@@ -35,6 +35,7 @@ const MyBooking = () => {
     redirect: 'follow'
   });
 
+
   // filter products that are reserved
   const filteredProducts =
     data && bookings
