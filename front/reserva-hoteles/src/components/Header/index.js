@@ -40,6 +40,7 @@ const Header = () => {
     sessionStorage.removeItem('email');
     sessionStorage.removeItem('name');
     sessionStorage.removeItem('lastName');
+    sessionStorage.removeItem('role');
   }
 
   const handleLogoClick = () => {

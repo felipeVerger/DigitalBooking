@@ -135,6 +135,9 @@ export const AdminBlock = styled.div`
   align-items: center;
   gap: 20px;
   margin-right: 20px;
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `
 
 export const AdminButton = styled(Link)`
