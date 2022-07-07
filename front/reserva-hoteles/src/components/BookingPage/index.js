@@ -29,7 +29,7 @@ import Form from './Form'
 
 const Booking = ({product, productDetail}) => {
   // const {category = {} } = product;
-  const {id, name, subtitle, description, address, images, score, longitude, latitude, city = {}, category = {} , healthHygiene, houseRules, cancellationPolicy} = productDetail;
+  const {id, name, city = {}, category = {} , healthHygiene, houseRules, cancellationPolicy} = productDetail;
 
   return (
     <Container>
@@ -72,7 +72,7 @@ const Booking = ({product, productDetail}) => {
               </Policy>
               ;
               <Policy>
-                <PolicyTitle>Politica de cancelacion</PolicyTitle>
+                <PolicyTitle>Politica de cancelación</PolicyTitle>
                 <PolicyContent>
                     <PolicyItem>{cancellationPolicy && cancellationPolicy}</PolicyItem>;
 

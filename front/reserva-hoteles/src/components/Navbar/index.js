@@ -19,11 +19,24 @@ const Navbar = () => {
     date: { startDate: null, endDate: null },
   });
   const navigate = useNavigate();
+
+  // change start date format to year-month-day
+  let formatStartDate = () => {
+    let startDate = data.date.startDate;
+    let startDateFormatted = `${startDate.getFullYear()}-${(startDate.getMonth() + 1)}-${startDate.getDate()}`;
+    return startDateFormatted;
+  }
+  // change end date format to year-month-day
+  let formatEndDate = () => {
+    let endDate = data.date.endDate;
+    let endDateFormatted = `${endDate.getFullYear()}-${( endDate.getMonth() + 1 )}-${endDate.getDate()}`;
+    return endDateFormatted;
+  }
   
   const handleSubmit = (e) => {
     e.preventDefault();
     if (destination !== '¿A dónde vamos?') {
-      setFilter({...filter, city: [destination, 'city']});
+      setFilter({...filter, city: [destination, 'city'], date: [{startDate: formatStartDate(), endDate: formatEndDate()}, 'date']});
     }
   };
 

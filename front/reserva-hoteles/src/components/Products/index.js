@@ -8,34 +8,38 @@ import { fetchData, options } from '../../utils/fetchData';
 const Recomendaciones = () => {
     const {filter} = useContext(FilterContext);
     const [products, setProducts] = useState([]);
-    const [dataFavorites, setDataFavorites] = useState();
+    // const [dataFavorites, setDataFavorites] = useState();
 
-    // console.log(filter);
+    console.log(filter.date[1]);
+    console.log(filter.date[0].startDate);
+    console.log(filter.date[0].endDate);
 
   useEffect(() => {
-    const fetchProductsData = async () => { 
+    const fetchProductsData = async () => {
       const productUrl = `${process.env.REACT_APP_URL_REMOTE}/products/findAll`;
       const productByCityUrl = `${process.env.REACT_APP_URL_REMOTE}/products/city/`;
       const productByCategoryUrl = `${process.env.REACT_APP_URL_REMOTE}/products/category/`;
-      const productByCategoryAndCity = `${process.env.REACT_APP_URL_REMOTE}/products/`;
-      const productByCityAndDateUrl = `${process.env.REACT_APP_URL_REMOTE}/products/date/startDate/endDate/city`;
+      // const productByCategoryAndCity = `${process.env.REACT_APP_URL_REMOTE}/products/`;
+      const productByCityAndDateUrl = `${process.env.REACT_APP_URL_REMOTE}/products/date/`;
 
-      if(filter && filter.city && filter.city[1] === 'city'){
-        let productsByCity = await fetchData(productByCityUrl + filter.city[0], options);
-        setProducts(productsByCity);
-      } else if (filter && filter.category[1] === 'category'){
-        let productsByCategory = await fetchData(productByCategoryUrl + filter.category[0], options);
-        setProducts(productsByCategory);
-      } else if ( filter && filter.city && filter.category[1] === 'category' && filter.city[1] === 'city'){
-        let productsByCategoryAndCity = await fetchData(productByCategoryAndCity + filter.category[0] + '/' + filter.city[0], options);
-        setProducts(productsByCategoryAndCity);
-      } else {
-        const productsData = await fetchData(productUrl, options);
-        setProducts(productsData);
+      if (filter) {
+        if (filter.city && filter.city[1] === "city") {
+          let productsByCity = await fetchData(productByCityUrl + filter.city[0], options);
+          setProducts(productsByCity);
+        } else if (filter.category && filter.category[1] === "category") {
+          let productsByCategory = await fetchData(productByCategoryUrl + filter.category[0], options);
+          setProducts(productsByCategory);
+        } else if (filter.date && filter.date[1] === "date" && filter.date[0].startDate !== '' && filter.date[0].endDate !== '') {
+          let productsByCityAndDate = await fetchData(productByCityAndDateUrl + filter.date[0].startDate + "/" + filter.date[0].endDate + "/" + filter.city[0], options);
+          setProducts(productsByCityAndDate);
+        } else {
+          const productsData = await fetchData(productUrl, options);
+          setProducts(productsData);
+        }
       }
-    }
+    };
     fetchProductsData();
-  }, [filter]) 
+  }, [filter]); 
 
 
   // useEffect(() => {

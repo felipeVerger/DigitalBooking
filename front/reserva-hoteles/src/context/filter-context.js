@@ -6,6 +6,7 @@ export const FilterProvider = ({children}) => {
   const [filter, setFilter] = useState({
     city: [],
     category: [],
+    date: [{startDate: '', endDate: ''}],
   });
 
   return (
