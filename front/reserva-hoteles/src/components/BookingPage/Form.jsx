@@ -78,12 +78,14 @@ const Form = ({product}) => {
   const register = async  () => {
     let url = `${process.env.REACT_APP_URL_REMOTE}/reservations`;
     let body = JSON.stringify({
+      "productId": product.id,
+      "userId": user.id, 
       "name": formValues.nombre,
       "lastName": formValues.apellido,
       "email": formValues.email,
       "city": formValues.ciudad,
-      "startDate": dates.startDate,
-      "endDate": dates.endDate
+      "startDate":  dates[0].startDate.getFullYear() + "-" + ('0' + (dates[0].startDate.getMonth()+1)).slice(-2) + "-" + ('0' + dates[0].startDate.getDate()).slice(-2) ,
+      "endDate": dates[0].endDate.getFullYear() + "-" + ('0' + (dates[0].endDate.getMonth()+1)).slice(-2) + "-" + ('0' + dates[0].endDate.getDate()).slice(-2) ,
     });
     let options = {
       method: 'POST',
