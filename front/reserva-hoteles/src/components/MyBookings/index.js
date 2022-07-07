@@ -19,7 +19,7 @@ import Loading from '../Loading/index';
 const MyBooking = () => {
   const { userId } = useParams();
   const URL_API_PRODUCTS = `${process.env.REACT_APP_URL_REMOTE}/products/findAll`;
-  const URL_API_BOOKINGS = `${process.env.REACT_APP_URL_REMOTE}/reservations/user/${userId}`;
+  // const URL_API_BOOKINGS = `${process.env.REACT_APP_URL_REMOTE}/reservations/user/${userId}`;
 
   const myHeaders = new Headers();
     myHeaders.append("Authorization", "Basic dXNlcjpnMTBCb29raW5n");
@@ -29,21 +29,25 @@ const MyBooking = () => {
     headers: myHeaders,
     redirect: 'follow'
   });
-  const { data: bookings } = useFetch(URL_API_BOOKINGS, {
-    method: 'GET',
-    headers: myHeaders,
-    redirect: 'follow'
-  });
+  // const { data: bookings } = useFetch(URL_API_BOOKINGS, {
+  //   method: 'GET',
+  //   headers: myHeaders,
+  //   redirect: 'follow'
+  // });
 
 
   // filter products that are reserved
-  const filteredProducts =
-    data && bookings
-      ? data.filter((product) =>
-          bookings.map((booking) => booking.product.includes(product.id))
-        )
-      : data;
+  // const filteredProducts =
+  //   data && bookings
+  //     ? data.filter((product) =>
+  //         bookings.map((booking) => booking.product.includes(product.id))
+  //       )
+  //     : data;
 
+  const filteredProducts =
+  data &&  data.filter((product) =>
+        product.id === 26
+      );
 
   if (loading) {
     return <Loading/>

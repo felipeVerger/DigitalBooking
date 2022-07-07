@@ -41,6 +41,7 @@ const FormComponent = () => {
   const [category, setCategory] = useState();
   const [errors, setErrors] = useState({});
   const [toSumbit, setToSumbit] = useState(false);
+  const [images, setImages] = useState([]);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
