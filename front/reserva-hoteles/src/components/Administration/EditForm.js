@@ -35,7 +35,7 @@ import Swal from 'sweetalert2';
 const URL_API_CITY = `${process.env.REACT_APP_URL_REMOTE}/cities/findAll`;
 const URL_API_CATEGORIES = `${process.env.REACT_APP_URL_REMOTE}/categories/findAll`
 
-const FormComponent = () => {
+const EditForm = () => {
   const [formValues, setformValues] = useState({});
   const [city, setCity] = useState();
   const [category, setCategory] = useState();
@@ -72,7 +72,7 @@ const FormComponent = () => {
   });
 
   const createProduct = async () => {
-    const URL_API_CREATE_PRODUCT = `${process.env.REACT_APP_URL_REMOTE}/products/create`;
+    const URL_API_CREATE_PRODUCT = `${process.env.REACT_APP_URL_REMOTE}/products/update`;
     const body = JSON.stringify({
         "name": formValues.nombre,
         "category": category,
@@ -88,19 +88,25 @@ const FormComponent = () => {
     })
     console.log(body);
     let options = {
-        method: 'POST',
+        method: 'PUT',
         headers: myHeaders,
         redirect: 'follow',
         body: body,
     }
     const response = await fetch(URL_API_CREATE_PRODUCT, options)
         .then((res) => {
-          if (res.status === 200) {
-            navigate('/administration/successful-product-creation');
+          if (res.ok) {
+            return Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'El producto se ha editado correctamente',
+              showConfirmButton: false,
+              timer: 1500
+            });
           } else {
             Swal.fire({
               title: `Error ${res.status}`,
-              text: 'Lamentablemente, el producto no ha podido crearse. Por favor, intente mas tarde',
+              text: 'Lamentablemente, el producto no ha podido editarse. Por favor, intente mas tarde',
               icon: 'error',
               confirmButtonText: 'Aceptar'
             })
@@ -346,4 +352,4 @@ const FormComponent = () => {
   );
 }
 
-export default FormComponent;
+export default EditForm

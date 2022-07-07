@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     HeaderBody,
     HeaderBlock,
@@ -10,11 +10,28 @@ import {
     FormBody,
     Title,
     FormContainer,
+    NavigationButtonsBlock,
+    NavButton
 } from './AdminComponents'
 import FormComponent from './Form'
+import EditForm from './EditForm';
+import DeleteForm from './DeleteForm';
+
 
 
 const Administration = () => {
+  const [page, setPage] = useState('create');
+
+  const handlePage = (page) => {
+    if (page === 'create') {
+      setPage('create');
+    } else if (page === 'edit') {
+      setPage('edit');
+    } else {
+      setPage('delete');
+    }
+  }
+
   return (
     <div>
         <HeaderBody>
@@ -29,9 +46,14 @@ const Administration = () => {
       </HeaderBody>
       <FormBackground>
         <FormBody>
-            <Title>Crear propiedad</Title>
+            <NavigationButtonsBlock>
+              <NavButton onClick={() => handlePage('create')}>Crear</NavButton>
+              <NavButton onClick={() => handlePage('edit')}>Editar</NavButton>
+              <NavButton onClick={() => handlePage('delete')}>Eliminar</NavButton>
+            </NavigationButtonsBlock>
+            <Title>{page === 'create' ? 'Crear' : page === 'edit' ? 'Editar' : 'Eliminar'} propiedad</Title>
             <FormContainer>
-                <FormComponent/>
+                {page === 'create' ? <FormComponent /> : page === 'edit' ? <EditForm/> : <DeleteForm/>}
             </FormContainer>
         </FormBody>
       </FormBackground>
