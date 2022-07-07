@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -96,8 +97,10 @@ public class ProductController {
         return ResponseEntity.ok(productService.listProductsByScore(score));
     }
 
-    @GetMapping("/date/{startDate}/{endDate}/{city}")
-    public ResponseEntity<List<Product>> getProductByDate(@PathVariable LocalDate startDate, @PathVariable LocalDate endDate, @PathVariable String city) {
+    @GetMapping("/date/{startDates}/{endDates}/{city}")
+    public ResponseEntity<List<Product>> getProductByDate(@PathVariable String startDates, @PathVariable String endDates, @PathVariable String city) throws ParseException {
+        LocalDate startDate = LocalDate.parse(startDates);
+        LocalDate endDate = LocalDate.parse(endDates);
         logger.info("Retrieving data from products' table");
         return ResponseEntity.ok(productService.findProductsByDatesAndCity(startDate, endDate, city));
     }
