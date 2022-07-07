@@ -29,26 +29,26 @@ const MyBooking = () => {
     headers: myHeaders,
     redirect: 'follow'
   });
-//   const { data: bookings } = useFetch(URL_API_BOOKINGS, {
-//     method: 'GET',
-//     headers: myHeaders,
-//     redirect: 'follow'
-//   });
+  const { data: bookings } = useFetch(URL_API_BOOKINGS, {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+  });
 
-//   // filter products that are reserved
-//   const filteredProducts =
-//     data && bookings
-//       ? data.filter((product) =>
-//           bookings.map((booking) => booking.product.includes(product.id))
-//         )
-//       : data;
+  // filter products that are reserved
+  const filteredProducts =
+    data && bookings
+      ? data.filter((product) =>
+          bookings.map((booking) => booking.product.includes(product.id))
+        )
+      : data;
 
 
   if (loading) {
     return <Loading/>
   }
   return (
-    <div>
+    <>
         <HeaderBody>
             <HeaderBlock>
                 <HeaderInfo>
@@ -61,13 +61,13 @@ const MyBooking = () => {
         </HeaderBody>
         <ProductContainer>
             {
-                data.length === 0 ? 
+                filteredProducts.length === 0 ? 
                     <ErrorBlock>
                         <ErrorIcon/>
                         <ErrorMessage>Aun nos has efectuado ninguna reserva</ErrorMessage>
                     </ErrorBlock>
                 :
-                data.map((product) => {
+                filteredProducts.map((product) => {
                     return (
                       <ProductCard
                         key={product.id}
@@ -87,7 +87,7 @@ const MyBooking = () => {
                 })
             }
         </ProductContainer>
-    </div>
+    </>
   )
 }
 

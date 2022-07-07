@@ -285,7 +285,9 @@ const ProductPage = ({ product, productDetail }) => {
                 <Span bold={true}>
                   Agrega tus fechas de viaje para obtener precios exactos
                 </Span>
-                <ReservationButton><CleanLink to="booking">Iniciar Reserva</CleanLink></ReservationButton>
+                <Link to={handleReservation()} style={{width: '100%'}}>
+                    <ReservationButton>Iniciar Reserva</ReservationButton>
+                  </Link>
               </ReservationBlock>
             </MobileCalendar>
           </ContentBlock>

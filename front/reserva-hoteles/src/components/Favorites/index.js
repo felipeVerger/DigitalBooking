@@ -3,9 +3,14 @@ import useFetch from '../../hooks/useFetch';
 import ProductCard from '../Products/ProductsCard';
 import Loading from '../Loading/index';
 import {
+    HeaderBody,
+    HeaderBlock,
+    HeaderInfo,
+    CleanLink,
+    BackIcon,
+    HeaderName,
     FavoriteContainer,
     BodyFavorite,
-    Title,
     ErrorBlock,
     ErrorMessage,
     ErrorButton
@@ -34,20 +39,29 @@ const FavoriteProductList = () => {
 
   if (loading) {
     return <Loading/>
-  } else if (data.length === 0) {
+  } 
     return (
-        <ErrorBlock>
-            <ErrorMessage>No existen favoritos aun</ErrorMessage>
-            <ErrorButton to={'/'}>Volver</ErrorButton>
-        </ErrorBlock>
-    )
-  } else {
-    return (
+      <>
+      <HeaderBody>
+            <HeaderBlock>
+                <HeaderInfo>
+                    <HeaderName>Favoritos</HeaderName>
+                </HeaderInfo>
+            <CleanLink to={"/"}>
+                <BackIcon />
+            </CleanLink>
+            </HeaderBlock>
+        </HeaderBody>
     <FavoriteContainer>
         <BodyFavorite>
-            <Title>Favoritos:</Title>
             {
-                data.map((product) => {
+                filteredProducts.length === 0 ? 
+                  <ErrorBlock>
+                    <ErrorMessage>No existen favoritos aun</ErrorMessage>
+                    <ErrorButton to={'/'}>Volver</ErrorButton>
+                  </ErrorBlock>
+                :
+                filteredProducts.map((product) => {
                     return (
                         <ProductCard
                             key={product.id}
@@ -64,8 +78,9 @@ const FavoriteProductList = () => {
             }
         </BodyFavorite>
     </FavoriteContainer>
+    </>
   )
 }
-}
+
 
 export default FavoriteProductList;
