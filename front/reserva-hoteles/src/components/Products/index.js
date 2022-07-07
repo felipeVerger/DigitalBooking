@@ -6,13 +6,11 @@ import Loading from '../Loading';
 import { fetchData, options } from '../../utils/fetchData';
 
 const Recomendaciones = () => {
-    const {filter} = useContext(FilterContext);
+    const {filter, setFilter} = useContext(FilterContext);
     const [products, setProducts] = useState([]);
     // const [dataFavorites, setDataFavorites] = useState();
 
-    console.log(filter.date[1]);
-    console.log(filter.date[0].startDate);
-    console.log(filter.date[0].endDate);
+    console.log(filter);
 
   useEffect(() => {
     const fetchProductsData = async () => {
@@ -57,7 +55,7 @@ const Recomendaciones = () => {
     const randomProducts = products && products.length > 6 ? products.sort(() => Math.random() - 0.5).slice(0, 6) : products;
     // const filteredProducts = locationPath === '/productsList' ? products : randomProducts; 
 
-    console.log(products);
+    // console.log(products);
 
   if (!randomProducts.length) {
     return <Loading/>
