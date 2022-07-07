@@ -30,6 +30,7 @@ const MobileMenu = ({ isMenuOpen, toggle }) => {
     sessionStorage.removeItem('email');
     sessionStorage.removeItem('name');
     sessionStorage.removeItem('lastName');
+    sessionStorage.removeItem('role');
   }
   
   return (
@@ -58,10 +59,17 @@ const MobileMenu = ({ isMenuOpen, toggle }) => {
 
       <MenuLinksContainer>
         <MenuLink to={"/"}>Inicio</MenuLink>
-        {user ? (
-          <MenuLink to={"/"} onClick={handleUserSession}>
-            Cerrar sesion
-          </MenuLink>
+        {user && user.role === 'ROLE_ADMIN' ? (
+          <>
+            <MenuLink to={"/"} onClick={handleUserSession}>Cerrar sesion</MenuLink>
+            <MenuLink to={"/administration"}>Administracion</MenuLink>
+          </>
+        ) : user && user.role === 'ROLE_USER' ? (
+          <>
+            <MenuLink to={"/"} onClick={handleUserSession}>Cerrar sesion</MenuLink>
+            <MenuLink to={"/favorites"}>Favoritos</MenuLink>
+            <MenuLink to={`/${user.id}/bookings`}>Reservas</MenuLink>
+          </>
         ) : (
           <>
             {location != "/login" ? (
