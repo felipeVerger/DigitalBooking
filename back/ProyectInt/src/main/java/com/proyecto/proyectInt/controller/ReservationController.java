@@ -1,12 +1,18 @@
 package com.proyecto.proyectInt.controller;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proyecto.proyectInt.exception.BadRequestException;
 import com.proyecto.proyectInt.exception.ResourceNotFoundException;
+import com.proyecto.proyectInt.model.DTO.ProductDTO;
+import com.proyecto.proyectInt.model.DTO.ReservationDTO;
+import com.proyecto.proyectInt.model.Product;
 import com.proyecto.proyectInt.model.Reservation;
+import com.proyecto.proyectInt.model.User;
+import com.proyecto.proyectInt.service.ProductService;
 import com.proyecto.proyectInt.service.ReservationService;
+import com.proyecto.proyectInt.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +22,19 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/reservations")
 public class ReservationController {
+
+    final private ObjectMapper mapper;
     @Autowired
     private ReservationService reservationService;
+    private ProductService productService;
+    private UserService userService;
+
+    @Autowired
+    public ReservationController(ProductService productService, UserService userService, ObjectMapper mapper) {
+        this.productService = productService;
+        this.userService = userService;
+        this.mapper = mapper;
+    }
     Logger logger = LogManager.getLogger(ReservationController.class);
     @GetMapping("/findAll")
     public ResponseEntity<List<Reservation>> getReservationList() throws ResourceNotFoundException {
@@ -30,14 +47,19 @@ public class ReservationController {
         return ResponseEntity.ok(reservationService.findById(id));
     }
     @PostMapping
-    public ResponseEntity<Reservation> addReservation(@RequestBody Reservation reservation) throws  BadRequestException {
+    public ResponseEntity<Reservation> addReservation(@RequestBody ReservationDTO reservationDTO) throws BadRequestException, ResourceNotFoundException {
         logger.info("Adding new reservation");
-        logger.info(reservation.getUser().getId());
-        logger.info(reservation.getProduct().getId());
-        logger.info(reservation.getAdditionalInfo());
-        logger.info(reservation.getArrivalTime());
-        logger.info(reservation.getCheckIn());
-        logger.info(reservation.getCheckOut());
+        Optional<ProductDTO> productDTO = productService.findById(Long.valueOf(reservationDTO.getProductId()));
+        Product product = null;
+        if (productDTO.isPresent()) {
+            product = mapper.convertValue(productDTO, Product.class);
+        }
+        Optional<User> userFound = userService.findById(Long.valueOf(reservationDTO.getUserId()));
+        User user = null;
+        if (userFound.isPresent()) {
+            user = mapper.convertValue(userFound, User.class);
+        }
+        Reservation reservation = new Reservation(reservationDTO.getCheckIn(), reservationDTO.getCheckOut(), reservationDTO.getArrivalTime(), reservationDTO.getAdditionalInfo(), product, user);
         return ResponseEntity.ok(reservationService.create(reservation));
     }
     @PutMapping("update")
