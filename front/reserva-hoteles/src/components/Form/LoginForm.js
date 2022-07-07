@@ -57,7 +57,7 @@ const LoginForm = () => {
     }
     e.preventDefault();
     console.log(formValues);
-    const response = await fetch(url, options)
+     await fetch(url, options)
       .then((response) => {
         if (response.status === 200) {
           return response.json();
@@ -105,7 +105,6 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && toSumbit) {
-      login();
     }
   }, [errors]);
 

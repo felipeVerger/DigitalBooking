@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const FormContainer = styled.div`
 padding: 3rem;
-background-color: ${(props) => props.theme.content_background};
+background-color: ${(props) => props.theme.color_text_secondary};
 display: flex;
 flex-direction: row;
 @media only screen and (max-width: 1200px) {
